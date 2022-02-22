@@ -13,18 +13,20 @@ class Motor{
     private:
     PwmOut left;
     PwmOut right;
-    int enable;
-    int directionL;
-    int directionR;
+    DigitalOut enable;
+    DigitalOut directionL;
+    DigitalOut directionR;
     float period;
     static const int mode = UNIPOLAR;
 
     public:
     
-    Motor(PinName l,PinName r,int directionL,int directionR,int enable);
+    Motor(PinName l,PinName r,PinName directionL,PinName directionR,PinName enable);
 
     void set_direction(char c,int direction);
     void set_frequency(int freq);
+    void set_enable(int enable);
+    void set_enable();
     void set_dutycycle(char c,float dutycycle);
 
     

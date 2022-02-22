@@ -1,7 +1,6 @@
 #include "encoder.h"
 using namespace std::chrono;
 
-
 // Constructor
 // p1 Channel A
 // p2 Channel B
@@ -23,14 +22,14 @@ void Encoder::start(){
 
 void Encoder::stop(){
     t.stop();
-    time_ms = t.elapsed_time();
     end_pulse = Encoder::getPulses();
+    time_ms = t.elapsed_time();
     calculate_speed();
 }
 
 // Calculate the speed of wheel
 // v = pulse * CPR * Circumference
-// FORMULA NEEDED TO BE CHECKED
+// TODO : check formula
 void Encoder::calculate_speed(){
 
     pulse_width = end_pulse-start_pulse;
@@ -52,12 +51,12 @@ double Encoder::read_velocity(){
     return velocity;
 }
 
-// Return distance covered
+// Return distance covered by a wheel
 double Encoder::read_distance(){
     return (pulse_counter/(2.0*CPR))*C;
 }
 
-//R Return pulse counter
+// Return pulse counter
 int Encoder::read_counter(){
     return pulse_counter;
 }
