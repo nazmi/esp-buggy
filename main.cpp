@@ -17,12 +17,13 @@ int main()
     motor.set_frequency(25000);
     motor.set_dutycycle('A', 0.5);
     
- 
-    while(1){
+    // Try calibrate distance to 1 metre
+    while(Encoder::average_distance(wheel_r,wheel_l) < 1){
 
-        lcd.printf("Left Wheel Speed : %f",wheel_l.read_speed());
-        lcd.printf("Right Wheel Speed : %f",wheel_r.read_speed());
-
+        lcd.printf("Left Wheel Velocity : %f",wheel_l.read_velocity());
+        lcd.printf("Right Wheel Velocity : %f",wheel_r.read_velocity());
+        lcd.printf("Translational Velocity : %f",Encoder::average_velocity(wheel_r, wheel_l));
+        lcd.printf("Angular Velocity : %f",Encoder::average_angular(wheel_r, wheel_l));
     
 
     }
