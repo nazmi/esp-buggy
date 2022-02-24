@@ -28,14 +28,15 @@ void Encoder::stop(){
 }
 
 // Calculate the speed of wheel
-// v = pulse * CPR * Circumference
-// TODO : check formula
+// Clockwise is forward but pulses = pulse-1;
 void Encoder::calculate_speed(){
 
-    pulse_width = end_pulse-start_pulse;
+    pulse_width = start_pulse - end_pulse;
     pulse_counter += pulse_width;
     auto time_sec = 0.001 * time_ms.count();
-    velocity = (pulse_width/(2.0*CPR*time_sec))*C;
+    auto rev_per_sec = pulse_width / (2.0*CPR*time_sec);
+    rpm = rev_per_sec * 60;
+    velocity = rev_per_sec * C;
 
     reset();
     start();
@@ -46,14 +47,21 @@ void Encoder::reset_counter(){
     pulse_counter = 0;
 }
 
-// Return the speed
+// Return the speed in m/s
 double Encoder::read_velocity(){
     return velocity;
 }
 
+// Return the speed in rpm
+double Encoder::read_rpm(){
+    return rpm;
+}
+
+
+
 // Return distance covered by a wheel
 double Encoder::read_distance(){
-    return (pulse_counter/(2.0*CPR))*C;
+    return (pulse_counter*C)/(2.0*CPR);
 }
 
 // Return pulse counter
@@ -65,7 +73,7 @@ int Encoder::read_counter(){
 // +ve indicate rotation to the right
 // Access using Scope resolution Encoder::average_angular(right,left)
 double Encoder::average_angular(Encoder &right,Encoder &left){
-    return (right.read_velocity()-left.read_velocity())/WHEEL_DISTANCE;
+    return RAD_TO_DEGREE * (right.read_velocity()-left.read_velocity())/WHEEL_DISTANCE;
 }
 
 // Return the average velocity of left and right wheel

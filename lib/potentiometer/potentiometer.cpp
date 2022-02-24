@@ -1,41 +1,26 @@
 #include "potentiometer.h"
 
-Potentiometer::Potentiometer(PinName pin, float v,Motor* m,char c) : inputSignal(pin), VDD(v) {
+// Constructor
+// AnalogIn , PwmOut
+// Start new thread and queue event every X seconds
+Potentiometer::Potentiometer(PinName pin,PwmOut* pwm) : inputSignal(pin) {
 
-    this->motor = m;
-    this->side = c;
-    // Attach 200ms ticker (5 Hz) to sample
-    t.attach(callback(this,&Potentiometer::sample),200ms);
-
+    this->pwm = pwm;
+    t.start(callback(&q, &EventQueue::dispatch_forever));
+    q.call_every(POT_PERIOD, callback(this, &Potentiometer::update));
 }
 
-float Potentiometer::amplitudeVolts()
-{
-    return amplitudeNorm()*VDD;
+// Update value of duty cycle
+void Potentiometer::update(){
+    *pwm = inputSignal.read();
 }
 
-float Potentiometer::amplitudeNorm()
-{
+// Return raw volts
+float Potentiometer::read_volts(){
+    return inputSignal.read()*VDD;
+}
+
+// Return normalised value
+float Potentiometer::read(){
     return inputSignal.read();
 }
-
-void Potentiometer::sample()
-{
-    currentSampleNorm = amplitudeNorm();
-    currentSampleVolts = currentSampleNorm * VDD;
-
-    motor->set_dutycycle(this->side, currentSampleNorm);
-}
-
-float Potentiometer::read_volts()
-{
-    return currentSampleVolts;
-}
-
-float Potentiometer::read_norm()
-{
-    return currentSampleNorm;
-}
-
-
-

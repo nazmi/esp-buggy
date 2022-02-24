@@ -4,24 +4,25 @@
 #include "mbed.h"
 #include "motor.h"
 
+#define VDD 3.3
+#define POT_PERIOD 10s
+
 class Potentiometer
 {
     private:
         AnalogIn inputSignal;
-        float VDD, currentSampleNorm, currentSampleVolts;
-        char side;
-        Motor* motor;
-        Ticker t;
+        PwmOut* pwm;
+        Thread t;
+        EventQueue q;
         
 
     public:
-        Potentiometer(PinName pin, float v,Motor* m,char c);
-
-        float amplitudeVolts();
-        float amplitudeNorm();
-        void sample();
+        Potentiometer(PinName pin,PwmOut* pwm);
+        
+        void update();
         float read_volts();
-        float read_norm();
+        float read();
+        
 
 };
 
