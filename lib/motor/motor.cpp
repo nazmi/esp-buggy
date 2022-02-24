@@ -8,7 +8,7 @@
 // dR - direction motor right
 // enable_pin - enable motor driver board
 Motor::Motor(PinName l,PinName r,PinName dL,PinName dR,PinName s): 
-            left(l), right(r), directionL(dL,1), directionR(dR,1), state(s, 0) {}
+            left(l), right(r), directionL(dL, 1), directionR(dR, 1), state(s, 0) {}
 
 // Set direction of motor
 // L indicates left motor
@@ -16,9 +16,9 @@ Motor::Motor(PinName l,PinName r,PinName dL,PinName dR,PinName s):
 // otherwise both
 void Motor::set_direction(char c,int direction){
 
-    if(c == 'L')
+    if  (c == 'L')      
         this->directionL = direction;
-    else if(c == 'R')
+    else if(c == 'R')   
         this->directionR = direction;
     else
     {
@@ -52,7 +52,7 @@ pair<int,int> Motor::get_direction(){
 // Set frequency of PWM
 void Motor::set_frequency(float freq){
 
-    this->period = 1.0/freq;
+    this->period = 1.0 / freq;
     left.period(this->period);
     right.period(this->period);
 
@@ -60,7 +60,7 @@ void Motor::set_frequency(float freq){
 
 // Get current frequency
 float Motor::get_frequency(){
-    return 1/period;
+    return 1.0 / period;
 }
 
 // Set enable bit of motor driver
@@ -88,21 +88,21 @@ int Motor::get_enable(){
 // otherwise both
 
 // Duty cycle applied and motor out is inverted
-void Motor::set_dutycycle(char c,float dutycycle){
+void Motor::set_dutycycle(char c, float dutycycle){
 
-    if(dutycycle > 1) 
+    if(dutycycle > 1)
         dutycycle = 1.0;
     else if(dutycycle < 0) 
         dutycycle = 0;
 
     if(c == 'L')
-        left.write(1-dutycycle);
+        left.write(1 - dutycycle);
     else if(c == 'R')
-        right.write(1-dutycycle);
+        right.write(1 - dutycycle);
     else
     {
-        left.write(1-dutycycle);
-        right.write(1-dutycycle);
+        left.write(1 - dutycycle);
+        right.write(1 - dutycycle);
 
     }
 }
@@ -110,18 +110,18 @@ void Motor::set_dutycycle(char c,float dutycycle){
 // Get pair of dutycycle <left,right>
 pair<float,float> Motor::get_dutycycle(){
 
-    return make_pair(1-left.read(), 1-right.read());
+    return make_pair( 1 - left.read() , 1 - right.read() );
 
 }
 
 
-// Cruising methods with hardcoded 0.3 duty cycle
-void Motor::forward(double distance,Motor* motor,Encoder* left,Encoder* right){
+// Cruising methods
+void Motor::forward(double distance, Motor* motor, Encoder* left, Encoder* right){
 
     motor->set_enable(0);
 
-    motor->set_dutycycle('A', 0.3);
-    motor->set_direction('A',1);
+    motor->set_dutycycle('A', SLOW_PWM);
+    motor->set_direction('A', 1);
     left->reset_counter();
     right->reset_counter();
 
@@ -131,12 +131,12 @@ void Motor::forward(double distance,Motor* motor,Encoder* left,Encoder* right){
 
 }
 
-void Motor::reverse(double distance,Motor* motor,Encoder* left,Encoder* right){
+void Motor::reverse(double distance, Motor* motor, Encoder* left, Encoder* right){
 
     motor->set_enable(0);
 
-    motor->set_dutycycle('A', 0.3);
-    motor->set_direction('A',0);
+    motor->set_dutycycle('A', SLOW_PWM);
+    motor->set_direction('A', 0);
     left->reset_counter();
     right->reset_counter();
 
@@ -147,17 +147,17 @@ void Motor::reverse(double distance,Motor* motor,Encoder* left,Encoder* right){
 }
 
 //  Turn left : Right ON | LEFT OFF
-void Motor::turnleft(double angle,Motor* motor,Encoder* left,Encoder* right){
+void Motor::turnleft(double angle, Motor* motor, Encoder* left, Encoder* right){
 
     motor->set_enable(0);
 
     motor->set_dutycycle('L', 0);
-    motor->set_dutycycle('R', 0.3);
-    motor->set_direction('A',1);
+    motor->set_dutycycle('R', SLOW_PWM);
+    motor->set_direction('A', 1);
     left->reset_counter();
     right->reset_counter();
 
-    while(right->read_distance() < (Encoder::C * (angle/360.0)) ) { motor->set_enable(1); }
+    while(right->read_distance() < ( Encoder::FULL_ROTATION_SIDE_PIVOT * (angle/360.0) ) ) { motor->set_enable(1); }
 
     motor->set_enable(0);
 
@@ -168,13 +168,13 @@ void Motor::turnright(double angle,Motor* motor,Encoder* left,Encoder* right){
 
     motor->set_enable(0);
 
-    motor->set_dutycycle('L', 0.3);
+    motor->set_dutycycle('L', SLOW_PWM);
     motor->set_dutycycle('R', 0);
-    motor->set_direction('A',1);
+    motor->set_direction('A', 1);
     left->reset_counter();
     right->reset_counter();
 
-    while(left->read_distance() < (Encoder::C * (angle/360.0)) ) { motor->set_enable(1); }
+    while(left->read_distance() < ( Encoder::FULL_ROTATION_SIDE_PIVOT * ( angle / 360.0 ) ) ) { motor->set_enable(1); }
 
     motor->set_enable(0);
 

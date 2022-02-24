@@ -5,19 +5,19 @@
 #include "motor.h"
 
 #define VDD 3.3
-#define POT_PERIOD 10s
+#define POT_PERIOD 5s
 
 class Potentiometer
 {
     private:
         AnalogIn inputSignal;
         PwmOut* pwm;
-        Thread t;
-        EventQueue q;
+        Thread thread;
+        EventQueue queue;
         
 
     public:
-        Potentiometer(PinName pin,PwmOut* pwm);
+        Potentiometer(PinName pin, PwmOut* pwm);
         
         void update();
         float read_volts();

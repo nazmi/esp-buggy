@@ -7,6 +7,9 @@
 
 #define UNIPOLAR 0
 #define BIPOLAR 1
+#define FAST_PWM 0.7
+#define HALF_PWM 0.5
+#define SLOW_PWM 0.3
 
 
 class Motor{
@@ -22,10 +25,10 @@ class Motor{
     PwmOut left;
     PwmOut right;
     
-    Motor(PinName l,PinName r,PinName dL,PinName dR,PinName s);
+    Motor(PinName l, PinName r, PinName dL, PinName dR, PinName s);
     
     // Setters and getters
-    void set_direction(char c,int direction);
+    void set_direction(char c, int direction);
     void set_direction(char c);
     pair<int,int> get_direction();
 
@@ -36,15 +39,15 @@ class Motor{
     void set_enable();
     int get_enable();
 
-    void set_dutycycle(char c,float dutycycle);
+    void set_dutycycle(char c, float dutycycle);
     pair<float,float> get_dutycycle();
 
 
     // Cruising methods
-    static void forward(double distance,Motor* motor,Encoder* left,Encoder* right);
-    static void reverse(double distance,Motor* motor,Encoder* left,Encoder* right);
-    static void turnleft(double angle,Motor* motor,Encoder* left,Encoder* right);
-    static void turnright(double angle,Motor* motor,Encoder* left,Encoder* right);
+    static void forward(double distance , Motor* motor, Encoder* left,  Encoder* right);
+    static void reverse(double distance , Motor* motor, Encoder* left,  Encoder* right);
+    static void turnleft(double angle   , Motor* motor, Encoder* left,  Encoder* right);
+    static void turnright(double angle  , Motor* motor, Encoder* left,  Encoder* right);
     
 
 };

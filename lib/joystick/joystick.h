@@ -7,7 +7,7 @@
 
 class Joystick {
     private:
-        DebounceIn up,down,fire;
+        DebounceIn up, down, fire;
         Motor* motor;
 
     public:

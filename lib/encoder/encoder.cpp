@@ -5,17 +5,17 @@ using namespace std::chrono;
 // p1 Channel A
 // p2 Channel B
 // Resets counter and velocity to zero
-Encoder::Encoder(PinName p1, PinName p2): QEI(p1,p2,NC,CPR){
+Encoder::Encoder(PinName p1, PinName p2): QEI(p1 ,p2, NC, COUNTS_PER_REV){
     pulse_width = 0;
     pulse_counter = 0;
     velocity = 0;
 }
 
-// Start the timer interrupt every 10 ms
+// Start the timer interrupt every POLLING_PERIOD
 void Encoder::start(){
     t.start();
     start_pulse = Encoder::getPulses();
-    to.attach(callback(this,&Encoder::stop),10ms);
+    to.attach(callback(this,&Encoder::stop),POLLING_PERIOD);
 
 }
 
@@ -23,20 +23,20 @@ void Encoder::start(){
 void Encoder::stop(){
     t.stop();
     end_pulse = Encoder::getPulses();
-    time_ms = t.elapsed_time();
-    calculate_speed();
+    auto time_sec = 0.001 * t.elapsed_time().count();
+    calculate_speed(time_sec);
 }
 
 // Calculate the speed of wheel
-// Clockwise is forward but pulses = pulse-1;
-void Encoder::calculate_speed(){
+// Clockwise is forward but pulses is decreasing
+// so -ve pulses forward, start-end instead
+void Encoder::calculate_speed(double time_sec){
 
     pulse_width = start_pulse - end_pulse;
     pulse_counter += pulse_width;
-    auto time_sec = 0.001 * time_ms.count();
-    auto rev_per_sec = pulse_width / (2.0*CPR*time_sec);
+    auto rev_per_sec = pulse_width / (2.0 * COUNTS_PER_REV * time_sec);
     rpm = rev_per_sec * 60;
-    velocity = rev_per_sec * C;
+    velocity = rev_per_sec * CIRCUMFERENCE;
 
     reset();
     start();
@@ -57,11 +57,9 @@ double Encoder::read_rpm(){
     return rpm;
 }
 
-
-
 // Return distance covered by a wheel
 double Encoder::read_distance(){
-    return (pulse_counter*C)/(2.0*CPR);
+    return (pulse_counter * CIRCUMFERENCE) / (2.0 * COUNTS_PER_REV);
 }
 
 // Return pulse counter
@@ -69,23 +67,23 @@ int Encoder::read_counter(){
     return pulse_counter;
 }
 
-// Return the angular velocity between left and right wheel
+// Return the angular velocity between wheels in degree/s
 // +ve indicate rotation to the right
 // Access using Scope resolution Encoder::average_angular(right,left)
 double Encoder::average_angular(Encoder &right,Encoder &left){
-    return RAD_TO_DEGREE * (right.read_velocity()-left.read_velocity())/WHEEL_DISTANCE;
+    return radiansToDegrees( (  right.read_velocity() - left.read_velocity()    ) / WHEEL_DISTANCE );
 }
 
 // Return the average velocity of left and right wheel
 // +ve indicate forward direction
 // Access using Scope resolution Encoder::average_velocity(right,left)
 double Encoder::average_velocity(Encoder &right,Encoder &left){
-    return 0.5*(right.read_velocity()+left.read_velocity());
+    return 0.5*(    right.read_velocity() + left.read_velocity()    );
 }
 
 // Return the average distance covered
 double Encoder::average_distance(Encoder &right,Encoder &left){
-    return 0.5*(right.read_distance()+left.read_distance());
+    return 0.5*(    right.read_distance() + left.read_distance()  );
 }
 
 

@@ -25,7 +25,7 @@ int main() {
 
     if(DEBUG)
     {
-        motor.set_dutycycle('A', 0.2);
+        motor.set_dutycycle('A', 0.3);
         motor.set_direction('A', 1);
 
         Potentiometer pot_r(A1,&motor.right);
@@ -45,7 +45,7 @@ int main() {
         lcd.printf("pwm : %.3f %.3f\n",pot_l.read(),pot_r.read());
         lcd.printf("v   : %.3f  %.3f m/s\n", wheel_left.read_velocity(), wheel_right.read_velocity()); 
         lcd.printf("pulses %d %d\n", wheel_left.read_counter(), wheel_right.read_counter());
-        lcd.printf("V   : %.3f  Omega: %.3f \n",Encoder::average_velocity(wheel_right, wheel_left),Encoder::average_angular(wheel_right, wheel_left));
+        //lcd.printf("V   : %.3f  Omega: %.3f \n",Encoder::average_velocity(wheel_right, wheel_left),Encoder::average_angular(wheel_right, wheel_left));
        
         }
 
@@ -57,9 +57,9 @@ int main() {
 
         // Sequence
         // straight + left turns x4
-        // left turn once(rotate 90)
+        // left turn once
         // straight + right turns x4
-        ThisThread::sleep_for(2s);
+        ThisThread::sleep_for(5s);
         wheel_left.start();
         wheel_right.start();
         
@@ -78,6 +78,8 @@ int main() {
             Motor::turnright(90, &motor, &wheel_left, &wheel_right);
 
         }
+
+        Motor::turnright(90, &motor, &wheel_left, &wheel_right);
 
 
     }
