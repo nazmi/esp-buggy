@@ -4,28 +4,24 @@
 #include "motor.h"
 #include "joystick.h"
 #include "potentiometer.h"
+#include <chrono>
+#include <vector>
 
 #define DEBUG 0
 
 int main() {
 
     C12832 lcd(D11, D13, D12, D7, D10);
-    Motor motor(PC_9,PC_8,PB_8,PB_9,PB_4);
-    Encoder wheel_left(PB_2,PB_15);
+    Motor motor(PC_9,PB_8,PC_8,PC_6,PB_9);
+    Encoder wheel_left(PC_3,PC_2);
     Encoder wheel_right(PB_14,PB_13);
-
-    // Zuhayr Setup
-    // Motor motor(PA_15,PB_7,PA_14,PC_13,PC_5);
-    // Encoder wheel_left(PC_8,PC_6);
-    // Encoder wheel_right(PA_12,PA_11);
-    // DigitalOut mode(PA_13,0),mode2(PC_14,0);
-
+    
     motor.set_frequency(1000);
     motor.set_enable(0);
 
     if(DEBUG)
     {
-        motor.set_dutycycle('A', 0.3);
+        motor.set_dutycycle('A',0.4);
         motor.set_direction('A', 1);
 
         Potentiometer pot_r(A1,&motor.right);
@@ -36,11 +32,9 @@ int main() {
 
         wheel_right.start();
         wheel_left.start();
-        motor.set_enable(1);
+        motor.set_enable(0);
 
-        // TODO : Calibrate distance to 1 metre
         while (1) {
-        
         lcd.locate(0, 0);
         lcd.printf("pwm : %.3f %.3f\n",pot_l.read(),pot_r.read());
         lcd.printf("v   : %.3f  %.3f m/s\n", wheel_left.read_velocity(), wheel_right.read_velocity()); 
@@ -48,8 +42,6 @@ int main() {
         //lcd.printf("V   : %.3f  Omega: %.3f \n",Encoder::average_velocity(wheel_right, wheel_left),Encoder::average_angular(wheel_right, wheel_left));
        
         }
-
-        motor.set_enable(0);
     
     }
     else
@@ -62,24 +54,32 @@ int main() {
         ThisThread::sleep_for(5s);
         wheel_left.start();
         wheel_right.start();
+
+
+        //First Square
+        vector<double> linear   {0.625   , 0.6  , 0.6  , 0.6};
+        vector<double> rotation {90     , 90   , 90   , 170};
         
-        for(int i=0;i<4;i++){
-            
-            Motor::forward(0.5, &motor, &wheel_left, &wheel_right);
-            Motor::turnleft(90, &motor, &wheel_left, &wheel_right);
+        for(int i=0;i<linear.size();i++){
+
+            Motor::forward(linear[i], &motor, &wheel_left, &wheel_right);
+            Motor::turnright(rotation[i], &motor, &wheel_left, &wheel_right);
 
         }
 
-        Motor::turnleft(90, &motor, &wheel_left, &wheel_right);
 
-        for(int i=0;i<4;i++){
+        // Backtracking Square
+        vector<double> linear2   {0.6   , 0.5  , 0.5  , 0.67};
+        vector<double> rotation2 {55     , 50   , 50   , 120};
+        
+        for(int i=0;i<linear.size();i++){
 
-            Motor::forward(0.5, &motor, &wheel_left, &wheel_right);
-            Motor::turnright(90, &motor, &wheel_left, &wheel_right);
+            Motor::forward(linear2[i], &motor, &wheel_left, &wheel_right);
+            Motor::turnleft(rotation2[i], &motor, &wheel_left, &wheel_right);
 
         }
 
-        Motor::turnright(90, &motor, &wheel_left, &wheel_right);
+        
 
 
     }

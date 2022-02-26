@@ -7,9 +7,9 @@
 
 #define UNIPOLAR 0
 #define BIPOLAR 1
-#define FAST_PWM 0.7
-#define HALF_PWM 0.5
-#define SLOW_PWM 0.3
+#define FAST_PWM 0.6
+#define HALF_PWM 0.3
+#define SLOW_PWM 0.2
 
 
 class Motor{

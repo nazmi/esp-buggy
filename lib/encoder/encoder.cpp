@@ -13,17 +13,19 @@ Encoder::Encoder(PinName p1, PinName p2): QEI(p1 ,p2, NC, COUNTS_PER_REV){
 
 // Start the timer interrupt every POLLING_PERIOD
 void Encoder::start(){
+    t.reset();
     t.start();
+    reset();
     start_pulse = Encoder::getPulses();
     to.attach(callback(this,&Encoder::stop),POLLING_PERIOD);
-
+    
 }
 
 
 void Encoder::stop(){
     t.stop();
     end_pulse = Encoder::getPulses();
-    auto time_sec = 0.001 * t.elapsed_time().count();
+    double time_sec = 0.000001 * t.elapsed_time().count();
     calculate_speed(time_sec);
 }
 
@@ -34,11 +36,9 @@ void Encoder::calculate_speed(double time_sec){
 
     pulse_width = start_pulse - end_pulse;
     pulse_counter += pulse_width;
-    auto rev_per_sec = pulse_width / (2.0 * COUNTS_PER_REV * time_sec);
-    rpm = rev_per_sec * 60;
+    double rev_per_sec = pulse_width / (2.0 * COUNTS_PER_REV * time_sec);
     velocity = rev_per_sec * CIRCUMFERENCE;
-
-    reset();
+    rpm = rev_per_sec * 60;
     start();
 }
 

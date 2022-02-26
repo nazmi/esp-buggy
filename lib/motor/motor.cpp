@@ -2,13 +2,13 @@
 #include <utility>
 
 // Constructor
-// l -  PWM Motor Left
 // r - PWM Motor Right
-// dL - direction motor left
+// l -  PWM Motor Left
 // dR - direction motor right
+// dL - direction motor left
 // enable_pin - enable motor driver board
-Motor::Motor(PinName l,PinName r,PinName dL,PinName dR,PinName s): 
-            left(l), right(r), directionL(dL, 1), directionR(dR, 1), state(s, 0) {}
+Motor::Motor(PinName r,PinName l,PinName dr,PinName dl,PinName s): 
+            right(r), left(l), directionR(dr, 1), directionL(dl, 1), state(s, 0) {}
 
 // Set direction of motor
 // L indicates left motor
@@ -116,16 +116,20 @@ pair<float,float> Motor::get_dutycycle(){
 
 
 // Cruising methods
+// adjusted due to right encoder not working
 void Motor::forward(double distance, Motor* motor, Encoder* left, Encoder* right){
 
     motor->set_enable(0);
 
-    motor->set_dutycycle('A', SLOW_PWM);
+    motor->set_dutycycle('L', SLOW_PWM*1.05);
+    motor->set_dutycycle('R', SLOW_PWM);
     motor->set_direction('A', 1);
     left->reset_counter();
     right->reset_counter();
 
-    while(Encoder::average_distance(*right, *left) < distance) { motor->set_enable(1); }
+    while(abs(left->read_distance()) < distance) { 
+        motor->set_enable(1);
+    }
 
     motor->set_enable(0);
 
@@ -135,12 +139,15 @@ void Motor::reverse(double distance, Motor* motor, Encoder* left, Encoder* right
 
     motor->set_enable(0);
 
-    motor->set_dutycycle('A', SLOW_PWM);
+    motor->set_dutycycle('L', SLOW_PWM);
+    motor->set_dutycycle('R', SLOW_PWM);
     motor->set_direction('A', 0);
     left->reset_counter();
     right->reset_counter();
 
-    while(Encoder::average_distance(*right, *left) > -distance) { motor->set_enable(1); }
+    while(abs(left->read_distance()) < distance) { 
+        motor->set_enable(1);
+    }
 
     motor->set_enable(0);
 
@@ -151,14 +158,17 @@ void Motor::turnleft(double angle, Motor* motor, Encoder* left, Encoder* right){
 
     motor->set_enable(0);
 
-    motor->set_dutycycle('L', 0);
+    motor->set_dutycycle('L', SLOW_PWM);
+    motor->set_direction('L', 0);
     motor->set_dutycycle('R', SLOW_PWM);
-    motor->set_direction('A', 1);
+    motor->set_direction('R', 1);
+    
     left->reset_counter();
     right->reset_counter();
 
-    while(right->read_distance() < ( Encoder::FULL_ROTATION_SIDE_PIVOT * (angle/360.0) ) ) { motor->set_enable(1); }
-
+    while(abs(left->read_distance()) < ( Encoder::FULL_ROTATION_CENTER_PIVOT * (angle/360.0) ) ) { 
+        motor->set_enable(1);
+    }
     motor->set_enable(0);
 
 }
@@ -169,13 +179,15 @@ void Motor::turnright(double angle,Motor* motor,Encoder* left,Encoder* right){
     motor->set_enable(0);
 
     motor->set_dutycycle('L', SLOW_PWM);
-    motor->set_dutycycle('R', 0);
-    motor->set_direction('A', 1);
+    motor->set_direction('L', 1);
+    motor->set_dutycycle('R', SLOW_PWM);
+    motor->set_direction('R', 0);
     left->reset_counter();
     right->reset_counter();
 
-    while(left->read_distance() < ( Encoder::FULL_ROTATION_SIDE_PIVOT * ( angle / 360.0 ) ) ) { motor->set_enable(1); }
-
+    while(abs(left->read_distance()) < ( Encoder::FULL_ROTATION_CENTER_PIVOT * ( angle / 360.0 ) ) ) { 
+        motor->set_enable(1);
+    }
     motor->set_enable(0);
 
 }

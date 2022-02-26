@@ -17,10 +17,10 @@ void Potentiometer::update(){
 
 // Return raw volts
 float Potentiometer::read_volts(){
-    return inputSignal.read()*VDD;
+    return (1-inputSignal.read())*VDD;
 }
 
 // Return normalised value
 float Potentiometer::read(){
-    return inputSignal.read();
+    return 1-inputSignal.read();
 }

@@ -3,6 +3,15 @@
  *
  * @section LICENSE
  *
+ * Derivative work created in Jan 2021 by D.Smart, which 
+ * has the following changes:
+ *  + Update for MBED OS 6 ('callback' added to member ISRs)
+ *  + Added counter for non-grey-code transitions
+ *  + Added set functions to initialize counts to known values
+ *  + Added get functions for error counters
+ *
+ * No copyright claim is being made on these changes.
+ *
  * Copyright (c) 2010 ARM Limited
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -195,6 +204,15 @@ public:
     int getCurrentState(void);
 
     /**
+     * Read the number of invalid counts.
+     *
+     * @note Reading this resets the counter!
+     * 
+     * @return the number of times the gray-code transition was violated.
+     */
+    int getInvalidCount(void);
+
+    /**
      * Read the number of pulses recorded by the encoder.
      *
      * @return Number of pulses which have occured.
@@ -207,6 +225,23 @@ public:
      * @return Number of revolutions which have occured on the index channel.
      */
     int getRevolutions(void);
+
+    /**
+     * Set the current pulse count in case you want to init it.
+     *
+     * @param[in] newCount is the count to set it to.
+     *
+     */
+     void setPulses(int newCount);
+
+    /**
+     * Set the current revolution count in case you want to init it.
+     *
+     * @param[in] newRevs is the count to set it to.
+     *
+     */
+    void setRevolutions(int newRevs);
+
 
 private:
 
@@ -235,6 +270,8 @@ private:
     int          pulsesPerRev_;
     int          prevState_;
     int          currState_;
+    
+    volatile int invalid_;
 
     volatile int pulses_;
     volatile int revolutions_;

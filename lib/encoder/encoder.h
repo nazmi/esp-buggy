@@ -6,24 +6,21 @@
 #include <chrono>
 
 #define GEAR_RATIO 18.75
-/* From calibration */
-#define DIAMETER 0.0841958 
-/* From solidworks */
-//#define DIAMETER 0.0820352 
-#define WHEEL_DISTANCE 0.2021388
+#define DIAMETER 0.08 
+#define WHEEL_DISTANCE 0.212
 #define COUNTS_PER_REV 256
-#define POLLING_PERIOD 10ms
+#define POLLING_PERIOD 1ms
 #define M_PI 3.14159265358979323846264338327950288
-#define radiansToDegrees(angle) (angle * 180.0 / M_PI)
+#define radiansToDegrees(angle) ( (angle) * 180.0 / M_PI)
 
 
 class Encoder: public QEI{
 
     private:
-    int start_pulse, end_pulse, pulse_width; 
-    int pulse_counter;
-    double velocity;
-    double rpm;
+    volatile int start_pulse, end_pulse, pulse_width; 
+    volatile int pulse_counter;
+    volatile double velocity;
+    volatile double rpm;
     Timer t;
     Timeout to;
 

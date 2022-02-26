@@ -3,6 +3,15 @@
  *
  * @section LICENSE
  *
+ * Derivative work created in Jan 2021 by D.Smart, which 
+ * has the following changes:
+ *  + Update for MBED OS 6 ('callback' added to member ISRs)
+ *  + Added counter for non-grey-code transitions
+ *  + Added set functions to initialize counts to known values
+ *  + Added get functions for error counters
+ *
+ * No copyright claim is being made on these changes.
+ *
  * Copyright (c) 2010 ARM Limited
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -137,6 +146,7 @@ QEI::QEI(PinName channelA,
 
     pulses_       = 0;
     revolutions_  = 0;
+    invalid_      = 0;
     pulsesPerRev_ = pulsesPerRev;
     encoding_     = encoding;
 
@@ -166,11 +176,26 @@ QEI::QEI(PinName channelA,
 
 }
 
+void QEI::setPulses(int newCount) {
+    pulses_     = newCount;
+}
+
+void QEI::setRevolutions(int newRevs) {
+    revolutions_    = newRevs;
+}
+
 void QEI::reset(void) {
 
     pulses_      = 0;
     revolutions_ = 0;
+    invalid_     = 0;
 
+}
+
+int QEI::getInvalidCount(void) {
+    int r = invalid_;
+    invalid_ = 0;
+    return r;
 }
 
 int QEI::getCurrentState(void) {
@@ -259,6 +284,9 @@ void QEI::encode(void) {
 
             pulses_--;
 
+        }
+        else {
+            invalid_++;
         }
 
     } else if (encoding_ == X4_ENCODING) {
