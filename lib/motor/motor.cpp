@@ -121,14 +121,35 @@ void Motor::forward(double distance, Motor* motor, Encoder* left, Encoder* right
 
     motor->set_enable(0);
 
-    motor->set_dutycycle('L', SLOW_PWM*1.05);
+    motor->set_dutycycle('L', SLOW_PWM);
     motor->set_dutycycle('R', SLOW_PWM);
     motor->set_direction('A', 1);
     left->reset_counter();
     right->reset_counter();
 
-    while(abs(left->read_distance()) < distance) { 
+    // while(abs(left->read_distance()) < distance) { 
+    //     motor->set_enable(1);
+    // }
+
+    while(abs(Encoder::average_distance(*right,*left)) < distance) { 
         motor->set_enable(1);
+
+        if(left->read_counter() < right->read_counter()){
+
+            auto correction = (double) right->read_counter() / (double) left->read_counter();
+            motor->set_dutycycle('L',SLOW_PWM*correction*1.04);
+            motor->set_dutycycle('R',SLOW_PWM);
+
+
+        }
+        else if (right->read_counter() < left->read_counter()){
+
+            auto correction = (double) left->read_counter() / (double) right->read_counter();
+            motor->set_dutycycle('R',SLOW_PWM*correction);
+            motor->set_dutycycle('L',SLOW_PWM*1.04);
+
+        }
+
     }
 
     motor->set_enable(0);
@@ -145,7 +166,11 @@ void Motor::reverse(double distance, Motor* motor, Encoder* left, Encoder* right
     left->reset_counter();
     right->reset_counter();
 
-    while(abs(left->read_distance()) < distance) { 
+    // while(abs(left->read_distance()) < distance) { 
+    //     motor->set_enable(1);
+    // }
+
+    while(abs(Encoder::average_distance(*right,*left)) < distance) { 
         motor->set_enable(1);
     }
 
@@ -157,16 +182,22 @@ void Motor::reverse(double distance, Motor* motor, Encoder* left, Encoder* right
 void Motor::turnleft(double angle, Motor* motor, Encoder* left, Encoder* right){
 
     motor->set_enable(0);
-
-    motor->set_dutycycle('L', SLOW_PWM);
-    motor->set_direction('L', 0);
-    motor->set_dutycycle('R', SLOW_PWM);
-    motor->set_direction('R', 1);
-    
     left->reset_counter();
     right->reset_counter();
+    // motor->set_dutycycle('L', SLOW_PWM);
+    // motor->set_direction('L', 0);
+    // motor->set_dutycycle('R', SLOW_PWM);
+    // motor->set_direction('R', 1);
+    
+    
 
-    while(abs(left->read_distance()) < ( Encoder::FULL_ROTATION_CENTER_PIVOT * (angle/360.0) ) ) { 
+    // while(abs(left->read_distance()) < ( Encoder::FULL_ROTATION_CENTER_PIVOT * (angle/360.0) ) ) { 
+    //     motor->set_enable(1);
+    // }
+    motor->set_dutycycle('L', 0);
+    motor->set_dutycycle('R', HALF_PWM);
+    motor->set_direction('R', 1);
+    while(abs(right->read_distance()) < ( Encoder::FULL_ROTATION_SIDE_PIVOT * (angle/360.0) ) ) { 
         motor->set_enable(1);
     }
     motor->set_enable(0);
@@ -177,15 +208,22 @@ void Motor::turnleft(double angle, Motor* motor, Encoder* left, Encoder* right){
 void Motor::turnright(double angle,Motor* motor,Encoder* left,Encoder* right){
 
     motor->set_enable(0);
-
-    motor->set_dutycycle('L', SLOW_PWM);
-    motor->set_direction('L', 1);
-    motor->set_dutycycle('R', SLOW_PWM);
-    motor->set_direction('R', 0);
     left->reset_counter();
     right->reset_counter();
 
-    while(abs(left->read_distance()) < ( Encoder::FULL_ROTATION_CENTER_PIVOT * ( angle / 360.0 ) ) ) { 
+    // motor->set_dutycycle('L', SLOW_PWM);
+    // motor->set_direction('L', 1);
+    // motor->set_dutycycle('R', SLOW_PWM);
+    // motor->set_direction('R', 0);
+   
+    // while(abs(left->read_distance()) < ( Encoder::FULL_ROTATION_CENTER_PIVOT * ( angle / 360.0 ) ) ) { 
+    //     motor->set_enable(1);
+    // }
+
+    motor->set_dutycycle('R', 0);
+    motor->set_dutycycle('L', HALF_PWM);
+    motor->set_direction('L', 1);
+    while(abs(left->read_distance()) < ( Encoder::FULL_ROTATION_SIDE_PIVOT * (angle/360.0) ) ) { 
         motor->set_enable(1);
     }
     motor->set_enable(0);

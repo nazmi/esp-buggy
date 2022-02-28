@@ -21,7 +21,7 @@ int main() {
 
     if(DEBUG)
     {
-        motor.set_dutycycle('A',0.4);
+        motor.set_dutycycle('A',0.2);
         motor.set_direction('A', 1);
 
         Potentiometer pot_r(A1,&motor.right);
@@ -56,27 +56,49 @@ int main() {
         wheel_right.start();
 
 
-        //First Square
-        vector<double> linear   {0.625   , 0.6  , 0.6  , 0.6};
-        vector<double> rotation {90     , 90   , 90   , 170};
+        // First Square
+        // vector<double> linear   {0.62   , 0.6  , 0.6  , 0.6};
+        // vector<double> rotation {88     ,  88  , 88   , 170};
+        
+        // for(int i=0;i<linear.size();i++){
+
+        //     Motor::forward(linear[i], &motor, &wheel_left, &wheel_right);
+        //     Motor::turnright(rotation[i], &motor, &wheel_left, &wheel_right);
+
+        // }
+
+
+        // //Backtracking Square
+        // vector<double> linear2   {0.6   , 0.5  , 0.5  , 0.67};
+        // vector<double> rotation2 {50     , 50   , 50   , 120};
+        
+        // for(int i=0;i<linear2.size();i++){
+
+        //     Motor::forward(linear2[i], &motor, &wheel_left, &wheel_right);
+        //     Motor::turnleft(rotation2[i], &motor, &wheel_left, &wheel_right);
+
+        // }
+
+        // First Square
+        vector<double> linear   {0.6   , 0.53  , 0.53  , 0.6};
+        vector<double> rotation {80     ,  80  , 80   , 165};
         
         for(int i=0;i<linear.size();i++){
 
             Motor::forward(linear[i], &motor, &wheel_left, &wheel_right);
-            Motor::turnright(rotation[i], &motor, &wheel_left, &wheel_right);
-
+            if(rotation[i] < 100) Motor::turnright(rotation[i], &motor, &wheel_left, &wheel_right);
+            else Motor::turnleft(rotation[i], &motor, &wheel_left, &wheel_right);
         }
 
 
-        // Backtracking Square
-        vector<double> linear2   {0.6   , 0.5  , 0.5  , 0.67};
-        vector<double> rotation2 {55     , 50   , 50   , 120};
+        //Backtracking Square
+        vector<double> linear2   {0.6   , 0.53  , 0.53  , 0.6};
+        vector<double> rotation2 {82     , 82   , 82   , 165};
         
-        for(int i=0;i<linear.size();i++){
+        for(int i=0;i<linear2.size();i++){
 
             Motor::forward(linear2[i], &motor, &wheel_left, &wheel_right);
             Motor::turnleft(rotation2[i], &motor, &wheel_left, &wheel_right);
-
         }
 
         
