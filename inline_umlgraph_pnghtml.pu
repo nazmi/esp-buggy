@@ -1,0 +1,47 @@
+@startuml inline_umlgraph_1.png
+!theme blueprint
+package F401RE <<Frame>>{
+
+skinparam groupInheritance 1
+
+class QEI{
+getPulses()
+}
+
+QEI <-- left_encoder
+QEI <-- right_encoder
+
+
+object left_encoder{
+  read_velocity()
+--
+  read_distance()
+}
+
+object  right_encoder{
+  read_velocity()
+--
+  read_distance()
+}
+
+
+
+object motor{
+  Left PWM
+  Right PWM
+  enable
+  left direction
+  right direction
+  --
+forward()
+--
+reverse()
+--
+turnright()
+--
+turnleft()
+}
+
+
+}
+@enduml
