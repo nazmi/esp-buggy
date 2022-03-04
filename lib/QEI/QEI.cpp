@@ -34,7 +34,7 @@
  *
  * @section DESCRIPTION
  *
- * Quadrature Encoder Interface.
+ * QEI.
  *
  * A quadrature encoder consists of two code tracks on a disc which are 90
  * degrees out of phase. It can be used to determine how far a wheel has
@@ -48,82 +48,16 @@
  * and paper code tracks consisting of alternating black and white sections;
  * alternatively, complete disk and PCB emitter/receiver encoder systems can
  * be bought, but the interface, regardless of implementation is the same.
- *
- *               +-----+     +-----+     +-----+
- * Channel A     |  ^  |     |     |     |     |
- *            ---+  ^  +-----+     +-----+     +-----
- *               ^  ^
- *               ^  +-----+     +-----+     +-----+
- * Channel B     ^  |     |     |     |     |     |
- *            ------+     +-----+     +-----+     +-----
- *               ^  ^
- *               ^  ^
- *               90deg
- *
- * The interface uses X2 encoding by default which calculates the pulse count
- * based on reading the current state after each rising and falling edge of
- * channel A.
- *
- *               +-----+     +-----+     +-----+
- * Channel A     |     |     |     |     |     |
- *            ---+     +-----+     +-----+     +-----
- *               ^     ^     ^     ^     ^
- *               ^  +-----+  ^  +-----+  ^  +-----+
- * Channel B     ^  |  ^  |  ^  |  ^  |  ^  |     |
- *            ------+  ^  +-----+  ^  +-----+     +--
- *               ^     ^     ^     ^     ^
- *               ^     ^     ^     ^     ^
- * Pulse count 0 1     2     3     4     5  ...
- *
- * This interface can also use X4 encoding which calculates the pulse count
- * based on reading the current state after each rising and falling edge of
- * either channel.
- *
- *               +-----+     +-----+     +-----+
- * Channel A     |     |     |     |     |     |
- *            ---+     +-----+     +-----+     +-----
- *               ^     ^     ^     ^     ^
- *               ^  +-----+  ^  +-----+  ^  +-----+
- * Channel B     ^  |  ^  |  ^  |  ^  |  ^  |     |
- *            ------+  ^  +-----+  ^  +-----+     +--
- *               ^  ^  ^  ^  ^  ^  ^  ^  ^  ^
- *               ^  ^  ^  ^  ^  ^  ^  ^  ^  ^
- * Pulse count 0 1  2  3  4  5  6  7  8  9  ...
- *
- * It defaults
- *
- * An optional index channel can be used which determines when a full
- * revolution has occured.
- *
- * If a 4 pules per revolution encoder was used, with X4 encoding,
- * the following would be observed.
- *
- *               +-----+     +-----+     +-----+
- * Channel A     |     |     |     |     |     |
- *            ---+     +-----+     +-----+     +-----
- *               ^     ^     ^     ^     ^
- *               ^  +-----+  ^  +-----+  ^  +-----+
- * Channel B     ^  |  ^  |  ^  |  ^  |  ^  |     |
- *            ------+  ^  +-----+  ^  +-----+     +--
- *               ^  ^  ^  ^  ^  ^  ^  ^  ^  ^
- *               ^  ^  ^  ^  ^  ^  ^  ^  ^  ^
- *               ^  ^  ^  +--+  ^  ^  +--+  ^
- *               ^  ^  ^  |  |  ^  ^  |  |  ^
- * Index      ------------+  +--------+  +-----------
- *               ^  ^  ^  ^  ^  ^  ^  ^  ^  ^
- * Pulse count 0 1  2  3  4  5  6  7  8  9  ...
- * Rev.  count 0          1           2
- *
  * Rotational position in degrees can be calculated by:
  *
- * (pulse count / X * N) * 360
+ * \f$ rotational\ position\ =\  \frac{pulse\ count}{X\ \cdot \ N} \cdot \ 360\\\f$
  *
  * Where X is the encoding type [e.g. X4 encoding => X=4], and N is the number
  * of pulses per revolution.
  *
  * Linear position can be calculated by:
  *
- * (pulse count / X * N) * (1 / PPI)
+ * \f$ linear\ position\ =\  \frac{pulse\ count}{X\ \cdot \ N} \cdot \ \frac{1}{PPI}\\\f$
  *
  * Where X is encoding type [e.g. X4 encoding => X=44], N is the number of
  * pulses per revolution, and PPI is pulses per inch, or the equivalent for
@@ -132,9 +66,6 @@
  * of pulses per revolution.
  */
 
-/**
- * Includes
- */
 #include "QEI.h"
 
 QEI::QEI(PinName channelA,

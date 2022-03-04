@@ -16,96 +16,33 @@ int main() {
     Encoder wheel_left(PC_3,PC_2);
     Encoder wheel_right(PB_14,PB_13);
     
-    motor.set_frequency(1000);
-    motor.set_enable(0);
-
-    if(DEBUG)
-    {
-        motor.set_dutycycle('A',0.2);
-        motor.set_direction('A', 1);
-
-        Potentiometer pot_r(A1,&motor.right);
-        Potentiometer pot_l(A0,&motor.left);
-        Joystick joy(A2,A3,D4,&motor);
-
-        lcd.cls();
-
-        wheel_right.start();
-        wheel_left.start();
-        motor.set_enable(0);
-
-        while (1) {
-        lcd.locate(0, 0);
-        lcd.printf("pwm : %.3f %.3f\n",pot_l.read(),pot_r.read());
-        lcd.printf("v   : %.3f  %.3f m/s\n", wheel_left.read_velocity(), wheel_right.read_velocity()); 
-        lcd.printf("pulses %d %d\n", wheel_left.read_counter(), wheel_right.read_counter());
-        //lcd.printf("V   : %.3f  Omega: %.3f \n",Encoder::average_velocity(wheel_right, wheel_left),Encoder::average_angular(wheel_right, wheel_left));
-       
-        }
+    BufferedSerial hm10(PA_11,PA_12);
+    //Potentiometer pot_r(A1,&motor.right);
+    //Potentiometer pot_l(A0,&motor.left);
+    //Joystick joy(A2,A3,D4,&motor);
     
-    }
-    else
-    {
+    motor.set_enable(0);
+    motor.set_dutycycle('A', 0);
+    motor.set_frequency(1000);
+    
+    while(1){
 
-        // Sequence
-        // straight + left turns x4
-        // left turn once
-        // straight + right turns x4
-        ThisThread::sleep_for(5s);
-        wheel_left.start();
-        wheel_right.start();
+        if(hm10.readable()){
+            
+            char c = ' ';
+            hm10.read(&c,1);
 
+            if(c != ' '){
 
-        // First Square
-        // vector<double> linear   {0.62   , 0.6  , 0.6  , 0.6};
-        // vector<double> rotation {88     ,  88  , 88   , 170};
-        
-        // for(int i=0;i<linear.size();i++){
+                lcd.cls();
+                lcd.locate(0, 0);
+                lcd.printf("HM10 sent %c \n",c);
 
-        //     Motor::forward(linear[i], &motor, &wheel_left, &wheel_right);
-        //     Motor::turnright(rotation[i], &motor, &wheel_left, &wheel_right);
+            }
 
-        // }
-
-
-        // //Backtracking Square
-        // vector<double> linear2   {0.6   , 0.5  , 0.5  , 0.67};
-        // vector<double> rotation2 {50     , 50   , 50   , 120};
-        
-        // for(int i=0;i<linear2.size();i++){
-
-        //     Motor::forward(linear2[i], &motor, &wheel_left, &wheel_right);
-        //     Motor::turnleft(rotation2[i], &motor, &wheel_left, &wheel_right);
-
-        // }
-
-        // First Square
-        vector<double> linear   {0.6   , 0.53  , 0.53  , 0.6};
-        vector<double> rotation {80     ,  80  , 80   , 165};
-        
-        for(int i=0;i<linear.size();i++){
-
-            Motor::forward(linear[i], &motor, &wheel_left, &wheel_right);
-            if(rotation[i] < 100) Motor::turnright(rotation[i], &motor, &wheel_left, &wheel_right);
-            else Motor::turnleft(rotation[i], &motor, &wheel_left, &wheel_right);
         }
 
-
-        //Backtracking Square
-        vector<double> linear2   {0.6   , 0.53  , 0.53  , 0.6};
-        vector<double> rotation2 {82     , 82   , 82   , 165};
-        
-        for(int i=0;i<linear2.size();i++){
-
-            Motor::forward(linear2[i], &motor, &wheel_left, &wheel_right);
-            Motor::turnleft(rotation2[i], &motor, &wheel_left, &wheel_right);
-        }
-
-        
-
-
     }
-
 
     return 0;
 

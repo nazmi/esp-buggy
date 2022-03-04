@@ -34,7 +34,7 @@
  *
  * @section DESCRIPTION
  *
- * Quadrature Encoder Interface.
+ * QEI.
  *
  * A quadrature encoder consists of two code tracks on a disc which are 90
  * degrees out of phase. It can be used to determine how far a wheel has
@@ -48,82 +48,16 @@
  * and paper code tracks consisting of alternating black and white sections;
  * alternatively, complete disk and PCB emitter/receiver encoder systems can
  * be bought, but the interface, regardless of implementation is the same.
- *
- *               +-----+     +-----+     +-----+
- * Channel A     |  ^  |     |     |     |     |
- *            ---+  ^  +-----+     +-----+     +-----
- *               ^  ^
- *               ^  +-----+     +-----+     +-----+
- * Channel B     ^  |     |     |     |     |     |
- *            ------+     +-----+     +-----+     +-----
- *               ^  ^
- *               ^  ^
- *               90deg
- *
- * The interface uses X2 encoding by default which calculates the pulse count
- * based on reading the current state after each rising and falling edge of
- * channel A.
- *
- *               +-----+     +-----+     +-----+
- * Channel A     |     |     |     |     |     |
- *            ---+     +-----+     +-----+     +-----
- *               ^     ^     ^     ^     ^
- *               ^  +-----+  ^  +-----+  ^  +-----+
- * Channel B     ^  |  ^  |  ^  |  ^  |  ^  |     |
- *            ------+  ^  +-----+  ^  +-----+     +--
- *               ^     ^     ^     ^     ^
- *               ^     ^     ^     ^     ^
- * Pulse count 0 1     2     3     4     5  ...
- *
- * This interface can also use X4 encoding which calculates the pulse count
- * based on reading the current state after each rising and falling edge of
- * either channel.
- *
- *               +-----+     +-----+     +-----+
- * Channel A     |     |     |     |     |     |
- *            ---+     +-----+     +-----+     +-----
- *               ^     ^     ^     ^     ^
- *               ^  +-----+  ^  +-----+  ^  +-----+
- * Channel B     ^  |  ^  |  ^  |  ^  |  ^  |     |
- *            ------+  ^  +-----+  ^  +-----+     +--
- *               ^  ^  ^  ^  ^  ^  ^  ^  ^  ^
- *               ^  ^  ^  ^  ^  ^  ^  ^  ^  ^
- * Pulse count 0 1  2  3  4  5  6  7  8  9  ...
- *
- * It defaults
- *
- * An optional index channel can be used which determines when a full
- * revolution has occured.
- *
- * If a 4 pules per revolution encoder was used, with X4 encoding,
- * the following would be observed.
- *
- *               +-----+     +-----+     +-----+
- * Channel A     |     |     |     |     |     |
- *            ---+     +-----+     +-----+     +-----
- *               ^     ^     ^     ^     ^
- *               ^  +-----+  ^  +-----+  ^  +-----+
- * Channel B     ^  |  ^  |  ^  |  ^  |  ^  |     |
- *            ------+  ^  +-----+  ^  +-----+     +--
- *               ^  ^  ^  ^  ^  ^  ^  ^  ^  ^
- *               ^  ^  ^  ^  ^  ^  ^  ^  ^  ^
- *               ^  ^  ^  +--+  ^  ^  +--+  ^
- *               ^  ^  ^  |  |  ^  ^  |  |  ^
- * Index      ------------+  +--------+  +-----------
- *               ^  ^  ^  ^  ^  ^  ^  ^  ^  ^
- * Pulse count 0 1  2  3  4  5  6  7  8  9  ...
- * Rev.  count 0          1           2
- *
  * Rotational position in degrees can be calculated by:
  *
- * (pulse count / X * N) * 360
+ * \f$ rotational\ position\ =\  \frac{pulse\ count}{X\ \cdot \ N} \cdot \ 360\\\f$
  *
  * Where X is the encoding type [e.g. X4 encoding => X=4], and N is the number
  * of pulses per revolution.
  *
  * Linear position can be calculated by:
  *
- * (pulse count / X * N) * (1 / PPI)
+ * \f$ linear\ position\ =\  \frac{pulse\ count}{X\ \cdot \ N} \cdot \ \frac{1}{PPI}\\\f$
  *
  * Where X is encoding type [e.g. X4 encoding => X=44], N is the number of
  * pulses per revolution, and PPI is pulses per inch, or the equivalent for
@@ -135,22 +69,17 @@
 #ifndef QEI_H
 #define QEI_H
 
-/**
- * Includes
- */
 #include "mbed.h"
 
-/**
- * Defines
- */
-#define PREV_MASK 0x1 //Mask for the previous state in determining direction
-//of rotation.
-#define CURR_MASK 0x2 //Mask for the current state in determining direction
-//of rotation.
-#define INVALID   0x3 //XORing two states where both bits have changed.
+/** @brief Mask for the previous state in determining direction */
+#define PREV_MASK 0x1
+/** @brief Mask for the current state in determining direction */
+#define CURR_MASK 0x2
+/** @brief XORing both states where both bits have changed */
+#define INVALID   0x3 
 
 /**
- * Quadrature Encoder Interface.
+ * @brief  QEI class.
  */
 class QEI {
 
@@ -164,7 +93,7 @@ public:
     } Encoding;
 
     /**
-     * Constructor.
+     * @brief Constructor.
      *
      * Reads the current values on channel A and channel B to determine the
      * initial state.
@@ -188,14 +117,14 @@ public:
     QEI(PinName channelA, PinName channelB, PinName index, int pulsesPerRev, Encoding encoding = X2_ENCODING);
 
     /**
-     * Reset the encoder.
+     * @brief Reset the encoder.
      *
-     * Sets the pulses and revolutions count to zero.
+     * Sets the \link pulses_ pulses \endlink and \link revolutions_ revolutions \endlink count to zero.
      */
     void reset(void);
 
     /**
-     * Read the state of the encoder.
+     * @brief Read the \link currState_ state \endlink of the encoder.
      *
      * @return The current state of the encoder as a 2-bit number, where:
      *         bit 1 = The reading from channel B
@@ -204,7 +133,7 @@ public:
     int getCurrentState(void);
 
     /**
-     * Read the number of invalid counts.
+     * @brief Read the number of \link invalid_ invalid \endlink counts.
      *
      * @note Reading this resets the counter!
      * 
@@ -213,21 +142,21 @@ public:
     int getInvalidCount(void);
 
     /**
-     * Read the number of pulses recorded by the encoder.
+     * @brief Read the number of \link pulses_ pulses \endlink recorded by the encoder.
      *
      * @return Number of pulses which have occured.
      */
     int getPulses(void);
 
     /**
-     * Read the number of revolutions recorded by the encoder on the index channel.
+     * @brief Read the number of \link revolutions_ revolutions \endlink recorded by the encoder on the index channel.
      *
      * @return Number of revolutions which have occured on the index channel.
      */
     int getRevolutions(void);
 
     /**
-     * Set the current pulse count in case you want to init it.
+     * @brief Set the current \link pulses_ pulse count \endlink in case you want to init it.
      *
      * @param[in] newCount is the count to set it to.
      *
@@ -235,7 +164,7 @@ public:
      void setPulses(int newCount);
 
     /**
-     * Set the current revolution count in case you want to init it.
+     * @brief Set the current \link revolutions_ revolution count \endlink in case you want to init it.
      *
      * @param[in] newRevs is the count to set it to.
      *
@@ -246,7 +175,7 @@ public:
 private:
 
     /**
-     * Update the pulse count.
+     * @brief Update the pulse count.
      *
      * Called on every rising/falling edge of channels A/B.
      *
@@ -256,7 +185,7 @@ private:
     void encode(void);
 
     /**
-     * Called on every rising edge of channel index to update revolution
+     * @brief Called on every rising edge of channel index to update revolution
      * count by one.
      */
     void index(void);
@@ -278,4 +207,4 @@ private:
 
 };
 
-#endif /* QEI_H */
+#endif
