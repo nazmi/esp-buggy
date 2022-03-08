@@ -1,7 +1,8 @@
 var searchData=
 [
   ['t_0',['t',['../class_encoder.html#a2315f3ce505ba52acad0a3b95bb75dd8',1,'Encoder']]],
-  ['to_1',['to',['../class_encoder.html#a5a4d86373b57bae392458fa5305e4eb7',1,'Encoder']]],
-  ['turnleft_2',['turnleft',['../class_motor.html#a79212934db92388329bbcec117b0684b',1,'Motor']]],
-  ['turnright_3',['turnright',['../class_motor.html#a2fef33746e05e20c680b378edcdabad9',1,'Motor']]]
+  ['technical_20demo_20documentation_1',['Technical Demo Documentation',['../md_src__d_e_m_o.html',1,'']]],
+  ['to_2',['to',['../class_encoder.html#a5a4d86373b57bae392458fa5305e4eb7',1,'Encoder']]],
+  ['turnleft_3',['turnleft',['../class_motor.html#a9202af864674cf2bbbdc7f539216202e',1,'Motor']]],
+  ['turnright_4',['turnright',['../class_motor.html#a4acdb75f9311fec7d073e547843bb3e3',1,'Motor']]]
 ];

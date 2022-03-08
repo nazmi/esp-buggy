@@ -1,6 +1,6 @@
 <!-- HTML header for doxygen 1.9.3-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" class="light-mode">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
@@ -32,7 +32,11 @@ MathJax.Hub.Config({
        <script type="text/javascript">
            DoxygenAwesomeDarkModeToggle.init()
 </script>
-<html xmlns="http://www.w3.org/1999/xhtml" class="light-mode">
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+        <script type="text/javascript">
+            DoxygenAwesomeParagraphLink.init()
+        </script>
+<link rel="icon" href="icon.ico" type="image/x-icon" />
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -108,6 +112,12 @@ $(document).ready(function(){initNavTree('sensor_8h.html',''); initResizable(); 
 <div class="textblock"><code>#include &quot;mbed.h&quot;</code><br />
 <code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;cstdio&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for sensor.h:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="sensor_8h__incl.svg" width="256" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 </div>
 <p><a href="sensor_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -120,6 +130,8 @@ Classes</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:a080aa4c3ca12818b030991061ead0bfc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sensor_8h.html#a080aa4c3ca12818b030991061ead0bfc">OFFTRACK</a>&#160;&#160;&#160;0.15</td></tr>
 <tr class="separator:a080aa4c3ca12818b030991061ead0bfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca282936bcfbb85c24a95855c0dffd6f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sensor_8h.html#aca282936bcfbb85c24a95855c0dffd6f">VDD</a>&#160;&#160;&#160;3.3</td></tr>
+<tr class="separator:aca282936bcfbb85c24a95855c0dffd6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a080aa4c3ca12818b030991061ead0bfc" name="a080aa4c3ca12818b030991061ead0bfc"></a>
@@ -130,6 +142,20 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define OFFTRACK&#160;&#160;&#160;0.15</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aca282936bcfbb85c24a95855c0dffd6f" name="aca282936bcfbb85c24a95855c0dffd6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca282936bcfbb85c24a95855c0dffd6f">&#9670;&nbsp;</a></span>VDD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VDD&#160;&#160;&#160;3.3</td>
         </tr>
       </table>
 </div><div class="memdoc">

@@ -9,7 +9,7 @@ var searchData=
   ['readme_2emd_6',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]],
   ['reset_7',['reset',['../class_q_e_i.html#a734c89fb5d882bffb26132ac3db77caf',1,'QEI']]],
   ['reset_5fcounter_8',['reset_counter',['../class_encoder.html#a300dcd95c5aaae316658e1b85e947e18',1,'Encoder']]],
-  ['reverse_9',['reverse',['../class_motor.html#aa71063a48a0937197807a32e26d1e724',1,'Motor']]],
+  ['reverse_9',['reverse',['../class_motor.html#a9eacd201d086f725ab5ee4cca3f3e8f5',1,'Motor']]],
   ['revolutions_5f_10',['revolutions_',['../class_q_e_i.html#a2627141c6f094da10b9fb3e48e719f92',1,'QEI']]],
   ['right_11',['right',['../class_motor.html#a9cb4f85df1e212f4f9a3da651e2e6251',1,'Motor']]]
 ];

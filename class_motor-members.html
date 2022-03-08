@@ -1,6 +1,6 @@
 <!-- HTML header for doxygen 1.9.3-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" class="light-mode">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
@@ -32,7 +32,11 @@ MathJax.Hub.Config({
        <script type="text/javascript">
            DoxygenAwesomeDarkModeToggle.init()
 </script>
-<html xmlns="http://www.w3.org/1999/xhtml" class="light-mode">
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+        <script type="text/javascript">
+            DoxygenAwesomeParagraphLink.init()
+        </script>
+<link rel="icon" href="icon.ico" type="image/x-icon" />
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -107,7 +111,7 @@ $(document).ready(function(){initNavTree('class_motor.html',''); initResizable()
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="class_motor.html#a9aacac8fa81e05563009eb4c90c87cab">directionL</a></td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_motor.html#ac422a4e24872a96599f99c211a8f3ba7">directionR</a></td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_motor.html#af454b9ac47ea4221f39772278d317ffe">forward</a>(double distance, Motor *motor, Encoder *left, Encoder *right)</td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_motor.html#a3a856b89f959eb1032f8ec2016b29efb">forward</a>(double distance, Motor *motor, Encoder *left, Encoder *right)</td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_motor.html#af92cf4a9d886b80d8dc82dfd82003c40">get_direction</a>()</td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_motor.html#a1467d9c1917332c9ceccdda1e480b29c">get_dutycycle</a>()</td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_motor.html#af17e975a057b9834ea8ca42474bcc49b">get_enable</a>()</td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"></td></tr>
@@ -115,7 +119,7 @@ $(document).ready(function(){initNavTree('class_motor.html',''); initResizable()
   <tr class="odd"><td class="entry"><a class="el" href="class_motor.html#ac7153d86817994ab23be215b4f4ef725">left</a></td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_motor.html#a158a041e68f91033349f134075168c48">Motor</a>(PinName l, PinName r, PinName dL, PinName dR, PinName s)</td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_motor.html#a1d65a54430028041a1e29b56fef5b4a9">period</a></td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_motor.html#aa71063a48a0937197807a32e26d1e724">reverse</a>(double distance, Motor *motor, Encoder *left, Encoder *right)</td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_motor.html#a9eacd201d086f725ab5ee4cca3f3e8f5">reverse</a>(double distance, Motor *motor, Encoder *left, Encoder *right)</td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_motor.html#a9cb4f85df1e212f4f9a3da651e2e6251">right</a></td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_motor.html#adb6ef20c8f875988d7e0166687528e75">set_direction</a>(char c, int direction)</td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_motor.html#aae9c426fd058efcb0ffb3798f2103a93">set_direction</a>(char c)</td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"></td></tr>
@@ -124,8 +128,8 @@ $(document).ready(function(){initNavTree('class_motor.html',''); initResizable()
   <tr class="even"><td class="entry"><a class="el" href="class_motor.html#acd62648ec19d781647869649ca288dfe">set_enable</a>()</td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_motor.html#a53cca3666935f47cb097f7a9c3c732ae">set_frequency</a>(float freq)</td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_motor.html#a1a3d6ad79d32c116e80408b911523424">state</a></td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_motor.html#a79212934db92388329bbcec117b0684b">turnleft</a>(double angle, Motor *motor, Encoder *left, Encoder *right)</td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_motor.html#a2fef33746e05e20c680b378edcdabad9">turnright</a>(double angle, Motor *motor, Encoder *left, Encoder *right)</td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_motor.html#a9202af864674cf2bbbdc7f539216202e">turnleft</a>(double angle, Motor *motor, Encoder *left, Encoder *right)</td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_motor.html#a4acdb75f9311fec7d073e547843bb3e3">turnright</a>(double angle, Motor *motor, Encoder *left, Encoder *right)</td><td class="entry"><a class="el" href="class_motor.html">Motor</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

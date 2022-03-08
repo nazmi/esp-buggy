@@ -26,28 +26,16 @@ var NAVTREE =
 [
   [ "EEEN21000", "index.html", [
     [ "Embedded Systems Project 2021/2022", "index.html", [
-      [ "Overview", "index.html#autotoc_md1", [
-        [ "Motor Control (TD1)", "index.html#autotoc_md2", null ],
-        [ "Technical Demo 2", "index.html#autotoc_md3", null ],
-        [ "Technical Demo 3", "index.html#autotoc_md4", null ],
-        [ "Technical Demo 4 ( Heats )", "index.html#autotoc_md5", null ],
-        [ "Final Race Day", "index.html#autotoc_md6", null ]
-      ] ],
-      [ "Synchronization", "index.html#autotoc_md7", [
-        [ "Open a file", "index.html#autotoc_md8", null ],
-        [ "Save a file", "index.html#autotoc_md9", null ],
-        [ "Synchronize a file", "index.html#autotoc_md10", null ],
-        [ "Manage file synchronization", "index.html#autotoc_md11", null ]
-      ] ],
-      [ "Publication", "index.html#autotoc_md12", [
-        [ "Publish a File", "index.html#autotoc_md13", null ],
-        [ "Update a publication", "index.html#autotoc_md14", null ],
-        [ "Manage file publication", "index.html#autotoc_md15", null ]
-      ] ],
-      [ "Markdown extensions", "index.html#autotoc_md16", [
-        [ "SmartyPants", "index.html#autotoc_md17", null ],
-        [ "UML diagrams", "index.html#autotoc_md18", null ]
-      ] ]
+      [ "Dependencies", "index.html#autotoc_md1", null ],
+      [ "Installation", "index.html#autotoc_md2", null ],
+      [ "Troubleshooting", "index.html#autotoc_md3", null ],
+      [ "Components", "index.html#autotoc_md4", null ],
+      [ "Contributors", "index.html#autotoc_md5", null ]
+    ] ],
+    [ "Technical Demo Documentation", "md_src__d_e_m_o.html", [
+      [ "Overview", "md_src__d_e_m_o.html#autotoc_md6", null ],
+      [ "TD1 : Motor Control", "md_src__d_e_m_o.html#autotoc_md7", null ],
+      [ "TD2 : Sensors", "md_src__d_e_m_o.html#autotoc_md8", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -74,7 +62,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_q_e_i_8cpp.html"
+"_q_e_i_8h.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

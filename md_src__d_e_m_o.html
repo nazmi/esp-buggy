@@ -1,12 +1,12 @@
 <!-- HTML header for doxygen 1.9.3-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" class="light-mode">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>EEEN21000: lib/encoder/encoder.cpp File Reference</title>
+<title>EEEN21000: Technical Demo Documentation</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -32,7 +32,11 @@ MathJax.Hub.Config({
        <script type="text/javascript">
            DoxygenAwesomeDarkModeToggle.init()
 </script>
-<html xmlns="http://www.w3.org/1999/xhtml" class="light-mode">
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+        <script type="text/javascript">
+            DoxygenAwesomeParagraphLink.init()
+        </script>
+<link rel="icon" href="icon.ico" type="image/x-icon" />
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -80,7 +84,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('encoder_8cpp.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('md_src__d_e_m_o.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -98,17 +102,56 @@ $(document).ready(function(){initNavTree('encoder_8cpp.html',''); initResizable(
 </iframe>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">encoder.cpp File Reference</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Technical Demo Documentation </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="encoder_8h_source.html">encoder.h</a>&quot;</code><br />
+<div class="textblock"><p ><a class="anchor" id="journey"></a></p>
+<h1><a class="anchor" id="autotoc_md6"></a>
+Overview</h1>
+<p >We had at least 4 technical demonstrations (TD) for this semester, accessing different parts of the buggy. They emphasise on the hardware control especially the motors and the software solutions on interfacing the microcontroller and other components like sensors and bluetooth module.</p>
+<h1><a class="anchor" id="autotoc_md7"></a>
+TD1 : Motor Control</h1>
+<p >On software side, the key task was getting the encoders and motors working as intended. After testing, I discovered that the distance scaled up with the speed of the motors, which make the distance reading unreliable. So, I settled down on <b>20% duty cycle</b> to keep it steady and avoid any residue momentum after stopping. PWM frequency was set at <b>1000 Hz</b> because the wheels were louder than the switches, why not? The heatsink was also not too hot to touch. I chose to use <b>unipolar mode</b> as this offers less switching losses. </p><div class="dotgraph">
+<iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_1.svg" width="326" height="439"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p >One of the tasks was to make a square of 0.5 m, which I did not know they were so strict about the square. <b>The square had to be in between the wheels</b>.</p>
+<p ><em>main.cpp</em> </p><pre class="fragment">Motor  motor(PC_9,PB_8,PC_8,PC_6,PB_9);
+Encoder  wheel_left(PC_3,PC_2);
+Encoder  wheel_right(PB_14,PB_13);
+
+while(1){
+
+    vector&lt;double&gt; linear {...};
+    vector&lt;double&gt; rotation {...};
+
+    for(size_t i=0; i &lt; linear.size(); i++){
+        Motor::forward(linear,....);
+        Motor::turnright(rotation,...);
+    }
+}
+</pre><p> Above shows a snippet on how I implemented the square sequence. Ideally all values in linear vector are 0.5 m and rotation vector are 90° . However, our vectors looked like this </p><pre class="fragment">vector&lt;double&gt; linear { 0.45, 0.33, 0.33, 0.43};
+vector&lt;double&gt; rotation {83, 83, 83, 175};
+</pre><p> Note that the last one was more than 90° because the task was to trace the square back! Which was harder when your buggy did not move in straight line. I used bang-bang approach to compensate the tiny deviations between two wheels, implemented in the <a class="el" href="class_motor.html#a3a856b89f959eb1032f8ec2016b29efb" title="Control the motor to cruise forward.">Motor::forward</a>.</p>
+<p ><em>motor.cpp</em> </p><pre class="fragment">if ( left_encoder &gt; right_encoder)
+
+    right_motor.write(SLOW_PWM*(correction));
+    left_motor.write(SLOW_PWM)
+
+else if ( right_encoder &gt; left_encoder)
+
+    left_motor.write(SLOW_PWM*(correction));
+    right_motor.write(SLOW_PWM)
+</pre><p >Correction is evaluated by ratio of bigger encoder number to smaller encoder number, giving percentage around 110%.</p>
+<p >We have received full marks on TD1. This promises us a good start in our journey in producing a winning buggy.</p>
+<h1><a class="anchor" id="autotoc_md8"></a>
+TD2 : Sensors</h1>
+<p >Bla bla test </p>
 </div></div><!-- contents -->
+</div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_97aefd0d527b934f1d99a682da8fe6a9.html">lib</a></li><li class="navelem"><a class="el" href="dir_346d63a2cfbaa01f6a009f32f6baf3e8.html">encoder</a></li><li class="navelem"><a class="el" href="encoder_8cpp.html">encoder.cpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
   </ul>
 </div>
