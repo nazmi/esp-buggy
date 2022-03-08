@@ -53,7 +53,7 @@ class Motor{
     Motor(PinName l, PinName r, PinName dL, PinName dR, PinName s);
     
     /**
-     * @brief Set the \link state enable pin \endlink of the motor driver board, given the state.
+     * @brief Set the \link state enable pin\endlink of the motor driver board, given the state.
      * 
      * @param state 
      * - 1 Enabled
@@ -63,13 +63,13 @@ class Motor{
 
     /**
      * @overload
-     * @brief Toggle the \link state enable pin \endlink of the motor driver board, if no state is given.
+     * @brief Toggle the \link state enable pin\endlink of the motor driver board, if no state is given.
      * 
      */
     void set_enable();
 
     /**
-     * @brief Get the \link state enable status \endlink of the motor driver board.
+     * @brief Get the \link state enable status\endlink of the motor driver board.
      * 
      * @return int Enable status.
      * - 1 Enabled.
@@ -78,14 +78,14 @@ class Motor{
     int get_enable();
  
     /**
-     * @brief Set the \link period frequency \endlink of the PwmOut.
+     * @brief Set the \link period frequency\endlink of the PwmOut.
      * 
      * @param freq Frequency of the PWM.
      */
     void set_frequency(float freq);
 
     /**
-     * @brief Get the \link period frequency \endlink of the PwmOut.
+     * @brief Get the \link period frequency\endlink of the PwmOut.
      * 
      * @return float Frequency of the PWM.
      */
@@ -95,8 +95,8 @@ class Motor{
      * @brief Set the direction of the motors, provided the direction.
      * 
      * @param c Which motor direction to change.
-     * - 'L' for \link directionL left motor \endlink.
-     * - 'R' for \link directionR right motor \endlink.
+     * - 'L' for \link directionL left motor\endlink.
+     * - 'R' for \link directionR right motor\endlink.
      * - otherwise for both motors.
      * @param direction
      * - 1 forward.
@@ -109,8 +109,8 @@ class Motor{
      * @brief Toggle the direction of the motors, if no direction given.
      * 
      * @param c Which motor direction to change.
-     * - 'L' for \link directionL left motor \endlink.
-     * - 'R' for \link directionR right motor \endlink.
+     * - 'L' for \link directionL left motor\endlink.
+     * - 'R' for \link directionR right motor\endlink.
      * - otherwise for both motors. 
      */
     void set_direction(char c);
@@ -118,7 +118,7 @@ class Motor{
     /**
      * @brief Get the direction of the motors.
      * 
-     * @return pair<int,int> {\link directionL Left motor direction \endlink, \link directionR Right motor direction \endlink}.
+     * @return pair<int,int> { #directionL, #directionR }.
      */
     pair<int,int> get_direction();
 
@@ -152,7 +152,7 @@ class Motor{
      * - Reset the counter of the encoders.
      * - Toggle enable pin.
      * 
-     * - When \link Encoder::read_distance() read_distance\endlink > distance : Disable enable pin.
+     * - When Encoder::read_distance() > distance : Disable enable pin.
      * 
      * 
     */
@@ -163,8 +163,8 @@ class Motor{
      * 
      * @param distance Distance to travelled before stopping.
      * @param motor Motor object.
-     * @param left Left \link Encoder encoder\endlink object.
-     * @param right Right \link Encoder encoder\endlink object.
+     * @param left Left Encoder object.
+     * @param right Right Encoder object.
      */
     static void forward(double distance , Motor* motor, Encoder* left,  Encoder* right);
 
@@ -173,8 +173,8 @@ class Motor{
      * 
      * @param distance Distance to travelled before stopping.
      * @param motor Motor object.
-     * @param left Left \link Encoder encoder\endlink object.
-     * @param right Right \link Encoder encoder\endlink object.
+     * @param left Left Encoder object.
+     * @param right Right Encoder object.
      */
     static void reverse(double distance , Motor* motor, Encoder* left,  Encoder* right);
 
@@ -183,8 +183,8 @@ class Motor{
      * 
      * @param angle Angle to make before stopping.
      * @param motor Motor object.
-     * @param left Left \link Encoder encoder\endlink object.
-     * @param right Right \link Encoder encoder\endlink object.
+     * @param left Left Encoder object.
+     * @param right Right Encoder object.
      */
     static void turnleft(double angle   , Motor* motor, Encoder* left,  Encoder* right);
 
@@ -193,8 +193,8 @@ class Motor{
      * 
      * @param angle Angle to make before stopping.
      * @param motor Motor object.
-     * @param left Left \link Encoder encoder\endlink object.
-     * @param right Right \link Encoder encoder\endlink object.
+     * @param left Left Encoder encoder object.
+     * @param right Right Encoder encoder object.
      */
     static void turnright(double angle  , Motor* motor, Encoder* left,  Encoder* right);
 

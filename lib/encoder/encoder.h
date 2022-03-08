@@ -48,7 +48,7 @@ class Encoder: public QEI{
     /** @brief Timer for high-precision clocking.*/
     Timer t;
     
-    /** @brief Timeout to interrupt every \link POLLING_PERIOD POLLING_PERIOD\endlink.*/
+    /** @brief Timeout to interrupt every #POLLING_PERIOD.*/
     Timeout to;
 
     public:
@@ -78,7 +78,7 @@ class Encoder: public QEI{
     static constexpr double FULL_ROTATION_CENTER_PIVOT = M_PI * WHEEL_DISTANCE;
 
     /**
-     *  Start timer and get current pulse. Timeout for every \link POLLING_PERIOD POLLING_PERIOD\endlink.
+     *  Start timer and get current pulse. Timeout for every #POLLING_PERIOD.
      * @brief Start the routine to measure pulses periodically.
      */
     void start();
@@ -91,7 +91,7 @@ class Encoder: public QEI{
     int read_counter();
 
     /**
-     * @brief Reset the running sum of pulses used for \link read_distance() distance\endlink.
+     * @brief Reset the running sum of pulses used for read_distance().
      */
     void reset_counter();
 
@@ -105,7 +105,7 @@ class Encoder: public QEI{
     /**
      * @brief Get total distance travelled.
      * 
-     *  The distance can be calculated from known values of \link COUNTS_PER_REV CPR\endlink and \link CIRCUMFERENCE Circumference\endlink
+     * The distance can be calculated from known values of #COUNTS_PER_REV and #CIRCUMFERENCE
      * which is defined by
      * \f$distance = \frac{pulse\ counter\  \cdot\  cirmcumference}{2\  \cdot\  CPR}\\\f$
      * @return double Total distance (metre) travelled by the wheel.
@@ -126,7 +126,7 @@ class Encoder: public QEI{
      * -ve indicates tilting to the left.
      * @param right Right Wheel encoder
      * @param left Left Wheel encoder
-     * @return double Angular velocity (deg/s) of the buggy.
+     * @return double Angular velocity \link radiansToDegrees(angle) (deg/s)\endlink of the buggy.
      */
     static double average_angular(Encoder& right, Encoder& left);
 
@@ -157,7 +157,7 @@ class Encoder: public QEI{
     /**
      * @brief Calculate the velocity of the wheel.
      *
-     * The velocity can be calculated from known values of \link COUNTS_PER_REV CPR\endlink and \link CIRCUMFERENCE Circumference\endlink
+     * The velocity can be calculated from known values of #COUNTS_PER_REV CPR and #CIRCUMFERENCE
      * which is defined by
      * \f$velocity = \frac{pulse\ width\  \cdot\  cirmcumference}{2\  \cdot\  CPR \ \cdot \ time}\\\f$
      * @param time The elapsed time between two pulse count.

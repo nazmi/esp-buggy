@@ -1,228 +1,45 @@
 # Embedded Systems Project 2021/2022
 
-Hi! I'm [Nazmi Ropi](https://uk.linkedin.com/in/nazmi-ropi), the author of this software documentation. One of the objectives are to achieve high average speed line following buggy without compromising its robustness. Also, my approach towards the software development is to implement Object-Oriented-Programming features in the buggy code to abstract any technical details to the user.
+Hi! I'm [Nazmi Ropi](https://uk.linkedin.com/in/nazmi-ropi), the author of this software documentation. One of the objectives of this project are to achieve high average speed line following buggy without compromising its robustness. Also, my approach towards the software development is to implement Object-Oriented-Programming features to abstract any technical details to the user. Details of technical demonstrations were also documented in [its page](#journey).
 
+## Dependencies
 
-# Overview
+Mbed OS 6.15\n
+[**QEI**](https://os.mbed.com/users/WiredHome/code/QEI/) by [Aaron Berk](https://os.mbed.com/users/aberk/)\n
+[**PID**](https://os.mbed.com) by [Aaron Berk](https://os.mbed.com)\n
 
-We had at least 4 technical demonstration (TD) for this semester, accessing different components of the buggy including motors, encoders, sensors, and a bluetooth module.
+## Installation
+1. Install latest [Mbed Studio](https://os.mbed.com/studio/) for your compatible platform.
+2.  Clone this repository. 
+	 ```console
+	git clone https://github.com/nazmi/esp-buggy
+	```
+@warning This will not work because the repository is private.
 
-## Motor Control (TD1)
+3. Compile *main.cpp* using Mbed Studio.
+4. Upload the binary file to NUCLEO-F401RE through USB.
 
-On software side, the key task was getting the encoders and motors working as intended. After testing, I discovered that the distance scaled up with the speed of the motors, which make the distance reading unreliable. So, I settled down on **20% duty cycle** to keep it steady and avoid any residue momentum after stopping. PWM frequency was set at **1000 Hz** because the wheels were louder than the switches, why not? The heatsink was also not too hot to touch. I chose to use **unipolar mode** as this offers less switching losses.
+@note You will need to replace some of the MACROS values, and PID parameters based on your own specifications.
 
-@startuml
-!theme blueprint
-package F401RE <<Frame>>{
+## Troubleshooting
+Some of the library might not work if you want to use it on Mbed OS 6, I have made modifications to some of the libraries to replace the deprecated functions from Mbed 2. This can be easily done by referring to the latest API list from  [Mbed OS 6 documentation](https://os.mbed.com/docs/mbed-os/v6.15/introduction/index.html).
 
-skinparam groupInheritance 1
+@note You can use joystick, potentiometer and LCD on the application shield to help debug your program.
 
-class QEI{
-getPulses()
-}
+## Components
+You can buy any components you like, the table below will help if you want to build the line following robot without thinking about the selection of the components.
 
-QEI <-- left_encoder
-QEI <-- right_encoder
+|Component|Quantity
+--|--
+|NUCLEO-F401RE| 1|
+|RS Pro DC %Motor|2|
+|Broadcom Magnetic Incremental %Encoder| 2
+|%Motor Driver Board|1|
+|TCRT5000| 6|
+|HM 10 BLE|1|
 
+## Contributors
+Special thanks to my supervisor and every group member that helped in this project (in no particular order).
 
-object left_encoder{
-  read_velocity()
---
-  read_distance()
-}
-
-object  right_encoder{
-  read_velocity()
---
-  read_distance()
-}
-
-
-
-object motor{
-  Left PWM
-  Right PWM
-  enable
-  left direction
-  right direction
-  --
-forward()
---
-reverse()
---
-turnright()
---
-turnleft()
-}
-
-
-}
-@enduml
-
-
-
-
-One of the tasks was to make a square of 0.5 m, which I did not know they were so strict about the square. **The square had to be in between the wheels**. 
-
-*main.cpp*
-
-    Motor  motor(PC_9,PB_8,PC_8,PC_6,PB_9);
-    Encoder  wheel_left(PC_3,PC_2);
-    Encoder  wheel_right(PB_14,PB_13);
-	
-	while(1){
-	
-		vector<double> linear {...};
-		vector<double> rotation {...};
-		
-		for(size_t i=0; i < linear.size(); i++){
-			Motor::forward(linear,....);
-			Motor::turnright(rotation,...);
-		}
-	}
-
-Above shows a snippet on how I implemented the square sequence. Ideally all values in linear vector are 0.5 m and rotation vector are 90° . However, our vectors looked like this
-
-    vector<double> linear { 0.45, 0.33, 0.33, 0.43};
-	vector<double> rotation {83, 83, 83, 175};
-Note that the last one was more than 90° because the task was to trace the square back! Which was harder when your buggy did not move in straight line. I used a bang-bang method to compensate the tiny deviations, in the Motor class.
-
-*motor.cpp*
-
-    Motor::forward(double distance,...){
-    >> Initiliase motor and encoder.
-    >> Start moving.
-	>> While distance < set distance :
-	
-	if ( left_encoder > right_encoder)
-		right_motor.write(SLOW_PWM*(correction));
-		left_motor.write(SLOW_PWM)
-	else if ( right_encoder > left_encoder)
-		left_motor.write(SLOW_PWM*(correction));
-		right_motor.write(SLOW_PWM)
-	
-    }
-
-Correction is evaluated by ratio of bigger encoder number to smaller encoder number, giving percentage around 110%.
-
-We have received full marks on TD1. This promises us a good start in our journey in producing a winning buggy.
-
-## Technical Demo 2
-
-All your files and folders are presented as a tree in the file explorer. You can switch from one to another by clicking a file in the tree.
-
-## Technical Demo 3
-
-You can rename the current file by clicking the file name in the navigation bar or by clicking the **Rename** button in the file explorer.
-
-## Technical Demo 4 ( Heats )
-
-You can delete the current file by clicking the **Remove** button in the file explorer. The file will be moved into the **Trash** folder and automatically deleted after 7 days of inactivity.
-
-## Final Race Day
-
-You can export the current file by clicking **Export to disk** in the menu. You can choose to export the file as plain Markdown, as HTML using a Handlebars template or as a PDF.
-
-
-# Synchronization
-
-Synchronization is one of the biggest features of StackEdit. It enables you to synchronize any file in your workspace with other files stored in your **Google Drive**, your **Dropbox** and your **GitHub** accounts. This allows you to keep writing on other devices, collaborate with people you share the file with, integrate easily into your workflow... The synchronization mechanism takes place every minute in the background, downloading, merging, and uploading file modifications.
-
-There are two types of synchronization and they can complement each other:
-
-- The workspace synchronization will sync all your files, folders and settings automatically. This will allow you to fetch your workspace on any other device.
-	> To start syncing your workspace, just sign in with Google in the menu.
-
-- The file synchronization will keep one file of the workspace synced with one or multiple files in **Google Drive**, **Dropbox** or **GitHub**.
-	> Before starting to sync files, you must link an account in the **Synchronize** sub-menu.
-
-## Open a file
-
-You can open a file from **Google Drive**, **Dropbox** or **GitHub** by opening the **Synchronize** sub-menu and clicking **Open from**. Once opened in the workspace, any modification in the file will be automatically synced.
-
-## Save a file
-
-You can save any file of the workspace to **Google Drive**, **Dropbox** or **GitHub** by opening the **Synchronize** sub-menu and clicking **Save on**. Even if a file in the workspace is already synced, you can save it to another location. StackEdit can sync one file with multiple locations and accounts.
-
-## Synchronize a file
-
-Once your file is linked to a synchronized location, StackEdit will periodically synchronize it by downloading/uploading any modification. A merge will be performed if necessary and conflicts will be resolved.
-
-If you just have modified your file and you want to force syncing, click the **Synchronize now** button in the navigation bar.
-
-> **Note:** The **Synchronize now** button is disabled if you have no file to synchronize.
-
-## Manage file synchronization
-
-Since one file can be synced with multiple locations, you can list and manage synchronized locations by clicking **File synchronization** in the **Synchronize** sub-menu. This allows you to list and remove synchronized locations that are linked to your file.
-
-
-# Publication
-
-Publishing in StackEdit makes it simple for you to publish online your files. Once you're happy with a file, you can publish it to different hosting platforms like **Blogger**, **Dropbox**, **Gist**, **GitHub**, **Google Drive**, **WordPress** and **Zendesk**. With [Handlebars templates](http://handlebarsjs.com/), you have full control over what you export.
-
-> Before starting to publish, you must link an account in the **Publish** sub-menu.
-
-## Publish a File
-
-You can publish your file by opening the **Publish** sub-menu and by clicking **Publish to**. For some locations, you can choose between the following formats:
-
-- Markdown: publish the Markdown text on a website that can interpret it (**GitHub** for instance),
-- HTML: publish the file converted to HTML via a Handlebars template (on a blog for example).
-
-## Update a publication
-
-After publishing, StackEdit keeps your file linked to that publication which makes it easy for you to re-publish it. Once you have modified your file and you want to update your publication, click on the **Publish now** button in the navigation bar.
-
-> **Note:** The **Publish now** button is disabled if your file has not been published yet.
-
-## Manage file publication
-
-Since one file can be published to multiple locations, you can list and manage publish locations by clicking **File publication** in the **Publish** sub-menu. This allows you to list and remove publication locations that are linked to your file.
-
-
-# Markdown extensions
-
-StackEdit extends the standard Markdown syntax by adding extra **Markdown extensions**, providing you with some nice features.
-
-> **ProTip:** You can disable any **Markdown extension** in the **File properties** dialog.
-
-
-## SmartyPants
-
-SmartyPants converts ASCII punctuation characters into "smart" typographic punctuation HTML entities. For example:
-
-|                |ASCII                          |HTML                         |
-|----------------|-------------------------------|-----------------------------|
-|Single backticks|`'Isn't this fun?'`            |'Isn't this fun?'            |
-|Quotes          |`"Isn't this fun?"`            |"Isn't this fun?"            |
-|Dashes          |`-- is en-dash, --- is em-dash`|-- is en-dash, --- is em-dash|
-
-
-
-
-## UML diagrams
-
-You can render UML diagrams using [Mermaid](https://mermaidjs.github.io/). For example, this will produce a sequence diagram:
-
-```mermaid
-sequenceDiagram
-Alice ->> Bob: Hello Bob, how are you?
-Bob-->>John: How about you John?
-Bob--x Alice: I am good thanks!
-Bob-x John: I am good thanks!
-Note right of John: Bob thinks a long<br/>long time, so long<br/>that the text does<br/>not fit on a row.
-
-Bob-->Alice: Checking with John...
-Alice->John: Yes... John, how are you?
-```
-
-And this will produce a flow chart:
-
-```mermaid
-graph LR
-A[Square Rect] -- Link text --> B((Circle))
-A --> C(Round Rect)
-B --> D{Rhombus}
-C --> D
-```
+*Dr Subhasish Chakraborty*\n
+*Ibrahim, Euan, Joseph, Zech, Eric*

@@ -6,6 +6,7 @@
 #include <cstdio>
 
 #define OFFTRACK 0.15
+#define VDD 3.3
 
 class Sensor
 {

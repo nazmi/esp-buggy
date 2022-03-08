@@ -119,12 +119,12 @@ public:
     /**
      * @brief Reset the encoder.
      *
-     * Sets the \link pulses_ pulses \endlink and \link revolutions_ revolutions \endlink count to zero.
+     * Sets the \link pulses_ pulses\endlink and \link revolutions_ revolutions\endlink count to zero.
      */
     void reset(void);
 
     /**
-     * @brief Read the \link currState_ state \endlink of the encoder.
+     * @brief Read the \link currState_ state\endlink of the encoder.
      *
      * @return The current state of the encoder as a 2-bit number, where:
      *         bit 1 = The reading from channel B
@@ -133,7 +133,7 @@ public:
     int getCurrentState(void);
 
     /**
-     * @brief Read the number of \link invalid_ invalid \endlink counts.
+     * @brief Read the number of \link invalid_ invalid\endlink counts.
      *
      * @note Reading this resets the counter!
      * 
@@ -142,21 +142,21 @@ public:
     int getInvalidCount(void);
 
     /**
-     * @brief Read the number of \link pulses_ pulses \endlink recorded by the encoder.
+     * @brief Read the number of \link pulses_ pulses\endlink recorded by the encoder.
      *
      * @return Number of pulses which have occured.
      */
     int getPulses(void);
 
     /**
-     * @brief Read the number of \link revolutions_ revolutions \endlink recorded by the encoder on the index channel.
+     * @brief Read the number of \link revolutions_ revolutions\endlink recorded by the encoder on the index channel.
      *
      * @return Number of revolutions which have occured on the index channel.
      */
     int getRevolutions(void);
 
     /**
-     * @brief Set the current \link pulses_ pulse count \endlink in case you want to init it.
+     * @brief Set the current \link pulses_ pulse count\endlink in case you want to init it.
      *
      * @param[in] newCount is the count to set it to.
      *
@@ -164,7 +164,7 @@ public:
      void setPulses(int newCount);
 
     /**
-     * @brief Set the current \link revolutions_ revolution count \endlink in case you want to init it.
+     * @brief Set the current \link revolutions_ revolution count\endlink in case you want to init it.
      *
      * @param[in] newRevs is the count to set it to.
      *

@@ -11,16 +11,18 @@ Sensor::Sensor(PinName p1, PinName p2, PinName p3, PinName p4, PinName p5, PinNa
 
 float Sensor::read(){
 
+    sensors = 0;
+    distance = 0;
+    float noise = input.read();
+    
+
     for(int i=0; i < 6; i++){
 
         sensors = 1 << i;
-        sensor_data[i] = input.read();
+        sensor_data[i] = (input.read() - noise) * VDD;
 
-        if( i == 3) printf("\n");
-        printf("%.9f ", sensor_data[i]);
+        printf("%.5f ", sensor_data[i]);
     }
-
-    distance = 0;
 
     for(int i =0; i < 6 ; i++){
 
@@ -28,7 +30,7 @@ float Sensor::read(){
 
     }
     
-    printf("%.9f",distance);
+    printf("%.5f",distance);
     return distance;
     
 }
