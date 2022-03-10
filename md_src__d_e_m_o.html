@@ -113,7 +113,7 @@ Overview</h1>
 <h1><a class="anchor" id="autotoc_md7"></a>
 TD1 : Motor Control</h1>
 <p >On software side, the key task was getting the encoders and motors working as intended. After testing, I discovered that the distance scaled up with the speed of the motors, which make the distance reading unreliable. So, I settled down on <b>20% duty cycle</b> to keep it steady and avoid any residue momentum after stopping. PWM frequency was set at <b>1000 Hz</b> because the wheels were louder than the switches, why not? The heatsink was also not too hot to touch. I chose to use <b>unipolar mode</b> as this offers less switching losses. </p><div class="dotgraph">
-<iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_1.svg" width="326" height="439"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_1.svg" width="458" height="412"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <p >One of the tasks was to make a square of 0.5 m, which I did not know they were so strict about the square. <b>The square had to be in between the wheels</b>.</p>
 <p ><em>main.cpp</em> </p><pre class="fragment">Motor  motor(PC_9,PB_8,PC_8,PC_6,PB_9);
 Encoder  wheel_left(PC_3,PC_2);
@@ -145,7 +145,51 @@ else if ( right_encoder &gt; left_encoder)
 <p >We have received full marks on TD1. This promises us a good start in our journey in producing a winning buggy.</p>
 <h1><a class="anchor" id="autotoc_md8"></a>
 TD2 : Sensors</h1>
-<p >Bla bla test </p>
+<p >This is where we have to interface sensors and bluetooth module with the microcontroller. The bluetooth part is easily done by connecting to correct RX, TX terminal. In this case I used <b>BufferedSerial</b> to handle the communication between F401RE and HM-10. Sensors are the tricky bit, since we chose not to arrange it in a one row but two instead. However, I will discuss on general process of configuration and calibration without considering the arrangement.</p>
+<div class="dotgraph">
+<iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_2.svg" width="334" height="244"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p >It is easier manage 6 sensors if they are connected to op-amp, this approach allows calibration only using potetiometer instead of software. Since this is not available to us, we need to calibrate black and white level of the sensors.</p>
+<ol type="1">
+<li><p class="startli">The <b>white level</b> can be calibrated by placing <b>white card</b> under the sensor and turning the sensor under <b>normal condition at fixed height from the sensors</b>. <em>Does VDD matter?</em> No, because reading is normalised,you can do whatever scaling you want as long as you understand. Here, I choose maximum level of <b>10</b>.</p>
+<p class="startli">Recall that I have <em>raw uncalibrated data (white level)</em> </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Sensor 1   </th><th class="markdownTableHeadNone">Sensor 2   </th><th class="markdownTableHeadNone">Sensor 3   </th><th class="markdownTableHeadNone">Sensor 4   </th><th class="markdownTableHeadNone">Sensor 5   </th><th class="markdownTableHeadNone">Sensor 6    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">6.326   </td><td class="markdownTableBodyNone">7.234   </td><td class="markdownTableBodyNone">6.107   </td><td class="markdownTableBodyNone">6.565   </td><td class="markdownTableBodyNone">6.122   </td><td class="markdownTableBodyNone">4.921   </td></tr>
+</table>
+<p class="startli">How big is the scale factor to make it <b>10</b>? </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Sensor 1   </th><th class="markdownTableHeadNone">Sensor 2   </th><th class="markdownTableHeadNone">Sensor 3   </th><th class="markdownTableHeadNone">Sensor 4   </th><th class="markdownTableHeadNone">Sensor 5   </th><th class="markdownTableHeadNone">Sensor 6    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1.580   </td><td class="markdownTableBodyNone">1.382   </td><td class="markdownTableBodyNone">1.637   </td><td class="markdownTableBodyNone">1.523   </td><td class="markdownTableBodyNone">1.633   </td><td class="markdownTableBodyNone">2.032   </td></tr>
+</table>
+<p class="startli">Now, just apply a scale factor to each sensor to scale it to desired maximum level </p><dl class="section note"><dt>Note</dt><dd>We have assume the sensors scale linearly. <em>But does it?</em></dd></dl>
+</li>
+<li>Next, the <b>black level</b> can be calibrated by placing <b>black track</b> under the sensor and turning the sensor under <b>minimum light condition</b>. This ensures we get minimum treshold value at minimum external noise(infrared). <em>What to do with black level?</em> It is pretty much pointless to read small values that is not useful to distance calculation, so black level is the treshold of the sensor reading.</li>
+<li><p class="startli">Although we expect perfect results by calibration, there are always external noise coming from sunlight and other sources. This issue needed to be addressed to avoid unreliable readings consist of random errors.</p>
+<p class="startli">\( reading_i = noise_i + emitter_i \quad \quad where \quad reading_i &gt; treshold_i \)</p>
+<dl class="section note"><dt>Note</dt><dd>Noise is simply background reading when none of the emitter is turn off.</dd></dl>
+<p>Measurements of the analog input when all emitter is off at the start of each read is very easy to implement. When this is done correctly, we will get the best intended readings from the sensor.</p>
+</li>
+</ol>
+<p ><details>
+<summary>more...</summary> Showcase some of the tests done to calibrate the sensors.<br  />
+ </p><div align="center"> <img src="white.svg" alt="White Level" style="pointer-events: none;" class="inline"/> White level raw<br  />
+<br  />
+ <img src="black.svg" alt="Black Level" style="pointer-events: none;" class="inline"/> Black level raw<br  />
+<br  />
+ <img src="distance.svg" alt="Variation of distance" style="pointer-events: none;" class="inline"/> Sweeping the white card back and forth to the sensor. </div><p> </details>
+</p>
+<p >This part is where I realised how important scaling factor impact the results. If all readings normalised to 10, distance calculation is simplified because of the linear properties we see before. From the sensor array, if we establish a coordinate system with its axis between sensor 3 and 4, we can assign weight for each sensor like in the example below.</p>
+<div class="dotgraph">
+<iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_3.svg" width="462" height="102"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Sensor 1   </th><th class="markdownTableHeadNone">Sensor 2   </th><th class="markdownTableHeadNone">Sensor 3   </th><th class="markdownTableHeadNone">Sensor 4   </th><th class="markdownTableHeadNone">Sensor 5   </th><th class="markdownTableHeadNone">Sensor 6    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">-30   </td><td class="markdownTableBodyNone">-20   </td><td class="markdownTableBodyNone">-10   </td><td class="markdownTableBodyNone">10   </td><td class="markdownTableBodyNone">20   </td><td class="markdownTableBodyNone">30   </td></tr>
+</table>
+<p >which can be reduced to \(\ distance = \sum_{1}^{6} reading_i \times weight_i \) </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

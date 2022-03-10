@@ -1,18 +1,16 @@
 var searchData=
 [
-  ['sensor_0',['Sensor',['../class_sensor.html#a909eb7b4efe74f4d5d3e0cc7c26fa5a9',1,'Sensor::Sensor()'],['../class_sensor.html',1,'Sensor']]],
-  ['sensor_2eh_1',['sensor.h',['../sensor_8h.html',1,'']]],
-  ['sensor_5fdata_2',['sensor_data',['../class_sensor.html#a62ec5bc9664f19d3c3cd7f005e75f08b',1,'Sensor']]],
-  ['sensors_3',['sensors',['../class_sensor.html#ad71624c39dd4396fde652b8da7014ff0',1,'Sensor']]],
-  ['set_5fdirection_4',['set_direction',['../class_motor.html#adb6ef20c8f875988d7e0166687528e75',1,'Motor::set_direction(char c, int direction)'],['../class_motor.html#aae9c426fd058efcb0ffb3798f2103a93',1,'Motor::set_direction(char c)']]],
-  ['set_5fdutycycle_5',['set_dutycycle',['../class_motor.html#adc6817f0bf91682d9a8078de2ae18a80',1,'Motor']]],
-  ['set_5fenable_6',['set_enable',['../class_motor.html#acd62648ec19d781647869649ca288dfe',1,'Motor::set_enable()'],['../class_motor.html#a430b1fb5304b58bea65ba9db37d94330',1,'Motor::set_enable(int state)']]],
-  ['set_5ffrequency_7',['set_frequency',['../class_motor.html#a53cca3666935f47cb097f7a9c3c732ae',1,'Motor']]],
-  ['setpulses_8',['setPulses',['../class_q_e_i.html#a324c46c31a8a8502f69ee736fc212157',1,'QEI']]],
-  ['setrevolutions_9',['setRevolutions',['../class_q_e_i.html#af9bdf84dcb24343b5b65f97b9a1c9932',1,'QEI']]],
-  ['slow_5fpwm_10',['SLOW_PWM',['../motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0',1,'motor.h']]],
-  ['start_11',['start',['../class_encoder.html#ad9a4d22fb29fbca6df88720348f0a851',1,'Encoder']]],
-  ['start_5fpulse_12',['start_pulse',['../class_encoder.html#a9bbe803e741bfe18c9cc296a35ae2f09',1,'Encoder']]],
-  ['state_13',['state',['../class_motor.html#a1a3d6ad79d32c116e80408b911523424',1,'Motor']]],
-  ['stop_14',['stop',['../class_encoder.html#a1da39fbf1d85bd36ab7aaad1a34ddc80',1,'Encoder']]]
+  ['radianstodegrees_0',['radiansToDegrees',['../encoder_8h.html#a0a66802250289d98eb056a05e4faab6c',1,'encoder.h']]],
+  ['read_1',['read',['../class_sensor.html#a2f68fe7942a7e139b087958510d822df',1,'Sensor']]],
+  ['read_5fcounter_2',['read_counter',['../class_encoder.html#af66403145db41a53e9a921b6a7edd734',1,'Encoder']]],
+  ['read_5fdistance_3',['read_distance',['../class_encoder.html#adc54ff8d3878b17f2b9cafd9e2cdaded',1,'Encoder']]],
+  ['read_5fpps_4',['read_pps',['../class_encoder.html#a9f4b3945c37887d0b2f7e424c61743f1',1,'Encoder']]],
+  ['read_5fvelocity_5',['read_velocity',['../class_encoder.html#a156eade0a873b903c7dab3f512fba43d',1,'Encoder']]],
+  ['readme_2emd_6',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]],
+  ['reset_7',['reset',['../class_q_e_i.html#a734c89fb5d882bffb26132ac3db77caf',1,'QEI']]],
+  ['reset_5fcounter_8',['reset_counter',['../class_encoder.html#a300dcd95c5aaae316658e1b85e947e18',1,'Encoder']]],
+  ['reverse_9',['reverse',['../class_motor.html#a9eacd201d086f725ab5ee4cca3f3e8f5',1,'Motor']]],
+  ['revolutions_5f_10',['revolutions_',['../class_q_e_i.html#a2627141c6f094da10b9fb3e48e719f92',1,'QEI']]],
+  ['right_11',['right',['../class_motor.html#a9cb4f85df1e212f4f9a3da651e2e6251',1,'Motor']]],
+  ['run_12',['run',['../class_sensor.html#aa2be5bc612e3a2567250b7074e0b17ec',1,'Sensor']]]
 ];

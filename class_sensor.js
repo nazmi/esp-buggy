@@ -1,13 +1,16 @@
 var class_sensor =
 [
-    [ "Sensor", "class_sensor.html#a909eb7b4efe74f4d5d3e0cc7c26fa5a9", null ],
+    [ "Sensor", "class_sensor.html#ad632abcf66cdd764bee77fcea28d440f", null ],
     [ "read", "class_sensor.html#a2f68fe7942a7e139b087958510d822df", null ],
-    [ "calibrate", "class_sensor.html#a8d8b66c2ed4d7973d84fc0a56081dc03", null ],
-    [ "input", "class_sensor.html#a128a32fab8cfb95d797bb905ed3d38aa", null ],
+    [ "calibrate_black", "class_sensor.html#adb8b9d310b79e284fae9c9dba2860b79", null ],
+    [ "calibrate_white", "class_sensor.html#a586b9673ae61053ef146b354c2d283d3", null ],
+    [ "input", "class_sensor.html#a9ccee5a22667133566ceed4c2a30fa6e", null ],
     [ "sensors", "class_sensor.html#ad71624c39dd4396fde652b8da7014ff0", null ],
     [ "sensor_data", "class_sensor.html#a62ec5bc9664f19d3c3cd7f005e75f08b", null ],
-    [ "upper_limit", "class_sensor.html#ac99ae1377f9a3680e77545df10b94e42", null ],
-    [ "lower_limit", "class_sensor.html#ae06247164873016ee4c2d8d2bb3a7d59", null ],
+    [ "noise", "class_sensor.html#a0f677d17c829e88e20b2232a3b909ced", null ],
     [ "distance", "class_sensor.html#a861556e36c5a7adfbc0e55fbe311a83e", null ],
-    [ "weight", "class_sensor.html#af44ce77cb1a617c91fef2e7f17bb8610", null ]
+    [ "weight", "class_sensor.html#af44ce77cb1a617c91fef2e7f17bb8610", null ],
+    [ "treshold", "class_sensor.html#af1644b2584927dedc1e0672809f3dafe", null ],
+    [ "scale_factor", "class_sensor.html#a67fefc31fa69b0ec9e870985fd38e0a0", null ],
+    [ "run", "class_sensor.html#aa2be5bc612e3a2567250b7074e0b17ec", null ]
 ];

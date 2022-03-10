@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['sensor_0',['Sensor',['../class_sensor.html#a909eb7b4efe74f4d5d3e0cc7c26fa5a9',1,'Sensor']]],
+  ['sensor_0',['Sensor',['../class_sensor.html#ad632abcf66cdd764bee77fcea28d440f',1,'Sensor']]],
   ['set_5fdirection_1',['set_direction',['../class_motor.html#adb6ef20c8f875988d7e0166687528e75',1,'Motor::set_direction(char c, int direction)'],['../class_motor.html#aae9c426fd058efcb0ffb3798f2103a93',1,'Motor::set_direction(char c)']]],
   ['set_5fdutycycle_2',['set_dutycycle',['../class_motor.html#adc6817f0bf91682d9a8078de2ae18a80',1,'Motor']]],
   ['set_5fenable_3',['set_enable',['../class_motor.html#a430b1fb5304b58bea65ba9db37d94330',1,'Motor::set_enable(int state)'],['../class_motor.html#acd62648ec19d781647869649ca288dfe',1,'Motor::set_enable()']]],

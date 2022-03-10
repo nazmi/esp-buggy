@@ -110,12 +110,13 @@ $(document).ready(function(){initNavTree('sensor_8h.html',''); initResizable(); 
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;mbed.h&quot;</code><br />
-<code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;cstdio&gt;</code><br />
+<code>#include &lt;numeric&gt;</code><br />
+<code>#include &lt;limits&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for sensor.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="sensor_8h__incl.svg" width="256" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="sensor_8h__incl.svg" width="327" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
@@ -130,8 +131,10 @@ Classes</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:a080aa4c3ca12818b030991061ead0bfc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sensor_8h.html#a080aa4c3ca12818b030991061ead0bfc">OFFTRACK</a>&#160;&#160;&#160;0.15</td></tr>
 <tr class="separator:a080aa4c3ca12818b030991061ead0bfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca282936bcfbb85c24a95855c0dffd6f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sensor_8h.html#aca282936bcfbb85c24a95855c0dffd6f">VDD</a>&#160;&#160;&#160;3.3</td></tr>
-<tr class="separator:aca282936bcfbb85c24a95855c0dffd6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fac869d83ac1a584d6c45cf609f5fe7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sensor_8h.html#a0fac869d83ac1a584d6c45cf609f5fe7">PRESCALER</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:a0fac869d83ac1a584d6c45cf609f5fe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08e4da5f3d0c7936fa52467f40e4b6aa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sensor_8h.html#a08e4da5f3d0c7936fa52467f40e4b6aa">MAX_DISTANCE</a>&#160;&#160;&#160;674045041.0</td></tr>
+<tr class="separator:a08e4da5f3d0c7936fa52467f40e4b6aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a080aa4c3ca12818b030991061ead0bfc" name="a080aa4c3ca12818b030991061ead0bfc"></a>
@@ -148,14 +151,28 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="aca282936bcfbb85c24a95855c0dffd6f" name="aca282936bcfbb85c24a95855c0dffd6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca282936bcfbb85c24a95855c0dffd6f">&#9670;&nbsp;</a></span>VDD</h2>
+<a id="a0fac869d83ac1a584d6c45cf609f5fe7" name="a0fac869d83ac1a584d6c45cf609f5fe7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fac869d83ac1a584d6c45cf609f5fe7">&#9670;&nbsp;</a></span>PRESCALER</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define VDD&#160;&#160;&#160;3.3</td>
+          <td class="memname">#define PRESCALER&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a08e4da5f3d0c7936fa52467f40e4b6aa" name="a08e4da5f3d0c7936fa52467f40e4b6aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08e4da5f3d0c7936fa52467f40e4b6aa">&#9670;&nbsp;</a></span>MAX_DISTANCE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_DISTANCE&#160;&#160;&#160;674045041.0</td>
         </tr>
       </table>
 </div><div class="memdoc">
