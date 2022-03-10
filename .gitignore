@@ -7,3 +7,5 @@ BUILD
 .hg
 html
 .vscode
+*.csv
+*.xlsx
