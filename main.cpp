@@ -4,8 +4,7 @@
 #include "motor.h"
 #include "joystick.h"
 #include "potentiometer.h"
-#include <chrono>
-#include <vector>
+#include "sensor.h"
 
 #define DEBUG 0
 
@@ -17,6 +16,8 @@ int main() {
     Encoder wheel_right(PB_14,PB_13);
     
     BufferedSerial hm10(PA_11,PA_12);
+    Sensor sensors(PA_9,PB_10,PB_4,PB_5,PB_3,PA_10,PC_0,PC_1,PB_0,PA_4,PA_1,PA_0 );
+    //DigitalOut n1(PC_5,0),n2(PB_1,0),n3(PC_4,0);
     //Potentiometer pot_r(A1,&motor.right);
     //Potentiometer pot_l(A0,&motor.left);
     //Joystick joy(A2,A3,D4,&motor);
@@ -25,25 +26,28 @@ int main() {
     motor.set_dutycycle('A', 0);
     motor.set_frequency(1000);
     
-    while(1){
 
-        if(hm10.readable()){
+    // while(1){
+
+    //     if(hm10.readable()){
             
-            char c = ' ';
-            hm10.read(&c,1);
+    //         char c = NULL;
+    //         hm10.read(&c,1);
 
-            if(c != ' '){
+    //         if(c){
+    //             lcd.cls();
+    //             lcd.locate(0, 0);
+    //             lcd.printf("HM10 sent %c \n",c);
 
-                lcd.cls();
-                lcd.locate(0, 0);
-                lcd.printf("HM10 sent %c \n",c);
+    //         }
+    //     }
 
-            }
-
-        }
-
-    }
-
+        
+    // }
+    int i = 1000;
+    while(i-- > 0)
+        sensors.read();
+    
     return 0;
 
 }
