@@ -1,4 +1,5 @@
 #include "sensor.h"
+#include <algorithm>
 
 bool Sensor::run = false;
 
@@ -12,14 +13,12 @@ float Sensor::read(){
     Timer t;
     t.start();
     sensors.write(0);
+    wait_us(135);
     for(int i=0;i<6;i++){
 
         float reading = input[i].read();
         
-        if(reading > treshold[i])
-            noise[i]= reading;
-        else
-            noise[i] = 0;
+        noise[i]= reading;
     
     }
 
@@ -31,21 +30,28 @@ float Sensor::read(){
 
         if(reading > noise[i] && reading > treshold[i])
             sensor_data[i] = (reading - noise[i]) * PRESCALER * scale_factor[i];
-        else if(reading > treshold[i] && reading < noise[i])
-             sensor_data[i] = reading * PRESCALER * scale_factor[i];
         else
             sensor_data[i] = 0;
+
+
+        if(sensor_data[i] > PRESCALER)
+            sensor_data[i] = PRESCALER;
         
     }
 
 
-    if(std::accumulate(sensor_data,sensor_data+6,0.0) > 0.1*PRESCALER){
+    if(std::any_of(sensor_data,sensor_data+6,[](float i){ return i > MIN_BLACK; })){
+
+        float sum{0.0}, weighted_sum{0.0};
 
         for(int i =0; i < 6 ; i++){
 
-            distance += sensor_data[i]*weight[i];
+            sum += sensor_data[i];
+            weighted_sum += sensor_data[i]*weight[i];
 
         }
+
+        distance = weighted_sum / sum;
 
     }else {
 
@@ -89,14 +95,12 @@ void Sensor::calibrate_white(){
 
 
     sensors.write(0);
+    wait_us(135);
     for(int i=0;i<6;i++){
 
         float reading = input[i].read();
         
-        if(reading > treshold[i])
-            noise[i]= reading;
-        else
-            noise[i] = 0;
+        noise[i]= reading;
     
     }
 
@@ -113,8 +117,6 @@ void Sensor::calibrate_white(){
 
         if(reading > noise[i] && reading > treshold[i])
             sensor_data[i] = (reading - noise[i]) * PRESCALER;
-        else if(reading > treshold[i] && reading < noise[i])
-            sensor_data[i] = reading * PRESCALER;
         else
             sensor_data[i] = 0;
 

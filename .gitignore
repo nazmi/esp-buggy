@@ -9,3 +9,5 @@ html
 .vscode
 *.csv
 *.xlsx
+.tmp.driveupload
+*.bat
