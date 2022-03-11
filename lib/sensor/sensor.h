@@ -7,8 +7,10 @@
 #include <limits>
 
 #define OFFTRACK 0.15
-#define PRESCALER 2
-#define MAX_DISTANCE 674045041.0
+#define PRESCALER 10.0
+#define MAX_DISTANCE 50.0
+#define MIN_BLACK 1.4
+
 
 class Sensor
 {
@@ -25,12 +27,12 @@ class Sensor
         static constexpr float treshold[6] {0.02666367,	0.04516327,	0.03560837,	0.04705085,	0.04266423,	0.03508913};
 
         static constexpr float scale_factor[6] {1.580680823,	1.382250323,	1.637246257,	1.523113522,	1.633290298,	2.032013615};
-        static bool run;
+        
         
 
     public:
         Sensor(PinName p1, PinName p2, PinName p3, PinName p4, PinName p5, PinName p6, PinName in1,PinName in2,PinName in3,PinName in4,PinName in5,PinName in6);
-        
+        static bool run;
         float read();
         void calibrate_black();
         void calibrate_white();

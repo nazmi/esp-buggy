@@ -15,7 +15,7 @@ int main() {
     Encoder wheel_left(PC_3,PC_2);
     Encoder wheel_right(PB_14,PB_13);
     
-    BufferedSerial hm10(PA_11,PA_12);
+    BufferedSerial hm10(PA_11,PA_12,115200);
     Sensor sensors(PA_9,PB_10,PB_4,PB_5,PB_3,PA_10,PC_0,PC_1,PB_0,PA_4,PA_1,PA_0 );
     //DigitalOut n1(PC_5,0),n2(PB_1,0),n3(PC_4,0);
     //Potentiometer pot_r(A1,&motor.right);
@@ -26,27 +26,49 @@ int main() {
     motor.set_dutycycle('A', 0);
     motor.set_frequency(1000);
     
+    while(1){
 
-    // while(1){
+        char c;
 
-    //     if(hm10.readable()){
+        if (hm10.readable()) {
+
+            hm10.read(&c,1);
+
+            switch(c){
+
+                case 'R':
+                {
+                    int i = 1000;
+                    while(i-- > 0)
+                        sensors.read();
+                    sensors.run = false;
+                    break;
+                }
+                case 'W':
+                {
+                    int i = 1000;
+                    while(i-- > 0)
+                        sensors.calibrate_white();
+                    sensors.run = false;
+                    break;
+                }
+                case 'B':
+                {
+                    int i = 1000;
+                    while(i-- > 0)
+                        sensors.calibrate_black();
+                    sensors.run = false;
+                    break;
+                }
+                default:
+                      printf("HM10 sent %c\n",c);
+
+            }
             
-    //         char c = NULL;
-    //         hm10.read(&c,1);
-
-    //         if(c){
-    //             lcd.cls();
-    //             lcd.locate(0, 0);
-    //             lcd.printf("HM10 sent %c \n",c);
-
-    //         }
-    //     }
-
-        
-    // }
-    int i = 1000;
-    while(i-- > 0)
-        sensors.read();
+            
+        } 
+    
+    }
     
     return 0;
 
