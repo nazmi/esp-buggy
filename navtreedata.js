@@ -34,8 +34,8 @@ var NAVTREE =
     ] ],
     [ "Technical Demo Documentation", "md_src__d_e_m_o.html", [
       [ "Overview", "md_src__d_e_m_o.html#autotoc_md6", null ],
-      [ "TD1 : Motor Control", "md_src__d_e_m_o.html#autotoc_md7", null ],
-      [ "TD2 : Sensors", "md_src__d_e_m_o.html#autotoc_md8", null ]
+      [ "TD1: Motor Control", "md_src__d_e_m_o.html#autotoc_md7", null ],
+      [ "TD2: Sensors", "md_src__d_e_m_o.html#autotoc_md8", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],

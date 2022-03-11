@@ -138,5 +138,6 @@ var NAVTREEINDEX0 =
 "sensor_8h.html#a080aa4c3ca12818b030991061ead0bfc":[3,0,0,3,0,1],
 "sensor_8h.html#a08e4da5f3d0c7936fa52467f40e4b6aa":[3,0,0,3,0,3],
 "sensor_8h.html#a0fac869d83ac1a584d6c45cf609f5fe7":[3,0,0,3,0,2],
+"sensor_8h.html#ac452dd040c1db51ee63eb2de6002607d":[3,0,0,3,0,4],
 "sensor_8h_source.html":[3,0,0,3,0]
 };

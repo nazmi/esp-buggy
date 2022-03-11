@@ -109,66 +109,77 @@ $(document).ready(function(){initNavTree('md_src__d_e_m_o.html',''); initResizab
 <div class="textblock"><p ><a class="anchor" id="journey"></a></p>
 <h1><a class="anchor" id="autotoc_md6"></a>
 Overview</h1>
-<p >We had at least 4 technical demonstrations (TD) for this semester, accessing different parts of the buggy. They emphasise on the hardware control especially the motors and the software solutions on interfacing the microcontroller and other components like sensors and bluetooth module.</p>
+<p >We had at least 4 technical demonstrations (TD) for this semester, accessing different parts of the buggy. They emphasised the hardware control, especially the motors and the software solutions to interface the microcontroller and other components like sensors and Bluetooth module.</p>
 <h1><a class="anchor" id="autotoc_md7"></a>
-TD1 : Motor Control</h1>
-<p >On software side, the key task was getting the encoders and motors working as intended. After testing, I discovered that the distance scaled up with the speed of the motors, which make the distance reading unreliable. So, I settled down on <b>20% duty cycle</b> to keep it steady and avoid any residue momentum after stopping. PWM frequency was set at <b>1000 Hz</b> because the wheels were louder than the switches, why not? The heatsink was also not too hot to touch. I chose to use <b>unipolar mode</b> as this offers less switching losses. </p><div class="dotgraph">
+TD1: Motor Control</h1>
+<p >On the software side, the key task was setting up the encoders and motors to work as intended. I settled down on a <b>20% duty cycle</b> to keep it steady and avoid any translational inertia after stopping. PWM frequency set to <b>1000 Hz</b> because the wheels were louder than the switches, why not? The heatsink was also not too hot to touch. I chose to use <b>unipolar mode</b> as this offered less switching losses. </p><div class="dotgraph">
 <iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_1.svg" width="458" height="412"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-<p >One of the tasks was to make a square of 0.5 m, which I did not know they were so strict about the square. <b>The square had to be in between the wheels</b>.</p>
-<p ><em>main.cpp</em> </p><pre class="fragment">Motor  motor(PC_9,PB_8,PC_8,PC_6,PB_9);
-Encoder  wheel_left(PC_3,PC_2);
-Encoder  wheel_right(PB_14,PB_13);
-
-while(1){
-
-    vector&lt;double&gt; linear {...};
-    vector&lt;double&gt; rotation {...};
-
-    for(size_t i=0; i &lt; linear.size(); i++){
-        Motor::forward(linear,....);
-        Motor::turnright(rotation,...);
-    }
-}
-</pre><p> Above shows a snippet on how I implemented the square sequence. Ideally all values in linear vector are 0.5 m and rotation vector are 90° . However, our vectors looked like this </p><pre class="fragment">vector&lt;double&gt; linear { 0.45, 0.33, 0.33, 0.43};
-vector&lt;double&gt; rotation {83, 83, 83, 175};
-</pre><p> Note that the last one was more than 90° because the task was to trace the square back! Which was harder when your buggy did not move in straight line. I used bang-bang approach to compensate the tiny deviations between two wheels, implemented in the <a class="el" href="class_motor.html#a3a856b89f959eb1032f8ec2016b29efb" title="Control the motor to cruise forward.">Motor::forward</a>.</p>
-<p ><em>motor.cpp</em> </p><pre class="fragment">if ( left_encoder &gt; right_encoder)
-
-    right_motor.write(SLOW_PWM*(correction));
-    left_motor.write(SLOW_PWM)
-
-else if ( right_encoder &gt; left_encoder)
-
-    left_motor.write(SLOW_PWM*(correction));
-    right_motor.write(SLOW_PWM)
-</pre><p >Correction is evaluated by ratio of bigger encoder number to smaller encoder number, giving percentage around 110%.</p>
-<p >We have received full marks on TD1. This promises us a good start in our journey in producing a winning buggy.</p>
+<p >The encoder was connected directly to the wheel shaft, and from there we could measure the speed of the rotating wheel. The <a class="el" href="class_q_e_i.html" title="QEI class.">QEI</a> library encoded the pulses to <b>X2 resolution</b>, so we need to scale it down to get actual number of pulses. We also knew the number of pulses per revolution (CPR) was <b>256</b>. </p><p class="formulaDsp">
+\begin{align} pulses &amp;= \frac{pulses}{2} \\ rev &amp;= \frac{pulses}{256} \\ distance &amp;= rev \times 2 \pi r \\ velocity &amp;= \frac{distance}{time} \\ \end{align}
+</p>
+<p >One of the tasks was to make a square of 0.5 m length. The hardest part was the square had to be in between the wheels. Even worst, I did not tune the task on the actual square at A16. The snippet below shows how I implemented the square sequence.</p>
+<p ><b>main.cpp</b> </p><div class="fragment"><div class="line"><a class="code hl_class" href="class_motor.html">Motor</a>  motor(PC_9,PB_8,PC_8,PC_6,PB_9);</div>
+<div class="line"><a class="code hl_class" href="class_encoder.html">Encoder</a>  wheel_left(PC_3,PC_2);</div>
+<div class="line"><a class="code hl_class" href="class_encoder.html">Encoder</a>  wheel_right(PB_14,PB_13);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordflow">while</span>(1){</div>
+<div class="line"> </div>
+<div class="line">    vector&lt;double&gt; linear {...};</div>
+<div class="line">    vector&lt;double&gt; rotation {...};</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i=0; i &lt; linear.size(); i++){</div>
+<div class="line">        <a class="code hl_function" href="class_motor.html#a3a856b89f959eb1032f8ec2016b29efb">Motor::forward</a>(linear,....);</div>
+<div class="line">        <a class="code hl_function" href="class_motor.html#a4acdb75f9311fec7d073e547843bb3e3">Motor::turnright</a>(rotation,...);</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="ttc" id="aclass_encoder_html"><div class="ttname"><a href="class_encoder.html">Encoder</a></div><div class="ttdoc">Encoder class with helper functions, derived from QEI.</div><div class="ttdef"><b>Definition:</b> encoder.h:26</div></div>
+<div class="ttc" id="aclass_motor_html"><div class="ttname"><a href="class_motor.html">Motor</a></div><div class="ttdoc">Motor class to control the motors.</div><div class="ttdef"><b>Definition:</b> motor.h:20</div></div>
+<div class="ttc" id="aclass_motor_html_a3a856b89f959eb1032f8ec2016b29efb"><div class="ttname"><a href="class_motor.html#a3a856b89f959eb1032f8ec2016b29efb">Motor::forward</a></div><div class="ttdeci">static void forward(double distance, Motor *motor, Encoder *left, Encoder *right)</div><div class="ttdoc">Control the motor to cruise forward.</div></div>
+<div class="ttc" id="aclass_motor_html_a4acdb75f9311fec7d073e547843bb3e3"><div class="ttname"><a href="class_motor.html#a4acdb75f9311fec7d073e547843bb3e3">Motor::turnright</a></div><div class="ttdeci">static void turnright(double angle, Motor *motor, Encoder *left, Encoder *right)</div><div class="ttdoc">Control the motor to turn right.</div></div>
+</div><!-- fragment --><p >Ideally all values in linear vector are 0.5 m and rotation vector are 90°. However, ours looked like this</p>
+<div class="fragment"><div class="line">vector&lt;double&gt; linear { 0.45, 0.33, 0.33, 0.43};</div>
+<div class="line">vector&lt;double&gt; rotation {83, 83, 83, 175};</div>
+</div><!-- fragment --><p >Note that the last one was more than 90° because the task was to trace the square back which was harder when your buggy did not move in straight line. I used bang-bang control approach to compensate any tiny deviation between the two wheels, implemented in the <a class="el" href="class_motor.html#a3a856b89f959eb1032f8ec2016b29efb" title="Control the motor to cruise forward.">Motor::forward</a>.</p>
+<p ><b>motor.cpp</b> </p><div class="fragment"><div class="line"><span class="keywordflow">if</span> ( left_encoder &gt; right_encoder)</div>
+<div class="line"> </div>
+<div class="line">    right_motor.write(<a class="code hl_define" href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">SLOW_PWM</a> * correction);</div>
+<div class="line">    left_motor.write(<a class="code hl_define" href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">SLOW_PWM</a>)</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordflow">else</span> <span class="keywordflow">if</span> ( right_encoder &gt; left_encoder)</div>
+<div class="line"> </div>
+<div class="line">    left_motor.write(<a class="code hl_define" href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">SLOW_PWM</a> * correction);</div>
+<div class="line">    right_motor.write(<a class="code hl_define" href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">SLOW_PWM</a>)</div>
+<div class="ttc" id="amotor_8h_html_ae2d5253ae733c15431dbf44cbad409f0"><div class="ttname"><a href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">SLOW_PWM</a></div><div class="ttdeci">#define SLOW_PWM</div><div class="ttdoc">Fixed slow duty cycle.</div><div class="ttdef"><b>Definition:</b> motor.h:14</div></div>
+</div><!-- fragment --> <p class="formulaDsp">
+\begin{align} correction &amp;= \frac{pulse_N}{pulse_M} \ where \ pulse_N &gt; pulse_M \\ \end{align}
+</p>
+<p> We received full marks on TD1 and this assured us a good start of our journey in producing a winning buggy.</p>
 <h1><a class="anchor" id="autotoc_md8"></a>
-TD2 : Sensors</h1>
-<p >This is where we have to interface sensors and bluetooth module with the microcontroller. The bluetooth part is easily done by connecting to correct RX, TX terminal. In this case I used <b>BufferedSerial</b> to handle the communication between F401RE and HM-10. Sensors are the tricky bit, since we chose not to arrange it in a one row but two instead. However, I will discuss on general process of configuration and calibration without considering the arrangement.</p>
+TD2: Sensors</h1>
+<p >This was where we had to interface the sensors and bluetooth module with the microcontroller. The bluetooth module was easily configured by connecting to the correct RX, TX pins. In this case I used <b>BufferedSerial</b> to handle the communication between F401RE and HM-10. Sensors were the tricky bit, since we chose not to arrange it in a one row but two instead. However, I will discuss on general process of configuration and calibration without considering our chosen arrangement.</p>
 <div class="dotgraph">
 <iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_2.svg" width="334" height="244"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-<p >It is easier manage 6 sensors if they are connected to op-amp, this approach allows calibration only using potetiometer instead of software. Since this is not available to us, we need to calibrate black and white level of the sensors.</p>
+<p >It was easier manage 6 sensors if they are connected to op-amp as this approach allowed calibration only using potetiometer instead of software. Since this was not available to us, we had to calibrate black and white level of the sensors.</p>
 <ol type="1">
-<li><p class="startli">The <b>white level</b> can be calibrated by placing <b>white card</b> under the sensor and turning the sensor under <b>normal condition at fixed height from the sensors</b>. <em>Does VDD matter?</em> No, because reading is normalised,you can do whatever scaling you want as long as you understand. Here, I choose maximum level of <b>10</b>.</p>
-<p class="startli">Recall that I have <em>raw uncalibrated data (white level)</em> </p><table class="markdownTable">
+<li><p class="startli">The <b>white level</b> was calibrated by placing <b>white card</b> under the sensors and toggling the sensors under <b>normal condition at fixed height from the sensors</b>. <em>Does VDD matter?</em> No, because reading was normalised,you can do whatever scaling you want as long as you confortable with it. Here, I choose saturation level of <b>10</b>.</p>
+<p class="startli">Recall that I had <em>raw uncalibrated data (white level)</em> </p><table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Sensor 1   </th><th class="markdownTableHeadNone">Sensor 2   </th><th class="markdownTableHeadNone">Sensor 3   </th><th class="markdownTableHeadNone">Sensor 4   </th><th class="markdownTableHeadNone">Sensor 5   </th><th class="markdownTableHeadNone">Sensor 6    </th></tr>
+<th class="markdownTableHeadNone">S1   </th><th class="markdownTableHeadNone">S2   </th><th class="markdownTableHeadNone">S3   </th><th class="markdownTableHeadNone">S4   </th><th class="markdownTableHeadNone">S5   </th><th class="markdownTableHeadNone">S6    </th></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">6.326   </td><td class="markdownTableBodyNone">7.234   </td><td class="markdownTableBodyNone">6.107   </td><td class="markdownTableBodyNone">6.565   </td><td class="markdownTableBodyNone">6.122   </td><td class="markdownTableBodyNone">4.921   </td></tr>
 </table>
 <p class="startli">How big is the scale factor to make it <b>10</b>? </p><table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Sensor 1   </th><th class="markdownTableHeadNone">Sensor 2   </th><th class="markdownTableHeadNone">Sensor 3   </th><th class="markdownTableHeadNone">Sensor 4   </th><th class="markdownTableHeadNone">Sensor 5   </th><th class="markdownTableHeadNone">Sensor 6    </th></tr>
+<th class="markdownTableHeadNone">S1   </th><th class="markdownTableHeadNone">S2   </th><th class="markdownTableHeadNone">S3   </th><th class="markdownTableHeadNone">S4   </th><th class="markdownTableHeadNone">S5   </th><th class="markdownTableHeadNone">S6    </th></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">1.580   </td><td class="markdownTableBodyNone">1.382   </td><td class="markdownTableBodyNone">1.637   </td><td class="markdownTableBodyNone">1.523   </td><td class="markdownTableBodyNone">1.633   </td><td class="markdownTableBodyNone">2.032   </td></tr>
 </table>
-<p class="startli">Now, just apply a scale factor to each sensor to scale it to desired maximum level </p><dl class="section note"><dt>Note</dt><dd>We have assume the sensors scale linearly. <em>But does it?</em></dd></dl>
+<p class="startli">Now, just apply a scale factor to each sensor to scale it to the desired maximum level. </p><dl class="section note"><dt>Note</dt><dd>We assumed the sensors scale linearly. <em>But did it?</em></dd></dl>
 </li>
-<li>Next, the <b>black level</b> can be calibrated by placing <b>black track</b> under the sensor and turning the sensor under <b>minimum light condition</b>. This ensures we get minimum treshold value at minimum external noise(infrared). <em>What to do with black level?</em> It is pretty much pointless to read small values that is not useful to distance calculation, so black level is the treshold of the sensor reading.</li>
-<li><p class="startli">Although we expect perfect results by calibration, there are always external noise coming from sunlight and other sources. This issue needed to be addressed to avoid unreliable readings consist of random errors.</p>
-<p class="startli">\( reading_i = noise_i + emitter_i \quad \quad where \quad reading_i &gt; treshold_i \)</p>
-<dl class="section note"><dt>Note</dt><dd>Noise is simply background reading when none of the emitter is turn off.</dd></dl>
+<li>The <b>black level</b> was calibrated by placing <b>black track</b> under the sensors and toggling the sensors under <b>minimum light condition</b>. This ensured we get minimum treshold value at minimum external noise(infrared). <em>What to do with black level?</em> It was pretty much pointless to read small values that was not useful for distance calculation, so the black level is the treshold of the sensor activation.</li>
+<li><p class="startli">Although we expected perfect results by calibration, there will be always external noise coming from sunlight and other sources. The issue needed to be addressed to avoid unreliable readings consist of random errors.</p>
+<p class="startli">\( reading_i = noise_i + emitter_i \)</p>
+<dl class="section note"><dt>Note</dt><dd>Noise is simply background reading when none of the emitter is turned on.</dd></dl>
 <p>Measurements of the analog input when all emitter is off at the start of each read is very easy to implement. When this is done correctly, we will get the best intended readings from the sensor.</p>
 </li>
 </ol>
@@ -180,16 +191,12 @@ TD2 : Sensors</h1>
 <br  />
  <img src="distance.svg" alt="Variation of distance" style="pointer-events: none;" class="inline"/> Sweeping the white card back and forth to the sensor. </div><p> </details>
 </p>
-<p >This part is where I realised how important scaling factor impact the results. If all readings normalised to 10, distance calculation is simplified because of the linear properties we see before. From the sensor array, if we establish a coordinate system with its axis between sensor 3 and 4, we can assign weight for each sensor like in the example below.</p>
+<p >This part was where I realised how important normalised readings for distance calculation. If all readings were normalised to a level, distance formula simply became weighted mean of sensor readings. From the sensor array, if we established a pivot point between sensor 3 and 4, we could assign weight for every sensor like in the example below.</p>
 <div class="dotgraph">
-<iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_3.svg" width="462" height="102"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Sensor 1   </th><th class="markdownTableHeadNone">Sensor 2   </th><th class="markdownTableHeadNone">Sensor 3   </th><th class="markdownTableHeadNone">Sensor 4   </th><th class="markdownTableHeadNone">Sensor 5   </th><th class="markdownTableHeadNone">Sensor 6    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">-30   </td><td class="markdownTableBodyNone">-20   </td><td class="markdownTableBodyNone">-10   </td><td class="markdownTableBodyNone">10   </td><td class="markdownTableBodyNone">20   </td><td class="markdownTableBodyNone">30   </td></tr>
-</table>
-<p >which can be reduced to \(\ distance = \sum_{1}^{6} reading_i \times weight_i \) </p>
+<iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_3.svg" width="462" height="132"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="dotgraph">
+<iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_4.svg" width="431" height="135"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p >The solution was very simple and the equivalent formula was \(\ distance = \frac{\sum_{1}^{6} reading_i \times weight_i}{\sum_{1}^{6} reading_i} \) </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
