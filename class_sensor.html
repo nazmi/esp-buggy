@@ -107,7 +107,6 @@ $(document).ready(function(){initNavTree('class_sensor.html',''); initResizable(
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
-<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="class_sensor-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Sensor Class Reference</div></div>
 </div><!--header-->
@@ -128,6 +127,12 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
+<tr class="memitem:a03960c2a87a0f0b84519d41a5ff726a8"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sensor.html#a03960c2a87a0f0b84519d41a5ff726a8">weights</a> [6]</td></tr>
+<tr class="separator:a03960c2a87a0f0b84519d41a5ff726a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1644b2584927dedc1e0672809f3dafe"><td class="memItemLeft" align="right" valign="top">static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sensor.html#af1644b2584927dedc1e0672809f3dafe">treshold</a> [6] { 0.07828519, 0.09378702, 0.10737747, 0.09584597, 0.09437664, 0.13561697 }</td></tr>
+<tr class="separator:af1644b2584927dedc1e0672809f3dafe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67fefc31fa69b0ec9e870985fd38e0a0"><td class="memItemLeft" align="right" valign="top">static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sensor.html#a67fefc31fa69b0ec9e870985fd38e0a0">scale_factor</a> [6] { 1.006342313, 1.019787556, 1.031426983, 1.018563463, 1.014853279, 1.099818972 }</td></tr>
+<tr class="separator:a67fefc31fa69b0ec9e870985fd38e0a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2be5bc612e3a2567250b7074e0b17ec"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sensor.html#aa2be5bc612e3a2567250b7074e0b17ec">run</a></td></tr>
 <tr class="separator:aa2be5bc612e3a2567250b7074e0b17ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -143,15 +148,6 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a0f677d17c829e88e20b2232a3b909ced"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a861556e36c5a7adfbc0e55fbe311a83e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sensor.html#a861556e36c5a7adfbc0e55fbe311a83e">distance</a> {0.0}</td></tr>
 <tr class="separator:a861556e36c5a7adfbc0e55fbe311a83e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
-Static Private Attributes</h2></td></tr>
-<tr class="memitem:af44ce77cb1a617c91fef2e7f17bb8610"><td class="memItemLeft" align="right" valign="top">static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sensor.html#af44ce77cb1a617c91fef2e7f17bb8610">weight</a> [6] {47,28,7,-7,-19,-31}</td></tr>
-<tr class="separator:af44ce77cb1a617c91fef2e7f17bb8610"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1644b2584927dedc1e0672809f3dafe"><td class="memItemLeft" align="right" valign="top">static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sensor.html#af1644b2584927dedc1e0672809f3dafe">treshold</a> [6] {0.02666367, 0.04516327, 0.03560837, 0.04705085, 0.04266423, 0.03508913}</td></tr>
-<tr class="separator:af1644b2584927dedc1e0672809f3dafe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67fefc31fa69b0ec9e870985fd38e0a0"><td class="memItemLeft" align="right" valign="top">static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sensor.html#a67fefc31fa69b0ec9e870985fd38e0a0">scale_factor</a> [6] {1.580680823, 1.382250323, 1.637246257, 1.523113522, 1.633290298, 2.032013615}</td></tr>
-<tr class="separator:a67fefc31fa69b0ec9e870985fd38e0a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad632abcf66cdd764bee77fcea28d440f" name="ad632abcf66cdd764bee77fcea28d440f"></a>
@@ -405,8 +401,8 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="af44ce77cb1a617c91fef2e7f17bb8610" name="af44ce77cb1a617c91fef2e7f17bb8610"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af44ce77cb1a617c91fef2e7f17bb8610">&#9670;&nbsp;</a></span>weight</h2>
+<a id="a03960c2a87a0f0b84519d41a5ff726a8" name="a03960c2a87a0f0b84519d41a5ff726a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03960c2a87a0f0b84519d41a5ff726a8">&#9670;&nbsp;</a></span>weights</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -415,12 +411,12 @@ Static Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr float Sensor::weight[6] {47,28,7,-7,-19,-31}</td>
+          <td class="memname">float Sensor::weights[6]</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -437,12 +433,12 @@ Static Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr float Sensor::treshold[6] {0.02666367, 0.04516327, 0.03560837, 0.04705085, 0.04266423, 0.03508913}</td>
+          <td class="memname">constexpr float Sensor::treshold[6] { 0.07828519, 0.09378702, 0.10737747, 0.09584597, 0.09437664, 0.13561697 }</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -459,12 +455,12 @@ Static Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr float Sensor::scale_factor[6] {1.580680823, 1.382250323, 1.637246257, 1.523113522, 1.633290298, 2.032013615}</td>
+          <td class="memname">constexpr float Sensor::scale_factor[6] { 1.006342313, 1.019787556, 1.031426983, 1.018563463, 1.014853279, 1.099818972 }</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

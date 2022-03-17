@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['weight_0',['weight',['../class_sensor.html#af44ce77cb1a617c91fef2e7f17bb8610',1,'Sensor']]]
+  ['weights_0',['weights',['../class_sensor.html#a03960c2a87a0f0b84519d41a5ff726a8',1,'Sensor']]]
 ];

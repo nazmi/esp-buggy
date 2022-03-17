@@ -159,9 +159,9 @@ TD2: Sensors</h1>
 <p >This was where we had to interface the sensors and bluetooth module with the microcontroller. The bluetooth module was easily configured by connecting to the correct RX, TX pins. In this case I used <b>BufferedSerial</b> to handle the communication between F401RE and HM-10. Sensors were the tricky bit, since we chose not to arrange it in a one row but two instead. However, I will discuss on general process of configuration and calibration without considering our chosen arrangement.</p>
 <div class="dotgraph">
 <iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_2.svg" width="334" height="244"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-<p >It was easier manage 6 sensors if they are connected to op-amp as this approach allowed calibration only using potetiometer instead of software. Since this was not available to us, we had to calibrate black and white level of the sensors.</p>
+<p >It was easier to manage 6 sensors if they are connected to op-amp as this approach allowed calibration only using potetiometer instead of software. Since this was not available to us, we had to calibrate the black and white level of the sensors.</p>
 <ol type="1">
-<li><p class="startli">The <b>white level</b> was calibrated by placing <b>white card</b> under the sensors and toggling the sensors under <b>normal condition at fixed height from the sensors</b>. <em>Does VDD matter?</em> No, because reading was normalised,you can do whatever scaling you want as long as you confortable with it. Here, I choose saturation level of <b>10</b>.</p>
+<li><p class="startli">The <b>white level</b> was calibrated by placing <b>white card</b> under the sensors and toggling the sensors under <b>normal condition at fixed height from the sensors</b>. <em>Does VDD matter?</em> No, because reading was already normalised, you can do whatever scaling you want as long as you comfortable with it. Here, I choose a saturation level of <b>10</b>.</p>
 <p class="startli">Recall that I had <em>raw uncalibrated data (white level)</em> </p><table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">S1   </th><th class="markdownTableHeadNone">S2   </th><th class="markdownTableHeadNone">S3   </th><th class="markdownTableHeadNone">S4   </th><th class="markdownTableHeadNone">S5   </th><th class="markdownTableHeadNone">S6    </th></tr>
@@ -177,10 +177,10 @@ TD2: Sensors</h1>
 <p class="startli">Now, just apply a scale factor to each sensor to scale it to the desired maximum level. </p><dl class="section note"><dt>Note</dt><dd>We assumed the sensors scale linearly. <em>But did it?</em></dd></dl>
 </li>
 <li>The <b>black level</b> was calibrated by placing <b>black track</b> under the sensors and toggling the sensors under <b>minimum light condition</b>. This ensured we get minimum treshold value at minimum external noise(infrared). <em>What to do with black level?</em> It was pretty much pointless to read small values that was not useful for distance calculation, so the black level is the treshold of the sensor activation.</li>
-<li><p class="startli">Although we expected perfect results by calibration, there will be always external noise coming from sunlight and other sources. The issue needed to be addressed to avoid unreliable readings consist of random errors.</p>
+<li><p class="startli">Although we expected perfect results by calibration, there will be always external noise coming from sunlight and other sources. The issue needed to be addressed to avoid unreliable readings consisting of random errors.</p>
 <p class="startli">\( reading_i = noise_i + emitter_i \)</p>
 <dl class="section note"><dt>Note</dt><dd>Noise is simply background reading when none of the emitter is turned on.</dd></dl>
-<p>Measurements of the analog input when all emitter is off at the start of each read is very easy to implement. When this is done correctly, we will get the best intended readings from the sensor.</p>
+<p>Measurements of the analog input when all emitter is off at the start of each read was very easy to implement. When this is done correctly, you get the best intended readings from the sensor.</p>
 </li>
 </ol>
 <p ><details>
@@ -191,7 +191,7 @@ TD2: Sensors</h1>
 <br  />
  <img src="distance.svg" alt="Variation of distance" style="pointer-events: none;" class="inline"/> Sweeping the white card back and forth to the sensor. </div><p> </details>
 </p>
-<p >This part was where I realised how important normalised readings for distance calculation. If all readings were normalised to a level, distance formula simply became weighted mean of sensor readings. From the sensor array, if we established a pivot point between sensor 3 and 4, we could assign weight for every sensor like in the example below.</p>
+<p >This part was where I realised how important normalised readings for distance calculation. If all readings were normalised to a level, distance formula simply became weighted mean of sensor readings. From the sensor array, if we established a pivot point between sensor 3 and 4, we could assign weight for every sensor based on its distance from pivot like in the example below.</p>
 <div class="dotgraph">
 <iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_3.svg" width="462" height="132"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <div class="dotgraph">

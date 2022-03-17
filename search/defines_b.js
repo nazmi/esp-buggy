@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wheel_5fdistance_0',['WHEEL_DISTANCE',['../encoder_8h.html#aeec35d5fa40cda2b874fd262a1268b5e',1,'encoder.h']]]
+  ['slow_5fpwm_0',['SLOW_PWM',['../motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0',1,'motor.h']]]
 ];

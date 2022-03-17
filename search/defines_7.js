@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['offtrack_0',['OFFTRACK',['../sensor_8h.html#a080aa4c3ca12818b030991061ead0bfc',1,'sensor.h']]]
+  ['no_5ftrack_0',['NO_TRACK',['../sensor_8h.html#a841dd029b9d3a595436aa30bdcf99416',1,'sensor.h']]]
 ];

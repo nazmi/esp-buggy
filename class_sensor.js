@@ -9,7 +9,7 @@ var class_sensor =
     [ "sensor_data", "class_sensor.html#a62ec5bc9664f19d3c3cd7f005e75f08b", null ],
     [ "noise", "class_sensor.html#a0f677d17c829e88e20b2232a3b909ced", null ],
     [ "distance", "class_sensor.html#a861556e36c5a7adfbc0e55fbe311a83e", null ],
-    [ "weight", "class_sensor.html#af44ce77cb1a617c91fef2e7f17bb8610", null ],
+    [ "weights", "class_sensor.html#a03960c2a87a0f0b84519d41a5ff726a8", null ],
     [ "treshold", "class_sensor.html#af1644b2584927dedc1e0672809f3dafe", null ],
     [ "scale_factor", "class_sensor.html#a67fefc31fa69b0ec9e870985fd38e0a0", null ],
     [ "run", "class_sensor.html#aa2be5bc612e3a2567250b7074e0b17ec", null ]
