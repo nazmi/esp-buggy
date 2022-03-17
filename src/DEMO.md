@@ -122,9 +122,9 @@ digraph System{
 }
 \enddot
 
-It was easier manage 6 sensors if they are connected to op-amp as this approach allowed calibration only using potetiometer instead of software. Since this was not available to us, we had to calibrate black and white level of the sensors.
+It was easier to manage 6 sensors if they are connected to op-amp as this approach allowed calibration only using potetiometer instead of software. Since this was not available to us, we had to calibrate the black and white level of the sensors.
 
-1. The **white level** was calibrated by placing **white card** under the sensors and toggling the sensors under **normal condition at fixed height from the sensors**. *Does VDD matter?* No, because reading was normalised,you can do whatever scaling you want as long as you confortable with it. Here, I choose saturation level of **10**.
+1. The **white level** was calibrated by placing **white card** under the sensors and toggling the sensors under **normal condition at fixed height from the sensors**. *Does VDD matter?* No, because reading was already normalised, you can do whatever scaling you want as long as you comfortable with it. Here, I choose a saturation level of **10**.
 
 	Recall that I had *raw uncalibrated data (white level)*
 	|S1|S2|S3|S4|S5|S6|
@@ -141,13 +141,13 @@ It was easier manage 6 sensors if they are connected to op-amp as this approach 
 
 2. The **black level** was calibrated by placing **black track** under the sensors and toggling the sensors under **minimum light condition**. This ensured we get minimum treshold value at minimum external noise(infrared). *What to do with black level?* It was pretty much pointless to read small values that was not useful for distance calculation, so the black level is the treshold of the sensor activation.
 
-3. Although we expected perfect results by calibration, there will be always external noise coming from sunlight and other sources. The issue needed to be addressed to avoid unreliable readings consist of random errors. 
+3. Although we expected perfect results by calibration, there will be always external noise coming from sunlight and other sources. The issue needed to be addressed to avoid unreliable readings consisting of random errors. 
 
 	\f$ reading_i = noise_i + emitter_i \f$
 
 	@note Noise is simply background reading when none of the emitter is turned on.
 	
-	Measurements of the analog input when all emitter is off at the start of each read is very easy to implement. When this is done correctly, we will get the best intended readings from the sensor.
+	Measurements of the analog input when all emitter is off at the start of each read was very easy to implement. When this is done correctly, you get the best intended readings from the sensor.
 
 <details><summary>more...</summary>
 Showcase some of the tests done to calibrate the sensors.<br/>
@@ -161,7 +161,7 @@ Sweeping the white card back and forth to the sensor.
 </div>
 </details>
 
-This part was where I realised how important normalised readings for distance calculation. If all readings were normalised to a level, distance formula simply became weighted mean of sensor readings. From the sensor array, if we established a pivot point between sensor 3 and 4, we could assign weight for every sensor like in the example below.
+This part was where I realised how important normalised readings for distance calculation. If all readings were normalised to a level, distance formula simply became weighted mean of sensor readings. From the sensor array, if we established a pivot point between sensor 3 and 4, we could assign weight for every sensor based on its distance from pivot like in the example below.
 
 \dot
 digraph Sensor{

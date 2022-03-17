@@ -2,14 +2,13 @@
 #define SENSOR_H
 
 #include "mbed.h"
+#include "arm_math.h"
 #include <cstdio>
-#include <numeric>
-#include <limits>
 
 #define OFFTRACK 0.15
-#define PRESCALER 10.0
-#define MAX_DISTANCE 50.0
-#define MIN_BLACK 1.4
+#define PRESCALER 10.0f
+#define NO_TRACK 30
+#define TRESHOLD 2.8
 
 
 class Sensor
@@ -17,22 +16,19 @@ class Sensor
     private:
         AnalogIn input[6];
         BusOut sensors;
-        float sensor_data[6] {0.0}, noise[6] {0.0};
+        float sensor_data[6] {0.0};
+        float noise[6] {0.0};
         float distance {0.0};
-        
-        // 0 1 2
-        // 3 4 5
-        static constexpr float weight[6] {47,28,7,-7,-19,-31};
-        
-        static constexpr float treshold[6] {0.02666367,	0.04516327,	0.03560837,	0.04705085,	0.04266423,	0.03508913};
-
-        static constexpr float scale_factor[6] {1.580680823,	1.382250323,	1.637246257,	1.523113522,	1.633290298,	2.032013615};
-        
         
 
     public:
         Sensor(PinName p1, PinName p2, PinName p3, PinName p4, PinName p5, PinName p6, PinName in1,PinName in2,PinName in3,PinName in4,PinName in5,PinName in6);
+        
+        static float weights[6];
+        static constexpr float treshold[6]      { 0.07828519,	0.09378702,	0.10737747,	0.09584597,	0.09437664,	0.13561697 };
+        static constexpr float scale_factor[6]  { 1.006342313,	1.019787556,	1.031426983,	1.018563463,	1.014853279,	1.099818972 };
         static bool run;
+
         float read();
         void calibrate_black();
         void calibrate_white();

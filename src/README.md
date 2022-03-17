@@ -24,7 +24,7 @@ Hi! I'm [Nazmi Ropi](https://uk.linkedin.com/in/nazmi-ropi), the author of this 
 ## Troubleshooting
 Some of the libraries might not work if you want to import and use them on Mbed OS 6, I have made modifications to some of them to replace the deprecated functions from Mbed 2. This can be easily done by referring to the latest API list from  [Mbed OS 6 documentation](https://os.mbed.com/docs/mbed-os/v6.15/introduction/index.html).
 
-@note You can use a joystick, potentiometer and LCD on the application shield to help debug your program.
+@note You can use the joystick, potentiometer and LCD on the application shield to help debug your program.
 
 ## Components
 You can buy any component you like, but the table below will help if you want to build the robot without thinking about the selection of the components.
