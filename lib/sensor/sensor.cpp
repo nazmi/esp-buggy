@@ -3,6 +3,8 @@
 
 bool Sensor::run = false;
 float Sensor::weights[6] =  {27,9,-9,-27,9,-9};
+float Sensor::treshold[6] =  { 0.07828519,	0.09378702,	0.10737747,	0.09584597,	0.09437664,	0.13561697 };
+float Sensor::scale_factor[6] = { 1.006342313,	1.019787556,	1.031426983,	1.018563463,	1.014853279,	1.099818972 };
 
 Sensor::Sensor(PinName p1, PinName p2, PinName p3, PinName p4, PinName p5, PinName p6, PinName in1,PinName in2,PinName in3,PinName in4,PinName in5,PinName in6) : sensors(p1,p2,p3,p4,p5,p6), input{AnalogIn(in1),AnalogIn(in2),AnalogIn(in3),AnalogIn(in4),AnalogIn(in5),AnalogIn(in6)} {};
 
@@ -75,7 +77,7 @@ float Sensor::read(){
     t.stop();
     
     
-    if(run == false) printf("1,2,3,4,5,6,time,distance\n"); run=true;
+    if(run == false) {printf("1,2,3,4,5,6,time,distance\n"); run=true;}
     printf("%.5f,%.5f,%.5f,%.5f,%.5f,%.5f,",sensor_data[0],sensor_data[1],sensor_data[2],sensor_data[3],sensor_data[4],sensor_data[5]);
     printf("%lld,", t.elapsed_time().count()*1);
     printf("%f\n",distance);
@@ -99,7 +101,7 @@ void Sensor::calibrate_black(){
 
     }
 
-    if(run == false) printf("1,2,3,4,5,6\n"); run=true;
+    if(run == false) {printf("1,2,3,4,5,6\n"); run=true;}
     printf("%.5f,%.5f,%.5f,%.5f,%.5f,%.5f\n",calibrate_data[0],calibrate_data[1],calibrate_data[2],calibrate_data[3],calibrate_data[4],calibrate_data[5]);
     
 }
@@ -129,7 +131,7 @@ void Sensor::calibrate_white(){
 
     }
 
-    if(run == false) printf("1,2,3,4,5,6\n"); run=true;
+    if(run == false) {printf("1,2,3,4,5,6\n"); run=true;}
     printf("%.5f,%.5f,%.5f,%.5f,%.5f,%.5f\n",sensor_data[0],sensor_data[1],sensor_data[2],sensor_data[3],sensor_data[4],sensor_data[5]);
     
 }

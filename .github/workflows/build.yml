@@ -1,0 +1,31 @@
+name: Build application
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs: 
+  build-cli-gcc:
+    container:
+      image: ghcr.io/armmbed/mbed-os-env:mbed-os-6-latest
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        target: [NUCLEO_F401RE]
+        profile: [release, debug, develop]
+        
+
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+          
+      -
+        name: build-gcc
+        run: |
+          set -e
+          mbed-tools deploy
+          mbed-tools compile -t GCC_ARM -m ${{ matrix.target }} --profile ${{ matrix.profile }}
