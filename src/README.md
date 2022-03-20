@@ -1,8 +1,8 @@
 # Embedded Systems Project 2021/2022
 
 ## Line Following Robot (LFR)
-![Doxygen Page](https://github.com/nazmi/esp-buggy/actions/workflows/publish.yml/badge.svg) 
-![Build GCC_ARM](https://github.com/nazmi/esp-buggy/actions/workflows/build.yml/badge.svg)  
+![Build GCC](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/nazmi/661bc6f35f626bca218501f160893b4b/raw/gcc_badge.json) 
+![Doxygen](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/nazmi/25d7b5dd85bdd54d9dc73366aa9f4c85/raw/doxygen_badge.json)  
 Hi! I'm [Nazmi Ropi](https://uk.linkedin.com/in/nazmi-ropi), the author of this software documentation. One of the objectives of this year's project is to produce a high average speed line following buggy without compromising its robustness. Also, my approach towards software development is to implement Object-Oriented-Programming features to abstract any technical details to the user. Details of technical demonstrations were also documented on [its page](#journey).
 
 ## Dependencies
