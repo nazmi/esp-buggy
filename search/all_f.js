@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['scale_5ffactor_0',['scale_factor',['../class_sensor.html#a67fefc31fa69b0ec9e870985fd38e0a0',1,'Sensor']]],
+  ['scale_5ffactor_0',['scale_factor',['../class_sensor.html#a4d9aa882d5b4f161e83678fca53c423d',1,'Sensor']]],
   ['sensor_1',['Sensor',['../class_sensor.html#ad632abcf66cdd764bee77fcea28d440f',1,'Sensor::Sensor()'],['../class_sensor.html',1,'Sensor']]],
   ['sensor_2eh_2',['sensor.h',['../sensor_8h.html',1,'']]],
   ['sensor_5fdata_3',['sensor_data',['../class_sensor.html#a62ec5bc9664f19d3c3cd7f005e75f08b',1,'Sensor']]],

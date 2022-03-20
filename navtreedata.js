@@ -26,16 +26,17 @@ var NAVTREE =
 [
   [ "EEEN21000", "index.html", [
     [ "Embedded Systems Project 2021/2022", "index.html", [
-      [ "Dependencies", "index.html#autotoc_md1", null ],
-      [ "Installation", "index.html#autotoc_md2", null ],
-      [ "Troubleshooting", "index.html#autotoc_md3", null ],
-      [ "Components", "index.html#autotoc_md4", null ],
-      [ "Contributors", "index.html#autotoc_md5", null ]
+      [ "Line Following Robot (LFR)", "index.html#autotoc_md1", null ],
+      [ "Dependencies", "index.html#autotoc_md2", null ],
+      [ "Installation", "index.html#autotoc_md3", null ],
+      [ "Troubleshooting", "index.html#autotoc_md4", null ],
+      [ "Components", "index.html#autotoc_md5", null ],
+      [ "Contributors", "index.html#autotoc_md6", null ]
     ] ],
     [ "Technical Demo Documentation", "md_src__d_e_m_o.html", [
-      [ "Overview", "md_src__d_e_m_o.html#autotoc_md6", null ],
-      [ "TD1: Motor Control", "md_src__d_e_m_o.html#autotoc_md7", null ],
-      [ "TD2: Sensors", "md_src__d_e_m_o.html#autotoc_md8", null ]
+      [ "Overview", "md_src__d_e_m_o.html#autotoc_md7", null ],
+      [ "TD1: Motor Control", "md_src__d_e_m_o.html#autotoc_md8", null ],
+      [ "TD2: Sensors", "md_src__d_e_m_o.html#autotoc_md9", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
