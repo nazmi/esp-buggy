@@ -48,7 +48,7 @@ int main() {
                 case 'S':
                 {
                     while(1){
-                        auto distance = sensors.read();
+                        sensors.read();
 
                         if(hm10.readable()){
                             hm10.read(&c,1);

@@ -14,8 +14,8 @@
 class Sensor
 {
     private:
-        AnalogIn input[6];
         BusOut sensors;
+        AnalogIn input[6];
         float sensor_data[6] {0.0};
         float noise[6] {0.0};
         float distance {0.0};
@@ -25,8 +25,8 @@ class Sensor
         Sensor(PinName p1, PinName p2, PinName p3, PinName p4, PinName p5, PinName p6, PinName in1,PinName in2,PinName in3,PinName in4,PinName in5,PinName in6);
         
         static float weights[6];
-        static constexpr float treshold[6]      { 0.07828519,	0.09378702,	0.10737747,	0.09584597,	0.09437664,	0.13561697 };
-        static constexpr float scale_factor[6]  { 1.006342313,	1.019787556,	1.031426983,	1.018563463,	1.014853279,	1.099818972 };
+        static float treshold[6];
+        static float scale_factor[6];
         static bool run;
 
         float read();

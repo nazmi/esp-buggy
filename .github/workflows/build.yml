@@ -1,0 +1,56 @@
+name: Build application
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs: 
+  build-cli-gcc:
+    container:
+      image: ghcr.io/armmbed/mbed-os-env:mbed-os-6-latest
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        target: [NUCLEO_F401RE]
+        profile: [release, debug, develop]
+        
+
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+          
+      -
+        name: build-gcc
+        id: build
+        run: |
+          set -e
+          mbed deploy
+          mbed compile -t GCC_ARM -m ${{ matrix.target }} --profile ${{ matrix.profile }}
+
+      -
+        name: badge_green
+        if: steps.build.outcome == 'success'
+        uses: schneegans/dynamic-badges-action@v1.1.0
+        with:
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: 661bc6f35f626bca218501f160893b4b
+          filename: gcc_badge.json
+          label: Build GCC_ARM
+          message: passing
+          color: green
+
+      -
+        name: badge_red
+        if: steps.build.outcome == 'failure'
+        uses: schneegans/dynamic-badges-action@v1.1.0
+        with:
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: 661bc6f35f626bca218501f160893b4b
+          filename: gcc_badge.json
+          label: Build GCC_ARM
+          message: failing
+          color: red

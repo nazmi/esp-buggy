@@ -23,6 +23,7 @@ jobs:
     - uses: actions/checkout@v3
         
     - name: Doxygen Action
+      id : build
       uses: mattnotmitt/doxygen-action@v1.9.3
       with:
         # Path to Doxyfile
@@ -30,10 +31,26 @@ jobs:
         # Working directory
         working-directory: "." # default is .
     
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
+    -
+      name: badge_green
+      if: steps.build.outcome == 'success'
+      uses: schneegans/dynamic-badges-action@v1.1.0
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        # Default Doxyfile build documentation to html directory. 
-        # Change the directory if changes in Doxyfile
-        publish_dir: ./html
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: 25d7b5dd85bdd54d9dc73366aa9f4c85
+        filename: doxygen_badge.json
+        label: Doxygen
+        message: passing
+        color: green
+
+    -
+      name: badge_red
+      if: steps.build.outcome == 'failure'
+      uses: schneegans/dynamic-badges-action@v1.1.0
+      with:
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: 25d7b5dd85bdd54d9dc73366aa9f4c85
+        filename: doxygen_badge.json
+        label: Doxygen
+        message: failing
+        color: red
