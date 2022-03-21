@@ -5,22 +5,22 @@ changelog:
     authors:
       - nazmi
   categories:
-    - title: New Features :sparkles:
+    - title: New Features ✨
       labels:
         - feat
-    - title: Bug Fixes :bug:
+    - title: Bug Fixes 🐛
       labels:
         - fix
-    - title: Documentation :memo:
+    - title: Documentation 📝
       labels:
         - docs
-    - title: Style change :lipstick:
+    - title: Style change 💄
       labels:
         - style
-    - title: Refactor :recycle:
+    - title: Refactor ♻
       labels:
         - refactor
-    - title: Dependencies :hammer:
+    - title: Dependencies 🔨
       labels:
         - build
     - title: Other Changes
