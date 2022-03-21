@@ -28,7 +28,7 @@ jobs:
         # Path to Doxyfile
         doxyfile-path: "./Doxyfile-prj.cfg" # default is ./Doxyfile
         # Working directory
-        working-directory: "." # default is .
+        working-directory: "docs/" # default is .
 
     - name: Deploy
       id : deploy
@@ -37,7 +37,7 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         # Default Doxyfile build documentation to html directory. 
         # Change the directory if changes in Doxyfile
-        publish_dir: ./html
+        publish_dir: docs/html
     
     -
       name: badge_green
