@@ -1,8 +1,8 @@
-<map id="lib/motor/motor.h" name="lib/motor/motor.h">
-<area shape="rect" id="node1" title=" " alt="" coords="23,5,142,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,229,69,256"/>
-<area shape="rect" id="node3" href="$encoder_8h.html" title=" " alt="" coords="43,80,122,107"/>
-<area shape="rect" id="node6" title=" " alt="" coords="146,80,198,107"/>
-<area shape="rect" id="node4" href="$_q_e_i_8h.html" title=" " alt="" coords="75,155,130,181"/>
-<area shape="rect" id="node5" title=" " alt="" coords="155,155,216,181"/>
+<map id="/github/workspace/include/motor/motor.h" name="/github/workspace/include/motor/motor.h">
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,179,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="15,244,79,271"/>
+<area shape="rect" id="node3" href="$encoder_8h.html" title=" " alt="" coords="53,95,131,121"/>
+<area shape="rect" id="node6" title=" " alt="" coords="155,95,207,121"/>
+<area shape="rect" id="node4" href="$_q_e_i_8h.html" title=" " alt="" coords="85,169,139,196"/>
+<area shape="rect" id="node5" title=" " alt="" coords="164,169,225,196"/>
 </map>

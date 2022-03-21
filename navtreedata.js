@@ -33,16 +33,16 @@ var NAVTREE =
       [ "Components", "index.html#autotoc_md5", null ],
       [ "Contributors", "index.html#autotoc_md6", null ]
     ] ],
-    [ "Technical Demo Documentation", "md_src__d_e_m_o.html", [
-      [ "Overview", "md_src__d_e_m_o.html#autotoc_md7", null ],
-      [ "TD1: Motor Control", "md_src__d_e_m_o.html#autotoc_md8", null ],
-      [ "TD2: Sensors", "md_src__d_e_m_o.html#autotoc_md9", null ]
+    [ "Technical Demo Documentation", "md__d_e_m_o.html", [
+      [ "Overview", "md__d_e_m_o.html#autotoc_md7", null ],
+      [ "TD1: Motor Control", "md__d_e_m_o.html#autotoc_md8", null ],
+      [ "TD2: Sensors", "md__d_e_m_o.html#autotoc_md9", null ]
     ] ],
-    [ "Innovative Features", "md_src__f_e_a_t_u_r_e_s.html", [
-      [ "Background", "md_src__f_e_a_t_u_r_e_s.html#autotoc_md10", null ],
-      [ "Hardware Solution", "md_src__f_e_a_t_u_r_e_s.html#autotoc_md11", null ],
-      [ "Software solution", "md_src__f_e_a_t_u_r_e_s.html#autotoc_md12", null ],
-      [ "Results", "md_src__f_e_a_t_u_r_e_s.html#autotoc_md13", null ]
+    [ "Innovative Features", "md__f_e_a_t_u_r_e_s.html", [
+      [ "Background", "md__f_e_a_t_u_r_e_s.html#autotoc_md10", null ],
+      [ "Hardware Solution", "md__f_e_a_t_u_r_e_s.html#autotoc_md11", null ],
+      [ "Software solution", "md__f_e_a_t_u_r_e_s.html#autotoc_md12", null ],
+      [ "Results", "md__f_e_a_t_u_r_e_s.html#autotoc_md13", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
