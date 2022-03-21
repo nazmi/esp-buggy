@@ -1,0 +1,28 @@
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+    authors:
+      - nazmi
+  categories:
+    - title: New Features ✨
+      labels:
+        - feat
+    - title: Bug Fixes 🐛
+      labels:
+        - fix
+    - title: Documentation 📝
+      labels:
+        - docs
+    - title: Style change 💄
+      labels:
+        - style
+    - title: Refactor ♻
+      labels:
+        - refactor
+    - title: Dependencies 🔨
+      labels:
+        - build
+    - title: Other Changes
+      labels:
+        - "*"
