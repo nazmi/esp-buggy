@@ -38,6 +38,12 @@ var NAVTREE =
       [ "TD1: Motor Control", "md_src__d_e_m_o.html#autotoc_md8", null ],
       [ "TD2: Sensors", "md_src__d_e_m_o.html#autotoc_md9", null ]
     ] ],
+    [ "Innovative Features", "md_src__f_e_a_t_u_r_e_s.html", [
+      [ "Background", "md_src__f_e_a_t_u_r_e_s.html#autotoc_md10", null ],
+      [ "Hardware Solution", "md_src__f_e_a_t_u_r_e_s.html#autotoc_md11", null ],
+      [ "Software solution", "md_src__f_e_a_t_u_r_e_s.html#autotoc_md12", null ],
+      [ "Results", "md_src__f_e_a_t_u_r_e_s.html#autotoc_md13", null ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],

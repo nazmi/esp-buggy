@@ -15,10 +15,10 @@ var class_motor =
     [ "reverse", "class_motor.html#a9eacd201d086f725ab5ee4cca3f3e8f5", null ],
     [ "turnleft", "class_motor.html#a9202af864674cf2bbbdc7f539216202e", null ],
     [ "turnright", "class_motor.html#a4acdb75f9311fec7d073e547843bb3e3", null ],
-    [ "state", "class_motor.html#a1a3d6ad79d32c116e80408b911523424", null ],
-    [ "directionL", "class_motor.html#a9aacac8fa81e05563009eb4c90c87cab", null ],
     [ "directionR", "class_motor.html#ac422a4e24872a96599f99c211a8f3ba7", null ],
+    [ "directionL", "class_motor.html#a9aacac8fa81e05563009eb4c90c87cab", null ],
+    [ "state", "class_motor.html#a1a3d6ad79d32c116e80408b911523424", null ],
     [ "period", "class_motor.html#a1d65a54430028041a1e29b56fef5b4a9", null ],
-    [ "left", "class_motor.html#ac7153d86817994ab23be215b4f4ef725", null ],
-    [ "right", "class_motor.html#a9cb4f85df1e212f4f9a3da651e2e6251", null ]
+    [ "right", "class_motor.html#a9cb4f85df1e212f4f9a3da651e2e6251", null ],
+    [ "left", "class_motor.html#ac7153d86817994ab23be215b4f4ef725", null ]
 ];
