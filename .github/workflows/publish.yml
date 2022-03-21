@@ -40,17 +40,17 @@ jobs:
         gistID: 25d7b5dd85bdd54d9dc73366aa9f4c85
         filename: doxygen_badge.json
         label: Doxygen
-        message: passing
+        message: success
         color: green
 
     -
       name: badge_red
-      if: steps.build.outcome == 'failure'
+      if: steps.build.outcome != 'success'
       uses: schneegans/dynamic-badges-action@v1.1.0
       with:
         auth: ${{ secrets.GIST_SECRET }}
         gistID: 25d7b5dd85bdd54d9dc73366aa9f4c85
         filename: doxygen_badge.json
         label: Doxygen
-        message: failing
+        message: fail
         color: red

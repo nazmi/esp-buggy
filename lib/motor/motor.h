@@ -20,12 +20,12 @@
 class Motor{
 
     private:
-    /** @brief Enable pin to motor driver board. */
-    DigitalOut state;
-    /** @brief Direction for left motor. */
-    DigitalOut directionL;
     /** @brief Direction for right motor. */
     DigitalOut directionR;
+    /** @brief Direction for left motor. */
+    DigitalOut directionL;
+    /** @brief Enable pin to motor driver board. */
+    DigitalOut state;
     /** @brief Period of PWM output. 
      * 
     *\f$period = \frac{1}{frequency}\\\f$
@@ -34,10 +34,10 @@ class Motor{
 
     public:
 
-    /** @brief Left motor PwmOut.*/
-    PwmOut left;
     /** @brief Right motor PwmOut.*/
     PwmOut right;
+    /** @brief Left motor PwmOut.*/
+    PwmOut left;
     
     /**
      * @brief Constructor.

@@ -40,17 +40,17 @@ jobs:
           gistID: 661bc6f35f626bca218501f160893b4b
           filename: gcc_badge.json
           label: Build GCC_ARM
-          message: passing
+          message: success
           color: green
 
       -
         name: badge_red
-        if: steps.build.outcome == 'failure'
+        if: steps.build.outcome != 'success'
         uses: schneegans/dynamic-badges-action@v1.1.0
         with:
           auth: ${{ secrets.GIST_SECRET }}
           gistID: 661bc6f35f626bca218501f160893b4b
           filename: gcc_badge.json
           label: Build GCC_ARM
-          message: failing
+          message: fail
           color: red
