@@ -28,6 +28,7 @@ jobs:
         id: build
         run: |
           set -e
+          mbed new .
           mbed deploy
           mbed compile -t GCC_ARM -m ${{ matrix.target }} --profile ${{ matrix.profile }}
 
