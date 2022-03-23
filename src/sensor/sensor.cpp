@@ -1,22 +1,12 @@
 #include "sensor.h"
+#include "helper.h"
 #include <algorithm>
 
 bool Sensor::run = false;
 float Sensor::weights[6] =  {27,9,-9,-27,9,-9};
-float Sensor::treshold[6] =  { 0.07828519,	0.09378702,	0.10737747,	0.09584597,	0.09437664,	0.13561697 };
-float Sensor::scale_factor[6] = { 1.006342313,	1.019787556,	1.031426983,	1.018563463,	1.014853279,	1.099818972 };
-
+float Sensor::treshold[6] = {0.01563,	0.0232,	0.02173,	0.01905,	0.02466,	0.03736};
+float Sensor::scale_factor[6] = { 3.147073819,	3.056926704,	3.170609335,	2.955608988,	3.159467111,	2.637137664};
 Sensor::Sensor(PinName p1, PinName p2, PinName p3, PinName p4, PinName p5, PinName p6, PinName in1,PinName in2,PinName in3,PinName in4,PinName in5,PinName in6) : sensors(p1,p2,p3,p4,p5,p6), input{AnalogIn(in1),AnalogIn(in2),AnalogIn(in3),AnalogIn(in4),AnalogIn(in5),AnalogIn(in6)} {};
-
-
-template<class T>
-constexpr const T& clamp( const T& v, const T& lo, const T& hi)
-{
-    return std::less<T>{}(v, lo) ? lo : std::less<T>{}(hi, v) ? hi : v;
-}
-
-
-
 
 float Sensor::read(){
 
@@ -52,17 +42,14 @@ float Sensor::read(){
     // Check if any of 6 sensors reading > TRESHOLD for white
     if(std::any_of(sensor_data,sensor_data+6,[](float i){ return i > TRESHOLD; })){
 
-        
-        float distance_4 = arm_weighted_sum_f32(Sensor::weights,sensor_data,4);
-        distance = distance_4;
-
         //Check if second row is contributing to any distance reading
         if(sensor_data[4] > TRESHOLD || sensor_data[5] > TRESHOLD ){
-            
-            float distance_2 = arm_weighted_sum_f32(weights+4,sensor_data+4,2);
-            float coeff = 0.5;
-            distance = coeff * distance_4 + (1-coeff) * distance_2;
 
+            distance = arm_weighted_sum_f32(Sensor::weights,sensor_data,6);
+
+        }else{
+
+            distance = arm_weighted_sum_f32(Sensor::weights,sensor_data,4);
         }        
       
 

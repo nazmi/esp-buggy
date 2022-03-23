@@ -1,5 +1,6 @@
 \page features Innovative Features
-# Background
+[TOC]
+# Background {#background}
 
 High speed buggy is very achievable by all groups, but cornering will punish those who overlook their control algorithm. 
 Either the buggy will overshoot at high speed, or the buggy will slow down and take the corner wisely. 
@@ -8,7 +9,7 @@ Signal processing is important for line following robot to achieve stability in 
 Simply reading the output of the sensors will not give meaningful components to the software if it is not processed the correct way. 
 This page discusses our attempt to get the best out of the buggy system by incorporating hardware and software solutions to the stated problem.
 
-# Hardware Solution
+# Hardware Solution {#hardware}
 
 Although we try our best to test the sensor and get the optimum operating height, it can vary depending on the environment. 
 So designing a chassis based on this constraint may cause trouble for iterative development as we go forward. 
@@ -28,7 +29,7 @@ Both of this design approach gives us flexibility to choose the height and posit
 <div style="text-align:center"><img width="60%" src="sensor3.png" alt="PCB design"></div>
 
 
-# Software solution
+# Software Solution {#software}
 
 Determining the position of the line is very simple by using weighted average as discuss in [this section](#autotoc_md9). Recall again that it is simply \f$\ distance = \frac{\sum_{1}^{6} reading_i \times weight_i}{\sum_{1}^{6} reading_i} \f$. This simple method is fast and simple but it is not the best way to determine the position of sensors. The alternative method is to use quadratic interpolation from the sensors. Using this method, not all sensors will be used for calculations because the problem is overdetermined so only four nearest to the sensors output is chosen to simplify the problem. Maybe it is easier to visualise this concept using the figure below.
 
@@ -37,7 +38,7 @@ Determining the position of the line is very simple by using weighted average as
 The position can be determined from \f$ distance = -\frac{b}{2a} \f$. To be explained.
 
 
-# Results
+# Results {#results}
 
 Adjusting the height....  
 graph reading vs height  

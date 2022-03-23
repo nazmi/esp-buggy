@@ -8,7 +8,7 @@
 #define OFFTRACK 0.15
 #define PRESCALER 10.0f
 #define NO_TRACK 30
-#define TRESHOLD 2.8
+#define TRESHOLD 0.7
 
 
 class Sensor
