@@ -26,7 +26,8 @@ Hi! I'm [Nazmi Ropi](https://uk.linkedin.com/in/nazmi-ropi), the author of this 
 @note You need to replace some of the MACROS values, and PID parameters based on your specifications.
 
 ## Troubleshooting {#troubleshoot}
-Some of the libraries might not work if you want to import and use them on Mbed OS 6, I have made modifications to some of them to replace the deprecated functions from Mbed 2. This can be easily done by referring to the latest API list from  [Mbed OS 6 documentation](https://os.mbed.com/docs/mbed-os/v6.15/introduction/index.html).
+1. MbedStudio has linter problems when compiled with GCC_ARM, but it can compile the program. Although build check uses GCC_ARM, I suggest to use the default ARMC6 toolchain to avoid false errors when writing code.
+2. Some of the libraries might not work if you want to import and use them on Mbed OS 6, I have made modifications to some of them to replace the deprecated functions from Mbed 2. This can be easily done by referring to the latest API list from  [Mbed OS 6 documentation](https://os.mbed.com/docs/mbed-os/v6.15/introduction/index.html).
 
 @note You can use the joystick, potentiometer and LCD on the application shield to help debug your program.
 
@@ -42,8 +43,15 @@ You can buy any component you like, but the table below will help if you want to
 |TCRT5000| 6|
 |HM 10 BLE|1|
 
+## Contributing {#contribute}
+Contributors are welcomed. If this repo is still private contact me through [email](mailto:muhammad.binmohdropi@student.manchester.ac.uk).  
+Please create [pull request](https://github.com/nazmi/esp-buggy/pulls) and raise any [bug/issue](https://github.com/nazmi/esp-buggy/issues).  
+
 ## Contributors {#contributors}
 Special thanks to my supervisor and every group member that helped in this project (in no particular order).
 
 *Dr Subhasish Chakraborty*  
 *Ibrahim, Euan, Joseph, Zech, Eric*
+
+## Credits {#credits}
+This documentation theme is from [doxygen-awesome-css](https://github.com/jothepro/doxygen-awesome-css).

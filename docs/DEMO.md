@@ -130,12 +130,12 @@ It was easier to manage 6 sensors if they are connected to op-amp as this approa
 	Recall that I had *raw uncalibrated data (white level)*
 	|S1|S2|S3|S4|S5|S6|
 	|-|-|-|-|-|-|
-	|6.326|7.234|6.107|6.565|6.122|4.921|
+	|3.18998|3.26268|3.07483|3.12763|3.22799|3.70966|
 
 	How big is the scale factor to make it **10**?
 	|S1|S2|S3|S4|S5|S6|
 	|-|-|-|-|-|-|
-	|1.580|	1.382|	1.637|	1.523|	1.633|	2.032|
+	|3.13481|3.06497|3.25221|3.19731|3.09790|2.69567|
 
 	Now, just apply a scale factor to each sensor to scale it to the desired maximum level.
 	@note We assumed the sensors scale linearly. *But did it?*

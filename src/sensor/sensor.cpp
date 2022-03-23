@@ -2,123 +2,147 @@
 #include "helper.h"
 #include <algorithm>
 
-bool Sensor::run = false;
-float Sensor::weights[6] =  {27,9,-9,-27,9,-9};
-float Sensor::treshold[6] = {0.01563,	0.0232,	0.02173,	0.01905,	0.02466,	0.03736};
-float Sensor::scale_factor[6] = { 3.147073819,	3.056926704,	3.170609335,	2.955608988,	3.159467111,	2.637137664};
-Sensor::Sensor(PinName p1, PinName p2, PinName p3, PinName p4, PinName p5, PinName p6, PinName in1,PinName in2,PinName in3,PinName in4,PinName in5,PinName in6) : sensors(p1,p2,p3,p4,p5,p6), input{AnalogIn(in1),AnalogIn(in2),AnalogIn(in3),AnalogIn(in4),AnalogIn(in5),AnalogIn(in6)} {};
+using std::min_element;
 
-float Sensor::read(){
+bool Sensor::s_run = false;
+std::array<float, 6> Sensor::WEIGHTS = {27, 9, -9, -27, 9, -9};
+std::array<float, 6> Sensor::BLACK_TRESHOLD = {0.01783, 0.02589, 0.02344, 0.02076, 0.02759, 0.03907};
+std::array<float, 6> Sensor::SCALE_FACTOR = {3.13481219, 3.064968664, 3.252208943, 3.197312711, 3.097903068, 2.695666361};
 
-    distance = 0;
+Sensor::Sensor(PinName p1, PinName p2, PinName p3, PinName p4, PinName p5, PinName p6, PinName in1, PinName in2, PinName in3, PinName in4, PinName in5, PinName in6) : m_pins(p1, p2, p3, p4, p5, p6),
+                                                                                                                                                                       m_analog{AnalogIn(in1), AnalogIn(in2), AnalogIn(in3), AnalogIn(in4), AnalogIn(in5), AnalogIn(in6)} {};
+
+float Sensor::read() {
+
+    m_distance = 0;
     Timer t;
     t.start();
 
+
     // All off to capture noise
-    sensors.write(0);
+    m_pins.write(0);
     wait_us(25);
-    for(int i=0;i<6;i++){
+    for (size_t i = 0; i < m_analog.size(); ++i) {
 
-        noise[i] = input[i].read();
-
+        m_noise[i] = m_analog[i].read();
     }
 
-    // Turn led on one by one
-    for(int i=0; i < 6; i++){
+    // Turn on in sequence
+    for (size_t i = 0; i < m_analog.size(); ++i) {
 
-        sensors.write(1 << i);
+        m_pins.write(1 << i);
         wait_us(25);
-        float reading = input[i].read();
-
-        if(reading > noise[i] && reading > treshold[i])
-            sensor_data[i] = (reading - noise[i]) * PRESCALER * scale_factor[i];
-        else
-            sensor_data[i] = 0;
-
-        sensor_data[i] = clamp(sensor_data[i],0.0f,PRESCALER);
-        
+        m_reading[i] = m_analog[i].read();
     }
 
-    // Check if any of 6 sensors reading > TRESHOLD for white
-    if(std::any_of(sensor_data,sensor_data+6,[](float i){ return i > TRESHOLD; })){
+    // Process reading = reading - minimum_reading
+    float min = *std::min_element(m_reading.begin(),m_reading.end());
+    for (size_t i = 0; i < m_analog.size(); ++i) {
 
-        //Check if second row is contributing to any distance reading
-        if(sensor_data[4] > TRESHOLD || sensor_data[5] > TRESHOLD ){
-
-            distance = arm_weighted_sum_f32(Sensor::weights,sensor_data,6);
-
-        }else{
-
-            distance = arm_weighted_sum_f32(Sensor::weights,sensor_data,4);
-        }        
-      
-
-    }else {
-
-        distance = NO_TRACK;
-
+        m_reading[i] = clamp(m_reading[i] - min , 0.0f, 1.0f);
     }
 
-    
-    
+    // Process reading above treshold
+    for (size_t i = 0; i < m_analog.size(); ++i) {
+
+        const auto isAboveTreshold = m_reading[i] > BLACK_TRESHOLD[i];
+        if (isAboveTreshold) {
+            m_reading[i] = (m_reading[i] - m_noise[i]) * PRESCALER * SCALE_FACTOR[i];
+        } else {
+            m_reading[i] = 0;
+        }
+
+        m_reading[i] = clamp(m_reading[i], 0.0f, PRESCALER);
+    }
+
+    // Check if any of 6 m_pins m_reading > WHITE_TRESHOLD for white
+    const auto isUnderWhiteLine = std::any_of(m_reading.begin(), m_reading.end(), [](float reading) { return reading > WHITE_TRESHOLD; });
+    if (isUnderWhiteLine) {
+
+        // Check if second row is contributing to any m_distance m_reading
+        const auto isCenterOn = m_reading[4] > WHITE_TRESHOLD || m_reading[5] > WHITE_TRESHOLD;
+        if (isCenterOn) {
+            m_distance = arm_weighted_sum_f32(Sensor::WEIGHTS.cbegin(), m_reading.cbegin(), 6);
+        } else {
+            m_distance = arm_weighted_sum_f32(Sensor::WEIGHTS.cbegin(), m_reading.cbegin(), 4);
+        }
+
+    } else {
+
+        m_distance = NO_TRACK;
+    }
+
     t.stop();
-    
-    
-    if(run == false) {printf("1,2,3,4,5,6,time,distance\n"); run=true;}
-    printf("%.5f,%.5f,%.5f,%.5f,%.5f,%.5f,",sensor_data[0],sensor_data[1],sensor_data[2],sensor_data[3],sensor_data[4],sensor_data[5]);
-    printf("%lld,", t.elapsed_time().count()*1);
-    printf("%f\n",distance);
-    
+
+    if (!s_run) {
+        printf("1,2,3,4,5,6,time,m_distance\n");
+        s_run = true;
+    }
+    for (const auto &reading : m_reading) {
+        printf("%.5f,", reading);
+    }
+    for (const auto &noise : m_noise) {
+        printf("%.5f,", noise);
+    }
+    printf("%lld,", t.elapsed_time().count() * 1);
+    printf("%f\n", m_distance);
+
     t.reset();
 
-    return distance;
-    
+    return m_distance;
 }
 
-
-void Sensor::calibrate_black(){
-
-    float calibrate_data[6] {0};
-    
-    for(int i=0; i < 6; i++){
-
-        sensors.write(1<<i);
-        wait_us(25);
-        calibrate_data[i] = input[i].read();
-
-    }
-
-    if(run == false) {printf("1,2,3,4,5,6\n"); run=true;}
-    printf("%.5f,%.5f,%.5f,%.5f,%.5f,%.5f\n",calibrate_data[0],calibrate_data[1],calibrate_data[2],calibrate_data[3],calibrate_data[4],calibrate_data[5]);
-    
+float Sensor::getDistance() const {
+    return m_distance;
 }
 
-void Sensor::calibrate_white(){
+void Sensor::calibrate_black() {
 
-    // Turn all off to read noise
-    sensors.write(0);
+    std::array<float, 6> calibrate_data{};
+    m_pins.write(0);
     wait_us(25);
-    for(int i=0;i<6;i++){
+    for (size_t i = 0; i < m_analog.size(); ++i) {
 
-        noise[i]= input[i].read();
-    
+        //m_pins.write(1 << i);
+        //wait_us(25);
+
+        calibrate_data[i] = m_analog[i].read();
     }
 
-    for(int i=0; i < 6; i++){
+    if (!s_run) {
+        printf("1,2,3,4,5,6\n");
+        s_run = true;
+    }
+    printf("%.5f,%.5f,%.5f,%.5f,%.5f,%.5f\n", calibrate_data[0], calibrate_data[1], calibrate_data[2], calibrate_data[3], calibrate_data[4], calibrate_data[5]);
+}
 
-        sensors.write(1 << i);
+void Sensor::calibrate_white() {
+
+    // Turn all off to read m_noise
+    m_pins.write(0);
+    wait_us(25);
+    for (size_t i = 0; i < m_analog.size(); ++i) {
+        m_noise[i] = m_analog[i].read();
+    }
+
+    for (size_t i = 0; i < m_analog.size(); ++i) {
+
+        m_pins.write(1 << i);
         wait_us(25);
 
-        float reading = input[i].read();
+        float adc_value = m_analog[i].read();
 
-        if(reading > noise[i] && reading > treshold[i])
-            sensor_data[i] = (reading - noise[i]) * PRESCALER;
-        else
-            sensor_data[i] = 0;
-
+        auto isAboveTreshold = adc_value > m_noise[i] && adc_value > BLACK_TRESHOLD[i];
+        if (isAboveTreshold) {
+            m_reading[i] = (adc_value - m_noise[i]) * PRESCALER;
+        } else {
+            m_reading[i] = 0;
+        }
     }
 
-    if(run == false) {printf("1,2,3,4,5,6\n"); run=true;}
-    printf("%.5f,%.5f,%.5f,%.5f,%.5f,%.5f\n",sensor_data[0],sensor_data[1],sensor_data[2],sensor_data[3],sensor_data[4],sensor_data[5]);
-    
+    if (!s_run) {
+        printf("1,2,3,4,5,6\n");
+        s_run = true;
+    }
+    printf("%.5f,%.5f,%.5f,%.5f,%.5f,%.5f\n", m_reading[0], m_reading[1], m_reading[2], m_reading[3], m_reading[4], m_reading[5]);
 }
