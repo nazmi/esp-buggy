@@ -106,11 +106,17 @@ $(document).ready(function(){initNavTree('md__d_e_m_o.html',''); initResizable()
   <div class="headertitle"><div class="title">Technical Demo Documentation </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="journey"></a></p>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="#overview">Overview</a></li>
+<li class="level1"><a href="#motor">TD1: Motor Control</a></li>
+<li class="level1"><a href="#sensor">TD2: Sensors</a></li>
+</ul>
+</div>
+<div class="textblock"><p ><a class="anchor" id="journey"></a> </p>
+<h1><a class="anchor" id="overview"></a>
 Overview</h1>
 <p >We had at least 4 technical demonstrations (TD) for this semester, accessing different parts of the buggy. They emphasised the hardware control, especially the motors and the software solutions to interface the microcontroller and other components like sensors and Bluetooth module.</p>
-<h1><a class="anchor" id="autotoc_md8"></a>
+<h1><a class="anchor" id="motor"></a>
 TD1: Motor Control</h1>
 <p >On the software side, the key task was setting up the encoders and motors to work as intended. I settled down on a <b>20% duty cycle</b> to keep it steady and avoid any translational inertia after stopping. PWM frequency set to <b>1000 Hz</b> because the wheels were louder than the switches, why not? The heatsink was also not too hot to touch. I chose to use <b>unipolar mode</b> as this offered less switching losses. </p><div class="dotgraph">
 <iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_1.svg" width="458" height="412"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
@@ -154,7 +160,7 @@ TD1: Motor Control</h1>
 \begin{align} correction &amp;= \frac{pulse_N}{pulse_M} \ where \ pulse_N &gt; pulse_M \\ \end{align}
 </p>
 <p> We received full marks on TD1 and this assured us a good start of our journey in producing a winning buggy.</p>
-<h1><a class="anchor" id="autotoc_md9"></a>
+<h1><a class="anchor" id="sensor"></a>
 TD2: Sensors</h1>
 <p >This was where we had to interface the sensors and bluetooth module with the microcontroller. The bluetooth module was easily configured by connecting to the correct RX, TX pins. In this case I used <b>BufferedSerial</b> to handle the communication between F401RE and HM-10. Sensors were the tricky bit, since we chose not to arrange it in a one row but two instead. However, I will discuss on general process of configuration and calibration without considering our chosen arrangement.</p>
 <div class="dotgraph">

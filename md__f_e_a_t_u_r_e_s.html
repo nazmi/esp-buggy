@@ -106,22 +106,29 @@ $(document).ready(function(){initNavTree('md__f_e_a_t_u_r_e_s.html',''); initRes
   <div class="headertitle"><div class="title">Innovative Features </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="features"></a></p>
-<h1><a class="anchor" id="autotoc_md10"></a>
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="#background">Background</a></li>
+<li class="level1"><a href="#hardware">Hardware Solution</a></li>
+<li class="level1"><a href="#software">Software Solution</a></li>
+<li class="level1"><a href="#results">Results</a></li>
+</ul>
+</div>
+<div class="textblock"><p ><a class="anchor" id="features"></a> </p>
+<h1><a class="anchor" id="background"></a>
 Background</h1>
 <p >High speed buggy is very achievable by all groups, but cornering will punish those who overlook their control algorithm. Either the buggy will overshoot at high speed, or the buggy will slow down and take the corner wisely. Is there a way to corner without lowering current speed? Of course, it is possible with the correct implementation of signal processing. Signal processing is important for line following robot to achieve stability in performance. Simply reading the output of the sensors will not give meaningful components to the software if it is not processed the correct way. This page discusses our attempt to get the best out of the buggy system by incorporating hardware and software solutions to the stated problem.</p>
-<h1><a class="anchor" id="autotoc_md11"></a>
+<h1><a class="anchor" id="hardware"></a>
 Hardware Solution</h1>
 <p >Although we try our best to test the sensor and get the optimum operating height, it can vary depending on the environment. So designing a chassis based on this constraint may cause trouble for iterative development as we go forward. This also might cause a problem because we only test one sensor to characterise it, not as an array of sensors which we will be using in the final assembly. Our solution to this problem to use a system that allow us to change the height of the sensors from ground when the sensors are calibrated. The plate for the sensors can be clamped at height from the ground of between 2.5 cm up to 6 cm. <br  />
 </p>
 <div style="text-align:center"><img src="sensor1.png" alt="Vertical adjustment" width="60%" class="inline"/></div><p >However, this solution only fix the problem in vertical-axis direction. Hence, we further design the sensor plate with long holes to allow adjustable position of the PCB by using nuts and bolts.</p>
 <div style="text-align:center"><img src="sensor2.png" alt="Horizontal adjustment" width="60%" class="inline"/></div><p >Both of this design approach gives us flexibility to choose the height and position of the sensors that we want, resulting to better output of the sensors' readings. Next, our sensor array design consist of two rows instead of traditional one row system. The inner row consist of two sensors, and the front row consists of four sensors. We created this design based on the consideration that we want to maximise number of sensors operating and reading outputs. While 6 sensors in a row cover the line almost by 4x its width, our arrangement benefits from its additional row. This allow the buggy to immediately respond to incoming corners when detected by the front row sensors.</p>
-<div style="text-align:center"><img src="sensor3.png" alt="PCB design" width="60%" class="inline"/></div><h1><a class="anchor" id="autotoc_md12"></a>
-Software solution</h1>
-<p >Determining the position of the line is very simple by using weighted average as discuss in <a class="el" href="md__d_e_m_o.html#autotoc_md9">this section</a>. Recall again that it is simply \(\ distance = \frac{\sum_{1}^{6} reading_i \times weight_i}{\sum_{1}^{6} reading_i} \). This simple method is fast and simple but it is not the best way to determine the position of sensors. The alternative method is to use quadratic interpolation from the sensors. Using this method, not all sensors will be used for calculations because the problem is overdetermined so only four nearest to the sensors output is chosen to simplify the problem. Maybe it is easier to visualise this concept using the figure below.</p>
+<div style="text-align:center"><img src="sensor3.png" alt="PCB design" width="60%" class="inline"/></div><h1><a class="anchor" id="software"></a>
+Software Solution</h1>
+<p >Determining the position of the line is very simple by using weighted average as discuss in this section. Recall again that it is simply \(\ distance = \frac{\sum_{1}^{6} reading_i \times weight_i}{\sum_{1}^{6} reading_i} \). This simple method is fast and simple but it is not the best way to determine the position of sensors. The alternative method is to use quadratic interpolation from the sensors. Using this method, not all sensors will be used for calculations because the problem is overdetermined so only four nearest to the sensors output is chosen to simplify the problem. Maybe it is easier to visualise this concept using the figure below.</p>
 <p ><img src="sensor4.svg" alt="Quadratic interpolation" style="pointer-events: none;" class="inline"/></p>
 <p >The position can be determined from \( distance = -\frac{b}{2a} \). To be explained.</p>
-<h1><a class="anchor" id="autotoc_md13"></a>
+<h1><a class="anchor" id="results"></a>
 Results</h1>
 <p >Adjusting the height.... <br  />
  graph reading vs height <br  />

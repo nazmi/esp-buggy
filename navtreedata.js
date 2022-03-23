@@ -26,23 +26,23 @@ var NAVTREE =
 [
   [ "EEEN21000", "index.html", [
     [ "Embedded Systems Project 2021/2022", "index.html", [
-      [ "Line Following Robot (LFR)", "index.html#autotoc_md1", null ],
-      [ "Dependencies", "index.html#autotoc_md2", null ],
-      [ "Installation", "index.html#autotoc_md3", null ],
-      [ "Troubleshooting", "index.html#autotoc_md4", null ],
-      [ "Components", "index.html#autotoc_md5", null ],
-      [ "Contributors", "index.html#autotoc_md6", null ]
+      [ "Line Following Robot (LFR)", "index.html#intro", null ],
+      [ "Dependencies", "index.html#dependencies", null ],
+      [ "Installation", "index.html#installation", null ],
+      [ "Troubleshooting", "index.html#troubleshoot", null ],
+      [ "Components", "index.html#components", null ],
+      [ "Contributors", "index.html#contributors", null ]
     ] ],
     [ "Technical Demo Documentation", "md__d_e_m_o.html", [
-      [ "Overview", "md__d_e_m_o.html#autotoc_md7", null ],
-      [ "TD1: Motor Control", "md__d_e_m_o.html#autotoc_md8", null ],
-      [ "TD2: Sensors", "md__d_e_m_o.html#autotoc_md9", null ]
+      [ "Overview", "md__d_e_m_o.html#overview", null ],
+      [ "TD1: Motor Control", "md__d_e_m_o.html#motor", null ],
+      [ "TD2: Sensors", "md__d_e_m_o.html#sensor", null ]
     ] ],
     [ "Innovative Features", "md__f_e_a_t_u_r_e_s.html", [
-      [ "Background", "md__f_e_a_t_u_r_e_s.html#autotoc_md10", null ],
-      [ "Hardware Solution", "md__f_e_a_t_u_r_e_s.html#autotoc_md11", null ],
-      [ "Software solution", "md__f_e_a_t_u_r_e_s.html#autotoc_md12", null ],
-      [ "Results", "md__f_e_a_t_u_r_e_s.html#autotoc_md13", null ]
+      [ "Background", "md__f_e_a_t_u_r_e_s.html#background", null ],
+      [ "Hardware Solution", "md__f_e_a_t_u_r_e_s.html#hardware", null ],
+      [ "Software Solution", "md__f_e_a_t_u_r_e_s.html#software", null ],
+      [ "Results", "md__f_e_a_t_u_r_e_s.html#results", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -61,6 +61,7 @@ var NAVTREE =
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
+        [ "Functions", "globals_func.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
