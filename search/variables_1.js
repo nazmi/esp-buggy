@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['directionl_0',['directionL',['../class_motor.html#a9aacac8fa81e05563009eb4c90c87cab',1,'Motor']]],
-  ['directionr_1',['directionR',['../class_motor.html#ac422a4e24872a96599f99c211a8f3ba7',1,'Motor']]],
-  ['distance_2',['distance',['../class_sensor.html#a861556e36c5a7adfbc0e55fbe311a83e',1,'Sensor']]]
+  ['channela_5f_0',['channelA_',['../class_q_e_i.html#a79c7dfebc90a53bfaacbf618229b8c8d',1,'QEI']]],
+  ['channelb_5f_1',['channelB_',['../class_q_e_i.html#a456c6ef02566e1df468ef733d9a5d6fc',1,'QEI']]],
+  ['circumference_2',['CIRCUMFERENCE',['../class_encoder.html#af6c8f36da1f6de7228a591e9ace1f735',1,'Encoder']]],
+  ['currstate_5f_3',['currState_',['../class_q_e_i.html#aa16e7fa1d8bd87cbb496bbdc7c7d76b9',1,'QEI']]]
 ];

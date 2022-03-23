@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['slow_5fpwm_0',['SLOW_PWM',['../motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0',1,'motor.h']]]
+  ['wheel_5fdistance_0',['WHEEL_DISTANCE',['../encoder_8h.html#aeec35d5fa40cda2b874fd262a1268b5e',1,'encoder.h']]],
+  ['white_5ftreshold_1',['WHITE_TRESHOLD',['../sensor_8h.html#ae6a7584e51a69ec941b3c3362555d10f',1,'sensor.h']]]
 ];

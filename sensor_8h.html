@@ -109,13 +109,15 @@ $(document).ready(function(){initNavTree('sensor_8h.html',''); initResizable(); 
   <div class="headertitle"><div class="title">sensor.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;mbed.h&quot;</code><br />
-<code>#include &quot;arm_math.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;arm_math.h&quot;</code><br />
+<code>#include &quot;mbed.h&quot;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;array&gt;</code><br />
 <code>#include &lt;cstdio&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for sensor.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="sensor_8h__incl.svg" width="272" height="127"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="sensor_8h__incl.svg" width="446" height="127"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
@@ -134,8 +136,8 @@ Macros</h2></td></tr>
 <tr class="separator:a0fac869d83ac1a584d6c45cf609f5fe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a841dd029b9d3a595436aa30bdcf99416"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sensor_8h.html#a841dd029b9d3a595436aa30bdcf99416">NO_TRACK</a>&#160;&#160;&#160;30</td></tr>
 <tr class="separator:a841dd029b9d3a595436aa30bdcf99416"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab320100bdc9fa7e2092ee1cbd41cf2a8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sensor_8h.html#ab320100bdc9fa7e2092ee1cbd41cf2a8">TRESHOLD</a>&#160;&#160;&#160;0.7</td></tr>
-<tr class="separator:ab320100bdc9fa7e2092ee1cbd41cf2a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6a7584e51a69ec941b3c3362555d10f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sensor_8h.html#ae6a7584e51a69ec941b3c3362555d10f">WHITE_TRESHOLD</a>&#160;&#160;&#160;0.7</td></tr>
+<tr class="separator:ae6a7584e51a69ec941b3c3362555d10f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a080aa4c3ca12818b030991061ead0bfc" name="a080aa4c3ca12818b030991061ead0bfc"></a>
@@ -180,14 +182,14 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="ab320100bdc9fa7e2092ee1cbd41cf2a8" name="ab320100bdc9fa7e2092ee1cbd41cf2a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab320100bdc9fa7e2092ee1cbd41cf2a8">&#9670;&nbsp;</a></span>TRESHOLD</h2>
+<a id="ae6a7584e51a69ec941b3c3362555d10f" name="ae6a7584e51a69ec941b3c3362555d10f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6a7584e51a69ec941b3c3362555d10f">&#9670;&nbsp;</a></span>WHITE_TRESHOLD</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define TRESHOLD&#160;&#160;&#160;0.7</td>
+          <td class="memname">#define WHITE_TRESHOLD&#160;&#160;&#160;0.7</td>
         </tr>
       </table>
 </div><div class="memdoc">

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['radianstodegrees_0',['radiansToDegrees',['../encoder_8h.html#a0a66802250289d98eb056a05e4faab6c',1,'encoder.h']]]
+  ['slow_5fpwm_0',['SLOW_PWM',['../motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0',1,'motor.h']]]
 ];

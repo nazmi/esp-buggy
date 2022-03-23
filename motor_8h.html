@@ -109,13 +109,14 @@ $(document).ready(function(){initNavTree('motor_8h.html',''); initResizable(); }
   <div class="headertitle"><div class="title">motor.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;mbed.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="encoder_8h_source.html">encoder.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="encoder_8h_source.html">encoder.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="helper_8h_source.html">helper.h</a>&quot;</code><br />
+<code>#include &quot;mbed.h&quot;</code><br />
 <code>#include &lt;utility&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for motor.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="motor_8h__incl.svg" width="231" height="276"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="motor_8h__incl.svg" width="296" height="351"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
@@ -129,14 +130,14 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:add64edb466ebc8cf935fbce2e3a6fb25"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="motor_8h.html#add64edb466ebc8cf935fbce2e3a6fb25">FAST_PWM</a>&#160;&#160;&#160;0.55</td></tr>
-<tr class="memdesc:add64edb466ebc8cf935fbce2e3a6fb25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed fast duty cycle.  <a href="motor_8h.html#add64edb466ebc8cf935fbce2e3a6fb25">More...</a><br /></td></tr>
+<tr class="memitem:add64edb466ebc8cf935fbce2e3a6fb25"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="motor_8h.html#add64edb466ebc8cf935fbce2e3a6fb25">FAST_PWM</a>&#160;&#160;&#160;0.6</td></tr>
+<tr class="memdesc:add64edb466ebc8cf935fbce2e3a6fb25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fast duty cycle constant.  <a href="motor_8h.html#add64edb466ebc8cf935fbce2e3a6fb25">More...</a><br /></td></tr>
 <tr class="separator:add64edb466ebc8cf935fbce2e3a6fb25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7051de59e6115405db179689d7a630e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="motor_8h.html#ac7051de59e6115405db179689d7a630e">HALF_PWM</a>&#160;&#160;&#160;0.45</td></tr>
-<tr class="memdesc:ac7051de59e6115405db179689d7a630e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed normal duty cycle.  <a href="motor_8h.html#ac7051de59e6115405db179689d7a630e">More...</a><br /></td></tr>
+<tr class="memitem:ac7051de59e6115405db179689d7a630e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="motor_8h.html#ac7051de59e6115405db179689d7a630e">HALF_PWM</a>&#160;&#160;&#160;0.5</td></tr>
+<tr class="memdesc:ac7051de59e6115405db179689d7a630e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normal duty cycle constant.  <a href="motor_8h.html#ac7051de59e6115405db179689d7a630e">More...</a><br /></td></tr>
 <tr class="separator:ac7051de59e6115405db179689d7a630e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2d5253ae733c15431dbf44cbad409f0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">SLOW_PWM</a>&#160;&#160;&#160;0.25</td></tr>
-<tr class="memdesc:ae2d5253ae733c15431dbf44cbad409f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed slow duty cycle.  <a href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">More...</a><br /></td></tr>
+<tr class="memitem:ae2d5253ae733c15431dbf44cbad409f0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">SLOW_PWM</a>&#160;&#160;&#160;0.3</td></tr>
+<tr class="memdesc:ae2d5253ae733c15431dbf44cbad409f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Slow duty cycle constant.  <a href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">More...</a><br /></td></tr>
 <tr class="separator:ae2d5253ae733c15431dbf44cbad409f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -147,12 +148,12 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define FAST_PWM&#160;&#160;&#160;0.55</td>
+          <td class="memname">#define FAST_PWM&#160;&#160;&#160;0.6</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fixed fast duty cycle. </p>
+<p>Fast duty cycle constant. </p>
 
 </div>
 </div>
@@ -163,12 +164,12 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define HALF_PWM&#160;&#160;&#160;0.45</td>
+          <td class="memname">#define HALF_PWM&#160;&#160;&#160;0.5</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fixed normal duty cycle. </p>
+<p>Normal duty cycle constant. </p>
 
 </div>
 </div>
@@ -179,12 +180,12 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SLOW_PWM&#160;&#160;&#160;0.25</td>
+          <td class="memname">#define SLOW_PWM&#160;&#160;&#160;0.3</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fixed slow duty cycle. </p>
+<p>Slow duty cycle constant. </p>
 
 </div>
 </div>

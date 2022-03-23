@@ -134,18 +134,18 @@ TD1: Motor Control</h1>
 <div class="line">    vector&lt;double&gt; rotation {...};</div>
 <div class="line">    </div>
 <div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i=0; i &lt; linear.size(); i++){</div>
-<div class="line">        <a class="code hl_function" href="class_motor.html#a3a856b89f959eb1032f8ec2016b29efb">Motor::forward</a>(linear,....);</div>
-<div class="line">        <a class="code hl_function" href="class_motor.html#a4acdb75f9311fec7d073e547843bb3e3">Motor::turnright</a>(rotation,...);</div>
+<div class="line">        <a class="code hl_function" href="class_motor.html#abbeb0f664d334505276a83b7b7ef77ea">Motor::forward</a>(linear,....);</div>
+<div class="line">        <a class="code hl_function" href="class_motor.html#abdec5f02db58b8b0412b7b2c8758339f">Motor::turnright</a>(rotation,...);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-<div class="ttc" id="aclass_encoder_html"><div class="ttname"><a href="class_encoder.html">Encoder</a></div><div class="ttdoc">Encoder class with helper functions, derived from QEI.</div><div class="ttdef"><b>Definition:</b> encoder.h:26</div></div>
-<div class="ttc" id="aclass_motor_html"><div class="ttname"><a href="class_motor.html">Motor</a></div><div class="ttdoc">Motor class to control the motors.</div><div class="ttdef"><b>Definition:</b> motor.h:20</div></div>
-<div class="ttc" id="aclass_motor_html_a3a856b89f959eb1032f8ec2016b29efb"><div class="ttname"><a href="class_motor.html#a3a856b89f959eb1032f8ec2016b29efb">Motor::forward</a></div><div class="ttdeci">static void forward(double distance, Motor *motor, Encoder *left, Encoder *right)</div><div class="ttdoc">Control the motor to cruise forward.</div></div>
-<div class="ttc" id="aclass_motor_html_a4acdb75f9311fec7d073e547843bb3e3"><div class="ttname"><a href="class_motor.html#a4acdb75f9311fec7d073e547843bb3e3">Motor::turnright</a></div><div class="ttdeci">static void turnright(double angle, Motor *motor, Encoder *left, Encoder *right)</div><div class="ttdoc">Control the motor to turn right.</div></div>
+<div class="ttc" id="aclass_encoder_html"><div class="ttname"><a href="class_encoder.html">Encoder</a></div><div class="ttdoc">Encoder class with helper functions, derived from QEI.</div><div class="ttdef"><b>Definition:</b> encoder.h:25</div></div>
+<div class="ttc" id="aclass_motor_html"><div class="ttname"><a href="class_motor.html">Motor</a></div><div class="ttdoc">Motor class to control the motors.</div><div class="ttdef"><b>Definition:</b> motor.h:21</div></div>
+<div class="ttc" id="aclass_motor_html_abbeb0f664d334505276a83b7b7ef77ea"><div class="ttname"><a href="class_motor.html#abbeb0f664d334505276a83b7b7ef77ea">Motor::forward</a></div><div class="ttdeci">static void forward(const double distance, Motor *const motor, Encoder *const left_encoder, Encoder *const right_encoder)</div><div class="ttdoc">Control the motor to cruise forward.</div></div>
+<div class="ttc" id="aclass_motor_html_abdec5f02db58b8b0412b7b2c8758339f"><div class="ttname"><a href="class_motor.html#abdec5f02db58b8b0412b7b2c8758339f">Motor::turnright</a></div><div class="ttdeci">static void turnright(const double angle, Motor *const motor, Encoder *const left_encoder, Encoder *const right_encoder)</div><div class="ttdoc">Control the motor to turn right.</div></div>
 </div><!-- fragment --><p >Ideally all values in linear vector are 0.5 m and rotation vector are 90°. However, ours looked like this</p>
 <div class="fragment"><div class="line">vector&lt;double&gt; linear { 0.45, 0.33, 0.33, 0.43};</div>
 <div class="line">vector&lt;double&gt; rotation {83, 83, 83, 175};</div>
-</div><!-- fragment --><p >Note that the last one was more than 90° because the task was to trace the square back which was harder when your buggy did not move in straight line. I used bang-bang control approach to compensate any tiny deviation between the two wheels, implemented in the <a class="el" href="class_motor.html#a3a856b89f959eb1032f8ec2016b29efb" title="Control the motor to cruise forward.">Motor::forward</a>.</p>
+</div><!-- fragment --><p >Note that the last one was more than 90° because the task was to trace the square back which was harder when your buggy did not move in straight line. I used bang-bang control approach to compensate any tiny deviation between the two wheels, implemented in the <a class="el" href="class_motor.html#abbeb0f664d334505276a83b7b7ef77ea" title="Control the motor to cruise forward.">Motor::forward</a>.</p>
 <p ><b>motor.cpp</b> </p><div class="fragment"><div class="line"><span class="keywordflow">if</span> ( left_encoder &gt; right_encoder)</div>
 <div class="line"> </div>
 <div class="line">    right_motor.write(<a class="code hl_define" href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">SLOW_PWM</a> * correction);</div>
@@ -155,7 +155,7 @@ TD1: Motor Control</h1>
 <div class="line"> </div>
 <div class="line">    left_motor.write(<a class="code hl_define" href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">SLOW_PWM</a> * correction);</div>
 <div class="line">    right_motor.write(<a class="code hl_define" href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">SLOW_PWM</a>)</div>
-<div class="ttc" id="amotor_8h_html_ae2d5253ae733c15431dbf44cbad409f0"><div class="ttname"><a href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">SLOW_PWM</a></div><div class="ttdeci">#define SLOW_PWM</div><div class="ttdoc">Fixed slow duty cycle.</div><div class="ttdef"><b>Definition:</b> motor.h:14</div></div>
+<div class="ttc" id="amotor_8h_html_ae2d5253ae733c15431dbf44cbad409f0"><div class="ttname"><a href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">SLOW_PWM</a></div><div class="ttdeci">#define SLOW_PWM</div><div class="ttdoc">Slow duty cycle constant.</div><div class="ttdef"><b>Definition:</b> motor.h:14</div></div>
 </div><!-- fragment --> <p class="formulaDsp">
 \begin{align} correction &amp;= \frac{pulse_N}{pulse_M} \ where \ pulse_N &gt; pulse_M \\ \end{align}
 </p>
@@ -172,13 +172,13 @@ TD2: Sensors</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">S1   </th><th class="markdownTableHeadNone">S2   </th><th class="markdownTableHeadNone">S3   </th><th class="markdownTableHeadNone">S4   </th><th class="markdownTableHeadNone">S5   </th><th class="markdownTableHeadNone">S6    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">6.326   </td><td class="markdownTableBodyNone">7.234   </td><td class="markdownTableBodyNone">6.107   </td><td class="markdownTableBodyNone">6.565   </td><td class="markdownTableBodyNone">6.122   </td><td class="markdownTableBodyNone">4.921   </td></tr>
+<td class="markdownTableBodyNone">3.18998   </td><td class="markdownTableBodyNone">3.26268   </td><td class="markdownTableBodyNone">3.07483   </td><td class="markdownTableBodyNone">3.12763   </td><td class="markdownTableBodyNone">3.22799   </td><td class="markdownTableBodyNone">3.70966   </td></tr>
 </table>
 <p class="startli">How big is the scale factor to make it <b>10</b>? </p><table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">S1   </th><th class="markdownTableHeadNone">S2   </th><th class="markdownTableHeadNone">S3   </th><th class="markdownTableHeadNone">S4   </th><th class="markdownTableHeadNone">S5   </th><th class="markdownTableHeadNone">S6    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">1.580   </td><td class="markdownTableBodyNone">1.382   </td><td class="markdownTableBodyNone">1.637   </td><td class="markdownTableBodyNone">1.523   </td><td class="markdownTableBodyNone">1.633   </td><td class="markdownTableBodyNone">2.032   </td></tr>
+<td class="markdownTableBodyNone">3.13481   </td><td class="markdownTableBodyNone">3.06497   </td><td class="markdownTableBodyNone">3.25221   </td><td class="markdownTableBodyNone">3.19731   </td><td class="markdownTableBodyNone">3.09790   </td><td class="markdownTableBodyNone">2.69567   </td></tr>
 </table>
 <p class="startli">Now, just apply a scale factor to each sensor to scale it to the desired maximum level. </p><dl class="section note"><dt>Note</dt><dd>We assumed the sensors scale linearly. <em>But did it?</em></dd></dl>
 </li>

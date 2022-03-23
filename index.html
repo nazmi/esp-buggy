@@ -130,7 +130,10 @@ Installation</h1>
 <dl class="section note"><dt>Note</dt><dd>You need to replace some of the MACROS values, and PID parameters based on your specifications.</dd></dl>
 <h1><a class="anchor" id="troubleshoot"></a>
 Troubleshooting</h1>
-<p >Some of the libraries might not work if you want to import and use them on Mbed OS 6, I have made modifications to some of them to replace the deprecated functions from Mbed 2. This can be easily done by referring to the latest API list from <a href="https://os.mbed.com/docs/mbed-os/v6.15/introduction/index.html">Mbed OS 6 documentation</a>.</p>
+<ol type="1">
+<li>MbedStudio has linter problems when compiled with GCC_ARM, but it can compile the program. Although build check uses GCC_ARM, I suggest to use the default ARMC6 toolchain to avoid false errors when writing code.</li>
+<li>Some of the libraries might not work if you want to import and use them on Mbed OS 6, I have made modifications to some of them to replace the deprecated functions from Mbed 2. This can be easily done by referring to the latest API list from <a href="https://os.mbed.com/docs/mbed-os/v6.15/introduction/index.html">Mbed OS 6 documentation</a>.</li>
+</ol>
 <dl class="section note"><dt>Note</dt><dd>You can use the joystick, potentiometer and LCD on the application shield to help debug your program.</dd></dl>
 <h1><a class="anchor" id="components"></a>
 Components</h1>
@@ -151,11 +154,19 @@ Components</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">HM 10 BLE   </td><td class="markdownTableBodyNone">1   </td></tr>
 </table>
+<h1><a class="anchor" id="contribute"></a>
+Contributing</h1>
+<p >Contributors are welcomed. If this repo is still private contact me through <a href="#" onclick="location.href='mai'+'lto:'+'muh'+'am'+'mad'+'.b'+'inm'+'oh'+'dro'+'pi'+'@st'+'ud'+'ent'+'.m'+'anc'+'he'+'ste'+'r.'+'ac.'+'uk'; return false;">email</a>. <br  />
+ Please create <a href="https://github.com/nazmi/esp-buggy/pulls">pull request</a> and raise any <a href="https://github.com/nazmi/esp-buggy/issues">bug/issue</a>. <br  />
+</p>
 <h1><a class="anchor" id="contributors"></a>
 Contributors</h1>
 <p >Special thanks to my supervisor and every group member that helped in this project (in no particular order).</p>
 <p ><em>Dr Subhasish Chakraborty</em> <br  />
- <em>Ibrahim, Euan, Joseph, Zech, Eric</em> </p>
+ <em>Ibrahim, Euan, Joseph, Zech, Eric</em></p>
+<h1><a class="anchor" id="credits"></a>
+Credits</h1>
+<p >This documentation theme is from <a href="https://github.com/jothepro/doxygen-awesome-css">doxygen-awesome-css</a>. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['left_0',['left',['../class_motor.html#ac7153d86817994ab23be215b4f4ef725',1,'Motor']]]
+  ['left_5fmotor_0',['left_motor',['../class_motor.html#a69e5f5005440e09a825f5510238ff251',1,'Motor']]]
 ];

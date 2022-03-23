@@ -106,14 +106,36 @@ $(document).ready(function(){initNavTree('helper_8h_source.html',''); initResiza
   <div class="headertitle"><div class="title">helper.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="helper_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;mbed.h&quot;</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno"><a class="line" href="helper_8h.html#aab9f0232e41c960b4a09629eac33aef3">    4</a></span><span class="keyword">constexpr</span> <span class="keyword">const</span> T&amp; <a class="code hl_function" href="helper_8h.html#aab9f0232e41c960b4a09629eac33aef3">clamp</a>( <span class="keyword">const</span> T&amp; v, <span class="keyword">const</span> T&amp; lo, <span class="keyword">const</span> T&amp; hi)</div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>{</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>    <span class="keywordflow">return</span> std::less&lt;T&gt;{}(v, lo) ? lo : std::less&lt;T&gt;{}(hi, v) ? hi : v;</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>}</div>
-<div class="ttc" id="ahelper_8h_html_aab9f0232e41c960b4a09629eac33aef3"><div class="ttname"><a href="helper_8h.html#aab9f0232e41c960b4a09629eac33aef3">clamp</a></div><div class="ttdeci">constexpr const T &amp; clamp(const T &amp;v, const T &amp;lo, const T &amp;hi)</div><div class="ttdef"><b>Definition:</b> helper.h:4</div></div>
+<a href="helper_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef HELPER_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define HELPER_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="encoder_8h.html">encoder.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;mbed.h&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="helper_8h.html#aab9f0232e41c960b4a09629eac33aef3">   17</a></span><span class="keyword">constexpr</span> <span class="keyword">const</span> T &amp;<a class="code hl_function" href="helper_8h.html#aab9f0232e41c960b4a09629eac33aef3">clamp</a>(<span class="keyword">const</span> T &amp;v, <span class="keyword">const</span> T &amp;lo, <span class="keyword">const</span> T &amp;hi) {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordflow">return</span> std::less&lt;T&gt;{}(v, lo) ? lo : std::less&lt;T&gt;{}(hi, v) ? hi</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>                                                              : v;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="helper_8h.html#ae7926ece13c9c1d8e7e0cc77bafaaada">   30</a></span><span class="keyword">constexpr</span> <span class="keyword">const</span> T <a class="code hl_function" href="helper_8h.html#ae7926ece13c9c1d8e7e0cc77bafaaada">speed_to_pps</a>(<span class="keyword">const</span> T &amp;speed) {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordflow">return</span> speed * 256 / <a class="code hl_variable" href="class_encoder.html#af6c8f36da1f6de7228a591e9ace1f735">Encoder::CIRCUMFERENCE</a>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>}</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="helper_8h.html#a1544dfe1cc64b778b7052f55c16fb868">   42</a></span><span class="keyword">constexpr</span> <span class="keyword">const</span> T <a class="code hl_function" href="helper_8h.html#a1544dfe1cc64b778b7052f55c16fb868">radiansToDegrees</a>(<span class="keyword">const</span> T &amp;angle) {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">return</span> angle * 180.0 / <a class="code hl_define" href="encoder_8h.html#ae71449b1cc6e6250b91f539153a7a0d3">M_PI</a>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_encoder_html_af6c8f36da1f6de7228a591e9ace1f735"><div class="ttname"><a href="class_encoder.html#af6c8f36da1f6de7228a591e9ace1f735">Encoder::CIRCUMFERENCE</a></div><div class="ttdeci">static constexpr double CIRCUMFERENCE</div><div class="ttdoc">Circumference of the wheel.</div><div class="ttdef"><b>Definition:</b> encoder.h:65</div></div>
+<div class="ttc" id="aencoder_8h_html"><div class="ttname"><a href="encoder_8h.html">encoder.h</a></div></div>
+<div class="ttc" id="aencoder_8h_html_ae71449b1cc6e6250b91f539153a7a0d3"><div class="ttname"><a href="encoder_8h.html#ae71449b1cc6e6250b91f539153a7a0d3">M_PI</a></div><div class="ttdeci">#define M_PI</div><div class="ttdoc">Accurate PI value.</div><div class="ttdef"><b>Definition:</b> encoder.h:19</div></div>
+<div class="ttc" id="ahelper_8h_html_a1544dfe1cc64b778b7052f55c16fb868"><div class="ttname"><a href="helper_8h.html#a1544dfe1cc64b778b7052f55c16fb868">radiansToDegrees</a></div><div class="ttdeci">constexpr const T radiansToDegrees(const T &amp;angle)</div><div class="ttdoc">Convert radians to degree.</div><div class="ttdef"><b>Definition:</b> helper.h:42</div></div>
+<div class="ttc" id="ahelper_8h_html_aab9f0232e41c960b4a09629eac33aef3"><div class="ttname"><a href="helper_8h.html#aab9f0232e41c960b4a09629eac33aef3">clamp</a></div><div class="ttdeci">constexpr const T &amp; clamp(const T &amp;v, const T &amp;lo, const T &amp;hi)</div><div class="ttdoc">Clamp the value between [lo,high].</div><div class="ttdef"><b>Definition:</b> helper.h:17</div></div>
+<div class="ttc" id="ahelper_8h_html_ae7926ece13c9c1d8e7e0cc77bafaaada"><div class="ttname"><a href="helper_8h.html#ae7926ece13c9c1d8e7e0cc77bafaaada">speed_to_pps</a></div><div class="ttdeci">constexpr const T speed_to_pps(const T &amp;speed)</div><div class="ttdoc">Convert m/s to pulse per sec(PPS).</div><div class="ttdef"><b>Definition:</b> helper.h:30</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

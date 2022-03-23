@@ -31,7 +31,9 @@ var NAVTREE =
       [ "Installation", "index.html#installation", null ],
       [ "Troubleshooting", "index.html#troubleshoot", null ],
       [ "Components", "index.html#components", null ],
-      [ "Contributors", "index.html#contributors", null ]
+      [ "Contributing", "index.html#contribute", null ],
+      [ "Contributors", "index.html#contributors", null ],
+      [ "Credits", "index.html#credits", null ]
     ] ],
     [ "Technical Demo Documentation", "md__d_e_m_o.html", [
       [ "Overview", "md__d_e_m_o.html#overview", null ],
