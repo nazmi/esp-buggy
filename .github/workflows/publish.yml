@@ -40,6 +40,10 @@ jobs:
         publish_dir: docs/html
     
     -
+        name: get time
+        run: echo "TIME=$(date +"%H:%M %d-%m-%Y")" >> $GITHUB_ENV
+
+    -
       name: badge_green
       if: steps.deploy.outcome == 'success'
       uses: schneegans/dynamic-badges-action@v1.1.0
@@ -48,7 +52,7 @@ jobs:
         gistID: 25d7b5dd85bdd54d9dc73366aa9f4c85
         filename: doxygen_badge.json
         label: Doxygen
-        message: success
+        message: passing @ ${{ env.TIME }}
         color: green
 
     -
@@ -60,5 +64,5 @@ jobs:
         gistID: 25d7b5dd85bdd54d9dc73366aa9f4c85
         filename: doxygen_badge.json
         label: Doxygen
-        message: fail
+        message: failing @ ${{ env.TIME }}
         color: red

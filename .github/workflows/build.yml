@@ -31,6 +31,10 @@ jobs:
           mbed new .
           mbed deploy
           mbed compile -t GCC_ARM -m ${{ matrix.target }} --profile ${{ matrix.profile }}
+      
+      -
+        name: get time
+        run: echo "TIME=$(date +"%H:%M %d-%m-%Y")" >> $GITHUB_ENV
 
       -
         name: badge_green
@@ -41,7 +45,7 @@ jobs:
           gistID: 661bc6f35f626bca218501f160893b4b
           filename: gcc_badge.json
           label: Build GCC_ARM
-          message: success
+          message: passing @ ${{ env.TIME }}
           color: green
 
       -
@@ -52,6 +56,6 @@ jobs:
           auth: ${{ secrets.GIST_SECRET }}
           gistID: 661bc6f35f626bca218501f160893b4b
           filename: gcc_badge.json
-          label: Build GCC_ARM
-          message: fail
+          label: Build GCC_ARM 
+          message: failing @ ${{ env.TIME }}
           color: red
