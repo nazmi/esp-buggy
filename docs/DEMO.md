@@ -1,9 +1,10 @@
 \page journey Technical Demo Documentation
-# Overview
+[TOC]
+# Overview {#overview}
 
 We had at least 4 technical demonstrations (TD) for this semester, accessing different parts of the buggy. They emphasised the hardware control, especially the motors and the software solutions to interface the microcontroller and other components like sensors and Bluetooth module.
 
-# TD1: Motor Control
+# TD1: Motor Control {#motor}
 
 On the software side, the key task was setting up the encoders and motors to work as intended. I settled down on a **20% duty cycle** to keep it steady and avoid any translational inertia after stopping. PWM frequency set to **1000 Hz** because the wheels were louder than the switches, why not? The heatsink was also not too hot to touch. I chose to use **unipolar mode** as this offered less switching losses.
 \dot
@@ -92,7 +93,7 @@ correction &= \frac{pulse_N}{pulse_M} \  where \ pulse_N > pulse_M \\
 \f}
 We received full marks on TD1 and this assured us a good start of our journey in producing a winning buggy.
 
-# TD2: Sensors
+# TD2: Sensors {#sensor}
 
 This was where we had to interface the sensors and bluetooth module with the microcontroller. The bluetooth module was easily configured by connecting to the correct RX, TX pins. In this case I used **BufferedSerial** to handle the communication between F401RE and HM-10. Sensors were the tricky bit, since we chose not to arrange it in a one row but two instead. However, I will discuss on general process of configuration and calibration without considering our chosen arrangement.
 

@@ -41,7 +41,7 @@ int main() {
                             hm10.write(&s,sizeof(s));
                         }
 
-                        ThisThread::sleep_for(5ms);
+                        ThisThread::sleep_for(10ms);
                     }
                     break;
                 }
@@ -62,14 +62,14 @@ int main() {
                 }
                 case 'W':
                 {
-                    int i = 1000;
+                    int i = 10000;
                     while(i-- > 0)
                         sensors.calibrate_white();
                     break;
                 }
                 case 'B':
                 {
-                    int i = 1000;
+                    int i = 10000;
                     while(i-- > 0)
                         sensors.calibrate_black();
                     break;
