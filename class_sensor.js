@@ -2,6 +2,7 @@ var class_sensor =
 [
     [ "Sensor", "class_sensor.html#ad632abcf66cdd764bee77fcea28d440f", null ],
     [ "read", "class_sensor.html#a2f68fe7942a7e139b087958510d822df", null ],
+    [ "toggle", "class_sensor.html#a0a7dafa04194911bf7a14fdb65cd8680", null ],
     [ "getDistance", "class_sensor.html#a0405c09c1dca1e5788e712bc02cfea50", null ],
     [ "calibrate_black", "class_sensor.html#adb8b9d310b79e284fae9c9dba2860b79", null ],
     [ "calibrate_white", "class_sensor.html#a586b9673ae61053ef146b354c2d283d3", null ],
