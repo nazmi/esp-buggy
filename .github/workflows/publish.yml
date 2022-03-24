@@ -1,50 +1,50 @@
-# This is a basic workflow to help you get started with Actions
+##################################
+##################################
+## Automatic Doxygen Deployment ##
+##################################
+##################################
 
 name: Doxygen Action
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
+##############################
+# Start the job on push main #
+##############################
 on:
   push:
     branches: [ main ]
 
-
-  
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+###############
+# Set the Job #
+###############
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
+
+    name: Doxygen Action
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    # Build Documentation
     - uses: actions/checkout@v3
-        
-    - name: Doxygen Action
+    - name: Build documentation
       uses: mattnotmitt/doxygen-action@v1.9.3
       with:
-        # Path to Doxyfile
-        doxyfile-path: "./Doxyfile-prj.cfg" # default is ./Doxyfile
-        # Working directory
-        working-directory: "docs/" # default is .
+        doxyfile-path: "./Doxyfile-prj.cfg"
+        working-directory: "docs/"
 
-    - name: Deploy
+    # Deploy to gh-pages
+    - name: Deploy documentation
       id : deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        # Default Doxyfile build documentation to html directory. 
-        # Change the directory if changes in Doxyfile
         publish_dir: docs/html
     
-    -
-        name: get time
-        run: echo "TIME=$(date +"%H:%M %d-%m-%Y")" >> $GITHUB_ENV
+    # Log current time
+    - name: Log current time
+      run: echo "TIME=$(date +"%H:%M %d-%m-%Y")" >> $GITHUB_ENV
 
-    -
-      name: badge_green
+    # If success, update badge to green
+    - name: Update badge to green
       if: steps.deploy.outcome == 'success'
       uses: schneegans/dynamic-badges-action@v1.1.0
       with:
@@ -52,11 +52,11 @@ jobs:
         gistID: 25d7b5dd85bdd54d9dc73366aa9f4c85
         filename: doxygen_badge.json
         label: Doxygen
-        message: passing @ ${{ env.TIME }}
+        message: passing — ${{ env.TIME }}
         color: green
 
-    -
-      name: badge_red
+    # If fail, update badge to red
+    - name: Update badge to red
       if: steps.deploy.outcome != 'success'
       uses: schneegans/dynamic-badges-action@v1.1.0
       with:
@@ -64,5 +64,5 @@ jobs:
         gistID: 25d7b5dd85bdd54d9dc73366aa9f4c85
         filename: doxygen_badge.json
         label: Doxygen
-        message: failing @ ${{ env.TIME }}
+        message: failing — ${{ env.TIME }}
         color: red

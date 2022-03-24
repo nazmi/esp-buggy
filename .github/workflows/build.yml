@@ -1,12 +1,25 @@
+#############################
+#############################
+## Automatic Build GCC_ARM ##
+#############################
+#############################
+
 name: Build application
 
+##############################
+# Start the job on push main #
+##############################
 on:
   pull_request:
   push:
     branches: [ main ]
 
+###############
+# Set the Job #
+###############
 jobs: 
   build-cli-gcc:
+
     container:
       image: ghcr.io/armmbed/mbed-os-env:mbed-os-6-latest
 
@@ -17,45 +30,45 @@ jobs:
         target: [NUCLEO_F401RE]
         profile: [release, debug, develop]
         
-
     steps:
-      -
-        name: Checkout
+
+      # Checkout repo
+      - name: Checkout
         uses: actions/checkout@v3
-          
-      -
-        name: build-gcc
-        id: build
+      
+      # Compile using mbed-cli (GCC_ARM)
+      - name: Build source code
+        id: compile
         run: |
           set -e
           mbed new .
           mbed deploy
           mbed compile -t GCC_ARM -m ${{ matrix.target }} --profile ${{ matrix.profile }}
       
-      -
-        name: get time
-        run: echo "TIME=$(date +"%H:%M %d-%m-%Y")" >> $GITHUB_ENV
+      # Log current time
+      - name: Log current time
+        run: echo "TIME=$(date +"%Y.%m.%d—%H:%M")" >> $GITHUB_ENV
 
-      -
-        name: badge_green
-        if: steps.build.outcome == 'success'
+      # If success, update badge to green
+      - name: Update badge to green
+        if: steps.compile.outcome == 'success'
         uses: schneegans/dynamic-badges-action@v1.1.0
         with:
           auth: ${{ secrets.GIST_SECRET }}
           gistID: 661bc6f35f626bca218501f160893b4b
           filename: gcc_badge.json
           label: Build GCC_ARM
-          message: passing @ ${{ env.TIME }}
+          message: passing — ${{ env.TIME }}
           color: green
 
-      -
-        name: badge_red
-        if: steps.build.outcome != 'success'
+      # If success, update badge to red
+      - name: Update badge to red
+        if: steps.compile.outcome != 'success'
         uses: schneegans/dynamic-badges-action@v1.1.0
         with:
           auth: ${{ secrets.GIST_SECRET }}
           gistID: 661bc6f35f626bca218501f160893b4b
           filename: gcc_badge.json
           label: Build GCC_ARM 
-          message: failing @ ${{ env.TIME }}
+          message: failing — ${{ env.TIME }}
           color: red
