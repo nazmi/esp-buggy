@@ -1,0 +1,75 @@
+####################
+####################
+## Style Check CI ##
+####################
+####################
+
+name: Style Check
+
+
+###############################
+# Start the job on edited cpp #
+###############################
+on:
+  pull_request:
+    branches: [main]
+    paths: 
+    - 'include/**'
+    - 'src/**'
+  push:
+    branches: [main]
+    paths: 
+    - 'include/**'
+    - 'src/**'
+  
+
+###############
+# Set the Job #
+###############
+jobs:
+  cpp-linter:
+    # Name the Job
+    name: Lint Code Base
+    # Set the agent to run on
+    runs-on: ubuntu-latest
+
+    ##################
+    # Load all steps #
+    ##################
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: C++ Lint
+        id: check
+        run: |
+          set -x
+          pip install cpplint
+          python -m cpplint --linelength=150 --filter=-whitespace/indent,-legal/copyright,-build/header_guard,-build/include_subdir,-whitespace/blank_line,-build/include_order,-build/c++11 --recursive $( find src include -name \*.cpp -or -name \*.h | grep -vE \DSP )
+
+
+      # If success, update badge to green
+      - name: Update badge to green
+        if: success()
+        uses: schneegans/dynamic-badges-action@v1.1.0
+        with:
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: 88852f73e80cb06c05e5babaec5febe0
+          filename: lint_badge.json
+          label: cpp-lint
+          message: passing
+          color: green
+
+      # If fail, update badge to red
+      - name: Update badge to red
+        if: failure()
+        uses: schneegans/dynamic-badges-action@v1.1.0
+        with:
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: 88852f73e80cb06c05e5babaec5febe0
+          filename: lint_badge.json
+          label: cpp-lint
+          message: failing
+          color: red
+

@@ -7,11 +7,19 @@
 name: Doxygen Action
 
 ##############################
-# Start the job on push main #
+# Start the job on push docs #
 ##############################
 on:
+  pull-request:
+    branches: [ main ]
+    paths:
+    - 'docs/**'
   push:
     branches: [ main ]
+    paths:
+    - 'docs/**'
+  schedule:
+    - cron: 34 12 * * *
 
 ###############
 # Set the Job #
@@ -41,7 +49,7 @@ jobs:
     
     # Log current time
     - name: Log current time
-      run: echo "TIME=$(date +"%H:%M %d-%m-%Y")" >> $GITHUB_ENV
+      run: echo "TIME=$(date +"%Y.%m.%d %H:%M")" >> $GITHUB_ENV
 
     # If success, update badge to green
     - name: Update badge to green
@@ -52,7 +60,7 @@ jobs:
         gistID: 25d7b5dd85bdd54d9dc73366aa9f4c85
         filename: doxygen_badge.json
         label: Doxygen
-        message: passing — ${{ env.TIME }}
+        message: passing @ ${{ env.TIME }}
         color: green
 
     # If fail, update badge to red
@@ -64,5 +72,5 @@ jobs:
         gistID: 25d7b5dd85bdd54d9dc73366aa9f4c85
         filename: doxygen_badge.json
         label: Doxygen
-        message: failing — ${{ env.TIME }}
+        message: failing @ ${{ env.TIME }}
         color: red

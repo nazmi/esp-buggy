@@ -21,7 +21,8 @@ class Sensor {
     float m_distance{0};
 
   public:
-    Sensor(PinName p1, PinName p2, PinName p3, PinName p4, PinName p5, PinName p6, PinName in1, PinName in2, PinName in3, PinName in4, PinName in5, PinName in6);
+    Sensor(PinName p1, PinName p2, PinName p3, PinName p4, PinName p5, PinName p6,
+           PinName in1, PinName in2, PinName in3, PinName in4, PinName in5, PinName in6);
 
     static std::array<float, 6> WEIGHTS;
     static std::array<float, 6> BLACK_TRESHOLD;

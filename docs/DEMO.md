@@ -1,6 +1,8 @@
 \page journey Technical Demo Documentation
-[TOC]
+
 # Overview {#overview}
+
+[TOC]
 
 We had at least 4 technical demonstrations (TD) for this semester, accessing different parts of the buggy. They emphasised the hardware control, especially the motors and the software solutions to interface the microcontroller and other components like sensors and Bluetooth module.
 
@@ -9,21 +11,20 @@ We had at least 4 technical demonstrations (TD) for this semester, accessing dif
 On the software side, the key task was setting up the encoders and motors to work as intended. I settled down on a **20% duty cycle** to keep it steady and avoid any translational inertia after stopping. PWM frequency set to **1000 Hz** because the wheels were louder than the switches, why not? The heatsink was also not too hot to touch. I chose to use **unipolar mode** as this offered less switching losses.
 \dot
 digraph System{
-    
-    
-	fontname="Arial";
-	fontsize="14pt";
+
+ fontname="Arial";
+ fontsize="14pt";
     node [shape=record style=filled fillcolor=gray95 fontname="Arial" fontsize="11pt"];
-    
+
     subgraph cluster_nucleo{
-       	label="NUCLEO F401RE";
+        label="NUCLEO F401RE";
         {rank=same motor left_encoder right_encoder ;}
-		{rank=same qei}
-		color =blue;
+  {rank=same qei}
+  color =blue;
     }
-        
+
    motor[label = <{<b>motor</b>|Left PWM<br align="left"/>Right PWM<br align="left"/>enable<br align="left"/>left direction<br align="left"/>right direction<br align="left"/>|forward()<br align="left"/>|reverse()<br align="left"/> |turnright()<br align="left"/>|turnleft()<br align="left"/>}>]
-    
+
     qei[label = <{<b>QEI</b>|getPulses()<br align="left"/>}>]
     
     left_encoder[label = <{<b>Left Encoder</b>|velocity<br align="left"/>distance<br align="left"/>| read_velocity()<br align="left"/>| read_distance()<br align="left"/>}>]
@@ -33,7 +34,7 @@ digraph System{
     edge [dir=back arrowtail=empty style=""]
     qei  -> right_encoder 
     qei  -> left_encoder
-    
+
 }
 \enddot
 
@@ -49,45 +50,48 @@ velocity &= \frac{distance}{time} \\
 
 One of the tasks was to make a square of 0.5 m length. The hardest part was the square had to be in between the wheels. Even worst, I did not tune the task on the actual square at A16. The snippet below shows how I implemented the square sequence.
 
-**main.cpp**
-```cpp
-Motor  motor(PC_9,PB_8,PC_8,PC_6,PB_9);
-Encoder  wheel_left(PC_3,PC_2);
-Encoder  wheel_right(PB_14,PB_13);
+    **main.cpp**
 
-while(1){
+    ```cpp
+    Motor  motor(PC_9,PB_8,PC_8,PC_6,PB_9);
+    Encoder  wheel_left(PC_3,PC_2);
+    Encoder  wheel_right(PB_14,PB_13);
 
-    vector<double> linear {...};
-    vector<double> rotation {...};
-    
-    for(size_t i=0; i < linear.size(); i++){
-        Motor::forward(linear,....);
-        Motor::turnright(rotation,...);
+    while(1){
+
+        vector<double> linear {...};
+        vector<double> rotation {...};
+        
+        for(size_t i=0; i < linear.size(); i++){
+            Motor::forward(linear,....);
+            Motor::turnright(rotation,...);
+        }
     }
-}
-```
+    ```
 
 Ideally all values in linear vector are 0.5 m and rotation vector are 90°. However, ours looked like this
 
-```cpp
-vector<double> linear { 0.45, 0.33, 0.33, 0.43};
-vector<double> rotation {83, 83, 83, 175};
-```
+    ```cpp
+    vector<double> linear { 0.45, 0.33, 0.33, 0.43};
+    vector<double> rotation {83, 83, 83, 175};
+    ```
 
 Note that the last one was more than 90° because the task was to trace the square back which was harder when your buggy did not move in straight line. I used bang-bang control approach to compensate any tiny deviation between the two wheels, implemented in the Motor::forward.
 
-**motor.cpp**
-```cpp	
-if ( left_encoder > right_encoder)
+    **motor.cpp**
 
-    right_motor.write(SLOW_PWM * correction);
-    left_motor.write(SLOW_PWM)
+    ```cpp
+    if ( left_encoder > right_encoder)
 
-else if ( right_encoder > left_encoder)
+        right_motor.write(SLOW_PWM * correction);
+        left_motor.write(SLOW_PWM)
 
-    left_motor.write(SLOW_PWM * correction);
-    right_motor.write(SLOW_PWM)
-```
+    else if ( right_encoder > left_encoder)
+
+        left_motor.write(SLOW_PWM * correction);
+        right_motor.write(SLOW_PWM)
+    ```
+
 \f{align}{
 correction &= \frac{pulse_N}{pulse_M} \  where \ pulse_N > pulse_M \\
 \f}
@@ -99,11 +103,11 @@ This was where we had to interface the sensors and bluetooth module with the mic
 
 \dot
 digraph System{
-    
-	fontname="Arial";
-	fontsize="14pt";
+
+ fontname="Arial";
+ fontsize="14pt";
     node [shape=record style=filled fillcolor=gray95 fontname="Arial" fontsize="11pt"];
-    
+
     subgraph cluster_nucleo{
         label ="NUCLEO F401RE"
         sensor;
@@ -116,9 +120,9 @@ digraph System{
         }
         
     }
-    
+
    sensor[label = <{<b>sensor</b>|AnalogIn in[6]<br align="left"/>BusOut pins<br align="left"/>scale_factor[6]<br align="left"/>treshold[6]<br align="left"/>|read()<br align="left"/>|calibrate()<br align="left"/>}>]
-    
+
     ble[label = <{<b>BufferredSerial</b>|readable()<br align="left"/>|read()<br align="left"/>}>]
 }
 \enddot
@@ -127,28 +131,28 @@ It was easier to manage 6 sensors if they are connected to op-amp as this approa
 
 1. The **white level** was calibrated by placing **white card** under the sensors and toggling the sensors under **normal condition at fixed height from the sensors**. *Does VDD matter?* No, because reading was already normalised, you can do whatever scaling you want as long as you comfortable with it. Here, I choose a saturation level of **10**.
 
-	Recall that I had *raw uncalibrated data (white level)*
-	|S1|S2|S3|S4|S5|S6|
-	|-|-|-|-|-|-|
-	|3.18998|3.26268|3.07483|3.12763|3.22799|3.70966|
+    Recall that I had *raw uncalibrated data (white level)*
+    |S1|S2|S3|S4|S5|S6|
+    |-|-|-|-|-|-|
+    |3.18998|3.26268|3.07483|3.12763|3.22799|3.70966|
 
-	How big is the scale factor to make it **10**?
-	|S1|S2|S3|S4|S5|S6|
-	|-|-|-|-|-|-|
-	|3.13481|3.06497|3.25221|3.19731|3.09790|2.69567|
+    How big is the scale factor to make it **10**?
+    |S1|S2|S3|S4|S5|S6|
+    |-|-|-|-|-|-|
+    |3.13481|3.06497|3.25221|3.19731|3.09790|2.69567|
 
-	Now, just apply a scale factor to each sensor to scale it to the desired maximum level.
-	@note We assumed the sensors scale linearly. *But did it?*
+    Now, just apply a scale factor to each sensor to scale it to the desired maximum level.
+    @note We assumed the sensors scale linearly. *But did it?*
 
 2. The **black level** was calibrated by placing **black track** under the sensors and toggling the sensors under **minimum light condition**. This ensured we get minimum treshold value at minimum external noise(infrared). *What to do with black level?* It was pretty much pointless to read small values that was not useful for distance calculation, so the black level is the treshold of the sensor activation.
 
-3. Although we expected perfect results by calibration, there will be always external noise coming from sunlight and other sources. The issue needed to be addressed to avoid unreliable readings consisting of random errors. 
+3. Although we expected perfect results by calibration, there will be always external noise coming from sunlight and other sources. The issue needed to be addressed to avoid unreliable readings consisting of random errors.
 
-	\f$ reading_i = noise_i + emitter_i \f$
+ \f$ reading_i = noise_i + emitter_i \f$
 
-	@note Noise is simply background reading when none of the emitter is turned on.
-	
-	Measurements of the analog input when all emitter is off at the start of each read was very easy to implement. When this is done correctly, you get the best intended readings from the sensor.
+ @note Noise is simply background reading when none of the emitter is turned on.
+
+ Measurements of the analog input when all emitter is off at the start of each read was very easy to implement. When this is done correctly, you get the best intended readings from the sensor.
 
 <details><summary>more...</summary>
 Showcase some of the tests done to calibrate the sensors.<br/>
@@ -166,17 +170,17 @@ This part was where I realised how important normalised readings for distance ca
 
 \dot
 digraph Sensor{
-    
-	fontname="Arial";
-	fontsize="14pt";
-	node [shape=circle style=filled fillcolor=lightblue fontname="Arial" fontsize="11pt"];
-     
+
+ fontname="Arial";
+ fontsize="14pt";
+ node [shape=circle style=filled fillcolor=lightblue fontname="Arial" fontsize="11pt"];
+
    subgraph cluster_sensors{
        label="Sensor location"
        sensor6;sensor5;sensor4;sensor3;sensor2;sensor1;
        color = blue;
    }
-   
+
    sensor1[label = 1]
    sensor2[label = 2]
    sensor3[label = 3]
@@ -189,12 +193,12 @@ digraph Sensor{
 
 \dot
 digraph Weight{
-    
-	fontname="Arial";
-	fontsize="14pt";
-	node [shape=record style=filled fillcolor=lightblue fontname="Arial" fontsize="11pt"];
+
+ fontname="Arial";
+ fontsize="14pt";
+ node [shape=record style=filled fillcolor=lightblue fontname="Arial" fontsize="11pt"];
     rankdir =LR;
-    
+
     subgraph cluster_weight{
        label="Weight of each sensor"
        weight;
@@ -207,4 +211,3 @@ weight[label = <{-30||-20|| -10 |  | 10 ||20||30}>]
 \enddot
 
 The solution was very simple and the equivalent formula was \f$\ distance = \frac{\sum_{1}^{6} reading_i \times weight_i}{\sum_{1}^{6} reading_i} \f$
-

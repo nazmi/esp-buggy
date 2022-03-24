@@ -3,7 +3,7 @@
  *
  * @section LICENSE
  *
- * Derivative work created in Jan 2021 by D.Smart, which 
+ * Derivative work created in Jan 2021 by D.Smart, which
  * has the following changes:
  *  + Update for MBED OS 6 ('callback' added to member ISRs)
  *  + Added counter for non-grey-code transitions
@@ -76,20 +76,16 @@
 /** @brief Mask for the current state in determining direction */
 #define CURR_MASK 0x2
 /** @brief XORing both states where both bits have changed */
-#define INVALID   0x3 
+#define INVALID 0x3
 
 /**
  * @brief  QEI class.
  */
 class QEI {
-
-public:
-
+  public:
     typedef enum Encoding {
-
         X2_ENCODING,
         X4_ENCODING
-
     } Encoding;
 
     /**
@@ -136,7 +132,7 @@ public:
      * @brief Read the number of \link invalid_ invalid\endlink counts.
      *
      * @note Reading this resets the counter!
-     * 
+     *
      * @return the number of times the gray-code transition was violated.
      */
     int getInvalidCount(void);
@@ -161,7 +157,7 @@ public:
      * @param[in] newCount is the count to set it to.
      *
      */
-     void setPulses(int newCount);
+    void setPulses(int newCount);
 
     /**
      * @brief Set the current \link revolutions_ revolution count\endlink in case you want to init it.
@@ -171,9 +167,7 @@ public:
      */
     void setRevolutions(int newRevs);
 
-
-private:
-
+  private:
     /**
      * @brief Update the pulse count.
      *
@@ -196,15 +190,14 @@ private:
     InterruptIn channelB_;
     InterruptIn index_;
 
-    int          pulsesPerRev_;
-    int          prevState_;
-    int          currState_;
-    
+    int pulsesPerRev_;
+    int prevState_;
+    int currState_;
+
     volatile int invalid_;
 
     volatile int pulses_;
     volatile int revolutions_;
-
 };
 
 #endif
