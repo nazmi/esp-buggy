@@ -10,7 +10,7 @@
 #define OFFTRACK 0.15
 #define PRESCALER 10.0f
 #define NO_TRACK 30
-#define WHITE_TRESHOLD 0.7
+#define WHITE_TRESHOLD 0.8
 
 class Sensor {
   private:
@@ -29,6 +29,7 @@ class Sensor {
     static bool s_run;
 
     float read();
+    void toggle(const bool on);
     float getDistance() const;
     void calibrate_black();
     void calibrate_white();

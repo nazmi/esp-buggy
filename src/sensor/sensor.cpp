@@ -6,7 +6,7 @@ using std::min_element;
 
 bool Sensor::s_run = false;
 std::array<float, 6> Sensor::WEIGHTS = {27, 9, -9, -27, 9, -9};
-std::array<float, 6> Sensor::BLACK_TRESHOLD = {0.01783, 0.02589, 0.02344, 0.02076, 0.02759, 0.03907};
+std::array<float, 6> Sensor::BLACK_TRESHOLD = {0.004934593,	0.014571535,	0.013338404,	0.01000882,	0.015825268,	0.02775455};
 std::array<float, 6> Sensor::SCALE_FACTOR = {3.13481219, 3.064968664, 3.252208943, 3.197312711, 3.097903068, 2.695666361};
 
 Sensor::Sensor(PinName p1, PinName p2, PinName p3, PinName p4, PinName p5, PinName p6, PinName in1, PinName in2, PinName in3, PinName in4, PinName in5, PinName in6) : m_pins(p1, p2, p3, p4, p5, p6),
@@ -18,7 +18,6 @@ float Sensor::read() {
     Timer t;
     t.start();
 
-
     // All off to capture noise
     m_pins.write(0);
     wait_us(25);
@@ -27,32 +26,30 @@ float Sensor::read() {
         m_noise[i] = m_analog[i].read();
     }
 
-    // Turn on in sequence
+    // Turn on in sequence, reading -= noise
     for (size_t i = 0; i < m_analog.size(); ++i) {
 
         m_pins.write(1 << i);
         wait_us(25);
         m_reading[i] = m_analog[i].read();
+        m_reading[i] = clamp(m_reading[i] - m_noise[i], 0.0f, 1.0f);
     }
 
-    // Process reading = reading - minimum_reading
-    float min = *std::min_element(m_reading.begin(),m_reading.end());
+    // Process reading[i] -= minimum
+    // If reading[i] > BLACK_TRESHOLD, output reading[i]
+    float min = *std::min_element(m_reading.begin(), m_reading.end());
     for (size_t i = 0; i < m_analog.size(); ++i) {
 
-        m_reading[i] = clamp(m_reading[i] - min , 0.0f, 1.0f);
-    }
-
-    // Process reading above treshold
-    for (size_t i = 0; i < m_analog.size(); ++i) {
+        m_reading[i] = clamp(m_reading[i] - min, 0.0f, 1.0f);
 
         const auto isAboveTreshold = m_reading[i] > BLACK_TRESHOLD[i];
         if (isAboveTreshold) {
-            m_reading[i] = (m_reading[i] - m_noise[i]) * PRESCALER * SCALE_FACTOR[i];
+            m_reading[i] = m_reading[i] * PRESCALER * SCALE_FACTOR[i];
         } else {
             m_reading[i] = 0;
         }
 
-        m_reading[i] = clamp(m_reading[i], 0.0f, PRESCALER);
+        //m_reading[i] = clamp(m_reading[i], 0.0f, PRESCALER);
     }
 
     // Check if any of 6 m_pins m_reading > WHITE_TRESHOLD for white
@@ -81,15 +78,31 @@ float Sensor::read() {
     for (const auto &reading : m_reading) {
         printf("%.5f,", reading);
     }
-    for (const auto &noise : m_noise) {
-        printf("%.5f,", noise);
-    }
+    // for (const auto &noise : m_noise) {
+    //     printf("%.5f,", noise);
+    // }
     printf("%lld,", t.elapsed_time().count() * 1);
     printf("%f\n", m_distance);
 
     t.reset();
 
     return m_distance;
+}
+
+void Sensor::toggle(const bool on) {
+
+    if(on) {
+
+        m_pins.write(0b111111);
+        if(!s_run){ printf("On\n"); s_run = true;}
+
+    }else{
+
+        m_pins.write(0);
+        if(s_run){ printf("Off\n"); s_run = false;}
+    }
+
+    wait_us(25);
 }
 
 float Sensor::getDistance() const {
@@ -103,8 +116,8 @@ void Sensor::calibrate_black() {
     wait_us(25);
     for (size_t i = 0; i < m_analog.size(); ++i) {
 
-        //m_pins.write(1 << i);
-        //wait_us(25);
+        // m_pins.write(1 << i);
+        // wait_us(25);
 
         calibrate_data[i] = m_analog[i].read();
     }
