@@ -54,7 +54,7 @@ jobs:
           elif [ "workflow_dispatch" == "${{github.event_name}}" ];then
             version=${{ github.event.inputs.release_version }}
           else
-            version=`git describe --tags --abbrev=0  --match v[0-9]*`
+            version=`git describe --tags --abbrev=0  --match v[0-9]*.[0-9]*
           fi
           echo "TIME=$(date +"%Y.%m.%d—%H:%M")" >> $GITHUB_ENV
           echo "VERSION=${version}" >> $GITHUB_ENV
@@ -74,7 +74,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: refs/tags/${{ env.VERSION }}
+          ref: ${{ env.VERSION }}
 
       # Setup environment
       - name: Set up Docker Buildx
