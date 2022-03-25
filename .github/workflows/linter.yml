@@ -44,7 +44,7 @@ jobs:
 
       # If success, update badge to green
       - name: Update badge to green
-        if: steps.check.outcome == 'success'
+        if: success()
         uses: schneegans/dynamic-badges-action@v1.1.0
         with:
           auth: ${{ secrets.GIST_SECRET }}
@@ -56,7 +56,7 @@ jobs:
 
       # If fail, update badge to red
       - name: Update badge to red
-        if: steps.check.outcome != 'success'
+        if: failure()
         uses: schneegans/dynamic-badges-action@v1.1.0
         with:
           auth: ${{ secrets.GIST_SECRET }}
