@@ -27,7 +27,7 @@ jobs:
 
 
   prepare-tags:
-    name: Prepare the tags for the docker image.
+    name: Prepare build info of docker image.
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.buildinfo.outputs.version }}
@@ -35,10 +35,18 @@ jobs:
 
     steps:
       
+      # Checkout repo
       - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
+      # Archive Dockerfile
+      - name: Archive Dockerfile
+        uses: actions/upload-artifact@v3
+        with:
+          name: dockerconfig
+          path: Dockerfile
 
       - if: ${{ github.event_name == 'workflow_dispatch' }}
         name: Sanity check tag of manual trigger
@@ -49,6 +57,7 @@ jobs:
             exit 1
           fi
 
+      # Get build info
       - name: Get build information
         id: buildinfo
         run: |
@@ -75,7 +84,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{needs.prepare-tags.outputs.version}}
-          run: git checkout d5f34725b8b2a799890ea60275dddc368d274378 -- Dockerfile
+
+      # Download Dockerfile
+      - name: Download future Dockerfile
+        uses: actions/download-artifact@v3
+        with:
+          name: dockerconfig
 
       # Setup environment
       - name: Set up Docker Buildx
