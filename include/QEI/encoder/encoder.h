@@ -23,7 +23,6 @@
  * @details This class call a function periodically to measure the speed of wheel. It features return values in terms of pulse per second, distance, and velocity.
  */
 class Encoder : public QEI {
-
   private:
     /** @brief Counter for previous pulse. */
     volatile int m_start_pulse;

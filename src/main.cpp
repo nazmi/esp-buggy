@@ -29,7 +29,7 @@ int main() {
                     auto distance = sensors.read();
                     if (distance < NO_TRACK) {
                         char s[9];
-                        snprintf ( s, 9, "%2.5f", distance );
+                        snprintf(s, sizeof(s), "%2.5f", distance);
                         hm10.write(&s, sizeof(s));
                     } else {
                         char s[] = "No Track";
@@ -46,11 +46,10 @@ int main() {
 
                     if (hm10.readable()) {
                         hm10.read(&c, 1);
-                        if (c == 'S'){
+                        if (c == 'S') {
                             sensors.toggle(false);
                             break;
                         }
-                            
                     }
                     ThisThread::sleep_for(100ms);
                 }

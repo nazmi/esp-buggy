@@ -1,8 +1,9 @@
 #include "motor.h"
 
-Motor::Motor(PinName left, PinName right, PinName direction_left, PinName direction_right, PinName enable) : m_direction_left(direction_left, 1), m_direction_right(direction_right, 1),
-                                                                                                             m_enable(enable, 0),
-                                                                                                             left_motor(left), right_motor(right){};
+Motor::Motor(PinName left, PinName right,
+             PinName direction_left, PinName direction_right, PinName enable)
+    : m_direction_left(direction_left, 1), m_direction_right(direction_right, 1),
+      m_enable(enable, 0), left_motor(left), right_motor(right) {}
 
 void Motor::set_enable(int enable) {
 
@@ -43,11 +44,11 @@ void Motor::set_direction(char c, int direction) {
 
 void Motor::set_direction(char c) {
 
-    if (c == 'L')
+    if (c == 'L') {
         m_direction_left = !m_direction_left;
-    else if (c == 'R')
+    } else if (c == 'R') {
         m_direction_right = !m_direction_right;
-    else {
+    } else {
         m_direction_right = !m_direction_right;
         m_direction_left = !m_direction_left;
     }

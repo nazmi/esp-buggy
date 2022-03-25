@@ -15,11 +15,11 @@
 
 /**
  * @brief Motor class to control the motors.
- * @details This class includes configuration method of left and right motors. It also features cruising methods to move forward, backwards, turn left and turn left.
+ * @details This class includes configuration method of left and right motors. It also features cruising methods to move
+ * forward, backwards, turn left and turn left.
  *
  */
 class Motor {
-
   private:
     /** @brief Direction for the left motor. */
     DigitalOut m_direction_left;
@@ -129,7 +129,8 @@ class Motor {
      * - 'L' Left motor.
      * - 'R' Right motor.
      * - otherwise both motors.
-     * @param dutycycle Duty cycle in percentange within [0.0,1.0]. If duty cycle is out of range, it saturates at 0 and 1.
+     * @param dutycycle Duty cycle in percentange within [0.0,1.0]. If duty cycle is out of range, it saturates at 0
+     * and 1.
      *
      */
     void set_dutycycle(char c, float dutycycle);
@@ -166,7 +167,8 @@ class Motor {
      * @param left_encoder Left Encoder object.
      * @param right_encoder Right Encoder object.
      */
-    static void forward(const double distance, Motor *const motor, Encoder *const left_encoder, Encoder *const right_encoder);
+    static void forward(const double distance, Motor *const motor,
+                        Encoder *const left_encoder, Encoder *const right_encoder);
 
     /**
      * @brief Control the motor to cruise backwards.
@@ -176,7 +178,8 @@ class Motor {
      * @param left_encoder Left Encoder object.
      * @param right_encoder Right Encoder object.
      */
-    static void reverse(const double distance, Motor *const motor, Encoder *const left_encoder, Encoder *const right_encoder);
+    static void reverse(const double distance, Motor *const motor,
+                        Encoder *const left_encoder, Encoder *const right_encoder);
 
     /**
      * @brief Control the motor to turn left.
@@ -186,7 +189,8 @@ class Motor {
      * @param left_encoder Left Encoder object.
      * @param right_encoder Right Encoder object.
      */
-    static void turnleft(const double angle, Motor *const motor, Encoder *const left_encoder, Encoder *const right_encoder);
+    static void turnleft(const double angle, Motor *const motor,
+                        Encoder *const left_encoder, Encoder *const right_encoder);
 
     /**
      * @brief Control the motor to turn right.
@@ -196,7 +200,8 @@ class Motor {
      * @param left_encoder Left Encoder object.
      * @param right_encoder Right Encoder object.
      */
-    static void turnright(const double angle, Motor *const motor, Encoder *const left_encoder, Encoder *const right_encoder);
+    static void turnright(const double angle, Motor *const motor,
+                        Encoder *const left_encoder, Encoder *const right_encoder);
 
     ///@}
 };
