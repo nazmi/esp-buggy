@@ -53,6 +53,8 @@ jobs:
             version=${GITHUB_REF#refs/tags/}
           elif [ "workflow_dispatch" == "${{github.event_name}}" ];then
             version=${{ github.event.inputs.mbed_os_release_version }}
+          else
+            version=`git describe --tags --abbrev=0  --match v[0-9]*`
           fi
           echo "TIME=$(date +"%Y.%m.%d—%H:%M")" >> $GITHUB_ENV
           echo "VERSION=${version}" >> $GITHUB_ENV
@@ -68,6 +70,12 @@ jobs:
     
     steps:
 
+      # Checkout repo
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: refs/tags/${{ env.VERSION }}
+          
       # Setup environment
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -89,12 +97,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      # Checkout repo
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          ref: refs/tags/${{ env.VERSION }}
 
       # Build and push
       - name: Build and push
