@@ -1,28 +1,28 @@
-#################################
-#################################
-## Super Linter GitHub Actions ##
-#################################
-#################################
+####################
+####################
+## Style Check CI ##
+####################
+####################
+
 name: Style Check
 
-#
-# Documentation:
-# https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
-#
 
 ##############################
 # Start the job on pull/push #
 ##############################
 on:
   push:
+    paths-ignore: "docs/**"
+    branches: [main]
   pull_request:
     branches: [main]
+    paths-ignore: "docs/**"
 
 ###############
 # Set the Job #
 ###############
 jobs:
-  build:
+  cpp-linter:
     # Name the Job
     name: Lint Code Base
     # Set the agent to run on
@@ -32,30 +32,41 @@ jobs:
     # Load all steps #
     ##################
     steps:
-      ##########################
-      # Checkout the code base #
-      ##########################
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      - name: Check code
+      - id: check
+      - uses: actions/checkout@master
+      - uses: reviewdog/action-cpplint@master
         with:
-          # Full git history is needed to get a proper list of changed files within `super-linter`
-          fetch-depth: 0
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          flags: "--exclude=include/DSP/*.h --exclude=src/DSP/*.h --exclude=src/DSP/*.c"
+          filter: "-whitespace/indent\
+            ,-legal/copyright\
+            ,-build/header_guard\
+            ,-build/include_subdir\
+            "
 
-      ################################
-      # Run Linter against code base #
-      ################################
-      - name: Lint Code Base
-        uses: github/super-linter@v4
-        env:
-          VALIDATE_ALL_CODEBASE: true
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FILTER_REGEX_INCLUDE: .*(src/|include/).*
-          FILTER_REGEX_EXCLUDE: .*(src/DSP/|include/DSP/|\.github).*
-          VALIDATE_YAML: false
-          VALIDATE_MARKDOWN: false
-          VALIDATE_CSS: false
-          VALIDATE_JAVASCRIPT_ES: false
-          VALIDATE_JAVASCRIPT_STANDARD: false
-          VALIDATE_JSCPD: false
-          VALIDATE_CLANG_FORMAT: false
+      # If success, update badge to green
+      - name: Update badge to green
+        if: steps.check.outcome == 'success'
+        uses: schneegans/dynamic-badges-action@v1.1.0
+        with:
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: 88852f73e80cb06c05e5babaec5febe0
+          filename: lint_badge.json
+          label: cpp-lint
+          message: passing
+          color: green
+
+      # If fail, update badge to red
+      - name: Update badge to red
+        if: steps.check.outcome != 'success'
+        uses: schneegans/dynamic-badges-action@v1.1.0
+        with:
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: 88852f73e80cb06c05e5babaec5febe0
+          filename: lint_badge.json
+          label: cpp-lint
+          message: failing
+          color: red
+
