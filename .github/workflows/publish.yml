@@ -10,10 +10,16 @@ name: Doxygen Action
 # Start the job on push docs #
 ##############################
 on:
+  pull-request:
+    branches: [ main ]
+    paths:
+    - 'docs/**'
   push:
     branches: [ main ]
     paths:
     - 'docs/**'
+  schedule:
+    - cron: 34 12 * * *
 
 ###############
 # Set the Job #

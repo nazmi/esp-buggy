@@ -7,16 +7,21 @@
 name: Style Check
 
 
-##############################
-# Start the job on pull/push #
-##############################
+###############################
+# Start the job on edited cpp #
+###############################
 on:
-  push:
   pull_request:
     branches: [main]
     paths: 
     - 'include/**'
     - 'src/**'
+  push:
+    branches: [main]
+    paths: 
+    - 'include/**'
+    - 'src/**'
+  
 
 ###############
 # Set the Job #

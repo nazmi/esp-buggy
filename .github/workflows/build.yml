@@ -6,11 +6,15 @@
 
 name: Build application
 
-##############################
-# Start the job on push main #
-##############################
+###############################
+# Start the job on edited cpp #
+###############################
 on:
   pull_request:
+    branches: [ main ]
+    paths:
+    - 'include/**'
+    - 'src/**'
   push:
     branches: [ main ]
     paths:
