@@ -54,7 +54,7 @@ jobs:
           elif [ "workflow_dispatch" == "${{github.event_name}}" ];then
             version=${{ github.event.inputs.release_version }}
           else
-            version=`git describe --tags --abbrev=0  --match v[0-9]*.[0-9]*`
+            version=`git describe --tags \`git rev-list --tags --max-count=1\``
           fi
           echo "TIME=$(date +"%Y.%m.%d—%H:%M")" >> $GITHUB_ENV
           echo "VERSION=${version}" >> $GITHUB_ENV
@@ -64,9 +64,6 @@ jobs:
     needs: prepare-tags
     name: Build and push docker image
     runs-on: ubuntu-latest
-    container:
-      image: nazmiropi/esp-buggy:base
-
     
     steps:
 
@@ -82,6 +79,8 @@ jobs:
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
+        with:
+          platforms: linux/amd64
 
       # Login to Docker Hub
       - name: Log in to Docker Hub
