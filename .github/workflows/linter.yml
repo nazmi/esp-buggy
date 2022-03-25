@@ -33,9 +33,11 @@ jobs:
     ##################
     steps:
 
-      - name: Check code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: C++ Lint
         id: check
-        uses: actions/checkout@master
         uses: reviewdog/action-cpplint@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
