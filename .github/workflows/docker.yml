@@ -29,6 +29,9 @@ jobs:
   prepare-tags:
     name: Prepare the tags for the docker image.
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.buildinfo.outputs.version }}
+      date: ${{ steps.buildinfo.outputs.time }}
 
     steps:
       
@@ -47,6 +50,7 @@ jobs:
           fi
 
       - name: Get build information
+        id: buildinfo
         run: |
           if [ "release" == "${{github.event_name}}" ];then
             version=${{ github.event.release.tag_name }}
@@ -55,8 +59,8 @@ jobs:
           else
             version=`git describe --tags \`git rev-list --tags --max-count=1\``
           fi
-          echo "TIME=$(date +"%Y.%m.%d—%H:%M")" >> $GITHUB_ENV
-          echo "VERSION=${version}" >> $GITHUB_ENV
+          echo "::set-output name=time::$(date +'%Y.%m.%d—%H:%M')"
+          echo "::set-output name=version::${version}"
 
 
   build-and-push-image:
@@ -70,7 +74,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: ${{ env.VERSION }}
+          ref: ${{needs.prepare-tags.outputs.version}}
 
       # Setup environment
       - name: Set up Docker Buildx
@@ -104,7 +108,7 @@ jobs:
             nazmiropi/esp-buggy
             ghcr.io/${{ github.repository }}
           tags: |
-            type=raw,value={{branch}}-${{env.TIME}}
+            type=raw,value={{branch}}-${{needs.prepare-tags.outputs.date}}
 
       # Build and push
       - name: Build and push
@@ -114,8 +118,8 @@ jobs:
           push: true
           tags: |
             ${{ steps.meta.outputs.tags }}
-            ghcr.io/${{ github.repository }}:${{env.VERSION}}
-            nazmiropi/esp-buggy:${{env.VERSION}}
+            ghcr.io/${{ github.repository }}:${{needs.prepare-tags.outputs.version}}
+            nazmiropi/esp-buggy:${{needs.prepare-tags.outputs.version}}
             ghcr.io/${{ github.repository }}:latest
             nazmiropi/esp-buggy:latest
           labels: ${{ steps.meta.outputs.labels }}
