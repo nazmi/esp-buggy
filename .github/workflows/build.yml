@@ -4,7 +4,7 @@
 #############################
 #############################
 
-name: Build application
+name: Build GCC_ARM
 
 ###############################
 # Start the job on edited cpp #
