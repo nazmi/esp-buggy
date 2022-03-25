@@ -105,6 +105,8 @@ jobs:
           images: |
             nazmi/esp-buggy
             ghcr.io/${{ github.repository }}
+          tags: |
+            type=semver,pattern={{major}}.{{minor}}
 
       # Build and push
       - name: Build and push

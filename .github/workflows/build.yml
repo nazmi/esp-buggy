@@ -28,7 +28,7 @@ jobs:
   build-cli-gcc:
 
     container:
-      image: ghcr.io/armmbed/mbed-os-env:mbed-os-6-latest
+      image: nazmiropi/esp-buggy:tools
 
     runs-on: ubuntu-latest
 
