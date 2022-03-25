@@ -57,7 +57,8 @@ jobs:
             version=`git describe --tags \`git rev-list --tags --max-count=1\``
           fi
           echo "TIME=$(date +"%Y.%m.%d—%H:%M")" >> $GITHUB_ENV
-          echo "VERSION=${version:1}" >> $GITHUB_ENV
+          echo "VERSION=${version}" >> $GITHUB_ENV
+          echo "DOCKER_VERSION=${version:1}" >> $GITHUB_ENV
 
 
   build-and-push-image:
@@ -71,7 +72,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: v${{ env.VERSION }}
+          ref: ${{ env.VERSION }}
 
       # Setup environment
       - name: Set up Docker Buildx
@@ -103,7 +104,7 @@ jobs:
         with:
           push: true
           tags: |
-            ghcr.io/nazmi/esp-buggy:${{ env.VERSION }}
-            nazmiropi/esp-buggy::${{ env.VERSION }}
+            ghcr.io/nazmi/esp-buggy:${{ env.DOCKER_VERSION }}
+            nazmiropi/esp-buggy::${{ env.DOCKER_VERSION }}
       
      
