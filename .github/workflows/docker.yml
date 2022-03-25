@@ -1,0 +1,124 @@
+#############################
+#############################
+## Automatic Docker Deploy ##
+#############################
+#############################
+
+name: Docker image on Release
+
+############################
+# Start the job on release #
+############################
+on:
+  push:
+  release:
+    types: [published]
+
+  # Manual when needed
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: 'Which release version you want to update docker image.'
+        required: true 
+
+###############
+# Set the Job #
+###############
+jobs:
+
+
+  prepare-tags:
+    name: Prepare the tags for the docker image.
+    runs-on: ubuntu-latest
+
+    steps:
+      
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - if: ${{ github.event_name == 'workflow_dispatch' }}
+        name: Sanity check tag of manual trigger
+        shell: bash
+        run: | 
+          if [ -z $(git tag --merged ${GITHUB_REF} ${{ github.event.inputs.release_version }}) ]; then
+            echo "Check the tag name ${{ github.event.inputs.release_version }} is not found on branch ${GITHUB_REF}"
+            exit 1
+          fi
+
+      - name: Get build information
+        run: |
+          if [ "release" == "${{github.event_name}}" ];then
+            version=${{ github.event.release.tag_name }}
+          elif [ "workflow_dispatch" == "${{github.event_name}}" ];then
+            version=${{ github.event.inputs.release_version }}
+          else
+            version=`git describe --tags \`git rev-list --tags --max-count=1\``
+          fi
+          echo "TIME=$(date +"%Y.%m.%d—%H:%M")" >> $GITHUB_ENV
+          echo "VERSION=${version}" >> $GITHUB_ENV
+          echo "DOCKER_VERSION=${version:1}" >> $GITHUB_ENV
+
+
+  build-and-push-image:
+    needs: prepare-tags
+    name: Build and push docker image
+    runs-on: ubuntu-latest
+    
+    steps:
+
+      # Checkout repo
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.VERSION }}
+
+      # Setup environment
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+        with:
+          platforms: linux/amd64
+
+      # Login to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      # Login to GHCR.io
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: |
+            nazmiropi/esp-buggy
+            ghcr.io/${{ github.repository }}
+          tags: |
+            type=schedule
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=ref,event=branch
+            type=sha
+
+      # Build and push
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+      
+     
