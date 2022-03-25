@@ -7,11 +7,13 @@
 name: Doxygen Action
 
 ##############################
-# Start the job on push main #
+# Start the job on push docs #
 ##############################
 on:
   push:
     branches: [ main ]
+    paths:
+    - 'docs/**'
 
 ###############
 # Set the Job #

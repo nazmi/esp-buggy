@@ -14,7 +14,9 @@ on:
   push:
   pull_request:
     branches: [main]
-    paths-ignore: "docs/**"
+    paths: 
+    - 'include/**'
+    - 'src/**'
 
 ###############
 # Set the Job #
