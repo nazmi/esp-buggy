@@ -26,14 +26,15 @@ var NAVTREE =
 [
   [ "EEEN21000", "index.html", [
     [ "Embedded Systems Project 2021/2022", "index.html", [
-      [ "Line Following Robot (LFR)", "index.html#intro", null ],
-      [ "Dependencies", "index.html#dependencies", null ],
-      [ "Installation", "index.html#installation", null ],
-      [ "Troubleshooting", "index.html#troubleshoot", null ],
-      [ "Components", "index.html#components", null ],
-      [ "Contributing", "index.html#contribute", null ],
-      [ "Contributors", "index.html#contributors", null ],
-      [ "Credits", "index.html#credits", null ]
+      [ "Line Following Robot (LFR) 🚓", "index.html#intro", null ],
+      [ "Dependencies 📌", "index.html#dependencies", null ],
+      [ "Installation 📋", "index.html#installation", null ],
+      [ "Install with Docker 🐋", "index.html#docker", null ],
+      [ "Troubleshooting 🩺", "index.html#troubleshoot", null ],
+      [ "Components 🛒", "index.html#components", null ],
+      [ "Contributing 👨‍💻", "index.html#contribute", null ],
+      [ "Contributors 👷‍♂️", "index.html#contributors", null ],
+      [ "Credits 💚", "index.html#credits", null ]
     ] ],
     [ "Technical Demo Documentation", "md__d_e_m_o.html", [
       [ "Overview", "md__d_e_m_o.html#overview", null ],

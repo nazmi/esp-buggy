@@ -108,17 +108,17 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="contents">
 <div class="textblock"><p ><a class="anchor" id="mainpage"></a> </p>
 <h1><a class="anchor" id="intro"></a>
-Line Following Robot (LFR)</h1>
+Line Following Robot (LFR) 🚓</h1>
 <p ><img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/nazmi/661bc6f35f626bca218501f160893b4b/raw/gcc_badge.json" alt="Build GCC" class="inline"/> <img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/nazmi/25d7b5dd85bdd54d9dc73366aa9f4c85/raw/doxygen_badge.json" alt="Doxygen" class="inline"/> <img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/nazmi/88852f73e80cb06c05e5babaec5febe0/raw/lint_badge.json" alt="cpp-lint" class="inline"/> <br  />
  Hi! I'm <a href="https://uk.linkedin.com/in/nazmi-ropi">Nazmi Ropi</a>, the author of this software documentation. One of the objectives of this year's project is to produce a high average speed line following buggy without compromising its robustness. Also, my approach towards software development is to implement Object-Oriented-Programming features to abstract any technical details to the user. Details of technical demonstrations were also documented on <a class="el" href="md__d_e_m_o.html#journey">its page</a>.</p>
 <h1><a class="anchor" id="dependencies"></a>
-Dependencies</h1>
+Dependencies 📌</h1>
 <p ><a href="https://os.mbed.com/mbed-os/releases/"><b>Mbed OS 6.15</b></a> <br  />
  <a href="https://os.mbed.com/users/WiredHome/code/QEI/"><b>QEI</b></a> by <a href="https://os.mbed.com/users/aberk/">Aaron Berk</a> <br  />
  <a href="https://os.mbed.com"><b>PID</b></a> by <a href="https://os.mbed.com">Aaron Berk</a> <br  />
 </p>
 <h1><a class="anchor" id="installation"></a>
-Installation</h1>
+Installation 📋</h1>
 <ol type="1">
 <li>Install the latest <a href="https://os.mbed.com/studio/">Mbed Studio</a> for your compatible platform.</li>
 <li><p class="startli">Clone this repository.</p>
@@ -129,15 +129,40 @@ Installation</h1>
 <li>Upload the binary file to NUCLEO-F401RE through USB.</li>
 </ol>
 <dl class="section note"><dt>Note</dt><dd>You need to replace some of the MACROS values, and PID parameters based on your specifications.</dd></dl>
+<h1><a class="anchor" id="docker"></a>
+Install with Docker 🐋</h1>
+<ol type="1">
+<li><p class="startli">Run the commands in Git Bash.</p>
+<div class="fragment"><div class="line"># Pull latest image</div>
+<div class="line">docker pull nazmiropi/esp-buggy:latest</div>
+<div class="line"> </div>
+<div class="line"># Run the image in container</div>
+<div class="line">docker run -d -it nazmiropi/esp-buggy:latest</div>
+<div class="line"> </div>
+<div class="line"># Get containerID</div>
+<div class="line">docker ps</div>
+<div class="line"> </div>
+<div class="line"># (Optional) Copy projects files into host machine</div>
+<div class="line">docker cp &lt;containerID&gt;:root/esp-buggy &lt;relativePath&gt; </div>
+</div><!-- fragment --></li>
+<li><p class="startli">Attach to the running container in VSCode, navigate to <code>/root/esp-buggy</code></p>
+<div class="fragment"><div class="line"><span class="comment"># No mbed-os image to reduce size</span></div>
+<div class="line"><span class="comment"># Fetch mbed-os from git</span></div>
+<div class="line">mbed deploy</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"># Compile to check any problem</span></div>
+<div class="line">mbed compile -t GCC_ARM -m NUCLEO_F401RE --profile release</div>
+</div><!-- fragment --></li>
+</ol>
 <h1><a class="anchor" id="troubleshoot"></a>
-Troubleshooting</h1>
+Troubleshooting 🩺</h1>
 <ol type="1">
 <li>Mbed Studio 1.4.3 has linter problems when using with GCC_ARM, but it can compile the program. Use MbedStudio 1.4.1 or compile with ARMC6 toolchain to solve this problem.</li>
 <li>Some of the libraries might not work if you want to import and use them on Mbed OS 6, I have made modifications to some of them to replace the deprecated functions from Mbed 2. This can be easily done by referring to the latest API list from <a href="https://os.mbed.com/docs/mbed-os/v6.15/introduction/index.html">Mbed OS 6 documentation</a>.</li>
 </ol>
 <dl class="section note"><dt>Note</dt><dd>You can use the joystick, potentiometer and LCD on the application shield to help debug your program.</dd></dl>
 <h1><a class="anchor" id="components"></a>
-Components</h1>
+Components 🛒</h1>
 <p >You can buy any component you like, but the table below will help if you want to build the robot without thinking about the selection of the components.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -156,16 +181,16 @@ Components</h1>
 <td class="markdownTableBodyNone">HM 10 BLE   </td><td class="markdownTableBodyNone">1   </td></tr>
 </table>
 <h1><a class="anchor" id="contribute"></a>
-Contributing</h1>
+Contributing 👨‍💻</h1>
 <p >Contributors are welcomed. If this repo is still private contact me through <a href="#" onclick="location.href='mai'+'lto:'+'muh'+'am'+'mad'+'.b'+'inm'+'oh'+'dro'+'pi'+'@st'+'ud'+'ent'+'.m'+'anc'+'he'+'ste'+'r.'+'ac.'+'uk'; return false;">email</a>. Please create <a href="https://github.com/nazmi/esp-buggy/pulls">pull request</a> and raise any <a href="https://github.com/nazmi/esp-buggy/issues">bug/issue</a>. <br  />
 </p>
 <h1><a class="anchor" id="contributors"></a>
-Contributors</h1>
+Contributors 👷‍♂️</h1>
 <p >Special thanks to my supervisor and every group member that helped in this project (in no particular order).</p>
 <p ><em>Dr Subhasish Chakraborty</em> <br  />
  <em>Ibrahim, Euan, Joseph, Zech, Eric</em></p>
 <h1><a class="anchor" id="credits"></a>
-Credits</h1>
+Credits 💚</h1>
 <p >This documentation theme is from <a href="https://github.com/jothepro/doxygen-awesome-css">doxygen-awesome-css</a>. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
