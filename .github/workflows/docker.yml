@@ -1,0 +1,142 @@
+#############################
+#############################
+## Automatic Docker Deploy ##
+#############################
+#############################
+
+name: Build and push docker on release
+
+############################
+# Start the job on release #
+############################
+on:
+  release:
+    types: [published]
+
+  # Manual when needed
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: 'Which release version you want to update docker image.'
+        required: true 
+
+###############
+# Set the Job #
+###############
+jobs:
+
+
+  prepare-tags:
+    name: Prepare build info of docker image.
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.buildinfo.outputs.version }}
+      date: ${{ steps.buildinfo.outputs.time }}
+
+    steps:
+      
+      # Checkout repo
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # Archive Dockerfile
+      - name: Archive Dockerfile
+        uses: actions/upload-artifact@v3
+        with:
+          name: dockerconfig
+          path: Dockerfile
+
+      - if: ${{ github.event_name == 'workflow_dispatch' }}
+        name: Sanity check tag of manual trigger
+        shell: bash
+        run: | 
+          if [ -z $(git tag --merged ${GITHUB_REF} ${{ github.event.inputs.release_version }}) ]; then
+            echo "Check the tag name ${{ github.event.inputs.release_version }} is not found on branch ${GITHUB_REF}"
+            exit 1
+          fi
+
+      # Get build info
+      - name: Get build information
+        id: buildinfo
+        run: |
+          if [ "release" == "${{github.event_name}}" ];then
+            version=${{ github.event.release.tag_name }}
+          elif [ "workflow_dispatch" == "${{github.event_name}}" ];then
+            version=${{ github.event.inputs.release_version }}
+          else
+            version=`git describe --tags \`git rev-list --tags --max-count=1\``
+          fi
+          echo "::set-output name=time::$(date +'%Y%m%d')"
+          echo "::set-output name=version::${version}"
+
+
+  build-and-push-image:
+    needs: prepare-tags
+    name: Build and push docker image
+    runs-on: ubuntu-latest
+    
+    steps:
+
+      # Checkout repo
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{needs.prepare-tags.outputs.version}}
+
+      # Download Dockerfile
+      - name: Download future Dockerfile
+        uses: actions/download-artifact@v3
+        with:
+          name: dockerconfig
+
+      # Setup environment
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+        with:
+          platforms: linux/amd64
+
+      # Login to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      # Login to GHCR.io
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: |
+            nazmiropi/esp-buggy
+            ghcr.io/${{ github.repository }}
+          tags: |
+            type=raw,value={{branch}}-${{needs.prepare-tags.outputs.date}}
+
+      # Build and push
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ steps.meta.outputs.tags }}
+            ghcr.io/${{ github.repository }}:${{needs.prepare-tags.outputs.version}}
+            nazmiropi/esp-buggy:${{needs.prepare-tags.outputs.version}}
+            ghcr.io/${{ github.repository }}:latest
+            nazmiropi/esp-buggy:latest
+          labels: ${{ steps.meta.outputs.labels }}
+      
+     

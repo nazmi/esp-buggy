@@ -10,7 +10,7 @@ name: Doxygen Action
 # Start the job on push docs #
 ##############################
 on:
-  pull-request:
+  pull_request:
     branches: [ main ]
     paths:
     - 'docs/**'
