@@ -104,7 +104,7 @@ jobs:
             nazmiropi/esp-buggy
             ghcr.io/${{ github.repository }}
           tags: |
-            type=raw,value={{branch}}-{{date 'YYYYMMDD'}}
+            type=raw,value={{branch}}-${{env.TIME}}
 
       # Build and push
       - name: Build and push
