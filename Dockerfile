@@ -14,7 +14,6 @@ COPY mbed_app.json ${BASE}
 WORKDIR ${BASE}
 RUN     set -e \
         && mbed config --global cache none \
-        && mbed new . \
         && mbed deploy \
         && mbed compile -t GCC_ARM -m NUCLEO_F401RE --profile release \
         && rm -rf mbed-os \
