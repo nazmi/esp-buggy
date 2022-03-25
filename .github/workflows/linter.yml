@@ -12,8 +12,6 @@ name: Style Check
 ##############################
 on:
   push:
-    paths-ignore: "docs/**"
-    branches: [main]
   pull_request:
     branches: [main]
     paths-ignore: "docs/**"
@@ -38,16 +36,11 @@ jobs:
 
       - name: C++ Lint
         id: check
-        uses: reviewdog/action-cpplint@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-check
-          flags: "--exclude=include/DSP/*.h --exclude=src/DSP/*.h --exclude=src/DSP/*.c"
-          filter: "-whitespace/indent\
-            ,-legal/copyright\
-            ,-build/header_guard\
-            ,-build/include_subdir\
-            "
+        run: |
+          set -x
+          pip install cpplint
+          python -m cpplint --linelength=150 --filter=-whitespace/indent,-legal/copyright,-build/header_guard,-build/include_subdir,-whitespace/blank_line,-build/include_order,-build/c++11 --recursive $( find src include -name \*.cpp -or -name \*.h | grep -vE \DSP )
+
 
       # If success, update badge to green
       - name: Update badge to green
