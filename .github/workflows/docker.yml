@@ -4,13 +4,12 @@
 #############################
 #############################
 
-name: Docker image on Release
+name: Build and push docker on release
 
 ############################
 # Start the job on release #
 ############################
 on:
-  push:
   release:
     types: [published]
 
@@ -58,7 +57,6 @@ jobs:
           fi
           echo "TIME=$(date +"%Y.%m.%d—%H:%M")" >> $GITHUB_ENV
           echo "VERSION=${version}" >> $GITHUB_ENV
-          echo "DOCKER_VERSION=${version:1}" >> $GITHUB_ENV
 
 
   build-and-push-image:
@@ -106,11 +104,7 @@ jobs:
             nazmiropi/esp-buggy
             ghcr.io/${{ github.repository }}
           tags: |
-            type=schedule
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=ref,event=branch
-            type=sha
+            type=raw,value={{branch}}-{{date 'YYYYMMDD'}}
 
       # Build and push
       - name: Build and push
@@ -118,7 +112,12 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: |
+            ${{ steps.meta.outputs.tags }}
+            ghcr.io/${{ github.repository }}:${{env.VERSION}}
+            nazmiropi/esp-buggy:${{env.VERSION}}
+            ghcr.io/${{ github.repository }}:latest
+            nazmiropi/esp-buggy:latest
           labels: ${{ steps.meta.outputs.labels }}
       
      
