@@ -102,6 +102,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/nazmi/esp-buggy:${{ env.VERSION }}, nazmiropi/esp-buggy::${{ env.VERSION }}
+          tags: |
+            ghcr.io/nazmi/esp-buggy:${{ env.VERSION }}
+            nazmiropi/esp-buggy::${{ env.VERSION }}
       
      
