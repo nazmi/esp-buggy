@@ -41,7 +41,7 @@ jobs:
         uses: reviewdog/action-cpplint@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review
+          reporter: github-check
           flags: "--exclude=include/DSP/*.h --exclude=src/DSP/*.h --exclude=src/DSP/*.c"
           filter: "-whitespace/indent\
             ,-legal/copyright\
