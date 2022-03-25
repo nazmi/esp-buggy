@@ -123,40 +123,42 @@ TD1: Motor Control</h1>
 <p >The encoder was connected directly to the wheel shaft, and from there we could measure the speed of the rotating wheel. The <a class="el" href="class_q_e_i.html" title="QEI class.">QEI</a> library encoded the pulses to <b>X2 resolution</b>, so we need to scale it down to get actual number of pulses. We also knew the number of pulses per revolution (CPR) was <b>256</b>. </p><p class="formulaDsp">
 \begin{align} pulses &amp;= \frac{pulses}{2} \\ rev &amp;= \frac{pulses}{256} \\ distance &amp;= rev \times 2 \pi r \\ velocity &amp;= \frac{distance}{time} \\ \end{align}
 </p>
-<p >One of the tasks was to make a square of 0.5 m length. The hardest part was the square had to be in between the wheels. Even worst, I did not tune the task on the actual square at A16. The snippet below shows how I implemented the square sequence.</p>
-<p ><b>main.cpp</b> </p><div class="fragment"><div class="line"><a class="code hl_class" href="class_motor.html">Motor</a>  motor(PC_9,PB_8,PC_8,PC_6,PB_9);</div>
-<div class="line"><a class="code hl_class" href="class_encoder.html">Encoder</a>  wheel_left(PC_3,PC_2);</div>
-<div class="line"><a class="code hl_class" href="class_encoder.html">Encoder</a>  wheel_right(PB_14,PB_13);</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordflow">while</span>(1){</div>
-<div class="line"> </div>
-<div class="line">    vector&lt;double&gt; linear {...};</div>
-<div class="line">    vector&lt;double&gt; rotation {...};</div>
-<div class="line">    </div>
-<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i=0; i &lt; linear.size(); i++){</div>
-<div class="line">        <a class="code hl_function" href="class_motor.html#abbeb0f664d334505276a83b7b7ef77ea">Motor::forward</a>(linear,....);</div>
-<div class="line">        <a class="code hl_function" href="class_motor.html#abdec5f02db58b8b0412b7b2c8758339f">Motor::turnright</a>(rotation,...);</div>
-<div class="line">    }</div>
-<div class="line">}</div>
-<div class="ttc" id="aclass_encoder_html"><div class="ttname"><a href="class_encoder.html">Encoder</a></div><div class="ttdoc">Encoder class with helper functions, derived from QEI.</div><div class="ttdef"><b>Definition:</b> encoder.h:25</div></div>
-<div class="ttc" id="aclass_motor_html"><div class="ttname"><a href="class_motor.html">Motor</a></div><div class="ttdoc">Motor class to control the motors.</div><div class="ttdef"><b>Definition:</b> motor.h:22</div></div>
-<div class="ttc" id="aclass_motor_html_abbeb0f664d334505276a83b7b7ef77ea"><div class="ttname"><a href="class_motor.html#abbeb0f664d334505276a83b7b7ef77ea">Motor::forward</a></div><div class="ttdeci">static void forward(const double distance, Motor *const motor, Encoder *const left_encoder, Encoder *const right_encoder)</div><div class="ttdoc">Control the motor to cruise forward.</div></div>
-<div class="ttc" id="aclass_motor_html_abdec5f02db58b8b0412b7b2c8758339f"><div class="ttname"><a href="class_motor.html#abdec5f02db58b8b0412b7b2c8758339f">Motor::turnright</a></div><div class="ttdeci">static void turnright(const double angle, Motor *const motor, Encoder *const left_encoder, Encoder *const right_encoder)</div><div class="ttdoc">Control the motor to turn right.</div></div>
-</div><!-- fragment --><p >Ideally all values in linear vector are 0.5 m and rotation vector are 90°. However, ours looked like this</p>
-<div class="fragment"><div class="line">vector&lt;double&gt; linear { 0.45, 0.33, 0.33, 0.43};</div>
-<div class="line">vector&lt;double&gt; rotation {83, 83, 83, 175};</div>
-</div><!-- fragment --><p >Note that the last one was more than 90° because the task was to trace the square back which was harder when your buggy did not move in straight line. I used bang-bang control approach to compensate any tiny deviation between the two wheels, implemented in the <a class="el" href="class_motor.html#abbeb0f664d334505276a83b7b7ef77ea" title="Control the motor to cruise forward.">Motor::forward</a>.</p>
-<p ><b>motor.cpp</b> </p><div class="fragment"><div class="line"><span class="keywordflow">if</span> ( left_encoder &gt; right_encoder)</div>
-<div class="line"> </div>
-<div class="line">    right_motor.write(<a class="code hl_define" href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">SLOW_PWM</a> * correction);</div>
-<div class="line">    left_motor.write(<a class="code hl_define" href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">SLOW_PWM</a>)</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordflow">else</span> <span class="keywordflow">if</span> ( right_encoder &gt; left_encoder)</div>
-<div class="line"> </div>
-<div class="line">    left_motor.write(<a class="code hl_define" href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">SLOW_PWM</a> * correction);</div>
-<div class="line">    right_motor.write(<a class="code hl_define" href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">SLOW_PWM</a>)</div>
-<div class="ttc" id="amotor_8h_html_ae2d5253ae733c15431dbf44cbad409f0"><div class="ttname"><a href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">SLOW_PWM</a></div><div class="ttdeci">#define SLOW_PWM</div><div class="ttdoc">Slow duty cycle constant.</div><div class="ttdef"><b>Definition:</b> motor.h:14</div></div>
-</div><!-- fragment --> <p class="formulaDsp">
+<p >One of the tasks was to make a square of 0.5 m length. The hardest part was the square had to be in between the wheels. Even worst, I did not tune the task on the actual square at A16. The snippet below shows how I implemented the square sequence. </p><pre class="fragment">**main.cpp**
+
+```cpp
+Motor  motor(PC_9,PB_8,PC_8,PC_6,PB_9);
+Encoder  wheel_left(PC_3,PC_2);
+Encoder  wheel_right(PB_14,PB_13);
+
+while(1){
+
+    vector&lt;double&gt; linear {...};
+    vector&lt;double&gt; rotation {...};
+
+    for(size_t i=0; i &lt; linear.size(); i++){
+        Motor::forward(linear,....);
+        Motor::turnright(rotation,...);
+    }
+}
+```
+</pre><p> Ideally all values in linear vector are 0.5 m and rotation vector are 90°. However, ours looked like this </p><pre class="fragment">```cpp
+vector&lt;double&gt; linear { 0.45, 0.33, 0.33, 0.43};
+vector&lt;double&gt; rotation {83, 83, 83, 175};
+```
+</pre><p> Note that the last one was more than 90° because the task was to trace the square back which was harder when your buggy did not move in straight line. I used bang-bang control approach to compensate any tiny deviation between the two wheels, implemented in the <a class="el" href="class_motor.html#abbeb0f664d334505276a83b7b7ef77ea" title="Control the motor to cruise forward.">Motor::forward</a>. </p><pre class="fragment">**motor.cpp**
+
+```cpp
+if ( left_encoder &gt; right_encoder)
+
+    right_motor.write(SLOW_PWM * correction);
+    left_motor.write(SLOW_PWM)
+
+else if ( right_encoder &gt; left_encoder)
+
+    left_motor.write(SLOW_PWM * correction);
+    right_motor.write(SLOW_PWM)
+```
+</pre> <p class="formulaDsp">
 \begin{align} correction &amp;= \frac{pulse_N}{pulse_M} \ where \ pulse_N &gt; pulse_M \\ \end{align}
 </p>
 <p> We received full marks on TD1 and this assured us a good start of our journey in producing a winning buggy.</p>
