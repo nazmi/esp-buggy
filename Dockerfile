@@ -1,4 +1,4 @@
-FROM nazmiropi/esp-buggy:tools
+FROM nazmiropi/esp-buggy:base
 
 LABEL   org.opencontainers.image.authors="Nazmi <muhammad.binmohdropi@student.manchester.ac.uk>" \
         org.opencontainers.image.title="Line Following Robot" \
@@ -10,9 +10,6 @@ WORKDIR /root/esp-buggy
 COPY . ./
 
 RUN     set -e \
-        && mbed cache off \
-        && mbed new . \
-        && mbed deploy \
+        && mbed config root . \
         && mbed compile -t GCC_ARM -m NUCLEO_F401RE --profile release \
-        && rm -rf mbed-os \
         && : # last line

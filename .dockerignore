@@ -1,4 +1,5 @@
-.github
+**/*.git
+**/*.md
 .gitignore
 Dockerfile
 docs
