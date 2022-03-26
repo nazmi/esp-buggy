@@ -29,9 +29,9 @@ Hi! I'm [Nazmi Ropi](https://uk.linkedin.com/in/nazmi-ropi), the author of this 
 
 @note You need to replace some of the MACROS values, and PID parameters based on your specifications.
 
-## Install with Docker 🐋 {#docker}
+## Run on Docker 🐋 {#docker}
 
-1. Run the commands in Git Bash.
+Follow the steps below (run in bash/cmd/terminal)
 
    ```bash
    # Pull latest image
@@ -45,18 +45,22 @@ Hi! I'm [Nazmi Ropi](https://uk.linkedin.com/in/nazmi-ropi), the author of this 
 
    # (Optional) Copy projects files into host machine
    docker cp <containerID>:root/esp-buggy <relativePath> 
-   ```
+   
+   # Two known issues
+   # (cmd/powershell) Attach to containerID
+   docker attach <containerID>
+   # (git-bash) Attach to containerID
+   winpty docker attach <containerID>
 
-2. Attach to the running container in VSCode, navigate to `/root/esp-buggy`
-
-   ```python
-   # No mbed-os image to reduce size
-   # Fetch mbed-os from git
+   # No mbed-os image to reduce docker size
+   # Fetch mbed-os from github
    mbed deploy
 
    # Compile to check any problem
    mbed compile -t GCC_ARM -m NUCLEO_F401RE --profile release
    ```
+
+@note Attach to the running container in VSCode, navigate to ```/root/esp-buggy``` and start developing.
 
 ## Troubleshooting 🩺 {#troubleshoot}
 
