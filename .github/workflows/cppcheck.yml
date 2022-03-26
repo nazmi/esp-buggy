@@ -1,0 +1,58 @@
+#########################
+#########################
+## Static Analyzer C++ ##
+#########################
+#########################
+
+name: C++ Syntax Check
+
+###############################
+# Start the job on edited cpp #
+###############################
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches: [ main ]
+    paths:
+    - 'include/**'
+    - 'src/**'
+
+
+###############
+# Set the Job #
+###############
+jobs:
+
+  cppcheck:
+    name: cppcheck-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - name: cppcheck
+        uses: deep5050/cppcheck-action@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN}}
+          exclude_check: ./src/DSP
+          output_file: cppcheck.xml
+          other_options: --xml
+
+      - name: Violation Comments Action
+        uses: tomasbjerre/violation-comments-action@master
+        with:
+            parser: CPPCHECK
+            regexp: '.*cppcheck.xml$'
+            # Optional config below
+            keepOldComments: true # remove the old comments, or keep them
+            commentTemplate: '{{violation.message}}' # see https://github.com/tomasbjerre/violation-comments-lib
+            maxNumberOfViolations: 99 # Will only post this many comments
+            severity: INFO # INFO, WARN or ERROR
+            commentOnlyChangedContent: true # Comment only if violations in the changed part of PR
+            commentOnlyChangedFiles: true # Comment only on the files that are changed in PR
+            createSingleFileComments: true # Comment several comments, for each violation
+            createCommentWithAllSingleFileComments: false # Create on big comment with all violations

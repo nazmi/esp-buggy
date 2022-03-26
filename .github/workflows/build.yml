@@ -21,6 +21,9 @@ on:
     - 'include/**'
     - 'src/**'
 
+env: 
+  mbed-version: mbed-os-6.15.1
+
 ###############
 # Set the Job #
 ###############
@@ -42,27 +45,44 @@ jobs:
       # Checkout repo
       - name: Checkout
         uses: actions/checkout@v3
+
+      # Cache mbed-os
+      - name: Cache mbed-os
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: mbed-os
+          key: ${{ runner.os }}-${{ env.mbed-version }}
+
+      # Checkout mbed-os
+      - name: Checkout mbed-os
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v3
+        with:
+          repository: ARMmbed/mbed-os
+          ref: ${{ env.mbed-version }}
+          path: mbed-os
       
       # Compile using mbed-cli (GCC_ARM)
       - name: Build source code
         id: compile
         run: |
           set -e
-          mbed new .
-          mbed deploy
+          mbed config root .
           mbed compile -t GCC_ARM -m ${{ matrix.target }} --profile ${{ matrix.profile }}
       
       # Log current time
       - name: Log current time
+        if: ${{ always() }}
         run: echo "TIME=$(date +"%Y.%m.%d %H:%M")" >> $GITHUB_ENV
 
       # If success, update badge to green
       - name: Update badge to green
-        if: steps.compile.outcome == 'success'
+        if: ${{ success() && github.event_name == 'push' }}
         uses: schneegans/dynamic-badges-action@v1.1.0
         with:
           auth: ${{ secrets.GIST_SECRET }}
-          gistID: 661bc6f35f626bca218501f160893b4b
+          gistID: ${{ secrets.GIST_BUILD_GCC }}
           filename: gcc_badge.json
           label: Build GCC_ARM
           message: passing @ ${{ env.TIME }}
@@ -70,11 +90,11 @@ jobs:
 
       # If success, update badge to red
       - name: Update badge to red
-        if: steps.compile.outcome != 'success'
+        if: ${{ failure() && github.event_name == 'push' }}
         uses: schneegans/dynamic-badges-action@v1.1.0
         with:
           auth: ${{ secrets.GIST_SECRET }}
-          gistID: 661bc6f35f626bca218501f160893b4b
+          gistID: ${{ secrets.GIST_BUILD_GCC }}
           filename: gcc_badge.json
           label: Build GCC_ARM 
           message: failing @ ${{ env.TIME }}

@@ -4,7 +4,7 @@
 #############################
 #############################
 
-name: Build and push docker on release
+name: Build docker on release
 
 ############################
 # Start the job on release #
@@ -17,7 +17,7 @@ on:
   workflow_dispatch:
     inputs:
       release_version:
-        description: 'Which release version you want to update docker image.'
+        description: 'Release tag(v1.0) or latest'
         required: true 
 
 ###############
@@ -49,26 +49,30 @@ jobs:
           path: Dockerfile
 
       - if: ${{ github.event_name == 'workflow_dispatch' }}
+        id: check
         name: Sanity check tag of manual trigger
         shell: bash
         run: | 
           if [ -z $(git tag --merged ${GITHUB_REF} ${{ github.event.inputs.release_version }}) ]; then
             echo "Check the tag name ${{ github.event.inputs.release_version }} is not found on branch ${GITHUB_REF}"
-            exit 1
+            echo "Checkout latest commit as alternative"
+            echo "::set-output name=found::0"
+          else
+            echo "::set-output name=found::1"
           fi
 
       # Get build info
       - name: Get build information
         id: buildinfo
         run: |
-          if [ "release" == "${{github.event_name}}" ];then
+          if [ "release" == "${{github.event_name}}" ]; then
             version=${{ github.event.release.tag_name }}
-          elif [ "workflow_dispatch" == "${{github.event_name}}" ];then
+          elif [[ "workflow_dispatch" == "${{github.event_name}}" && "${{ steps.check.outputs.found }}" == 1 ]]; then
             version=${{ github.event.inputs.release_version }}
           else
-            version=`git describe --tags \`git rev-list --tags --max-count=1\``
+            version=${GITHUB_REF#refs/heads/}
           fi
-          echo "::set-output name=time::$(date +'%Y%m%d')"
+          echo "::set-output name=time::$(date +'%Y%m%d%H%M')"
           echo "::set-output name=version::${version}"
 
 
@@ -79,8 +83,8 @@ jobs:
     
     steps:
 
-      # Checkout repo
-      - name: Checkout
+      # Checkout main repo
+      - name: Checkout repo
         uses: actions/checkout@v3
         with:
           ref: ${{needs.prepare-tags.outputs.version}}
@@ -120,12 +124,12 @@ jobs:
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: |
-            nazmiropi/esp-buggy
+            ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}
             ghcr.io/${{ github.repository }}
           tags: |
-            type=raw,value={{branch}}-${{needs.prepare-tags.outputs.date}}
+            type=raw,value=${{needs.prepare-tags.outputs.version}}
 
-      # Build and push
+      # Build and push release
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
@@ -133,10 +137,8 @@ jobs:
           push: true
           tags: |
             ${{ steps.meta.outputs.tags }}
-            ghcr.io/${{ github.repository }}:${{needs.prepare-tags.outputs.version}}
-            nazmiropi/esp-buggy:${{needs.prepare-tags.outputs.version}}
             ghcr.io/${{ github.repository }}:latest
-            nazmiropi/esp-buggy:latest
+            ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
           labels: ${{ steps.meta.outputs.labels }}
-      
-     
+          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:cache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:cache,mode=max
