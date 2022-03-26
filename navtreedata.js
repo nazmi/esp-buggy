@@ -29,7 +29,7 @@ var NAVTREE =
       [ "Line Following Robot (LFR) 🚓", "index.html#intro", null ],
       [ "Dependencies 📌", "index.html#dependencies", null ],
       [ "Installation 📋", "index.html#installation", null ],
-      [ "Install with Docker 🐋", "index.html#docker", null ],
+      [ "Run on Docker 🐋", "index.html#docker", null ],
       [ "Troubleshooting 🩺", "index.html#troubleshoot", null ],
       [ "Components 🛒", "index.html#components", null ],
       [ "Contributing 👨‍💻", "index.html#contribute", null ],

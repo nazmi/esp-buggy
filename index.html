@@ -130,9 +130,8 @@ Installation 📋</h1>
 </ol>
 <dl class="section note"><dt>Note</dt><dd>You need to replace some of the MACROS values, and PID parameters based on your specifications.</dd></dl>
 <h1><a class="anchor" id="docker"></a>
-Install with Docker 🐋</h1>
-<ol type="1">
-<li><p class="startli">Run the commands in Git Bash.</p>
+Run on Docker 🐋</h1>
+<p >Follow the steps below (run in bash/cmd/terminal)</p>
 <div class="fragment"><div class="line"># Pull latest image</div>
 <div class="line">docker pull nazmiropi/esp-buggy:latest</div>
 <div class="line"> </div>
@@ -144,16 +143,20 @@ Install with Docker 🐋</h1>
 <div class="line"> </div>
 <div class="line"># (Optional) Copy projects files into host machine</div>
 <div class="line">docker cp &lt;containerID&gt;:root/esp-buggy &lt;relativePath&gt; </div>
-</div><!-- fragment --></li>
-<li><p class="startli">Attach to the running container in VSCode, navigate to <code>/root/esp-buggy</code></p>
-<div class="fragment"><div class="line"><span class="comment"># No mbed-os image to reduce size</span></div>
-<div class="line"><span class="comment"># Fetch mbed-os from git</span></div>
+<div class="line"> </div>
+<div class="line"># Two known issues</div>
+<div class="line"># (cmd/powershell) Attach to containerID</div>
+<div class="line">docker attach &lt;containerID&gt;</div>
+<div class="line"># (git-bash) Attach to containerID</div>
+<div class="line">winpty docker attach &lt;containerID&gt;</div>
+<div class="line"> </div>
+<div class="line"># No mbed-os image to reduce docker size</div>
+<div class="line"># Fetch mbed-os from github</div>
 <div class="line">mbed deploy</div>
 <div class="line"> </div>
-<div class="line"><span class="comment"># Compile to check any problem</span></div>
+<div class="line"># Compile to check any problem</div>
 <div class="line">mbed compile -t GCC_ARM -m NUCLEO_F401RE --profile release</div>
-</div><!-- fragment --></li>
-</ol>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>Attach to the running container in VSCode, navigate to <code>/root/esp-buggy</code> and start developing.</dd></dl>
 <h1><a class="anchor" id="troubleshoot"></a>
 Troubleshooting 🩺</h1>
 <ol type="1">
