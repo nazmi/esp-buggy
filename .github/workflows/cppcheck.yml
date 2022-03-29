@@ -61,7 +61,7 @@ jobs:
         run: |
           lines=$(wc -l <cppcheck.xml)
 
-          if [ $lines -gt 7 ]; then
+          if [ $lines -gt 12 ]; then
                   exit 1
           else
                   exit 0
