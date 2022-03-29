@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['x2_5fencoding_0',['X2_ENCODING',['../class_q_e_i.html#a402e83314ec5151efa06b0f8512ba442a5cbed4a72385f7d8fd70154aa08c5d8b',1,'QEI']]],
-  ['x4_5fencoding_1',['X4_ENCODING',['../class_q_e_i.html#a402e83314ec5151efa06b0f8512ba442a3e0d5f098320f28206f50f2c8d52db24',1,'QEI']]]
+  ['weights_0',['WEIGHTS',['../class_sensor.html#a612da136f7ca3a4a73f5dec957491b50',1,'Sensor']]],
+  ['wheel_5fdistance_1',['WHEEL_DISTANCE',['../encoder_8h.html#aeec35d5fa40cda2b874fd262a1268b5e',1,'encoder.h']]],
+  ['wheelcontrol_2',['WheelControl',['../class_wheel_control.html',1,'WheelControl'],['../class_wheel_control.html#aee9896b7083b4b93d52bb35c00fc3ccd',1,'WheelControl::WheelControl()']]],
+  ['wheelcontrol_2eh_3',['wheelcontrol.h',['../wheelcontrol_8h.html',1,'']]],
+  ['white_5ftreshold_4',['WHITE_TRESHOLD',['../sensor_8h.html#ae6a7584e51a69ec941b3c3362555d10f',1,'sensor.h']]]
 ];

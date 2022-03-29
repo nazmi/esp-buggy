@@ -1,13 +1,8 @@
 var searchData=
 [
-  ['gear_5fratio_0',['GEAR_RATIO',['../encoder_8h.html#a1b5f0a2cda8866a2a87331026ac8bd9a',1,'encoder.h']]],
-  ['get_5fdirection_1',['get_direction',['../class_motor.html#a1763f1d0389d8c0a0918b8eeaecf5677',1,'Motor']]],
-  ['get_5fdutycycle_2',['get_dutycycle',['../class_motor.html#ac17209cc7c3bda8b796edc19f0cb21ae',1,'Motor']]],
-  ['get_5fenable_3',['get_enable',['../class_motor.html#af17e975a057b9834ea8ca42474bcc49b',1,'Motor']]],
-  ['get_5ffrequency_4',['get_frequency',['../class_motor.html#a03de8a83175265bfa55f19344dfee5e1',1,'Motor']]],
-  ['getcurrentstate_5',['getCurrentState',['../class_q_e_i.html#a454939fb817516ad4a91b65cda752204',1,'QEI']]],
-  ['getdistance_6',['getDistance',['../class_sensor.html#a0405c09c1dca1e5788e712bc02cfea50',1,'Sensor']]],
-  ['getinvalidcount_7',['getInvalidCount',['../class_q_e_i.html#aad60c77825245207f766974aff2d8739',1,'QEI']]],
-  ['getpulses_8',['getPulses',['../class_q_e_i.html#aa1dcb3763c863233b72ad2ab8bbd7531',1,'QEI']]],
-  ['getrevolutions_9',['getRevolutions',['../class_q_e_i.html#abb9652bbe7e58905c08293a82db819cd',1,'QEI']]]
+  ['fast_5fpwm_0',['FAST_PWM',['../motor_8h.html#add64edb466ebc8cf935fbce2e3a6fb25',1,'motor.h']]],
+  ['features_2emd_1',['FEATURES.md',['../_f_e_a_t_u_r_e_s_8md.html',1,'']]],
+  ['forward_2',['forward',['../class_motor.html#abbeb0f664d334505276a83b7b7ef77ea',1,'Motor']]],
+  ['full_5frotation_5fcenter_5fpivot_3',['FULL_ROTATION_CENTER_PIVOT',['../class_encoder.html#a5101392371c122ad3dde4c0682b2ba50',1,'Encoder']]],
+  ['full_5frotation_5fside_5fpivot_4',['FULL_ROTATION_SIDE_PIVOT',['../class_encoder.html#a8666357b7b862ee1b52f6a41381315e6',1,'Encoder']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['half_5fpwm_0',['HALF_PWM',['../motor_8h.html#ac7051de59e6115405db179689d7a630e',1,'motor.h']]]
+  ['gear_5fratio_0',['GEAR_RATIO',['../encoder_8h.html#a1b5f0a2cda8866a2a87331026ac8bd9a',1,'encoder.h']]]
 ];

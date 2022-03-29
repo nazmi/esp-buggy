@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['weights_0',['WEIGHTS',['../class_sensor.html#a612da136f7ca3a4a73f5dec957491b50',1,'Sensor']]],
-  ['wheel_5fdistance_1',['WHEEL_DISTANCE',['../encoder_8h.html#aeec35d5fa40cda2b874fd262a1268b5e',1,'encoder.h']]],
-  ['white_5ftreshold_2',['WHITE_TRESHOLD',['../sensor_8h.html#ae6a7584e51a69ec941b3c3362555d10f',1,'sensor.h']]]
+  ['technical_20demo_20documentation_0',['Technical Demo Documentation',['../md__d_e_m_o.html',1,'']]],
+  ['toggle_1',['toggle',['../class_sensor.html#a0a7dafa04194911bf7a14fdb65cd8680',1,'Sensor']]],
+  ['turnleft_2',['turnleft',['../class_motor.html#a359186826e7f3b2e2c8cc41db81264bb',1,'Motor']]],
+  ['turnright_3',['turnright',['../class_motor.html#abdec5f02db58b8b0412b7b2c8758339f',1,'Motor']]]
 ];

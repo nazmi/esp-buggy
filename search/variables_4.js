@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['index_5f_0',['index_',['../class_q_e_i.html#a50dff2b3e884cc6a0286a6b93f4d8477',1,'QEI']]],
-  ['invalid_5f_1',['invalid_',['../class_q_e_i.html#af4a945fe636fc634ad08879fb34a2675',1,'QEI']]]
+  ['full_5frotation_5fcenter_5fpivot_0',['FULL_ROTATION_CENTER_PIVOT',['../class_encoder.html#a5101392371c122ad3dde4c0682b2ba50',1,'Encoder']]],
+  ['full_5frotation_5fside_5fpivot_1',['FULL_ROTATION_SIDE_PIVOT',['../class_encoder.html#a8666357b7b862ee1b52f6a41381315e6',1,'Encoder']]]
 ];

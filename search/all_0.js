@@ -1,6 +1,26 @@
 var searchData=
 [
-  ['average_5fangular_0',['average_angular',['../class_encoder.html#a1728a81195a174dde05c376d49f8e4a1',1,'Encoder']]],
-  ['average_5fdistance_1',['average_distance',['../class_encoder.html#ad28cef92c10e5635393403127bd252db',1,'Encoder']]],
-  ['average_5fvelocity_2',['average_velocity',['../class_encoder.html#a28a8607f8f8d098ae685d2488650028e',1,'Encoder']]]
+  ['_5faccerror_0',['_accError',['../class_p_i_d.html#afc25f129d1cb3620b113c62b649e944a',1,'PID']]],
+  ['_5fbias_1',['_bias',['../class_p_i_d.html#a243a3a02a5292d9168bf3d42b87bf2de',1,'PID']]],
+  ['_5fcontrolleroutput_2',['_controllerOutput',['../class_p_i_d.html#a03bc6a8c1b018decd7e32f3f0a012986',1,'PID']]],
+  ['_5fdparam_3',['_dParam',['../class_p_i_d.html#a3ca2d4149b4dc717caac4803c82571cd',1,'PID']]],
+  ['_5finauto_4',['_inAuto',['../class_p_i_d.html#aa677bc4800abd66ec32544a74dc7f7b0',1,'PID']]],
+  ['_5finmax_5',['_inMax',['../class_p_i_d.html#a85eaad444fc9e277286d55c9734685c3',1,'PID']]],
+  ['_5finmin_6',['_inMin',['../class_p_i_d.html#a9d449fac524e12e2f64e57b3073d088e',1,'PID']]],
+  ['_5finspan_7',['_inSpan',['../class_p_i_d.html#a0fa999f620664c8e5fa8478627b5851c',1,'PID']]],
+  ['_5fiparam_8',['_iParam',['../class_p_i_d.html#a21df4df9ac32165ea382e87733f50806',1,'PID']]],
+  ['_5fkc_9',['_Kc',['../class_p_i_d.html#a72b2393e344ecc43102f0874af2bc8a8',1,'PID']]],
+  ['_5foutmax_10',['_outMax',['../class_p_i_d.html#a2f690352c861e7004c2d7d05bd819f4c',1,'PID']]],
+  ['_5foutmin_11',['_outMin',['../class_p_i_d.html#ab14ebb351ce0f77e9adc571b0043eff7',1,'PID']]],
+  ['_5foutspan_12',['_outSpan',['../class_p_i_d.html#a17997c7ed80b980caa736605bb3267cb',1,'PID']]],
+  ['_5fpparam_13',['_pParam',['../class_p_i_d.html#ad4bd9bfa12273d59c542535a68b4e7d3',1,'PID']]],
+  ['_5fprevcontrolleroutput_14',['_prevControllerOutput',['../class_p_i_d.html#a03145d1e557c4e4028f0a776b0698358',1,'PID']]],
+  ['_5fprevprocessvariable_15',['_prevProcessVariable',['../class_p_i_d.html#a828edaa3693bade0afc0e02e030a8718',1,'PID']]],
+  ['_5fprocessvariable_16',['_processVariable',['../class_p_i_d.html#a31e66811cc7f4b3a84ea718c0d59da44',1,'PID']]],
+  ['_5frealoutput_17',['_realOutput',['../class_p_i_d.html#a6a54cd488340524ecdfcd64ee438de8f',1,'PID']]],
+  ['_5fsetpoint_18',['_setPoint',['../class_p_i_d.html#aafaf175fcdcca7371f1c59af527d2659',1,'PID']]],
+  ['_5ftaud_19',['_tauD',['../class_p_i_d.html#ad4621fd1cc0a3919a247b8162f293f32',1,'PID']]],
+  ['_5ftaur_20',['_tauR',['../class_p_i_d.html#accb4480173c7c38a2316dc254a1e03d2',1,'PID']]],
+  ['_5ftsample_21',['_tSample',['../class_p_i_d.html#ab790e3a93f09ff6cd5290e4613907989',1,'PID']]],
+  ['_5fusingfeedforward_22',['_usingFeedForward',['../class_p_i_d.html#ac08964c74dfe73d847624bad824571b3',1,'PID']]]
 ];
