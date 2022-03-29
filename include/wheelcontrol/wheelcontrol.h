@@ -4,8 +4,9 @@
 #include "mbed.h"
 #include "PID.h"
 #include <utility>
+#include <vector>
 
-#define SENSORWIDTH 54
+typedef pair<float, float> pff;
 
 class WheelControl {
   private:
@@ -29,7 +30,7 @@ class WheelControl {
     void setPWMLimits(float low, float high);
     void setTargetSpeed(float speed);
 
-    pair<float, float> computeSpeed(float position, const Encoder &left_encoder, const Encoder &right_encoder);
+    vector<pff> computeSpeed(float position, const Encoder &left_encoder, const Encoder &right_encoder);
 };
 
 #endif  // WHEEL_CONTROL_H

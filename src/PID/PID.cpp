@@ -202,7 +202,7 @@ float PID::compute() {
     // Pull in the input and setpoint, and scale them into percent span.
     float scaledPV = clamp((_processVariable - _inMin) / _inSpan, 0.0f, 1.0f);
     float scaledSP = clamp((_setPoint - _inMin) / _inSpan, 0.0f, 1.0f);
-    float error = scaledSP - scaledPV;
+    float error = scaledPV - scaledSP;
     float dMeas = (scaledPV - _prevProcessVariable) / _tSample;
     float scaledBias = 0.0;
 

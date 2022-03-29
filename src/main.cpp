@@ -54,9 +54,11 @@ int main() {
                     auto distance = sensors.read();
 
                     if (distance < NO_TRACK) {
-                        auto pwm_value = controller.computeSpeed(distance, wheel_left, wheel_right);
-                        motor.left_motor.write(pwm_value.first);
-                        motor.right_motor.write(pwm_value.second);
+                        auto compute_value = controller.computeSpeed(distance, wheel_left, wheel_right);
+                        motor.set_direction('L', compute_value[0].first);
+                        motor.set_direction('R', compute_value[1].first);
+                        motor.set_dutycycle('L', compute_value[0].second);
+                        motor.set_dutycycle('R', compute_value[1].second);
                     }
 
                     if (hm10.readable()) {
@@ -88,7 +90,6 @@ int main() {
             sensors.s_run = false;
         }
 
-        ThisThread::sleep_for(10ms);
     }
 
     return 0;
