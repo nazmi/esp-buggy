@@ -6,21 +6,19 @@ using std::min_element;
 
 bool Sensor::s_run = false;
 std::array<float, 6> Sensor::WEIGHTS = {27, 9, -9, -27, 9, -9};
-std::array<float, 6> Sensor::BLACK_TRESHOLD = {0.004934593, 0.014571535, 0.013338404,
-                                               0.01000882, 0.015825268, 0.02775455};
-std::array<float, 6> Sensor::SCALE_FACTOR = {3.13481219, 3.064968664, 3.252208943,
-                                             3.197312711, 3.097903068, 2.695666361};
+std::array<float, 6> Sensor::BLACK_TRESHOLD = {0.004934593, 0.014571535, 0.013338404, 0.01000882, 0.015825268, 0.02775455};
+std::array<float, 6> Sensor::SCALE_FACTOR = {3.13481219, 3.064968664, 3.252208943, 3.197312711, 3.097903068, 2.695666361};
 
 Sensor::Sensor(PinName p1, PinName p2, PinName p3, PinName p4, PinName p5, PinName p6,
                PinName in1, PinName in2, PinName in3, PinName in4, PinName in5, PinName in6)
-    : m_pins(p1, p2, p3, p4, p5, p6),
-      m_analog{AnalogIn(in1), AnalogIn(in2), AnalogIn(in3), AnalogIn(in4), AnalogIn(in5), AnalogIn(in6)} {};
+                : m_pins(p1, p2, p3, p4, p5, p6),
+                  m_analog{AnalogIn(in1), AnalogIn(in2), AnalogIn(in3), AnalogIn(in4), AnalogIn(in5), AnalogIn(in6)} {};
 
 float Sensor::read() {
 
     m_distance = 0;
-    Timer t;
-    t.start();
+    // Timer t;
+    // t.start();
 
     // All off to capture noise
     m_pins.write(0);
@@ -74,22 +72,22 @@ float Sensor::read() {
         m_distance = NO_TRACK;
     }
 
-    t.stop();
+    // t.stop();
 
-    if (!s_run) {
-        printf("1,2,3,4,5,6,time,m_distance\n");
-        s_run = true;
-    }
-    for (const auto &reading : m_reading) {
-        printf("%.5f,", reading);
-    }
-    // for (const auto &noise : m_noise) {
-    //     printf("%.5f,", noise);
+    // if (!s_run) {
+    //     printf("1,2,3,4,5,6,time,m_distance\n");
+    //     s_run = true;
     // }
-    printf("%lld,", t.elapsed_time().count() * 1);
-    printf("%f\n", m_distance);
+    // for (const auto &reading : m_reading) {
+    //     printf("%.5f,", reading);
+    // }
+    // // for (const auto &noise : m_noise) {
+    // //     printf("%.5f,", noise);
+    // // }
+    // printf("%lld,", t.elapsed_time().count() * 1);
+    // printf("%f\n", m_distance);
 
-    t.reset();
+    // t.reset();
 
     return m_distance;
 }

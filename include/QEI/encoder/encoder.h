@@ -15,8 +15,6 @@
 #define COUNTS_PER_REV 256
 /** @brief Polling period of encoder.*/
 #define POLLING_PERIOD 1ms
-/** @brief Accurate PI value.*/
-#define M_PI 3.14159265358979323846264338327950288
 
 /**
  * @brief Encoder class with helper functions, derived from QEI.
