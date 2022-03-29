@@ -2,6 +2,7 @@
 #include "mbed.h"
 #include "motor.h"
 #include "sensor.h"
+#include "wheelcontrol.h"
 #include <string>
 
 int main() {
@@ -13,6 +14,14 @@ int main() {
     BufferedSerial hm10(PA_11, PA_12, 115200);
     Sensor sensors(D2, D3, D4, D5, D6, D8, A5, A4, A3, A2, A1, A0);
     DigitalOut analog_1(PC_5, 0), analog_2(PB_1, 0), analog_3(PC_4, 0);
+
+    WheelControl controller;
+    controller.setSpeedController(1.2, 1.2, 0.00012, 0.01);
+    controller.setLineController(1.6, 0.00001, 0.0000001, 0.01);
+    controller.setLineLimits(-27.0f, 27.0f);
+    controller.setPWMLimits(0.0f, 1.0f);
+    controller.setTargetSpeed(0.5f);
+
     char c;
 
     while (1) {
@@ -42,16 +51,21 @@ int main() {
             }
             case 'S': {
                 while (1) {
-                    sensors.toggle(true);
+                    auto distance = sensors.read();
+
+                    if (distance < NO_TRACK) {
+                        auto pwm_value = controller.computeSpeed(distance, wheel_left, wheel_right);
+                        motor.left_motor.write(pwm_value.first);
+                        motor.right_motor.write(pwm_value.second);
+                    }
 
                     if (hm10.readable()) {
                         hm10.read(&c, 1);
                         if (c == 'S') {
-                            sensors.toggle(false);
                             break;
                         }
                     }
-                    ThisThread::sleep_for(100ms);
+                    ThisThread::sleep_for(1ms);
                 }
                 break;
             }

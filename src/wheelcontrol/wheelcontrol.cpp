@@ -72,8 +72,8 @@ void WheelControl::m_setProcessValue(float left_val, float right_val) {
 pair<float, float> WheelControl::computeSpeed(float position, const Encoder &left_encoder, const Encoder &right_encoder) {
 
     linecontroller.setProcessValue(position);
-    auto delta_distance = linecontroller.compute();
-    m_setSetPoint(m_target + delta_distance, m_target - delta_distance);
+    auto delta_target = linecontroller.compute();
+    m_setSetPoint(m_target + delta_target, m_target - delta_target);
     m_setProcessValue(static_cast<float>(left_encoder.read_pps()), static_cast<float>(right_encoder.read_pps()));
     return { leftcontroller.compute() , rightcontroller.compute() };
 }
