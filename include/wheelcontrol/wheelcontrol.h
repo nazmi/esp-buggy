@@ -1,8 +1,9 @@
-#ifndef _WHEEL_CONTROL_H
-#define _WHEEL_CONTROL_H
+#ifndef WHEEL_CONTROL_H
+#define WHEEL_CONTROL_H
 
 #include "mbed.h"
 #include "PID.h"
+#include <utility>
 
 #define SENSORWIDTH 54
 
@@ -20,7 +21,7 @@ class WheelControl {
 
   public:
     WheelControl();
-    
+
     void setSpeedController(float Kc, float tauI, float tauD, float interval);
     void setLineController(float Kc, float tauI, float tauD, float interval);
 
@@ -28,7 +29,7 @@ class WheelControl {
     void setPWMLimits(float low, float high);
     void setTargetSpeed(float speed);
 
-    pair<float,float> computeSpeed(float position,Encoder &left_encoder, Encoder &right_encoder);    
+    pair<float, float> computeSpeed(float position, const Encoder &left_encoder, const Encoder &right_encoder);
 };
 
-#endif // WHEEL_CONTROL_H
+#endif  // WHEEL_CONTROL_H

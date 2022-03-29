@@ -198,4 +198,4 @@ class PID {
     volatile float _realOutput;
 };
 
-#endif //_PID_H_
+#endif  // _PID_H_
