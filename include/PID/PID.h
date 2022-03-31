@@ -53,9 +53,6 @@
 #include "helper.h"
 #include "mbed.h"
 
-#define MANUAL_MODE 0
-#define AUTO_MODE 1
-
 /**
  * @brief Proportional-integral-derivative controller
  */
@@ -100,27 +97,6 @@ class PID {
     void setTunings(float Kc, float tauI, float tauD);
 
     /**
-     * Reinitializes controller internals. Automatically
-     * called on a manual to auto transition.
-     */
-    void reset(void);
-
-    /**
-     * Set PID to manual or auto mode.
-     *
-     * @param mode        0 -> Manual
-     *             Non-zero -> Auto
-     */
-    void setMode(int mode);
-
-    /**
-     * Set how fast the PID loop is run.
-     *
-     * @param interval PID calculation peformed every interval seconds.
-     */
-    void setInterval(float interval);
-
-    /**
      * Set the set point.
      *
      * @param sp The set point as a real world value.
@@ -156,7 +132,6 @@ class PID {
 
   protected:
     bool _usingFeedForward;
-    bool _inAuto;
 
     // Actual tuning parameters used in PID calculation.
     float _Kc;
@@ -194,8 +169,6 @@ class PID {
     // The interval between samples.
     float _tSample;
 
-    // Controller output as a real world value.
-    volatile float _realOutput;
 };
 
 #endif  // _PID_H_

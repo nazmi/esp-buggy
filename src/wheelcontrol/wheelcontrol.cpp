@@ -4,26 +4,19 @@ WheelControl::WheelControl() : leftcontroller(2.0, 1.2, 0.0002, 0.01),
                                rightcontroller(2.0, 1.2, 0.0002, 0.01),
                                linecontroller(1.6, 0.00001, 0.0000001, 0.01) {
 
-    leftcontroller.setMode(1);
-    rightcontroller.setMode(1);
-    linecontroller.setMode(1);
     leftcontroller.setInputLimits(0, ENCODER_LIMIT);
     rightcontroller.setInputLimits(0, ENCODER_LIMIT);
 }
 
-void WheelControl::setSpeedController(float Kc, float tauI, float tauD, float interval) {
+void WheelControl::setSpeedController(float Kc, float tauI, float tauD) {
 
     leftcontroller.setTunings(Kc, tauI, tauD);
-    leftcontroller.setInterval(interval);
-
     rightcontroller.setTunings(Kc, tauI, tauD);
-    rightcontroller.setInterval(interval);
 }
 
-void WheelControl::setLineController(float Kc, float tauI, float tauD, float interval) {
+void WheelControl::setLineController(float Kc, float tauI, float tauD) {
 
     linecontroller.setTunings(Kc, tauI, tauD);
-    linecontroller.setInterval(interval);
 }
 
 void WheelControl::setLineLimits(float low, float high) {
@@ -60,24 +53,27 @@ void WheelControl::m_setProcessValue(float left_val, float right_val) {
 
 vector<pif> WheelControl::computeSpeed(float position, const Encoder &left_encoder, const Encoder &right_encoder) {
 
-    bool positionIsPositive{true};
+    // bool positionIsPositive{true};
     float abs_position{abs(position)};
-    float abs_left_encoder_pps{static_cast<float>(abs(left_encoder.read_pps()))};
-    float abs_right_encoder_pps{static_cast<float>(abs(right_encoder.read_pps()))};
+    float abs_left_encoder_pps{static_cast<float>(abs(2 * left_encoder.read_pps()))};
+    float abs_right_encoder_pps{static_cast<float>(abs(2 * right_encoder.read_pps()))};
 
-    // PID works in %, unsigned range so, manipulating data is required.
-    // PID outputs only +ve value, no direction can be extracted.
-    if (position < 0) {
-        positionIsPositive = false;
-    }
+    // Record the position value so controller output can be manipulated
+    // if (position < 0) {
+    //     positionIsPositive = false;
+    // }
 
     // Compute line follower controller
     linecontroller.setProcessValue(position);
     printf("PID OUTPUT:       PV      SP     Error    Derror  Output  ScaledOutput\n");
     printf("Line output : ");
-    float delta_target = abs(linecontroller.compute());
-    float delta_plus = m_target + delta_target;
-    float delta_minus = m_target - delta_target;
+
+    // Positive position : Controller output is negative
+    // Negative position : Controller output is positive
+    float delta_target = linecontroller.compute();
+    float delta_left = m_target - delta_target;
+    float delta_right = m_target + delta_target;
+
     // Adaptive Set Point
     if (abs_position < 0.5f) {
 
@@ -85,25 +81,12 @@ vector<pif> WheelControl::computeSpeed(float position, const Encoder &left_encod
 
     } else if (abs_position > 15.0f) {
 
-        if (positionIsPositive) {
-
-            m_setSetPoint(1.5 * delta_plus, 0.0f);
-
-        } else {
-
-            m_setSetPoint(0.0f, 1.5 * delta_plus);
-        }
+        m_setSetPoint(delta_left - delta_target, delta_right + delta_target);
 
     } else {
 
-        if (positionIsPositive) {
+        m_setSetPoint(delta_left, delta_right);
 
-            m_setSetPoint(delta_plus, delta_minus);
-
-        } else {
-
-            m_setSetPoint(delta_minus, delta_plus);
-        }
     }
 
     m_setProcessValue(abs_left_encoder_pps, abs_right_encoder_pps);
@@ -117,13 +100,13 @@ vector<pif> WheelControl::computeSpeed(float position, const Encoder &left_encod
     // Producing when go up.
     vector<pif> results{{1, left_output}, {1, right_output}};
 
-    if (abs_left_encoder_pps > m_target && abs_position < 2.0f) {
+    if (abs_left_encoder_pps > m_target && abs_position < 1.0f) {
 
         results[0].first = 0;
         results[0].second = 0.1f;
     }
 
-    if (abs_right_encoder_pps > m_target && abs_position < 2.0f) {
+    if (abs_right_encoder_pps > m_target && abs_position < 1.0f) {
 
         results[1].first = 0;
         results[1].second = 0.1f;

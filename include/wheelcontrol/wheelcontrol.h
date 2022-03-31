@@ -7,7 +7,7 @@
 #include <vector>
 
 #define OFFSET 27.0f
-#define ENCODER_LIMIT 2000.0f
+#define ENCODER_LIMIT 4000.0f
 typedef pair<int, float> pif;
 
 class WheelControl {
@@ -23,8 +23,8 @@ class WheelControl {
   public:
     WheelControl();
 
-    void setSpeedController(float Kc, float tauI, float tauD, float interval);
-    void setLineController(float Kc, float tauI, float tauD, float interval);
+    void setSpeedController(float Kc, float tauI, float tauD);
+    void setLineController(float Kc, float tauI, float tauD);
 
     void setLineLimits(float low, float high);
     void setPWMLimits(float low, float high);

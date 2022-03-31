@@ -18,11 +18,11 @@ int main() {
     DigitalOut analog_1(PC_5, 0), analog_2(PB_1, 0), analog_3(PC_4, 0);
 
     WheelControl controller;
-    controller.setSpeedController(1.4, 0, 0.00002, 0.01);
-    controller.setLineController(1.6, 0, 0.00002, 0.01);
+    controller.setSpeedController(1.35, 0, 0.00005);
+    controller.setLineController(1.35, 0.0f, 0.0f);
     controller.setLineLimits(-27.0f, 27.0f);
     controller.setPWMLimits(0.0f, 1.0f);
-    controller.setTargetSpeed(0.8f);
+    controller.setTargetSpeed(0.75f);
 
     char c;
     Timer test;
@@ -71,7 +71,9 @@ int main() {
                         motor.set_dutycycle('L', compute_value[0].second);
                         motor.set_direction('R', compute_value[1].first);
                         motor.set_dutycycle('R', compute_value[1].second);
-                        printf("Motor output: [%d,%.5f] [%d,%.5f]\n", compute_value[0].first, compute_value[0].second, compute_value[1].first, compute_value[1].second);
+                        printf("Motor output: [%d,%.5f] [%d,%.5f]\n",
+                               compute_value[0].first, compute_value[0].second,
+                               compute_value[1].first, compute_value[1].second);
                         // printf("Counter : %d\n", sensors.getNoTrackCounter());
                     } else {
                         // printf("Counter : %d\n", sensors.getNoTrackCounter());
@@ -87,9 +89,14 @@ int main() {
                             motor.set_enable(0);
                             motor.set_dutycycle('A', 0);
                             break;
+                        } else if (c == 'Q') {
+                            motor.set_enable(0);
+                            ThisThread::sleep_for(1s);
+                            motor.turnright(175, &motor, &wheel_left, &wheel_right);
+                            motor.set_enable(1);
                         }
                     }
-                    //ThisThread::sleep_for(1ms);
+                    // ThisThread::sleep_for(1ms);
                 }
                 break;
             }
@@ -103,7 +110,7 @@ int main() {
                     hm10.read(&kd, sizeof(kd));
 
                     printf("Kp: %.5f Ki: %.5f Kd: %.5f\n", kp, ki, kd);
-                    controller.setSpeedController(kp, ki, kd, 0.01);
+                    controller.setSpeedController(kp, ki, kd);
                     break;
                 }
 

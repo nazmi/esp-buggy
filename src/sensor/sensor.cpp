@@ -6,13 +6,13 @@ using std::min_element;
 
 bool Sensor::s_run = false;
 std::array<float, 6> Sensor::WEIGHTS = {27, 9, -9, -27, 9, -9};
-std::array<float, 6> Sensor::BLACK_TRESHOLD = {0.000576735,	0.008243035,	0.010218155,	0.004252569,	0.007279201,	0.023050267};
-std::array<float, 6> Sensor::SCALE_FACTOR = {3.63554,	3.51805,	3.77641,	3.40797,	3.50128,	2.81837};
+std::array<float, 6> Sensor::BLACK_TRESHOLD = {0.000576735, 0.008243035, 0.010218155, 0.004252569, 0.007279201, 0.023050267};
+std::array<float, 6> Sensor::SCALE_FACTOR = {3.63554, 3.51805, 3.77641, 3.40797, 3.50128, 2.81837};
 
 Sensor::Sensor(PinName p1, PinName p2, PinName p3, PinName p4, PinName p5, PinName p6,
                PinName in1, PinName in2, PinName in3, PinName in4, PinName in5, PinName in6)
-                : m_pins(p1, p2, p3, p4, p5, p6),
-                  m_analog{AnalogIn(in1), AnalogIn(in2), AnalogIn(in3), AnalogIn(in4), AnalogIn(in5), AnalogIn(in6)} {};
+    : m_pins(p1, p2, p3, p4, p5, p6),
+      m_analog{AnalogIn(in1), AnalogIn(in2), AnalogIn(in3), AnalogIn(in4), AnalogIn(in5), AnalogIn(in6)} {};
 
 float Sensor::read() {
 
@@ -72,7 +72,6 @@ float Sensor::read() {
         no_track_counter++;
     }
 
-
     // if (!s_run) {
     //     printf("1,2,3,4,5,6,time,m_distance\n");
     //     s_run = true;
@@ -81,7 +80,6 @@ float Sensor::read() {
     //     printf("%.5f,", reading);
     // }
     // printf("%f\n", m_distance);
-
 
     return m_distance;
 }

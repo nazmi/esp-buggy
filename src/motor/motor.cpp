@@ -4,8 +4,8 @@ Motor::Motor(PinName left, PinName right,
              PinName direction_left, PinName direction_right, PinName enable)
     : m_direction_left(direction_left, 1), m_direction_right(direction_right, 1),
       m_enable(enable, 0), left_motor(left), right_motor(right) {
-          set_dutycycle('A',0);
-      }
+    set_dutycycle('A', 0);
+}
 
 void Motor::set_enable(int enable) {
 
@@ -96,13 +96,13 @@ void Motor::forward(const double distance, Motor *const motor, Encoder *const le
 
         if (left_encoder->read_counter() < right_encoder->read_counter()) {
 
-            auto correction = static_cast<double>(right_encoder->read_counter() / left_encoder->read_counter());
+            auto correction = static_cast<double>(right_encoder->read_counter()) / left_encoder->read_counter();
             motor->set_dutycycle('L', SLOW_PWM * correction * 1.05);
             motor->set_dutycycle('R', SLOW_PWM);
 
         } else if (right_encoder->read_counter() < left_encoder->read_counter()) {
 
-            auto correction = static_cast<double>(left_encoder->read_counter() / right_encoder->read_counter());
+            auto correction = static_cast<double>(left_encoder->read_counter()) / right_encoder->read_counter();
             motor->set_dutycycle('R', SLOW_PWM * correction);
             motor->set_dutycycle('L', SLOW_PWM * 1.05);
         }
@@ -128,13 +128,13 @@ void Motor::reverse(const double distance, Motor *const motor, Encoder *const le
         // Encoder growing negatively
         if (left_encoder->read_counter() > right_encoder->read_counter()) {
 
-            auto correction = static_cast<double>(right_encoder->read_counter() / left_encoder->read_counter());
+            auto correction = static_cast<double>(right_encoder->read_counter()) / left_encoder->read_counter();
             motor->set_dutycycle('L', SLOW_PWM * correction * 1.05);
             motor->set_dutycycle('R', SLOW_PWM);
 
         } else if (right_encoder->read_counter() > left_encoder->read_counter()) {
 
-            auto correction = static_cast<double>(left_encoder->read_counter() / right_encoder->read_counter());
+            auto correction = static_cast<double>(left_encoder->read_counter()) / right_encoder->read_counter();
             motor->set_dutycycle('R', SLOW_PWM * correction);
             motor->set_dutycycle('L', SLOW_PWM * 1.05);
         }

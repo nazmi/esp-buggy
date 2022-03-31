@@ -52,25 +52,23 @@
 PID::PID(float Kc, float tauI, float tauD, float interval) {
 
     _usingFeedForward = false;
-    _inAuto = false;
 
     // Default the limits to the full range of I/O: 3.3V
     // Make sure to set these to more appropriate limits for your application
-    setInputLimits(0.0, 3.3);
-    setOutputLimits(0.0, 3.3);
+    setInputLimits(0.0f, 3.3f);
+    setOutputLimits(0.0f, 3.3f);
 
     _tSample = interval;
     setTunings(Kc, tauI, tauD);
 
-    _setPoint = 0.0;
-    _processVariable = 0.0;
-    _prevProcessVariable = 0.0;
-    _controllerOutput = 0.0;
-    _prevControllerOutput = 0.0;
+    _setPoint = 0.0f;
+    _processVariable = 0.0f;
+    _prevProcessVariable = 0.0f;
+    _controllerOutput = 0.0f;
+    _prevControllerOutput = 0.0f;
 
-    _accError = 0.0;
-    _bias = 0.0;
-    _realOutput = 0.0;
+    _accError = 0.0f;
+    _bias = 0.0f;
 }
 
 void PID::setInputLimits(float inMin, float inMax) {
@@ -111,7 +109,7 @@ void PID::setOutputLimits(float outMin, float outMax) {
 void PID::setTunings(float Kc, float tauI, float tauD) {
 
     // Verify that the tunings make sense.
-    if (Kc == 0.0 || tauI < 0.0 || tauD < 0.0) {
+    if (Kc == 0.0f || tauI < 0.0f || tauD < 0.0f) {
         return;
     }
 
@@ -122,62 +120,15 @@ void PID::setTunings(float Kc, float tauI, float tauD) {
 
     float tempTauR;
 
-    if (tauI == 0.0) {
-        tempTauR = 0.0;
+    if (tauI == 0.0f) {
+        tempTauR = 0.0f;
     } else {
-        tempTauR = (1.0 / tauI) * _tSample;
-    }
-
-    // For "bumpless transfer" we need to rescale the accumulated error.
-    if (_inAuto) {
-        if (tempTauR == 0.0) {
-            _accError = 0.0;
-        } else {
-            _accError *= (_Kc * _tauR) / (Kc * tempTauR);
-        }
+        tempTauR = (1.0f / tauI) * _tSample;
     }
 
     _Kc = Kc;
     _tauR = tempTauR;
     _tauD = tauD / _tSample;
-}
-
-void PID::reset(void) {
-
-    float scaledBias = 0.0;
-
-    if (_usingFeedForward) {
-        scaledBias = (_bias - _outMin) / _outSpan;
-    } else {
-        scaledBias = (_realOutput - _outMin) / _outSpan;
-    }
-
-    _prevControllerOutput = scaledBias;
-    _prevProcessVariable = (_processVariable - _inMin) / _inSpan;
-
-    // Clear any error in the integral.
-    _accError = 0;
-}
-
-void PID::setMode(int mode) {
-    // We were in manual, and we just got set to auto.
-    // Reset the controller internals.
-    if (mode != 0 && !_inAuto) {
-        reset();
-    }
-
-    _inAuto = (mode != 0);
-}
-
-void PID::setInterval(float interval) {
-
-    if (interval > 0) {
-        // Convert the time-based tunings to reflect this change.
-        _tauR *= (interval / _tSample);
-        _accError *= (_tSample / interval);
-        _tauD *= (interval / _tSample);
-        _tSample = interval;
-    }
 }
 
 void PID::setSetPoint(float sp) {
@@ -217,8 +168,14 @@ float PID::compute() {
     }
 
     // Perform the PID calculation.
-    _controllerOutput = scaledBias + _Kc * (error + (_tauR * _accError) - (_tauD * dMeas));
-    printf("[ %.5f %.5f %.5f %.5f %.5f ", scaledPV, scaledSP, error,dMeas,_controllerOutput);
+    float derivative = _tauD * dMeas;
+    if (abs(error) > abs(derivative)) {
+        _controllerOutput = scaledBias + _Kc * (error + (_tauR * _accError) - derivative);
+    } else {
+        _controllerOutput = scaledBias + _Kc * (error + (_tauR * _accError));
+    }
+
+    printf("[ %.5f %.5f %.5f %.5f %.5f ", scaledPV, scaledSP, error, dMeas, _controllerOutput);
     // Make sure the computed output is within output constraints.
     _controllerOutput = clamp(_controllerOutput, -1.0f, 1.0f);
 
