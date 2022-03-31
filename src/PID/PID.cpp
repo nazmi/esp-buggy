@@ -101,7 +101,7 @@ void PID::setOutputLimits(float outMin, float outMax) {
     _prevControllerOutput *= (outMax - outMin) / _outSpan;
 
     // Make sure the working variables are within the new limits.
-    _prevControllerOutput = clamp(_prevControllerOutput, 0.0f, 1.0f);
+    _prevControllerOutput = clamp(_prevControllerOutput, -1.0f, 1.0f);
 
     _outMin = outMin;
     _outMax = outMax;
@@ -202,7 +202,7 @@ float PID::compute() {
     // Pull in the input and setpoint, and scale them into percent span.
     float scaledPV = clamp((_processVariable - _inMin) / _inSpan, 0.0f, 1.0f);
     float scaledSP = clamp((_setPoint - _inMin) / _inSpan, 0.0f, 1.0f);
-    float error = scaledPV - scaledSP;
+    float error = scaledSP - scaledPV;
     float dMeas = (scaledPV - _prevProcessVariable) / _tSample;
     float scaledBias = 0.0;
 
@@ -218,15 +218,15 @@ float PID::compute() {
 
     // Perform the PID calculation.
     _controllerOutput = scaledBias + _Kc * (error + (_tauR * _accError) - (_tauD * dMeas));
-
+    printf("[ %.5f %.5f %.5f %.5f %.5f ", scaledPV, scaledSP, error,dMeas,_controllerOutput);
     // Make sure the computed output is within output constraints.
-    _controllerOutput = clamp(_controllerOutput, 0.0f, 1.0f);
+    _controllerOutput = clamp(_controllerOutput, -1.0f, 1.0f);
 
     // Remember this output for the windup check next time.
     _prevControllerOutput = _controllerOutput;
     // Remember the input for the derivative calculation next time.
     _prevProcessVariable = scaledPV;
-
+    printf("%.5f] \n", (_controllerOutput * _outSpan) + _outMin);
     // Scale the output from percent span back out to a real world number.
     return ((_controllerOutput * _outSpan) + _outMin);
 }

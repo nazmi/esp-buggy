@@ -7,6 +7,8 @@ WheelControl::WheelControl() : leftcontroller(2.0, 1.2, 0.0002, 0.01),
     leftcontroller.setMode(1);
     rightcontroller.setMode(1);
     linecontroller.setMode(1);
+    leftcontroller.setInputLimits(0, ENCODER_LIMIT);
+    rightcontroller.setInputLimits(0, ENCODER_LIMIT);
 }
 
 void WheelControl::setSpeedController(float Kc, float tauI, float tauD, float interval) {
@@ -40,20 +42,8 @@ void WheelControl::setTargetSpeed(float speed) {
     if (m_target < 0)
         return;
 
-    m_target = speed_to_pps(speed);
-    m_setLineOutputLimits();
-    m_setSpeedLimits();
-}
-
-void WheelControl::m_setLineOutputLimits() {
-
+    m_target = clamp(speed_to_pps(speed), 0.0f, ENCODER_LIMIT);
     linecontroller.setOutputLimits(0, m_target);
-}
-
-void WheelControl::m_setSpeedLimits() {
-
-    leftcontroller.setInputLimits(0, 2 * m_target);
-    rightcontroller.setInputLimits(0, 2 * m_target);
 }
 
 void WheelControl::m_setSetPoint(float left_val, float right_val) {
@@ -68,55 +58,75 @@ void WheelControl::m_setProcessValue(float left_val, float right_val) {
     rightcontroller.setProcessValue(right_val);
 }
 
-vector<pff> WheelControl::computeSpeed(float position, const Encoder &left_encoder, const Encoder &right_encoder) {
+vector<pif> WheelControl::computeSpeed(float position, const Encoder &left_encoder, const Encoder &right_encoder) {
 
     bool positionIsPositive{true};
-    float abs_position{position};
+    float abs_position{abs(position)};
     float abs_left_encoder_pps{static_cast<float>(abs(left_encoder.read_pps()))};
     float abs_right_encoder_pps{static_cast<float>(abs(right_encoder.read_pps()))};
 
     // PID works in %, unsigned range so, manipulating data is required.
     // PID outputs only +ve value, no direction can be extracted.
     if (position < 0) {
-
-        abs_position = abs(position);
         positionIsPositive = false;
     }
 
     // Compute line follower controller
-    linecontroller.setProcessValue(abs_position);
-    float delta_target = linecontroller.compute();
+    linecontroller.setProcessValue(position);
+    printf("PID OUTPUT:       PV      SP     Error    Derror  Output  ScaledOutput\n");
+    printf("Line output : ");
+    float delta_target = abs(linecontroller.compute());
+    float delta_plus = m_target + delta_target;
+    float delta_minus = m_target - delta_target;
+    // Adaptive Set Point
+    if (abs_position < 0.5f) {
 
-    // Compute speed controller
-    if (positionIsPositive) {
+        m_setSetPoint(m_target, m_target);
 
-        m_setSetPoint(m_target + delta_target, m_target);
+    } else if (abs_position > 15.0f) {
+
+        if (positionIsPositive) {
+
+            m_setSetPoint(1.5 * delta_plus, 0.0f);
+
+        } else {
+
+            m_setSetPoint(0.0f, 1.5 * delta_plus);
+        }
 
     } else {
 
-        m_setSetPoint(m_target, m_target + delta_target);
+        if (positionIsPositive) {
+
+            m_setSetPoint(delta_plus, delta_minus);
+
+        } else {
+
+            m_setSetPoint(delta_minus, delta_plus);
+        }
     }
 
     m_setProcessValue(abs_left_encoder_pps, abs_right_encoder_pps);
-
-    float left_output = leftcontroller.compute();
-    float right_output = rightcontroller.compute();
+    printf("Left output : ");
+    float left_output = clamp(leftcontroller.compute(), 0.0f, 1.0f);
+    printf("Right output: ");
+    float right_output = clamp(rightcontroller.compute(), 0.0f, 1.0f);
 
     // Special cases when going up of ramp
     // Braking when go down.
     // Producing when go up.
-    vector<pff> results{{1.0f, left_output}, {1.0f, right_output}};
+    vector<pif> results{{1, left_output}, {1, right_output}};
 
-    if (abs_left_encoder_pps > m_target && abs_position < 9.0f) {
+    if (abs_left_encoder_pps > m_target && abs_position < 2.0f) {
 
-        results[0].first = -1.0f;
-        results[0].second = 0.3;
+        results[0].first = 0;
+        results[0].second = 0.1f;
     }
 
-    if (abs_right_encoder_pps > m_target && abs_position < 9.0f) {
+    if (abs_right_encoder_pps > m_target && abs_position < 2.0f) {
 
-        results[1].first = -1.0f;
-        results[1].second = 0.3;
+        results[1].first = 0;
+        results[1].second = 0.1f;
     }
 
     return results;

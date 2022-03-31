@@ -6,7 +6,9 @@
 #include <utility>
 #include <vector>
 
-typedef pair<float, float> pff;
+#define OFFSET 27.0f
+#define ENCODER_LIMIT 2000.0f
+typedef pair<int, float> pif;
 
 class WheelControl {
   private:
@@ -15,8 +17,6 @@ class WheelControl {
     PID rightcontroller;
     PID linecontroller;
 
-    void m_setLineOutputLimits();
-    void m_setSpeedLimits();
     void m_setSetPoint(float left_val, float right_val);
     void m_setProcessValue(float left_val, float right_val);
 
@@ -30,7 +30,7 @@ class WheelControl {
     void setPWMLimits(float low, float high);
     void setTargetSpeed(float speed);
 
-    vector<pff> computeSpeed(float position, const Encoder &left_encoder, const Encoder &right_encoder);
+    vector<pif> computeSpeed(float position, const Encoder &left_encoder, const Encoder &right_encoder);
 };
 
 #endif  // WHEEL_CONTROL_H
