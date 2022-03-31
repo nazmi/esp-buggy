@@ -6,8 +6,8 @@ using std::min_element;
 
 bool Sensor::s_run = false;
 std::array<float, 6> Sensor::WEIGHTS = {27, 9, -9, -27, 9, -9};
-std::array<float, 6> Sensor::BLACK_TRESHOLD = {0.004934593, 0.014571535, 0.013338404, 0.01000882, 0.015825268, 0.02775455};
-std::array<float, 6> Sensor::SCALE_FACTOR = {3.13481219, 3.064968664, 3.252208943, 3.197312711, 3.097903068, 2.695666361};
+std::array<float, 6> Sensor::BLACK_TRESHOLD = {0.000576735,	0.008243035,	0.010218155,	0.004252569,	0.007279201,	0.023050267};
+std::array<float, 6> Sensor::SCALE_FACTOR = {3.63554,	3.51805,	3.77641,	3.40797,	3.50128,	2.81837};
 
 Sensor::Sensor(PinName p1, PinName p2, PinName p3, PinName p4, PinName p5, PinName p6,
                PinName in1, PinName in2, PinName in3, PinName in4, PinName in5, PinName in6)
@@ -17,8 +17,6 @@ Sensor::Sensor(PinName p1, PinName p2, PinName p3, PinName p4, PinName p5, PinNa
 float Sensor::read() {
 
     m_distance = 0;
-    // Timer t;
-    // t.start();
 
     // All off to capture noise
     m_pins.write(0);
@@ -59,6 +57,7 @@ float Sensor::read() {
                                               [](float reading) { return reading > WHITE_TRESHOLD; });
     if (isUnderWhiteLine) {
 
+        no_track_counter = 0;
         // Check if second row is contributing to any m_distance m_reading
         const auto isCenterOn = m_reading[4] > WHITE_TRESHOLD || m_reading[5] > WHITE_TRESHOLD;
         if (isCenterOn) {
@@ -70,9 +69,9 @@ float Sensor::read() {
     } else {
 
         m_distance = NO_TRACK;
+        no_track_counter++;
     }
 
-    // t.stop();
 
     // if (!s_run) {
     //     printf("1,2,3,4,5,6,time,m_distance\n");
@@ -81,13 +80,8 @@ float Sensor::read() {
     // for (const auto &reading : m_reading) {
     //     printf("%.5f,", reading);
     // }
-    // // for (const auto &noise : m_noise) {
-    // //     printf("%.5f,", noise);
-    // // }
-    // printf("%lld,", t.elapsed_time().count() * 1);
     // printf("%f\n", m_distance);
 
-    // t.reset();
 
     return m_distance;
 }
@@ -118,15 +112,18 @@ float Sensor::getDistance() const {
     return m_distance;
 }
 
+int Sensor::getNoTrackCounter() const {
+    return no_track_counter;
+}
+
 void Sensor::calibrate_black() {
 
     std::array<float, 6> calibrate_data{};
-    m_pins.write(0);
     wait_us(25);
     for (size_t i = 0; i < m_analog.size(); ++i) {
 
-        // m_pins.write(1 << i);
-        // wait_us(25);
+        m_pins.write(1 << i);
+        wait_us(25);
 
         calibrate_data[i] = m_analog[i].read();
     }

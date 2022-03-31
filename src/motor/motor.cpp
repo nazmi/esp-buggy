@@ -3,7 +3,9 @@
 Motor::Motor(PinName left, PinName right,
              PinName direction_left, PinName direction_right, PinName enable)
     : m_direction_left(direction_left, 1), m_direction_right(direction_right, 1),
-      m_enable(enable, 0), left_motor(left), right_motor(right) {}
+      m_enable(enable, 0), left_motor(left), right_motor(right) {
+          set_dutycycle('A',0);
+      }
 
 void Motor::set_enable(int enable) {
 

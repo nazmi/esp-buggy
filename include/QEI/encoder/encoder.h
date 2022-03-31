@@ -14,8 +14,11 @@
 /** @brief Counts per revolution of encoder.*/
 #define COUNTS_PER_REV 256
 /** @brief Polling period of encoder.*/
-#define POLLING_PERIOD 1ms
+#define POLLING_PERIOD 10ms
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846264338327950288
+#endif
 /**
  * @brief Encoder class with helper functions, derived from QEI.
  * @details This class call a function periodically to measure the speed of wheel. It features return values in terms of pulse per second, distance, and velocity.
