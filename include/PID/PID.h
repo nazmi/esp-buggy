@@ -96,6 +96,11 @@ class PID {
      */
     void setTunings(float Kc, float tauI, float tauD);
 
+     /**
+      * @brief Reset previous values of output and error.
+      */
+    void reset();
+
     /**
      * Set the set point.
      *

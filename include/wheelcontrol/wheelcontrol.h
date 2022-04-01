@@ -25,10 +25,10 @@ class WheelControl {
 
     void setSpeedController(float Kc, float tauI, float tauD);
     void setLineController(float Kc, float tauI, float tauD);
-
     void setLineLimits(float low, float high);
     void setPWMLimits(float low, float high);
     void setTargetSpeed(float speed);
+    void reset();
 
     vector<pif> computeSpeed(float position, const Encoder &left_encoder, const Encoder &right_encoder);
 };

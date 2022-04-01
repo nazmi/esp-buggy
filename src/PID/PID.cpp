@@ -131,6 +131,13 @@ void PID::setTunings(float Kc, float tauI, float tauD) {
     _tauD = tauD / _tSample;
 }
 
+void PID::reset() {
+
+    _prevProcessVariable = 0.0f;
+    _prevControllerOutput = 0.0f;
+    _accError = 0.0f;
+}
+
 void PID::setSetPoint(float sp) {
     _setPoint = sp;
 }

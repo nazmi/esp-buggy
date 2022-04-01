@@ -18,11 +18,11 @@ int main() {
     DigitalOut analog_1(PC_5, 0), analog_2(PB_1, 0), analog_3(PC_4, 0);
 
     WheelControl controller;
-    controller.setSpeedController(1.35, 0, 0.00005);
-    controller.setLineController(1.35, 0.0f, 0.0f);
+    controller.setSpeedController(0.75f, 0.0f, 0.0004f);
+    controller.setLineController(1.2f, 0.0f, 0.0f);
     controller.setLineLimits(-27.0f, 27.0f);
     controller.setPWMLimits(0.0f, 1.0f);
-    controller.setTargetSpeed(0.75f);
+    controller.setTargetSpeed(1.5f);
 
     char c;
     Timer test;
@@ -92,7 +92,9 @@ int main() {
                         } else if (c == 'Q') {
                             motor.set_enable(0);
                             ThisThread::sleep_for(1s);
-                            motor.turnright(175, &motor, &wheel_left, &wheel_right);
+                            motor.turnright(172, &motor, &wheel_left, &wheel_right);
+                            controller.reset();
+                            motor.set_dutycycle('A', 0);
                             motor.set_enable(1);
                         }
                     }

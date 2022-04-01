@@ -39,6 +39,13 @@ void WheelControl::setTargetSpeed(float speed) {
     linecontroller.setOutputLimits(0, m_target);
 }
 
+void WheelControl::reset() {
+
+    leftcontroller.reset();
+    rightcontroller.reset();
+    linecontroller.reset();
+}
+
 void WheelControl::m_setSetPoint(float left_val, float right_val) {
 
     leftcontroller.setSetPoint(left_val);
@@ -55,8 +62,8 @@ vector<pif> WheelControl::computeSpeed(float position, const Encoder &left_encod
 
     // bool positionIsPositive{true};
     float abs_position{abs(position)};
-    float abs_left_encoder_pps{static_cast<float>(abs(2 * left_encoder.read_pps()))};
-    float abs_right_encoder_pps{static_cast<float>(abs(2 * right_encoder.read_pps()))};
+    float abs_left_encoder_pps{static_cast<float>(abs(left_encoder.read_pps()))};
+    float abs_right_encoder_pps{static_cast<float>(abs(right_encoder.read_pps()))};
 
     // Record the position value so controller output can be manipulated
     // if (position < 0) {
@@ -81,7 +88,7 @@ vector<pif> WheelControl::computeSpeed(float position, const Encoder &left_encod
 
     } else if (abs_position > 15.0f) {
 
-        m_setSetPoint(delta_left - delta_target, delta_right + delta_target);
+        m_setSetPoint(delta_left - 0.4 * delta_target, delta_right + 0.4 * delta_target);
 
     } else {
 
