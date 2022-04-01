@@ -50,7 +50,7 @@ double Encoder::read_distance() const {
 }
 
 double Encoder::read_pps() const {
-    return m_pulse_per_sec;
+    return 2 * m_pulse_per_sec;
 }
 
 double Encoder::average_angular(const Encoder &right_encoder, const Encoder &left_encoder) {

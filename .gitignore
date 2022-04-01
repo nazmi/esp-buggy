@@ -2,13 +2,14 @@
 .mbed
 .vscode
 .tmp.driveupload
+.hg
 *.xml
 *.bat
 *.txt
 *.csv
 *.xlsx
-.hg
 *.py*
+compile_commands.json
 projectfiles
 mbed-os
 BUILD

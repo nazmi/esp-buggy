@@ -7,7 +7,6 @@
 #include <array>
 #include <cstdio>
 
-#define OFFTRACK 0.15
 #define PRESCALER 10.0f
 #define NO_TRACK 30
 #define WHITE_TRESHOLD 0.8
@@ -19,6 +18,7 @@ class Sensor {
     std::array<float, 6> m_reading{};
     std::array<float, 6> m_noise{};
     float m_distance{0};
+    int no_track_counter{0};
 
   public:
     Sensor(PinName p1, PinName p2, PinName p3, PinName p4, PinName p5, PinName p6,
@@ -32,6 +32,7 @@ class Sensor {
     float read();
     void toggle(const bool on);
     float getDistance() const;
+    int getNoTrackCounter() const;
     void calibrate_black();
     void calibrate_white();
 };

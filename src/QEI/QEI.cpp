@@ -188,7 +188,6 @@ int QEI::getRevolutions(void) {
 // the state and carry on, with the error correcting itself shortly after.
 void QEI::encode(void) {
 
-    int change = 0;
     int chanA = channelA_.read();
     int chanB = channelB_.read();
 
@@ -219,9 +218,9 @@ void QEI::encode(void) {
         if (((currState_ ^ prevState_) != INVALID) && (currState_ != prevState_)) {
             // 2 bit state. Right hand bit of prev XOR left hand bit of current
             // gives 0 if clockwise rotation and 1 if counter clockwise rotation.
-            change = (prevState_ & PREV_MASK) ^ ((currState_ & CURR_MASK) >> 1);
+            int change = (prevState_ & PREV_MASK) ^ ((currState_ & CURR_MASK) >> 1);
 
-            if (change == 0) {
+            if (!change) {
                 change = -1;
             }
 

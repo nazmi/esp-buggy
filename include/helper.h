@@ -29,7 +29,7 @@ constexpr const T &clamp(const T &v, const T &lo, const T &hi) {
  */
 template <class T>
 constexpr const T speed_to_pps(const T &speed) {
-    return speed * 256 / Encoder::CIRCUMFERENCE;
+    return speed * 512 / Encoder::CIRCUMFERENCE;
 }
 
 /**
