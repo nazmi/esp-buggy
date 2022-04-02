@@ -8,7 +8,7 @@ var searchData=
   ['circumference_5',['CIRCUMFERENCE',['../class_encoder.html#af6c8f36da1f6de7228a591e9ace1f735',1,'Encoder']]],
   ['clamp_6',['clamp',['../helper_8h.html#aab9f0232e41c960b4a09629eac33aef3',1,'helper.h']]],
   ['compute_7',['compute',['../class_p_i_d.html#a9900dff400b1796cb0d281136524f73f',1,'PID']]],
-  ['computespeed_8',['computeSpeed',['../class_wheel_control.html#adde559a7a184f644405218178335cdc1',1,'WheelControl']]],
+  ['computespeed_8',['computeSpeed',['../class_wheel_control.html#a38eae4ab8a54d49009a685b1341c7a3a',1,'WheelControl']]],
   ['counts_5fper_5frev_9',['COUNTS_PER_REV',['../encoder_8h.html#a3518641a6d2b8381fe5bbf5d08760b4d',1,'encoder.h']]],
   ['curr_5fmask_10',['CURR_MASK',['../_q_e_i_8h.html#a7c88b710ce6b5128524915cc7f5b051c',1,'QEI.h']]],
   ['currstate_5f_11',['currState_',['../class_q_e_i.html#aa16e7fa1d8bd87cbb496bbdc7c7d76b9',1,'QEI']]]

@@ -4,11 +4,11 @@ var indexSectionsWithContent =
   1: "empqsw",
   2: "defhmpqrsw",
   3: "acefgimpqrstw",
-  4: "_bcefilmprsw",
-  5: "e",
+  4: "_bcefilmnprsw",
+  5: "ep",
   6: "e",
   7: "x",
-  8: "acdfghimnopsw",
+  8: "cdefghimnopsw",
   9: "eit"
 };
 

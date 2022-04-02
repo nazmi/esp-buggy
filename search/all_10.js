@@ -7,7 +7,7 @@ var searchData=
   ['read_5fpps_4',['read_pps',['../class_encoder.html#adca14051ba0093e03292ddee24c606c1',1,'Encoder']]],
   ['read_5fvelocity_5',['read_velocity',['../class_encoder.html#aa775c42ac01dda961b7489f847ddd107',1,'Encoder']]],
   ['readme_2emd_6',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]],
-  ['reset_7',['reset',['../class_p_i_d.html#a73cdd43d93f2cfcf19b62f7e5022bb90',1,'PID::reset()'],['../class_q_e_i.html#a734c89fb5d882bffb26132ac3db77caf',1,'QEI::reset()']]],
+  ['reset_7',['reset',['../class_p_i_d.html#af9677e76cb1beffbcf3f54cbc627c530',1,'PID::reset()'],['../class_q_e_i.html#a734c89fb5d882bffb26132ac3db77caf',1,'QEI::reset()'],['../class_wheel_control.html#a85aaf901928241f59c6316d8664362d9',1,'WheelControl::reset()']]],
   ['reset_5fcounter_8',['reset_counter',['../class_encoder.html#a300dcd95c5aaae316658e1b85e947e18',1,'Encoder']]],
   ['reverse_9',['reverse',['../class_motor.html#a4855077c33cbc69665fc0f43d5a24a84',1,'Motor']]],
   ['revolutions_5f_10',['revolutions_',['../class_q_e_i.html#a2627141c6f094da10b9fb3e48e719f92',1,'QEI']]],

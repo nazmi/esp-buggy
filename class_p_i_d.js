@@ -4,16 +4,13 @@ var class_p_i_d =
     [ "setInputLimits", "class_p_i_d.html#a4ea71918cdebb391c8820f522f194a47", null ],
     [ "setOutputLimits", "class_p_i_d.html#a501374c98a1c3b6496f2e6502b9ad44b", null ],
     [ "setTunings", "class_p_i_d.html#afa94b047006aaaf3d467dea5b5c08d7d", null ],
-    [ "reset", "class_p_i_d.html#a73cdd43d93f2cfcf19b62f7e5022bb90", null ],
-    [ "setMode", "class_p_i_d.html#a764740e374230940d39c7386bf709258", null ],
-    [ "setInterval", "class_p_i_d.html#a8ee65fc3cf943d363846c08dd4dcb301", null ],
+    [ "reset", "class_p_i_d.html#af9677e76cb1beffbcf3f54cbc627c530", null ],
     [ "setSetPoint", "class_p_i_d.html#ad9fef377fbdea7521053e4dd60243b15", null ],
     [ "getSetPoint", "class_p_i_d.html#a58375f1a5e88b0eae9676a0ea2a8e196", null ],
     [ "setProcessValue", "class_p_i_d.html#a066be8c5f0cf0d48737074a5438cd093", null ],
     [ "setBias", "class_p_i_d.html#a75dc96fa25780eb980528393007e5e22", null ],
     [ "compute", "class_p_i_d.html#a9900dff400b1796cb0d281136524f73f", null ],
     [ "_usingFeedForward", "class_p_i_d.html#ac08964c74dfe73d847624bad824571b3", null ],
-    [ "_inAuto", "class_p_i_d.html#aa677bc4800abd66ec32544a74dc7f7b0", null ],
     [ "_Kc", "class_p_i_d.html#a72b2393e344ecc43102f0874af2bc8a8", null ],
     [ "_tauR", "class_p_i_d.html#accb4480173c7c38a2316dc254a1e03d2", null ],
     [ "_tauD", "class_p_i_d.html#ad4621fd1cc0a3919a247b8162f293f32", null ],
@@ -33,6 +30,5 @@ var class_p_i_d =
     [ "_outSpan", "class_p_i_d.html#a17997c7ed80b980caa736605bb3267cb", null ],
     [ "_accError", "class_p_i_d.html#afc25f129d1cb3620b113c62b649e944a", null ],
     [ "_bias", "class_p_i_d.html#a243a3a02a5292d9168bf3d42b87bf2de", null ],
-    [ "_tSample", "class_p_i_d.html#ab790e3a93f09ff6cd5290e4613907989", null ],
-    [ "_realOutput", "class_p_i_d.html#a6a54cd488340524ecdfcd64ee438de8f", null ]
+    [ "_tSample", "class_p_i_d.html#ab790e3a93f09ff6cd5290e4613907989", null ]
 ];

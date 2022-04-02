@@ -105,17 +105,19 @@ $(document).ready(function(){initNavTree('wheelcontrol_8h.html',''); initResizab
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a>  </div>
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle"><div class="title">wheelcontrol.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;mbed.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="_p_i_d_8h_source.html">PID.h</a>&quot;</code><br />
 <code>#include &lt;utility&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for wheelcontrol.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="wheelcontrol_8h__incl.svg" width="370" height="426"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="wheelcontrol_8h__incl.svg" width="342" height="426"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
@@ -128,18 +130,54 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a981b0904052e69194b0c35179eb03b6a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wheelcontrol_8h.html#a981b0904052e69194b0c35179eb03b6a">SENSORWIDTH</a>&#160;&#160;&#160;54</td></tr>
-<tr class="separator:a981b0904052e69194b0c35179eb03b6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21005f9f4e2ce7597c5eb4351816d7e2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wheelcontrol_8h.html#a21005f9f4e2ce7597c5eb4351816d7e2">OFFSET</a>&#160;&#160;&#160;27.0f</td></tr>
+<tr class="separator:a21005f9f4e2ce7597c5eb4351816d7e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5419d77ed11a58d3abd038ced957e92d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wheelcontrol_8h.html#a5419d77ed11a58d3abd038ced957e92d">ENCODER_LIMIT</a>&#160;&#160;&#160;4000.0f</td></tr>
+<tr class="separator:a5419d77ed11a58d3abd038ced957e92d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ad1401db2cbc6ededbf746b985144e6f1"><td class="memItemLeft" align="right" valign="top">typedef pair&lt; int, float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wheelcontrol_8h.html#ad1401db2cbc6ededbf746b985144e6f1">pif</a></td></tr>
+<tr class="separator:ad1401db2cbc6ededbf746b985144e6f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a981b0904052e69194b0c35179eb03b6a" name="a981b0904052e69194b0c35179eb03b6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a981b0904052e69194b0c35179eb03b6a">&#9670;&nbsp;</a></span>SENSORWIDTH</h2>
+<a id="a21005f9f4e2ce7597c5eb4351816d7e2" name="a21005f9f4e2ce7597c5eb4351816d7e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21005f9f4e2ce7597c5eb4351816d7e2">&#9670;&nbsp;</a></span>OFFSET</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SENSORWIDTH&#160;&#160;&#160;54</td>
+          <td class="memname">#define OFFSET&#160;&#160;&#160;27.0f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5419d77ed11a58d3abd038ced957e92d" name="a5419d77ed11a58d3abd038ced957e92d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5419d77ed11a58d3abd038ced957e92d">&#9670;&nbsp;</a></span>ENCODER_LIMIT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ENCODER_LIMIT&#160;&#160;&#160;4000.0f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="ad1401db2cbc6ededbf746b985144e6f1" name="ad1401db2cbc6ededbf746b985144e6f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1401db2cbc6ededbf746b985144e6f1">&#9670;&nbsp;</a></span>pif</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef pair&lt;int, float&gt; <a class="el" href="wheelcontrol_8h.html#ad1401db2cbc6ededbf746b985144e6f1">pif</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
