@@ -1,52 +1,49 @@
-/**
- * @author Aaron Berk
- *
- * @section LICENSE
- *
- * Copyright (c) 2010 ARM Limited
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @section DESCRIPTION
- *
- * A PID controller is a widely used feedback controller commonly found in
- * industry.
- *
- * This library is a port of Brett Beauregard's Arduino PID library:
- *
- *  http://www.arduino.cc/playground/Code/PIDLibrary
- *
- * The wikipedia article on PID controllers is a good place to start on
- * understanding how they work:
- *
- *  http://en.wikipedia.org/wiki/PID_controller
- *
- * For a clear and elegant explanation of how to implement and tune a
- * controller, the controlguru website by Douglas J. Cooper (who also happened
- * to be Brett's controls professor) is an excellent reference:
- *
- *  http://www.controlguru.com/
- */
+// /**
+//  * @author Aaron Berk
+//  *
+//  * @section LICENSE1
+//  *
+//  * Copyright (c) 2010 ARM Limited
+//  *
+//  * Permission is hereby granted, free of charge, to any person obtaining a copy
+//  * of this software and associated documentation files (the "Software"), to deal
+//  * in the Software without restriction, including without limitation the rights
+//  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  * copies of the Software, and to permit persons to whom the Software is
+//  * furnished to do so, subject to the following conditions:
+//  *
+//  * The above copyright notice and this permission notice shall be included in
+//  * all copies or substantial portions of the Software.
+//  *
+//  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  * THE SOFTWARE.
+//  *
+//  * @section DESCRIPTION1
+//  *
+//  * A PID controller is a widely used feedback controller commonly found in
+//  * industry.
+//  *
+//  * This library is a port of Brett Beauregard's Arduino PID library:
+//  *
+//  *  http://www.arduino.cc/playground/Code/PIDLibrary
+//  *
+//  * The wikipedia article on PID controllers is a good place to start on
+//  * understanding how they work:
+//  *
+//  *  http://en.wikipedia.org/wiki/PID_controller
+//  *
+//  * For a clear and elegant explanation of how to implement and tune a
+//  * controller, the controlguru website by Douglas J. Cooper (who also happened
+//  * to be Brett's controls professor) is an excellent reference:
+//  *
+//  *  http://www.controlguru.com/
+//  */
 
-/**
- * Includes
- */
 #include "PID.h"
 
 PID::PID(float Kc, float tauI, float tauD, float interval) {

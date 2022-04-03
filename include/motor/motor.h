@@ -8,7 +8,7 @@
 
 /** @brief Fast duty cycle constant.*/
 #define FAST_PWM 0.6
-/** @brief Normal duty cycle constant.*/
+/** @brief Half duty cycle constant.*/
 #define HALF_PWM 0.5
 /** @brief Slow duty cycle constant.*/
 #define SLOW_PWM 0.3
@@ -23,10 +23,13 @@ class Motor {
   private:
     /** @brief Direction for the left motor. */
     DigitalOut m_direction_left;
+
     /** @brief Direction for the right motor. */
     DigitalOut m_direction_right;
+
     /** @brief Enable pin to motor driver board. */
     DigitalOut m_enable;
+
     /** @brief Period of PWM output.
      *
      *\f${m\\_period} = \frac{1}{frequency}\\\f$
@@ -36,6 +39,7 @@ class Motor {
   public:
     /** @brief Left motor PwmOut.*/
     PwmOut left_motor;
+
     /** @brief Right motor PwmOut.*/
     PwmOut right_motor;
 
@@ -59,14 +63,14 @@ class Motor {
      * - 1 Enabled
      * - 0 Disabled
      */
-    void set_enable(int enable);
+    void setEnable(int enable);
 
     /**
      * @overload
      * @brief Toggle the \link m_enable enable pin\endlink of the motor driver board, if no argument is given.
      *
      */
-    void set_enable();
+    void setEnable();
 
     /**
      * @brief Get the \link m_enable enable status\endlink of the motor driver board.
@@ -75,21 +79,21 @@ class Motor {
      * - 1 Enabled.
      * - 0 Disabled.
      */
-    int get_enable();
+    int getEnable();
 
     /**
      * @brief Set the \link m_period frequency\endlink of the PwmOut.
      *
      * @param frequency Frequency of the PWM.
      */
-    void set_frequency(float frequency);
+    void setFrequency(float frequency);
 
     /**
      * @brief Get the \link m_period frequency\endlink of the PwmOut.
      *
      * @return float Frequency of the PWM.
      */
-    float get_frequency() const;
+    float getFrequency() const;
 
     /**
      * @brief Set the direction of the motors, provided the direction.
@@ -102,7 +106,7 @@ class Motor {
      * - 1 forward.
      * - 0 reverse.
      */
-    void set_direction(char c, int direction);
+    void setDirection(char c, int direction);
 
     /**
      * @overload
@@ -113,14 +117,14 @@ class Motor {
      * - 'R' for \link m_direction_right right motor\endlink.
      * - otherwise for both motors.
      */
-    void set_direction(char c);
+    void setDirection(char c);
 
     /**
      * @brief Get the direction of the motors.
      *
      * @return std::pair<int,int> { #m_direction_left, #m_direction_right }.
      */
-    std::pair<int, int> get_direction() const;
+    std::pair<int, int> getDirection() const;
 
     /**
      * @brief Set the duty cycle of the motors.
@@ -133,14 +137,14 @@ class Motor {
      * and 1.
      *
      */
-    void set_dutycycle(char c, float dutycycle);
+    void setDutycycle(char c, float dutycycle);
 
     /**
      * @brief Get the duty cycle of the motors.
      *
      * @return std::pair<float,float> {Left motor duty cycle, Right motor duty cycle}.
      */
-    std::pair<float, float> get_dutycycle();
+    std::pair<float, float> getDutycycle();
 
     /**
      * @name Cruising Methods
@@ -153,7 +157,7 @@ class Motor {
      * - Reset the counter of the encoders.
      * - Toggle enable pin.
      *
-     * - When Encoder::read_distance() > distance : Disable enable pin.
+     * - When Encoder::getDistance() > distance : Disable enable pin.
      *
      *
      */

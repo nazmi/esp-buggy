@@ -1,8 +1,4 @@
 #include "sensor.h"
-#include "helper.h"
-#include <algorithm>
-
-using std::min_element;
 
 bool Sensor::s_run = false;
 std::array<float, 6> Sensor::WEIGHTS = {27, 9, -9, -27, 9, -9};
@@ -48,8 +44,6 @@ float Sensor::read() {
         } else {
             m_reading[i] = 0;
         }
-
-        // m_reading[i] = clamp(m_reading[i], 0.0f, PRESCALER);
     }
 
     // Check if any of 6 m_pins m_reading > WHITE_TRESHOLD for white
@@ -57,8 +51,9 @@ float Sensor::read() {
                                               [](float reading) { return reading > WHITE_TRESHOLD; });
     if (isUnderWhiteLine) {
 
-        no_track_counter = 0;
-        // Check if second row is contributing to any m_distance m_reading
+        m_notrackcounter = 0;
+        // Check if second row is contributing to any m_reading
+        // TODO(@nazmi): Fix if only one sensor is contributing.
         const auto isCenterOn = m_reading[4] > WHITE_TRESHOLD || m_reading[5] > WHITE_TRESHOLD;
         if (isCenterOn) {
             m_distance = arm_weighted_sum_f32(Sensor::WEIGHTS.cbegin(), m_reading.cbegin(), 6);
@@ -69,9 +64,10 @@ float Sensor::read() {
     } else {
 
         m_distance = NO_TRACK;
-        no_track_counter++;
+        m_notrackcounter++;
     }
 
+    // Debugging Stuff
     // if (!s_run) {
     //     printf("1,2,3,4,5,6,time,m_distance\n");
     //     s_run = true;
@@ -84,40 +80,19 @@ float Sensor::read() {
     return m_distance;
 }
 
-void Sensor::toggle(const bool on) {
-
-    if (on) {
-
-        m_pins.write(0b111111);
-        if (!s_run) {
-            printf("On\n");
-            s_run = true;
-        }
-
-    } else {
-
-        m_pins.write(0);
-        if (s_run) {
-            printf("Off\n");
-            s_run = false;
-        }
-    }
-
-    wait_us(25);
-}
-
 float Sensor::getDistance() const {
     return m_distance;
 }
 
 int Sensor::getNoTrackCounter() const {
-    return no_track_counter;
+    return m_notrackcounter;
 }
 
-void Sensor::calibrate_black() {
+void Sensor::calibrateBlack() {
 
     std::array<float, 6> calibrate_data{};
     wait_us(25);
+    // Read sensors one by one.
     for (size_t i = 0; i < m_analog.size(); ++i) {
 
         m_pins.write(1 << i);
@@ -126,15 +101,17 @@ void Sensor::calibrate_black() {
         calibrate_data[i] = m_analog[i].read();
     }
 
+    // Print into csv format
     if (!s_run) {
         printf("1,2,3,4,5,6\n");
         s_run = true;
     }
     printf("%.5f,%.5f,%.5f,%.5f,%.5f,%.5f\n",
-           calibrate_data[0], calibrate_data[1], calibrate_data[2], calibrate_data[3], calibrate_data[4], calibrate_data[5]);
+           calibrate_data[0], calibrate_data[1], calibrate_data[2],
+           calibrate_data[3], calibrate_data[4], calibrate_data[5]);
 }
 
-void Sensor::calibrate_white() {
+void Sensor::calibrateWhite() {
 
     // Turn all off to read m_noise
     m_pins.write(0);
@@ -143,6 +120,7 @@ void Sensor::calibrate_white() {
         m_noise[i] = m_analog[i].read();
     }
 
+    // Read sensors one by one.
     for (size_t i = 0; i < m_analog.size(); ++i) {
 
         m_pins.write(1 << i);
@@ -158,6 +136,7 @@ void Sensor::calibrate_white() {
         }
     }
 
+    // Print for csv format
     if (!s_run) {
         printf("1,2,3,4,5,6\n");
         s_run = true;

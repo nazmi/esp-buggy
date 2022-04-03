@@ -60,17 +60,17 @@ int main() {
             }
             case 'S': {
 
-                motor.set_enable(1);
-                motor.set_frequency(1000);
+                motor.setEnable(1);
+                motor.setFrequency(1000);
                 while (1) {
                     auto distance = sensors.read();
                     printf("Position: %.5f\n", distance);
                     if (distance != NO_TRACK) {
                         auto compute_value = controller.computeSpeed(distance, wheel_left, wheel_right);
-                        motor.set_direction('L', compute_value[0].first);
-                        motor.set_dutycycle('L', compute_value[0].second);
-                        motor.set_direction('R', compute_value[1].first);
-                        motor.set_dutycycle('R', compute_value[1].second);
+                        motor.setDirection('L', compute_value[0].first);
+                        motor.setDutycycle('L', compute_value[0].second);
+                        motor.setDirection('R', compute_value[1].first);
+                        motor.setDutycycle('R', compute_value[1].second);
                         printf("Motor output: [%d,%.5f] [%d,%.5f]\n",
                                compute_value[0].first, compute_value[0].second,
                                compute_value[1].first, compute_value[1].second);
@@ -78,7 +78,7 @@ int main() {
                     } else {
                         // printf("Counter : %d\n", sensors.getNoTrackCounter());
                         if (sensors.getNoTrackCounter() > 150) {
-                            motor.set_dutycycle('A', 0);
+                            motor.setDutycycle('A', 0);
                             break;
                         }
                     }
@@ -86,16 +86,16 @@ int main() {
                     if (hm10.readable()) {
                         hm10.read(&c, 1);
                         if (c == 'S') {
-                            motor.set_enable(0);
-                            motor.set_dutycycle('A', 0);
+                            motor.setEnable(0);
+                            motor.setDutycycle('A', 0);
                             break;
                         } else if (c == 'Q') {
-                            motor.set_enable(0);
+                            motor.setEnable(0);
                             ThisThread::sleep_for(1s);
                             motor.turnright(172, &motor, &wheel_left, &wheel_right);
                             controller.reset();
-                            motor.set_dutycycle('A', 0);
-                            motor.set_enable(1);
+                            motor.setDutycycle('A', 0);
+                            motor.setEnable(1);
                         }
                     }
                     // ThisThread::sleep_for(1ms);
@@ -104,7 +104,7 @@ int main() {
             }
             case 'T': {
 
-                motor.set_enable(0);
+                motor.setEnable(0);
                 float kp, ki, kd;
                 while (1) {
                     hm10.read(&kp, sizeof(kp));
@@ -120,7 +120,7 @@ int main() {
             }
             case 'V': {
 
-                motor.set_enable(0);
+                motor.setEnable(0);
                 float speed;
                 while (1) {
                     hm10.read(&speed, sizeof(speed));
@@ -133,15 +133,15 @@ int main() {
                 break;
             }
             case 'M': {
-                motor.set_enable(1);
-                motor.set_frequency(1000);
-                motor.set_direction('R', 0);
-                motor.set_dutycycle('R', 1);
-                motor.set_direction('L', 1);
-                motor.set_dutycycle('L', 1);
+                motor.setEnable(1);
+                motor.setFrequency(1000);
+                motor.setDirection('R', 0);
+                motor.setDutycycle('R', 1);
+                motor.setDirection('L', 1);
+                motor.setDutycycle('L', 1);
 
                 while (1) {
-                    printf("%.5f %.5f\n", wheel_left.read_pps(), wheel_right.read_pps());
+                    printf("%.5f %.5f\n", wheel_left.getPPS(), wheel_right.getPPS());
                     ThisThread::sleep_for(400ms);
                 }
                 break;
@@ -149,13 +149,13 @@ int main() {
             case 'W': {
                 int i = 10000;
                 while (i-- > 0)
-                    sensors.calibrate_white();
+                    sensors.calibrateWhite();
                 break;
             }
             case 'B': {
                 int i = 10000;
                 while (i-- > 0)
-                    sensors.calibrate_black();
+                    sensors.calibrateBlack();
                 break;
             }
             default:
