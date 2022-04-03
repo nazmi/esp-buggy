@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['technical_20demo_20documentation_0',['Technical Demo Documentation',['../md__d_e_m_o.html',1,'']]],
-  ['toggle_1',['toggle',['../class_sensor.html#a0a7dafa04194911bf7a14fdb65cd8680',1,'Sensor']]],
-  ['turnleft_2',['turnleft',['../class_motor.html#a359186826e7f3b2e2c8cc41db81264bb',1,'Motor']]],
-  ['turnright_3',['turnright',['../class_motor.html#abdec5f02db58b8b0412b7b2c8758339f',1,'Motor']]]
+  ['x2_5fencoding_0',['X2_ENCODING',['../class_q_e_i.html#a402e83314ec5151efa06b0f8512ba442a5cbed4a72385f7d8fd70154aa08c5d8b',1,'QEI']]],
+  ['x4_5fencoding_1',['X4_ENCODING',['../class_q_e_i.html#a402e83314ec5151efa06b0f8512ba442a3e0d5f098320f28206f50f2c8d52db24',1,'QEI']]]
 ];

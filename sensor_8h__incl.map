@@ -1,8 +1,13 @@
 <map id="/github/workspace/include/sensor/sensor.h" name="/github/workspace/include/sensor/sensor.h">
-<area shape="rect" id="node1" title=" " alt="" coords="159,5,332,47"/>
+<area shape="rect" id="node1" title=" " alt="" coords="164,5,337,47"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,95,96,121"/>
-<area shape="rect" id="node3" title=" " alt="" coords="120,95,184,121"/>
-<area shape="rect" id="node4" title=" " alt="" coords="208,95,283,121"/>
-<area shape="rect" id="node5" title=" " alt="" coords="307,95,357,121"/>
-<area shape="rect" id="node6" title=" " alt="" coords="382,95,439,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="177,319,241,345"/>
+<area shape="rect" id="node4" href="$helper_8h.html" title=" " alt="" coords="171,95,237,121"/>
+<area shape="rect" id="node9" title=" " alt="" coords="261,95,336,121"/>
+<area shape="rect" id="node10" title=" " alt="" coords="360,95,411,121"/>
+<area shape="rect" id="node11" title=" " alt="" coords="435,95,493,121"/>
+<area shape="rect" id="node5" href="$encoder_8h.html" title=" " alt="" coords="222,169,301,196"/>
+<area shape="rect" id="node8" title=" " alt="" coords="325,169,403,196"/>
+<area shape="rect" id="node6" href="$_q_e_i_8h.html" title=" " alt="" coords="273,244,327,271"/>
+<area shape="rect" id="node7" title=" " alt="" coords="352,244,413,271"/>
 </map>

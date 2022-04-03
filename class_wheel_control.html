@@ -112,52 +112,71 @@ $(document).ready(function(){initNavTree('class_wheel_control.html',''); initRes
 </div><!--header-->
 <div class="contents">
 
+<p>Controller class to handle speed and steering of the buggy.  
+ <a href="class_wheel_control.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="wheelcontrol_8h_source.html">wheelcontrol.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for WheelControl:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_wheel_control__coll__graph.svg" width="139" height="156"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_wheel_control__coll__graph.svg" width="158" height="156"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aee9896b7083b4b93d52bb35c00fc3ccd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wheel_control.html#aee9896b7083b4b93d52bb35c00fc3ccd">WheelControl</a> ()</td></tr>
+<tr class="memdesc:aee9896b7083b4b93d52bb35c00fc3ccd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="class_wheel_control.html#aee9896b7083b4b93d52bb35c00fc3ccd">More...</a><br /></td></tr>
 <tr class="separator:aee9896b7083b4b93d52bb35c00fc3ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d9b2b8cd9496a64c4f2cba7cd0d92f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wheel_control.html#a3d9b2b8cd9496a64c4f2cba7cd0d92f3">setSpeedController</a> (float Kc, float tauI, float tauD)</td></tr>
+<tr class="memdesc:a3d9b2b8cd9496a64c4f2cba7cd0d92f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the speed controller tuning parameters.  <a href="class_wheel_control.html#a3d9b2b8cd9496a64c4f2cba7cd0d92f3">More...</a><br /></td></tr>
 <tr class="separator:a3d9b2b8cd9496a64c4f2cba7cd0d92f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45084b91e43b4b9930aa5bb10ce1a15a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wheel_control.html#a45084b91e43b4b9930aa5bb10ce1a15a">setLineController</a> (float Kc, float tauI, float tauD)</td></tr>
+<tr class="memdesc:a45084b91e43b4b9930aa5bb10ce1a15a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the line controller tuning parameters.  <a href="class_wheel_control.html#a45084b91e43b4b9930aa5bb10ce1a15a">More...</a><br /></td></tr>
 <tr class="separator:a45084b91e43b4b9930aa5bb10ce1a15a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5e725d48743260aa00e8d40b6c2d1db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wheel_control.html#ad5e725d48743260aa00e8d40b6c2d1db">setLineLimits</a> (float low, float high)</td></tr>
+<tr class="memdesc:ad5e725d48743260aa00e8d40b6c2d1db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the line controller input limits.  <a href="class_wheel_control.html#ad5e725d48743260aa00e8d40b6c2d1db">More...</a><br /></td></tr>
 <tr class="separator:ad5e725d48743260aa00e8d40b6c2d1db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d5fa9b03289eb02fe28f5ff1107cd8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wheel_control.html#a8d5fa9b03289eb02fe28f5ff1107cd8b">setPWMLimits</a> (float low, float high)</td></tr>
+<tr class="memdesc:a8d5fa9b03289eb02fe28f5ff1107cd8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the PWM controller output limits.  <a href="class_wheel_control.html#a8d5fa9b03289eb02fe28f5ff1107cd8b">More...</a><br /></td></tr>
 <tr class="separator:a8d5fa9b03289eb02fe28f5ff1107cd8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b4f1d291b03ddd8a99c7d1d599b2cf7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wheel_control.html#a0b4f1d291b03ddd8a99c7d1d599b2cf7">setTargetSpeed</a> (float speed)</td></tr>
+<tr class="memdesc:a0b4f1d291b03ddd8a99c7d1d599b2cf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the target speed in m/s.  <a href="class_wheel_control.html#a0b4f1d291b03ddd8a99c7d1d599b2cf7">More...</a><br /></td></tr>
 <tr class="separator:a0b4f1d291b03ddd8a99c7d1d599b2cf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85aaf901928241f59c6316d8664362d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wheel_control.html#a85aaf901928241f59c6316d8664362d9">reset</a> ()</td></tr>
+<tr class="memdesc:a85aaf901928241f59c6316d8664362d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the <a class="el" href="class_p_i_d.html" title="Proportional-integral-derivative controller.">PID</a> controllers to initial state.  <a href="class_wheel_control.html#a85aaf901928241f59c6316d8664362d9">More...</a><br /></td></tr>
 <tr class="separator:a85aaf901928241f59c6316d8664362d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38eae4ab8a54d49009a685b1341c7a3a"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="wheelcontrol_8h.html#ad1401db2cbc6ededbf746b985144e6f1">pif</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wheel_control.html#a38eae4ab8a54d49009a685b1341c7a3a">computeSpeed</a> (float position, const <a class="el" href="class_encoder.html">Encoder</a> &amp;left_encoder, const <a class="el" href="class_encoder.html">Encoder</a> &amp;right_encoder)</td></tr>
+<tr class="memdesc:a38eae4ab8a54d49009a685b1341c7a3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the speed in pps for the left and right motors.  <a href="class_wheel_control.html#a38eae4ab8a54d49009a685b1341c7a3a">More...</a><br /></td></tr>
 <tr class="separator:a38eae4ab8a54d49009a685b1341c7a3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a804a8434d1bae2c2b00e4eee11e5df91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wheel_control.html#a804a8434d1bae2c2b00e4eee11e5df91">m_setSetPoint</a> (float left_val, float right_val)</td></tr>
+<tr class="memdesc:a804a8434d1bae2c2b00e4eee11e5df91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set setpoint for <a class="el" href="class_wheel_control.html#aa8b0f2540c9c981db84cb1a4ae457181">left controller</a> and <a class="el" href="class_wheel_control.html#a44b583d4907e96e1df5e930b32a88691">right controller</a>.  <a href="class_wheel_control.html#a804a8434d1bae2c2b00e4eee11e5df91">More...</a><br /></td></tr>
 <tr class="separator:a804a8434d1bae2c2b00e4eee11e5df91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00dc03b3c53c024f41f5e4440dbeb680"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wheel_control.html#a00dc03b3c53c024f41f5e4440dbeb680">m_setProcessValue</a> (float left_val, float right_val)</td></tr>
+<tr class="memdesc:a00dc03b3c53c024f41f5e4440dbeb680"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set process value for <a class="el" href="class_wheel_control.html#aa8b0f2540c9c981db84cb1a4ae457181">left controller</a> and <a class="el" href="class_wheel_control.html#a44b583d4907e96e1df5e930b32a88691">right controller</a>.  <a href="class_wheel_control.html#a00dc03b3c53c024f41f5e4440dbeb680">More...</a><br /></td></tr>
 <tr class="separator:a00dc03b3c53c024f41f5e4440dbeb680"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
+<tr class="memitem:aa8b0f2540c9c981db84cb1a4ae457181"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_p_i_d.html">PID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wheel_control.html#aa8b0f2540c9c981db84cb1a4ae457181">m_leftcontroller</a></td></tr>
+<tr class="memdesc:aa8b0f2540c9c981db84cb1a4ae457181"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_p_i_d.html" title="Proportional-integral-derivative controller.">PID</a> controller for left speed.  <a href="class_wheel_control.html#aa8b0f2540c9c981db84cb1a4ae457181">More...</a><br /></td></tr>
+<tr class="separator:aa8b0f2540c9c981db84cb1a4ae457181"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44b583d4907e96e1df5e930b32a88691"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_p_i_d.html">PID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wheel_control.html#a44b583d4907e96e1df5e930b32a88691">m_rightcontroller</a></td></tr>
+<tr class="memdesc:a44b583d4907e96e1df5e930b32a88691"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_p_i_d.html" title="Proportional-integral-derivative controller.">PID</a> controller for right speed.  <a href="class_wheel_control.html#a44b583d4907e96e1df5e930b32a88691">More...</a><br /></td></tr>
+<tr class="separator:a44b583d4907e96e1df5e930b32a88691"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2daf2f9398213a5803d16193dfc961cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_p_i_d.html">PID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wheel_control.html#a2daf2f9398213a5803d16193dfc961cd">m_linecontroller</a></td></tr>
+<tr class="memdesc:a2daf2f9398213a5803d16193dfc961cd"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_p_i_d.html" title="Proportional-integral-derivative controller.">PID</a> controller for line position.  <a href="class_wheel_control.html#a2daf2f9398213a5803d16193dfc961cd">More...</a><br /></td></tr>
+<tr class="separator:a2daf2f9398213a5803d16193dfc961cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a2609e83d7cc80e6b5ed6280fabdeab"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wheel_control.html#a5a2609e83d7cc80e6b5ed6280fabdeab">m_target</a></td></tr>
+<tr class="memdesc:a5a2609e83d7cc80e6b5ed6280fabdeab"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_p_i_d.html" title="Proportional-integral-derivative controller.">PID</a> output for <a class="el" href="class_wheel_control.html#a2daf2f9398213a5803d16193dfc961cd">line controller</a>.  <a href="class_wheel_control.html#a5a2609e83d7cc80e6b5ed6280fabdeab">More...</a><br /></td></tr>
 <tr class="separator:a5a2609e83d7cc80e6b5ed6280fabdeab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbcb6f036af30071817c85fc19f38d69"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_p_i_d.html">PID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wheel_control.html#acbcb6f036af30071817c85fc19f38d69">leftcontroller</a></td></tr>
-<tr class="separator:acbcb6f036af30071817c85fc19f38d69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b6c07cb35aa2f9a0138be79be41a922"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_p_i_d.html">PID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wheel_control.html#a7b6c07cb35aa2f9a0138be79be41a922">rightcontroller</a></td></tr>
-<tr class="separator:a7b6c07cb35aa2f9a0138be79be41a922"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea5b348effd6d1d7e260479ca02f78c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_p_i_d.html">PID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wheel_control.html#aea5b348effd6d1d7e260479ca02f78c1">linecontroller</a></td></tr>
-<tr class="separator:aea5b348effd6d1d7e260479ca02f78c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Controller class to handle speed and steering of the buggy. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aee9896b7083b4b93d52bb35c00fc3ccd" name="aee9896b7083b4b93d52bb35c00fc3ccd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aee9896b7083b4b93d52bb35c00fc3ccd">&#9670;&nbsp;</a></span>WheelControl()</h2>
 
@@ -172,6 +191,10 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Constructor. </p>
+<p >Construct a new Wheel Control object.</p>
+<p >Initializes three <a class="el" href="class_p_i_d.html" title="Proportional-integral-derivative controller.">PID</a> controllers with default values. </p>
 
 </div>
 </div>
@@ -210,6 +233,8 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Set setpoint for <a class="el" href="class_wheel_control.html#aa8b0f2540c9c981db84cb1a4ae457181">left controller</a> and <a class="el" href="class_wheel_control.html#a44b583d4907e96e1df5e930b32a88691">right controller</a>. </p>
+
 </div>
 </div>
 <a id="a00dc03b3c53c024f41f5e4440dbeb680" name="a00dc03b3c53c024f41f5e4440dbeb680"></a>
@@ -246,6 +271,8 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Set process value for <a class="el" href="class_wheel_control.html#aa8b0f2540c9c981db84cb1a4ae457181">left controller</a> and <a class="el" href="class_wheel_control.html#a44b583d4907e96e1df5e930b32a88691">right controller</a>. </p>
+
 </div>
 </div>
 <a id="a3d9b2b8cd9496a64c4f2cba7cd0d92f3" name="a3d9b2b8cd9496a64c4f2cba7cd0d92f3"></a>
@@ -279,6 +306,16 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the speed controller tuning parameters. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Kc</td><td>Propotional gain. </td></tr>
+    <tr><td class="paramname">tauI</td><td>Integral gain. </td></tr>
+    <tr><td class="paramname">tauD</td><td>Derivative gain. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -314,6 +351,16 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Set the line controller tuning parameters. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Kc</td><td>Propotional gain. </td></tr>
+    <tr><td class="paramname">tauI</td><td>Integral gain. </td></tr>
+    <tr><td class="paramname">tauD</td><td>Derivative gain. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="ad5e725d48743260aa00e8d40b6c2d1db" name="ad5e725d48743260aa00e8d40b6c2d1db"></a>
@@ -341,6 +388,15 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the line controller input limits. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">low</td><td>Minimum input value. </td></tr>
+    <tr><td class="paramname">high</td><td>Maximum input value. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -370,6 +426,15 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Set the PWM controller output limits. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">low</td><td>Minimum output value. </td></tr>
+    <tr><td class="paramname">high</td><td>Maximum output value. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a0b4f1d291b03ddd8a99c7d1d599b2cf7" name="a0b4f1d291b03ddd8a99c7d1d599b2cf7"></a>
@@ -388,6 +453,14 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Set the target speed in m/s. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">speed</td><td>Target speed in m/s. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a85aaf901928241f59c6316d8664362d9" name="a85aaf901928241f59c6316d8664362d9"></a>
@@ -404,6 +477,8 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Reset the <a class="el" href="class_p_i_d.html" title="Proportional-integral-derivative controller.">PID</a> controllers to initial state. </p>
 
 </div>
 </div>
@@ -439,9 +514,92 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Compute the speed in pps for the left and right motors. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>Position of the white line in milimetres. </td></tr>
+    <tr><td class="paramname">left_encoder</td><td>Left encoder. </td></tr>
+    <tr><td class="paramname">right_encoder</td><td>Right encoder. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>vector&lt;pif&gt; Vector of pair of direction, PWM outputs for left and right motor. </dd></dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa8b0f2540c9c981db84cb1a4ae457181" name="aa8b0f2540c9c981db84cb1a4ae457181"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8b0f2540c9c981db84cb1a4ae457181">&#9670;&nbsp;</a></span>m_leftcontroller</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_p_i_d.html">PID</a> WheelControl::m_leftcontroller</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="class_p_i_d.html" title="Proportional-integral-derivative controller.">PID</a> controller for left speed. </p>
+
+</div>
+</div>
+<a id="a44b583d4907e96e1df5e930b32a88691" name="a44b583d4907e96e1df5e930b32a88691"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44b583d4907e96e1df5e930b32a88691">&#9670;&nbsp;</a></span>m_rightcontroller</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_p_i_d.html">PID</a> WheelControl::m_rightcontroller</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="class_p_i_d.html" title="Proportional-integral-derivative controller.">PID</a> controller for right speed. </p>
+
+</div>
+</div>
+<a id="a2daf2f9398213a5803d16193dfc961cd" name="a2daf2f9398213a5803d16193dfc961cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2daf2f9398213a5803d16193dfc961cd">&#9670;&nbsp;</a></span>m_linecontroller</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_p_i_d.html">PID</a> WheelControl::m_linecontroller</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="class_p_i_d.html" title="Proportional-integral-derivative controller.">PID</a> controller for line position. </p>
+
+</div>
+</div>
 <a id="a5a2609e83d7cc80e6b5ed6280fabdeab" name="a5a2609e83d7cc80e6b5ed6280fabdeab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5a2609e83d7cc80e6b5ed6280fabdeab">&#9670;&nbsp;</a></span>m_target</h2>
 
@@ -462,71 +620,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="acbcb6f036af30071817c85fc19f38d69" name="acbcb6f036af30071817c85fc19f38d69"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbcb6f036af30071817c85fc19f38d69">&#9670;&nbsp;</a></span>leftcontroller</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_p_i_d.html">PID</a> WheelControl::leftcontroller</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7b6c07cb35aa2f9a0138be79be41a922" name="a7b6c07cb35aa2f9a0138be79be41a922"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b6c07cb35aa2f9a0138be79be41a922">&#9670;&nbsp;</a></span>rightcontroller</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_p_i_d.html">PID</a> WheelControl::rightcontroller</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aea5b348effd6d1d7e260479ca02f78c1" name="aea5b348effd6d1d7e260479ca02f78c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea5b348effd6d1d7e260479ca02f78c1">&#9670;&nbsp;</a></span>linecontroller</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_p_i_d.html">PID</a> WheelControl::linecontroller</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p><a class="el" href="class_p_i_d.html" title="Proportional-integral-derivative controller.">PID</a> output for <a class="el" href="class_wheel_control.html#a2daf2f9398213a5803d16193dfc961cd">line controller</a>. </p>
 
 </div>
 </div>

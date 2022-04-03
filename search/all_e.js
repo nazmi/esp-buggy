@@ -1,12 +1,11 @@
 var searchData=
 [
-  ['pid_0',['PID',['../class_p_i_d.html',1,'PID'],['../class_p_i_d.html#a4d23a225e9cb5f4c932f9c2cfc9f0937',1,'PID::PID()']]],
-  ['pid_2eh_1',['PID.h',['../_p_i_d_8h.html',1,'']]],
-  ['pif_2',['pif',['../wheelcontrol_8h.html#ad1401db2cbc6ededbf746b985144e6f1',1,'wheelcontrol.h']]],
-  ['polling_5fperiod_3',['POLLING_PERIOD',['../encoder_8h.html#a6ffc4470bf656da5e6fe5f7bac6061e7',1,'encoder.h']]],
-  ['prescaler_4',['PRESCALER',['../sensor_8h.html#a0fac869d83ac1a584d6c45cf609f5fe7',1,'sensor.h']]],
-  ['prev_5fmask_5',['PREV_MASK',['../_q_e_i_8h.html#aaeaf27d6e72d4cd547d4345c832244cd',1,'QEI.h']]],
-  ['prevstate_5f_6',['prevState_',['../class_q_e_i.html#a07d3965fbe9b3e027037c408933002b3',1,'QEI']]],
-  ['pulses_5f_7',['pulses_',['../class_q_e_i.html#a5c8e61a77eaa1696fd7f94f79d2f304f',1,'QEI']]],
-  ['pulsesperrev_5f_8',['pulsesPerRev_',['../class_q_e_i.html#a1df3fda1264546b849769e3963a4e218',1,'QEI']]]
+  ['radianstodegrees_0',['radiansToDegrees',['../helper_8h.html#a1544dfe1cc64b778b7052f55c16fb868',1,'helper.h']]],
+  ['read_1',['read',['../class_sensor.html#a2f68fe7942a7e139b087958510d822df',1,'Sensor']]],
+  ['readme_2emd_2',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]],
+  ['reset_3',['reset',['../class_p_i_d.html#af9677e76cb1beffbcf3f54cbc627c530',1,'PID::reset()'],['../class_q_e_i.html#a734c89fb5d882bffb26132ac3db77caf',1,'QEI::reset()'],['../class_wheel_control.html#a85aaf901928241f59c6316d8664362d9',1,'WheelControl::reset()']]],
+  ['resetcounter_4',['resetCounter',['../class_encoder.html#a848213b9ce927974da576fd7893c779d',1,'Encoder']]],
+  ['reverse_5',['reverse',['../class_motor.html#a4855077c33cbc69665fc0f43d5a24a84',1,'Motor']]],
+  ['revolutions_5f_6',['revolutions_',['../class_q_e_i.html#a2627141c6f094da10b9fb3e48e719f92',1,'QEI']]],
+  ['right_5fmotor_7',['right_motor',['../class_motor.html#a36e395479c53170227efd16370ec6ec7',1,'Motor']]]
 ];

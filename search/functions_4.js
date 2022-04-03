@@ -1,14 +1,4 @@
 var searchData=
 [
-  ['get_5fdirection_0',['get_direction',['../class_motor.html#a1763f1d0389d8c0a0918b8eeaecf5677',1,'Motor']]],
-  ['get_5fdutycycle_1',['get_dutycycle',['../class_motor.html#ac17209cc7c3bda8b796edc19f0cb21ae',1,'Motor']]],
-  ['get_5fenable_2',['get_enable',['../class_motor.html#af17e975a057b9834ea8ca42474bcc49b',1,'Motor']]],
-  ['get_5ffrequency_3',['get_frequency',['../class_motor.html#a03de8a83175265bfa55f19344dfee5e1',1,'Motor']]],
-  ['getcurrentstate_4',['getCurrentState',['../class_q_e_i.html#a454939fb817516ad4a91b65cda752204',1,'QEI']]],
-  ['getdistance_5',['getDistance',['../class_sensor.html#a0405c09c1dca1e5788e712bc02cfea50',1,'Sensor']]],
-  ['getinvalidcount_6',['getInvalidCount',['../class_q_e_i.html#aad60c77825245207f766974aff2d8739',1,'QEI']]],
-  ['getnotrackcounter_7',['getNoTrackCounter',['../class_sensor.html#a63457087a7780fe6a22e7c7fad49b0d2',1,'Sensor']]],
-  ['getpulses_8',['getPulses',['../class_q_e_i.html#aa1dcb3763c863233b72ad2ab8bbd7531',1,'QEI']]],
-  ['getrevolutions_9',['getRevolutions',['../class_q_e_i.html#abb9652bbe7e58905c08293a82db819cd',1,'QEI']]],
-  ['getsetpoint_10',['getSetPoint',['../class_p_i_d.html#a58375f1a5e88b0eae9676a0ea2a8e196',1,'PID']]]
+  ['index_0',['index',['../class_q_e_i.html#a9fd558033dbf4bdcad701222ebf2c7a4',1,'QEI']]]
 ];

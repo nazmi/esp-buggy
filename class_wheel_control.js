@@ -10,8 +10,8 @@ var class_wheel_control =
     [ "setTargetSpeed", "class_wheel_control.html#a0b4f1d291b03ddd8a99c7d1d599b2cf7", null ],
     [ "reset", "class_wheel_control.html#a85aaf901928241f59c6316d8664362d9", null ],
     [ "computeSpeed", "class_wheel_control.html#a38eae4ab8a54d49009a685b1341c7a3a", null ],
-    [ "m_target", "class_wheel_control.html#a5a2609e83d7cc80e6b5ed6280fabdeab", null ],
-    [ "leftcontroller", "class_wheel_control.html#acbcb6f036af30071817c85fc19f38d69", null ],
-    [ "rightcontroller", "class_wheel_control.html#a7b6c07cb35aa2f9a0138be79be41a922", null ],
-    [ "linecontroller", "class_wheel_control.html#aea5b348effd6d1d7e260479ca02f78c1", null ]
+    [ "m_leftcontroller", "class_wheel_control.html#aa8b0f2540c9c981db84cb1a4ae457181", null ],
+    [ "m_rightcontroller", "class_wheel_control.html#a44b583d4907e96e1df5e930b32a88691", null ],
+    [ "m_linecontroller", "class_wheel_control.html#a2daf2f9398213a5803d16193dfc961cd", null ],
+    [ "m_target", "class_wheel_control.html#a5a2609e83d7cc80e6b5ed6280fabdeab", null ]
 ];

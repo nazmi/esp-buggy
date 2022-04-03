@@ -39,7 +39,8 @@ var NAVTREE =
     [ "Technical Demo Documentation", "md__d_e_m_o.html", [
       [ "Overview", "md__d_e_m_o.html#overview", null ],
       [ "TD1: Motor Control", "md__d_e_m_o.html#motor", null ],
-      [ "TD2: Sensors", "md__d_e_m_o.html#sensor", null ]
+      [ "TD2: Sensors", "md__d_e_m_o.html#sensor", null ],
+      [ "TD3: Steering", "md__d_e_m_o.html#steering", null ]
     ] ],
     [ "Innovative Features", "md__f_e_a_t_u_r_e_s.html", [
       [ "Background", "md__f_e_a_t_u_r_e_s.html#background", null ],

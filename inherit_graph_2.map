@@ -1,4 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_q_e_i.html" title="QEI class." alt="" coords="5,5,49,32"/>
+<area shape="rect" id="node1" href="$class_q_e_i.html" title="Handle reading pulses from encoder." alt="" coords="5,5,49,32"/>
 <area shape="rect" id="node2" href="$class_encoder.html" title="Encoder class with helper functions, derived from QEI." alt="" coords="97,5,167,32"/>
 </map>

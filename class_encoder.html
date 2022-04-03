@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('class_encoder.html',''); initResizable
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="class_encoder.html" title="Encoder class with helper functions, derived from QEI.">Encoder</a> class with helper functions, derived from <a class="el" href="class_q_e_i.html" title="QEI class.">QEI</a>.  
+<p><a class="el" href="class_encoder.html" title="Encoder class with helper functions, derived from QEI.">Encoder</a> class with helper functions, derived from <a class="el" href="class_q_e_i.html" title="Handle reading pulses from encoder.">QEI</a>.  
  <a href="class_encoder.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="encoder_8h_source.html">encoder.h</a>&gt;</code></p>
@@ -139,21 +139,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad9a4d22fb29fbca6df88720348f0a851"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#ad9a4d22fb29fbca6df88720348f0a851">start</a> ()</td></tr>
 <tr class="memdesc:ad9a4d22fb29fbca6df88720348f0a851"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the routine to measure pulses periodically.  <a href="class_encoder.html#ad9a4d22fb29fbca6df88720348f0a851">More...</a><br /></td></tr>
 <tr class="separator:ad9a4d22fb29fbca6df88720348f0a851"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76172c1924d0893eea3a315b5f646fc9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#a76172c1924d0893eea3a315b5f646fc9">read_counter</a> () const</td></tr>
-<tr class="memdesc:a76172c1924d0893eea3a315b5f646fc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current running <a class="el" href="class_encoder.html#a4fd759cbe21829ee4ab873b921b7bb15">sum of pulses</a>.  <a href="class_encoder.html#a76172c1924d0893eea3a315b5f646fc9">More...</a><br /></td></tr>
-<tr class="separator:a76172c1924d0893eea3a315b5f646fc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a300dcd95c5aaae316658e1b85e947e18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#a300dcd95c5aaae316658e1b85e947e18">reset_counter</a> ()</td></tr>
-<tr class="memdesc:a300dcd95c5aaae316658e1b85e947e18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the running <a class="el" href="class_encoder.html#a4fd759cbe21829ee4ab873b921b7bb15">sum of pulses</a> used for <a class="el" href="class_encoder.html#a137a77c27747ae5ea6d89fad054ea581" title="Get total distance travelled.">read_distance()</a>.  <a href="class_encoder.html#a300dcd95c5aaae316658e1b85e947e18">More...</a><br /></td></tr>
-<tr class="separator:a300dcd95c5aaae316658e1b85e947e18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa775c42ac01dda961b7489f847ddd107"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#aa775c42ac01dda961b7489f847ddd107">read_velocity</a> () const</td></tr>
-<tr class="memdesc:aa775c42ac01dda961b7489f847ddd107"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get <a class="el" href="class_encoder.html#ada1061b151c2d0db1fdcb338f3ccd174">current velocity</a>.  <a href="class_encoder.html#aa775c42ac01dda961b7489f847ddd107">More...</a><br /></td></tr>
-<tr class="separator:aa775c42ac01dda961b7489f847ddd107"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a137a77c27747ae5ea6d89fad054ea581"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#a137a77c27747ae5ea6d89fad054ea581">read_distance</a> () const</td></tr>
-<tr class="memdesc:a137a77c27747ae5ea6d89fad054ea581"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get total distance travelled.  <a href="class_encoder.html#a137a77c27747ae5ea6d89fad054ea581">More...</a><br /></td></tr>
-<tr class="separator:a137a77c27747ae5ea6d89fad054ea581"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adca14051ba0093e03292ddee24c606c1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#adca14051ba0093e03292ddee24c606c1">read_pps</a> () const</td></tr>
-<tr class="memdesc:adca14051ba0093e03292ddee24c606c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current <a class="el" href="class_encoder.html#acac460aa488eb6878510e1e4cc44d444">pulses per unit second (PPS)</a>.  <a href="class_encoder.html#adca14051ba0093e03292ddee24c606c1">More...</a><br /></td></tr>
-<tr class="separator:adca14051ba0093e03292ddee24c606c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8f81866de045a179a6eac1f19e5a0bb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#ac8f81866de045a179a6eac1f19e5a0bb">getCounter</a> () const</td></tr>
+<tr class="memdesc:ac8f81866de045a179a6eac1f19e5a0bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current running <a class="el" href="class_encoder.html#a4fd759cbe21829ee4ab873b921b7bb15">sum of pulses</a>.  <a href="class_encoder.html#ac8f81866de045a179a6eac1f19e5a0bb">More...</a><br /></td></tr>
+<tr class="separator:ac8f81866de045a179a6eac1f19e5a0bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a848213b9ce927974da576fd7893c779d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#a848213b9ce927974da576fd7893c779d">resetCounter</a> ()</td></tr>
+<tr class="memdesc:a848213b9ce927974da576fd7893c779d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the running <a class="el" href="class_encoder.html#a4fd759cbe21829ee4ab873b921b7bb15">sum of pulses</a> used for <a class="el" href="class_encoder.html#a17465bd9ea1e9ea5fe2852d057c59799" title="Get total distance travelled.">getDistance()</a>.  <a href="class_encoder.html#a848213b9ce927974da576fd7893c779d">More...</a><br /></td></tr>
+<tr class="separator:a848213b9ce927974da576fd7893c779d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf54de64977d9e6d207f3d133160a258"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#acf54de64977d9e6d207f3d133160a258">getVelocity</a> () const</td></tr>
+<tr class="memdesc:acf54de64977d9e6d207f3d133160a258"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get <a class="el" href="class_encoder.html#ada1061b151c2d0db1fdcb338f3ccd174">current velocity</a>.  <a href="class_encoder.html#acf54de64977d9e6d207f3d133160a258">More...</a><br /></td></tr>
+<tr class="separator:acf54de64977d9e6d207f3d133160a258"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17465bd9ea1e9ea5fe2852d057c59799"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#a17465bd9ea1e9ea5fe2852d057c59799">getDistance</a> () const</td></tr>
+<tr class="memdesc:a17465bd9ea1e9ea5fe2852d057c59799"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get total distance travelled.  <a href="class_encoder.html#a17465bd9ea1e9ea5fe2852d057c59799">More...</a><br /></td></tr>
+<tr class="separator:a17465bd9ea1e9ea5fe2852d057c59799"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b26d082962dcd1e556bab94f42afcd0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#a3b26d082962dcd1e556bab94f42afcd0">getPPS</a> () const</td></tr>
+<tr class="memdesc:a3b26d082962dcd1e556bab94f42afcd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current <a class="el" href="class_encoder.html#acac460aa488eb6878510e1e4cc44d444">pulses per unit second (PPS)</a>.  <a href="class_encoder.html#a3b26d082962dcd1e556bab94f42afcd0">More...</a><br /></td></tr>
+<tr class="separator:a3b26d082962dcd1e556bab94f42afcd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_q_e_i"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_q_e_i')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_q_e_i.html">QEI</a></td></tr>
 <tr class="memitem:a59df86ca27b4ccd36d3ff28c23362e57 inherit pub_methods_class_q_e_i"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_e_i.html#a59df86ca27b4ccd36d3ff28c23362e57">QEI</a> (PinName channelA, PinName channelB, PinName <a class="el" href="class_q_e_i.html#a9fd558033dbf4bdcad701222ebf2c7a4">index</a>, int pulsesPerRev, <a class="el" href="class_q_e_i.html#a402e83314ec5151efa06b0f8512ba442">Encoding</a> encoding=<a class="el" href="class_q_e_i.html#a402e83314ec5151efa06b0f8512ba442a5cbed4a72385f7d8fd70154aa08c5d8b">X2_ENCODING</a>)</td></tr>
 <tr class="memdesc:a59df86ca27b4ccd36d3ff28c23362e57 inherit pub_methods_class_q_e_i"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="class_q_e_i.html#a59df86ca27b4ccd36d3ff28c23362e57">More...</a><br /></td></tr>
@@ -182,15 +182,15 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a1728a81195a174dde05c376d49f8e4a1"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#a1728a81195a174dde05c376d49f8e4a1">average_angular</a> (const <a class="el" href="class_encoder.html">Encoder</a> &amp;right_encoder, const <a class="el" href="class_encoder.html">Encoder</a> &amp;left_encoder)</td></tr>
-<tr class="memdesc:a1728a81195a174dde05c376d49f8e4a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get average of angular <a class="el" href="class_encoder.html#ada1061b151c2d0db1fdcb338f3ccd174">velocity</a> between two wheels.  <a href="class_encoder.html#a1728a81195a174dde05c376d49f8e4a1">More...</a><br /></td></tr>
-<tr class="separator:a1728a81195a174dde05c376d49f8e4a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28a8607f8f8d098ae685d2488650028e"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#a28a8607f8f8d098ae685d2488650028e">average_velocity</a> (const <a class="el" href="class_encoder.html">Encoder</a> &amp;right_encoder, const <a class="el" href="class_encoder.html">Encoder</a> &amp;left_encoder)</td></tr>
-<tr class="memdesc:a28a8607f8f8d098ae685d2488650028e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get average of linear <a class="el" href="class_encoder.html#ada1061b151c2d0db1fdcb338f3ccd174">velocity</a> between two wheels.  <a href="class_encoder.html#a28a8607f8f8d098ae685d2488650028e">More...</a><br /></td></tr>
-<tr class="separator:a28a8607f8f8d098ae685d2488650028e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad28cef92c10e5635393403127bd252db"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#ad28cef92c10e5635393403127bd252db">average_distance</a> (const <a class="el" href="class_encoder.html">Encoder</a> &amp;right_encoder, const <a class="el" href="class_encoder.html">Encoder</a> &amp;left_encoder)</td></tr>
-<tr class="memdesc:ad28cef92c10e5635393403127bd252db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get average of total <a class="el" href="class_encoder.html#a137a77c27747ae5ea6d89fad054ea581">distance</a> between two wheels.  <a href="class_encoder.html#ad28cef92c10e5635393403127bd252db">More...</a><br /></td></tr>
-<tr class="separator:ad28cef92c10e5635393403127bd252db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10e1e91daac6bba545dce3de6037a952"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#a10e1e91daac6bba545dce3de6037a952">getAverageAngular</a> (const <a class="el" href="class_encoder.html">Encoder</a> &amp;right_encoder, const <a class="el" href="class_encoder.html">Encoder</a> &amp;left_encoder)</td></tr>
+<tr class="memdesc:a10e1e91daac6bba545dce3de6037a952"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get average of angular <a class="el" href="class_encoder.html#ada1061b151c2d0db1fdcb338f3ccd174">velocity</a> between two wheels.  <a href="class_encoder.html#a10e1e91daac6bba545dce3de6037a952">More...</a><br /></td></tr>
+<tr class="separator:a10e1e91daac6bba545dce3de6037a952"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b8e3e66d7faabf9bd015c26cadce3c9"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#a0b8e3e66d7faabf9bd015c26cadce3c9">getAverageVelocity</a> (const <a class="el" href="class_encoder.html">Encoder</a> &amp;right_encoder, const <a class="el" href="class_encoder.html">Encoder</a> &amp;left_encoder)</td></tr>
+<tr class="memdesc:a0b8e3e66d7faabf9bd015c26cadce3c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get average of linear <a class="el" href="class_encoder.html#ada1061b151c2d0db1fdcb338f3ccd174">velocity</a> between two wheels.  <a href="class_encoder.html#a0b8e3e66d7faabf9bd015c26cadce3c9">More...</a><br /></td></tr>
+<tr class="separator:a0b8e3e66d7faabf9bd015c26cadce3c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6440309adabfeb87d51c3a5eb3868dc"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#ab6440309adabfeb87d51c3a5eb3868dc">getAverageDistance</a> (const <a class="el" href="class_encoder.html">Encoder</a> &amp;right_encoder, const <a class="el" href="class_encoder.html">Encoder</a> &amp;left_encoder)</td></tr>
+<tr class="memdesc:ab6440309adabfeb87d51c3a5eb3868dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get average of total <a class="el" href="class_encoder.html#a17465bd9ea1e9ea5fe2852d057c59799">distance</a> between two wheels.  <a href="class_encoder.html#ab6440309adabfeb87d51c3a5eb3868dc">More...</a><br /></td></tr>
+<tr class="separator:ab6440309adabfeb87d51c3a5eb3868dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -206,12 +206,12 @@ Static Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a234a9d68c4ec1ff30845fb7da66b6b40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#a234a9d68c4ec1ff30845fb7da66b6b40">calculate_speed</a> (const double &amp;time_elapsed)</td></tr>
-<tr class="memdesc:a234a9d68c4ec1ff30845fb7da66b6b40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the <a class="el" href="class_encoder.html#ada1061b151c2d0db1fdcb338f3ccd174">velocity</a> of the wheel.  <a href="class_encoder.html#a234a9d68c4ec1ff30845fb7da66b6b40">More...</a><br /></td></tr>
-<tr class="separator:a234a9d68c4ec1ff30845fb7da66b6b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1da39fbf1d85bd36ab7aaad1a34ddc80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#a1da39fbf1d85bd36ab7aaad1a34ddc80">stop</a> ()</td></tr>
-<tr class="memdesc:a1da39fbf1d85bd36ab7aaad1a34ddc80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the timer and get current pulse.  <a href="class_encoder.html#a1da39fbf1d85bd36ab7aaad1a34ddc80">More...</a><br /></td></tr>
-<tr class="separator:a1da39fbf1d85bd36ab7aaad1a34ddc80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0357f61573868671c723758dda10bafa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#a0357f61573868671c723758dda10bafa">m_calculateSpeed</a> (const double &amp;time_elapsed)</td></tr>
+<tr class="memdesc:a0357f61573868671c723758dda10bafa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the <a class="el" href="class_encoder.html#ada1061b151c2d0db1fdcb338f3ccd174">velocity</a> of the wheel.  <a href="class_encoder.html#a0357f61573868671c723758dda10bafa">More...</a><br /></td></tr>
+<tr class="separator:a0357f61573868671c723758dda10bafa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c86761eca6da19406535b67a7cf5ff6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_encoder.html#a9c86761eca6da19406535b67a7cf5ff6">m_stop</a> ()</td></tr>
+<tr class="memdesc:a9c86761eca6da19406535b67a7cf5ff6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the timer and get current pulse.  <a href="class_encoder.html#a9c86761eca6da19406535b67a7cf5ff6">More...</a><br /></td></tr>
+<tr class="separator:a9c86761eca6da19406535b67a7cf5ff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -251,7 +251,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ac66dae3589c072a3762ee03a983485f5 inherit pub_types_class_q_e_i"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p ><a class="el" href="class_encoder.html" title="Encoder class with helper functions, derived from QEI.">Encoder</a> class with helper functions, derived from <a class="el" href="class_q_e_i.html" title="QEI class.">QEI</a>. </p>
+<div class="textblock"><p ><a class="el" href="class_encoder.html" title="Encoder class with helper functions, derived from QEI.">Encoder</a> class with helper functions, derived from <a class="el" href="class_q_e_i.html" title="Handle reading pulses from encoder.">QEI</a>. </p>
 <p >This class call a function periodically to measure the speed of wheel. It features return values in terms of pulse per second, distance, and velocity. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aec7efbcb4fac54d8d9f5fa212e6f2754" name="aec7efbcb4fac54d8d9f5fa212e6f2754"></a>
@@ -313,14 +313,14 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a76172c1924d0893eea3a315b5f646fc9" name="a76172c1924d0893eea3a315b5f646fc9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76172c1924d0893eea3a315b5f646fc9">&#9670;&nbsp;</a></span>read_counter()</h2>
+<a id="ac8f81866de045a179a6eac1f19e5a0bb" name="ac8f81866de045a179a6eac1f19e5a0bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8f81866de045a179a6eac1f19e5a0bb">&#9670;&nbsp;</a></span>getCounter()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int Encoder::read_counter </td>
+          <td class="memname">int Encoder::getCounter </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -333,14 +333,14 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a300dcd95c5aaae316658e1b85e947e18" name="a300dcd95c5aaae316658e1b85e947e18"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a300dcd95c5aaae316658e1b85e947e18">&#9670;&nbsp;</a></span>reset_counter()</h2>
+<a id="a848213b9ce927974da576fd7893c779d" name="a848213b9ce927974da576fd7893c779d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a848213b9ce927974da576fd7893c779d">&#9670;&nbsp;</a></span>resetCounter()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Encoder::reset_counter </td>
+          <td class="memname">void Encoder::resetCounter </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -348,18 +348,18 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Reset the running <a class="el" href="class_encoder.html#a4fd759cbe21829ee4ab873b921b7bb15">sum of pulses</a> used for <a class="el" href="class_encoder.html#a137a77c27747ae5ea6d89fad054ea581" title="Get total distance travelled.">read_distance()</a>. </p>
+<p>Reset the running <a class="el" href="class_encoder.html#a4fd759cbe21829ee4ab873b921b7bb15">sum of pulses</a> used for <a class="el" href="class_encoder.html#a17465bd9ea1e9ea5fe2852d057c59799" title="Get total distance travelled.">getDistance()</a>. </p>
 
 </div>
 </div>
-<a id="aa775c42ac01dda961b7489f847ddd107" name="aa775c42ac01dda961b7489f847ddd107"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa775c42ac01dda961b7489f847ddd107">&#9670;&nbsp;</a></span>read_velocity()</h2>
+<a id="acf54de64977d9e6d207f3d133160a258" name="acf54de64977d9e6d207f3d133160a258"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf54de64977d9e6d207f3d133160a258">&#9670;&nbsp;</a></span>getVelocity()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double Encoder::read_velocity </td>
+          <td class="memname">double Encoder::getVelocity </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -372,14 +372,14 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a137a77c27747ae5ea6d89fad054ea581" name="a137a77c27747ae5ea6d89fad054ea581"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a137a77c27747ae5ea6d89fad054ea581">&#9670;&nbsp;</a></span>read_distance()</h2>
+<a id="a17465bd9ea1e9ea5fe2852d057c59799" name="a17465bd9ea1e9ea5fe2852d057c59799"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17465bd9ea1e9ea5fe2852d057c59799">&#9670;&nbsp;</a></span>getDistance()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double Encoder::read_distance </td>
+          <td class="memname">double Encoder::getDistance </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -392,14 +392,14 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="adca14051ba0093e03292ddee24c606c1" name="adca14051ba0093e03292ddee24c606c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adca14051ba0093e03292ddee24c606c1">&#9670;&nbsp;</a></span>read_pps()</h2>
+<a id="a3b26d082962dcd1e556bab94f42afcd0" name="a3b26d082962dcd1e556bab94f42afcd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b26d082962dcd1e556bab94f42afcd0">&#9670;&nbsp;</a></span>getPPS()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double Encoder::read_pps </td>
+          <td class="memname">double Encoder::getPPS </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -412,8 +412,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a1728a81195a174dde05c376d49f8e4a1" name="a1728a81195a174dde05c376d49f8e4a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1728a81195a174dde05c376d49f8e4a1">&#9670;&nbsp;</a></span>average_angular()</h2>
+<a id="a10e1e91daac6bba545dce3de6037a952" name="a10e1e91daac6bba545dce3de6037a952"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10e1e91daac6bba545dce3de6037a952">&#9670;&nbsp;</a></span>getAverageAngular()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -422,7 +422,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static double Encoder::average_angular </td>
+          <td class="memname">static double Encoder::getAverageAngular </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_encoder.html">Encoder</a> &amp;&#160;</td>
           <td class="paramname"><em>right_encoder</em>, </td>
@@ -458,8 +458,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a28a8607f8f8d098ae685d2488650028e" name="a28a8607f8f8d098ae685d2488650028e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28a8607f8f8d098ae685d2488650028e">&#9670;&nbsp;</a></span>average_velocity()</h2>
+<a id="a0b8e3e66d7faabf9bd015c26cadce3c9" name="a0b8e3e66d7faabf9bd015c26cadce3c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b8e3e66d7faabf9bd015c26cadce3c9">&#9670;&nbsp;</a></span>getAverageVelocity()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -468,7 +468,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static double Encoder::average_velocity </td>
+          <td class="memname">static double Encoder::getAverageVelocity </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_encoder.html">Encoder</a> &amp;&#160;</td>
           <td class="paramname"><em>right_encoder</em>, </td>
@@ -504,8 +504,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="ad28cef92c10e5635393403127bd252db" name="ad28cef92c10e5635393403127bd252db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad28cef92c10e5635393403127bd252db">&#9670;&nbsp;</a></span>average_distance()</h2>
+<a id="ab6440309adabfeb87d51c3a5eb3868dc" name="ab6440309adabfeb87d51c3a5eb3868dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6440309adabfeb87d51c3a5eb3868dc">&#9670;&nbsp;</a></span>getAverageDistance()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -514,7 +514,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static double Encoder::average_distance </td>
+          <td class="memname">static double Encoder::getAverageDistance </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_encoder.html">Encoder</a> &amp;&#160;</td>
           <td class="paramname"><em>right_encoder</em>, </td>
@@ -538,7 +538,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get average of total <a class="el" href="class_encoder.html#a137a77c27747ae5ea6d89fad054ea581">distance</a> between two wheels. </p>
+<p>Get average of total <a class="el" href="class_encoder.html#a17465bd9ea1e9ea5fe2852d057c59799">distance</a> between two wheels. </p>
 <p >+ve indicates forward direction. -ve indicates reverse direction. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">right_encoder</td><td>Right Wheel encoder. </td></tr>
@@ -550,8 +550,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a234a9d68c4ec1ff30845fb7da66b6b40" name="a234a9d68c4ec1ff30845fb7da66b6b40"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a234a9d68c4ec1ff30845fb7da66b6b40">&#9670;&nbsp;</a></span>calculate_speed()</h2>
+<a id="a0357f61573868671c723758dda10bafa" name="a0357f61573868671c723758dda10bafa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0357f61573868671c723758dda10bafa">&#9670;&nbsp;</a></span>m_calculateSpeed()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -560,7 +560,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Encoder::calculate_speed </td>
+          <td class="memname">void Encoder::m_calculateSpeed </td>
           <td>(</td>
           <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>time_elapsed</em></td><td>)</td>
@@ -584,8 +584,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a1da39fbf1d85bd36ab7aaad1a34ddc80" name="a1da39fbf1d85bd36ab7aaad1a34ddc80"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1da39fbf1d85bd36ab7aaad1a34ddc80">&#9670;&nbsp;</a></span>stop()</h2>
+<a id="a9c86761eca6da19406535b67a7cf5ff6" name="a9c86761eca6da19406535b67a7cf5ff6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c86761eca6da19406535b67a7cf5ff6">&#9670;&nbsp;</a></span>m_stop()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -594,7 +594,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Encoder::stop </td>
+          <td class="memname">void Encoder::m_stop </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>

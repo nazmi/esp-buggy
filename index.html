@@ -113,19 +113,19 @@ Line Following Robot (LFR) 🚓</h1>
  Hi! I'm <a href="https://uk.linkedin.com/in/nazmi-ropi">Nazmi Ropi</a>, the author of this software documentation. One of the objectives of this year's project is to produce a high average speed line following buggy without compromising its robustness. Also, my approach towards software development is to implement Object-Oriented-Programming features to abstract any technical details to the user. Details of technical demonstrations were also documented on <a class="el" href="md__d_e_m_o.html#journey">its page</a>.</p>
 <h1><a class="anchor" id="dependencies"></a>
 Dependencies 📌</h1>
-<p ><a href="https://os.mbed.com/mbed-os/releases/"><b>Mbed OS 6.15</b></a> <br  />
- <a href="https://os.mbed.com/users/WiredHome/code/QEI/"><b>QEI</b></a> by <a href="https://os.mbed.com/users/aberk/">Aaron Berk</a> <br  />
- <a href="https://os.mbed.com"><b>PID</b></a> by <a href="https://os.mbed.com">Aaron Berk</a> <br  />
+<p ><a href="https://github.com/ARMmbed/mbed-os/releases/tag/mbed-os-6.15.1"><b>Mbed OS 6.15.1</b></a> <br  />
+ <a href="https://os.mbed.com/users/WiredHome/code/QEI/"><b>QEI</b></a> by <a href="https://os.mbed.com/users/WiredHome/">David Smart</a> and <a href="https://os.mbed.com/users/aberk/">Aaron Berk</a> <br  />
+ <a href="https://os.mbed.com/users/aberk/code/PID/"><b>PID</b></a> by <a href="https://os.mbed.com/users/aberk/">Aaron Berk</a> <br  />
 </p>
 <h1><a class="anchor" id="installation"></a>
 Installation 📋</h1>
 <ol type="1">
-<li>Install the latest <a href="https://os.mbed.com/studio/">Mbed Studio</a> for your compatible platform.</li>
-<li><p class="startli">Clone this repository.</p>
+<li>Install the latest <a href="https://os.mbed.com/studio/">Mbed Studio</a> / Use online <a href="https://studio.keil.arm.com/">Arm Keil Studio</a>.</li>
+<li><p class="startli">Import this repository.</p>
 <div class="fragment"><div class="line">git clone https://github.com/nazmi/esp-buggy</div>
 </div><!-- fragment --><dl class="section warning"><dt>Warning</dt><dd>This will not work because the repository is private.</dd></dl>
 </li>
-<li>Compile <em>main.cpp</em> using Mbed Studio.</li>
+<li>Compile <em>main.cpp</em> using the compiler.</li>
 <li>Upload the binary file to NUCLEO-F401RE through USB.</li>
 </ol>
 <dl class="section note"><dt>Note</dt><dd>You need to replace some of the MACROS values, and <a class="el" href="class_p_i_d.html" title="Proportional-integral-derivative controller.">PID</a> parameters based on your specifications.</dd></dl>
@@ -150,12 +150,12 @@ Run on Docker 🐋</h1>
 <div class="line"># (git-bash) Attach to containerID</div>
 <div class="line">winpty docker attach &lt;containerID&gt;</div>
 <div class="line"> </div>
-<div class="line"># No mbed-os image to reduce docker size</div>
-<div class="line"># Fetch mbed-os from github</div>
-<div class="line">mbed deploy</div>
-<div class="line"> </div>
 <div class="line"># Compile to check any problem</div>
 <div class="line">mbed compile -t GCC_ARM -m NUCLEO_F401RE --profile release</div>
+<div class="line"> </div>
+<div class="line"># Docker image has reduced version of mbed-os with removed targets.</div>
+<div class="line"># If you want to compile for other targets, you need to deploy mbed-os again.</div>
+<div class="line">mbed deploy</div>
 </div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>Attach to the running container in VSCode, navigate to <code>/root/esp-buggy</code> and start developing.</dd></dl>
 <h1><a class="anchor" id="troubleshoot"></a>
 Troubleshooting 🩺</h1>
@@ -171,17 +171,17 @@ Components 🛒</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Component   </th><th class="markdownTableHeadNone">Quantity    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">NUCLEO-F401RE   </td><td class="markdownTableBodyNone">1    </td></tr>
+<td class="markdownTableBodyNone"><a href="https://uk.farnell.com/stmicroelectronics/nucleo-f401re/nucleo-board-mcu/dp/2394223">NUCLEO-F401RE</a>   </td><td class="markdownTableBodyNone">1    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">RS Pro DC Motor   </td><td class="markdownTableBodyNone">2    </td></tr>
+<td class="markdownTableBodyNone"><a href="https://uk.rs-online.com/web/p/dc-motors/2389737/">RS Pro DC Motor</a>   </td><td class="markdownTableBodyNone">2    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Broadcom Magnetic Incremental Encoder   </td><td class="markdownTableBodyNone">2    </td></tr>
+<td class="markdownTableBodyNone"><a href="https://uk.farnell.com/broadcom-limited/aeat-601b-f06/encoder-incremental-3-ch-12000rpm/dp/2467469">Broadcom Magnetic Incremental Encoder</a>   </td><td class="markdownTableBodyNone">2    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Motor Driver Board   </td><td class="markdownTableBodyNone">1    </td></tr>
+<td class="markdownTableBodyNone"><a href="https://uk.farnell.com/maxim-integrated-products/maxrefdes89/ref-design-board-dc-motor-driver/dp/2523609">Motor Driver Board</a>   </td><td class="markdownTableBodyNone">1    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">TCRT5000   </td><td class="markdownTableBodyNone">6    </td></tr>
+<td class="markdownTableBodyNone"><a href="https://www.robotshop.com/en/aptinex-raykha-s8-tcrt5000-based-8-channel-reflective-sensor-array.html">TCRT5000</a>   </td><td class="markdownTableBodyNone">1    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">HM 10 BLE   </td><td class="markdownTableBodyNone">1   </td></tr>
+<td class="markdownTableBodyNone"><a href="https://www.robotshop.com/uk/sunfounder-bluetooth-40-hm-10-master-slave-module.html">HM-10 BLE</a>   </td><td class="markdownTableBodyNone">1   </td></tr>
 </table>
 <h1><a class="anchor" id="contribute"></a>
 Contributing 👨‍💻</h1>
