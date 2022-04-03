@@ -5,7 +5,7 @@
 [![Build GCC_ARM](https://github.com/nazmi/esp-buggy/actions/workflows/build.yml/badge.svg)](https://github.com/nazmi/esp-buggy/actions/workflows/build.yml)
 [![Style Check](https://github.com/nazmi/esp-buggy/actions/workflows/linter.yml/badge.svg)](https://github.com/nazmi/esp-buggy/actions/workflows/linter.yml)
 [![C++ Syntax Check](https://github.com/nazmi/esp-buggy/actions/workflows/cppcheck.yml/badge.svg)](https://github.com/nazmi/esp-buggy/actions/workflows/cppcheck.yml)
-[![Doxygen Action](https://github.com/nazmi/esp-buggy/actions/workflows/publish.yml/badge.svg)](https://github.com/nazmi/esp-buggy/actions/workflows/publish.yml)
+[![Doxygen Action](https://github.com/nazmi/esp-buggy/actions/workflows/publish.yml/badge.svg)](https://github.com/nazmi/esp-buggy/actions/workflows/publish.yml)  
 Documentation of this project can be accessed throught this [link](https://nazmi.github.io/esp-buggy).
 
 ## Dependencies 📌
