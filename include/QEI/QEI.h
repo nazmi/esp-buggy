@@ -79,7 +79,7 @@
 #define INVALID 0x3
 
 /**
- * @brief  QEI class.
+ * @brief Handle reading pulses from encoder.
  */
 class QEI {
   public:

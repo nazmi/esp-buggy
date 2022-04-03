@@ -1,52 +1,49 @@
-/**
- * @author Aaron Berk
- *
- * @section LICENSE
- *
- * Copyright (c) 2010 ARM Limited
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @section DESCRIPTION
- *
- * A PID controller is a widely used feedback controller commonly found in
- * industry.
- *
- * This library is a port of Brett Beauregard's Arduino PID library:
- *
- *  http://www.arduino.cc/playground/Code/PIDLibrary
- *
- * The wikipedia article on PID controllers is a good place to start on
- * understanding how they work:
- *
- *  http://en.wikipedia.org/wiki/PID_controller
- *
- * For a clear and elegant explanation of how to implement and tune a
- * controller, the controlguru website by Douglas J. Cooper (who also happened
- * to be Brett's controls professor) is an excellent reference:
- *
- *  http://www.controlguru.com/
- */
+// /**
+//  * @author Aaron Berk
+//  *
+//  * @section LICENSE
+//  *
+//  * Copyright (c) 2010 ARM Limited
+//  *
+//  * Permission is hereby granted, free of charge, to any person obtaining a copy
+//  * of this software and associated documentation files (the "Software"), to deal
+//  * in the Software without restriction, including without limitation the rights
+//  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  * copies of the Software, and to permit persons to whom the Software is
+//  * furnished to do so, subject to the following conditions:
+//  *
+//  * The above copyright notice and this permission notice shall be included in
+//  * all copies or substantial portions of the Software.
+//  *
+//  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  * THE SOFTWARE.
+//  *
+//  * @section DESCRIPTION
+//  *
+//  * A PID controller is a widely used feedback controller commonly found in
+//  * industry.
+//  *
+//  * This library is a port of Brett Beauregard's Arduino PID library:
+//  *
+//  *  http://www.arduino.cc/playground/Code/PIDLibrary
+//  *
+//  * The wikipedia article on PID controllers is a good place to start on
+//  * understanding how they work:
+//  *
+//  *  http://en.wikipedia.org/wiki/PID_controller
+//  *
+//  * For a clear and elegant explanation of how to implement and tune a
+//  * controller, the controlguru website by Douglas J. Cooper (who also happened
+//  * to be Brett's controls professor) is an excellent reference:
+//  *
+//  *  http://www.controlguru.com/
+//  */
 
-/**
- * Includes
- */
 #ifndef _PID_H_
 #define _PID_H_
 
@@ -59,18 +56,18 @@
 class PID {
   public:
     /**
-     * Contructor
-     * Sets default limits [0-3.3V], calculates tuning parameters, and sets manual mode with no bias.
+     * @brief Contructor
+     * @details Sets default limits [0-3.3V], calculates tuning parameters, and sets manual mode with no bias.
      *
-     * @param Kc - Tuning parameter
-     * @param tauI - Tuning parameter
-     * @param tauD - Tuning parameter
+     * @param Kc - Proportional gain
+     * @param tauI - Integral gain
+     * @param tauD - Derivative gain
      * @param interval - PID calculation performed every interval seconds.
      */
     PID(float Kc, float tauI, float tauD, float interval);
 
     /**
-     * Scale from inputs to 0-100%
+     * @brief Scale from inputs to 0-100%
      *
      * @param inMin - The real world value corresponding to 0%
      * @param inMax - The real world value corresponding to 100%
@@ -78,7 +75,7 @@ class PID {
     void setInputLimits(float inMin, float inMax);
 
     /**
-     * Scale from outputs to 0-100%
+     * @brief Scale from outputs to 0-100%
      *
      * @param outMin - The real world value corresponding to 0%
      * @param outMax - The real world value corresponding to 100%
@@ -86,13 +83,13 @@ class PID {
     void setOutputLimits(float outMin, float outMax);
 
     /**
-     * Calculate PID constants.
+     * @brief Calculate PID constants.
      *
-     * Allows parameters to be changed on the fly without ruining calculations.
+     * @details Allows parameters to be changed on the fly without ruining calculations.
      *
-     * @param Kc - Tuning parameter
-     * @param tauI - Tuning parameter
-     * @param tauD - Tuning parameter
+     * @param Kc - Proportional gain
+     * @param tauI - Integral gain
+     * @param tauD - Derivative gain
      */
     void setTunings(float Kc, float tauI, float tauD);
 
@@ -102,34 +99,34 @@ class PID {
     void reset();
 
     /**
-     * Set the set point.
+     * @brief Set the set point.
      *
      * @param sp The set point as a real world value.
      */
     void setSetPoint(float sp);
 
     /**
-     * Get the setpoint.
+     * @brief Get the setpoint.
      * @return float Setpoint
      */
     float getSetPoint();
 
     /**
-     * Set the process value.
+     * @brief Set the process value.
      *
      * @param pv The process value as a real world value.
      */
     void setProcessValue(float pv);
 
     /**
-     * Set the bias.
+     * @brief Set the bias.
      *
      * @param bias The bias for the controller output.
      */
     void setBias(float bias);
 
     /**
-     * PID calculation.
+     * @brief PID calculation.
      *
      * @return The controller output as a float between outMin and outMax.
      */

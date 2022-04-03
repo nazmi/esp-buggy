@@ -9,14 +9,14 @@ Hi! I'm [Nazmi Ropi](https://uk.linkedin.com/in/nazmi-ropi), the author of this 
 
 ## Dependencies 📌 {#dependencies}
 
-[**Mbed OS 6.15**](https://os.mbed.com/mbed-os/releases/)  
-[**QEI**](https://os.mbed.com/users/WiredHome/code/QEI/) by [Aaron Berk](https://os.mbed.com/users/aberk/)  
-[**PID**](https://os.mbed.com) by [Aaron Berk](https://os.mbed.com)  
+[**Mbed OS 6.15.1**](https://github.com/ARMmbed/mbed-os/releases/tag/mbed-os-6.15.1)  
+[**QEI**](https://os.mbed.com/users/WiredHome/code/QEI/) by [David Smart](https://os.mbed.com/users/WiredHome/)   and [Aaron Berk](https://os.mbed.com/users/aberk/)  
+[**PID**](https://os.mbed.com/users/aberk/code/PID/) by [Aaron Berk](https://os.mbed.com/users/aberk/)  
 
 ## Installation 📋 {#installation}
 
-1. Install the latest [Mbed Studio](https://os.mbed.com/studio/) for your compatible platform.
-2. Clone this repository.
+1. Install the latest [Mbed Studio](https://os.mbed.com/studio/) / Use online [Arm Keil Studio](https://studio.keil.arm.com/).
+2. Import this repository.
 
    ```bash
    git clone https://github.com/nazmi/esp-buggy
@@ -24,7 +24,7 @@ Hi! I'm [Nazmi Ropi](https://uk.linkedin.com/in/nazmi-ropi), the author of this 
 
    @warning This will not work because the repository is private.
 
-3. Compile *main.cpp* using Mbed Studio.
+3. Compile *main.cpp* using the compiler.
 4. Upload the binary file to NUCLEO-F401RE through USB.
 
 @note You need to replace some of the MACROS values, and PID parameters based on your specifications.
@@ -52,12 +52,12 @@ Follow the steps below (run in bash/cmd/terminal)
    # (git-bash) Attach to containerID
    winpty docker attach <containerID>
 
-   # No mbed-os image to reduce docker size
-   # Fetch mbed-os from github
-   mbed deploy
-
    # Compile to check any problem
    mbed compile -t GCC_ARM -m NUCLEO_F401RE --profile release
+
+   # Docker image has reduced version of mbed-os with removed targets.
+   # If you want to compile for other targets, you need to deploy mbed-os again.
+   mbed deploy
    ```
 
 @note Attach to the running container in VSCode, navigate to ```/root/esp-buggy``` and start developing.
@@ -75,12 +75,12 @@ You can buy any component you like, but the table below will help if you want to
 
 |Component|Quantity
 --|--
-|NUCLEO-F401RE| 1|
-|RS Pro DC %Motor|2|
-|Broadcom Magnetic Incremental %Encoder| 2
-|%Motor Driver Board|1|
-|TCRT5000| 6|
-|HM 10 BLE|1|
+|[NUCLEO-F401RE](https://uk.farnell.com/stmicroelectronics/nucleo-f401re/nucleo-board-mcu/dp/2394223)| 1|
+|[RS Pro DC %Motor](https://uk.rs-online.com/web/p/dc-motors/2389737/)|2|
+|[Broadcom Magnetic Incremental %Encoder](https://uk.farnell.com/broadcom-limited/aeat-601b-f06/encoder-incremental-3-ch-12000rpm/dp/2467469)| 2
+|[%Motor Driver Board](https://uk.farnell.com/maxim-integrated-products/maxrefdes89/ref-design-board-dc-motor-driver/dp/2523609)|1|
+|[TCRT5000](https://www.robotshop.com/en/aptinex-raykha-s8-tcrt5000-based-8-channel-reflective-sensor-array.html)| 1|
+|[HM-10 BLE](https://www.robotshop.com/uk/sunfounder-bluetooth-40-hm-10-master-slave-module.html)|1|
 
 ## Contributing 👨‍💻 {#contribute}
 

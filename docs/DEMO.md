@@ -50,47 +50,47 @@ velocity &= \frac{distance}{time} \\
 
 One of the tasks was to make a square of 0.5 m length. The hardest part was the square had to be in between the wheels. Even worst, I did not tune the task on the actual square at A16. The snippet below shows how I implemented the square sequence.
 
-    **main.cpp**
+_main.cpp_
 
-    ```cpp
-    Motor  motor(PC_9,PB_8,PC_8,PC_6,PB_9);
-    Encoder  wheel_left(PC_3,PC_2);
-    Encoder  wheel_right(PB_14,PB_13);
+```cpp
+Motor  motor(PC_9,PB_8,PC_8,PC_6,PB_9);
+Encoder  wheel_left(PC_3,PC_2);
+Encoder  wheel_right(PB_14,PB_13);
 
-    while(1){
+while(1){
 
-        vector<double> linear {...};
-        vector<double> rotation {...};
-        
-        for(size_t i=0; i < linear.size(); i++){
-            Motor::forward(linear,....);
-            Motor::turnright(rotation,...);
-        }
+    vector<double> linear {...};
+    vector<double> rotation {...};
+    
+    for(size_t i=0; i < linear.size(); i++){
+        Motor::forward(linear,....);
+        Motor::turnright(rotation,...);
     }
-    ```
+}
+```
 
 Ideally all values in linear vector are 0.5 m and rotation vector are 90°. However, ours looked like this
 
-    ```cpp
-    vector<double> linear { 0.45, 0.33, 0.33, 0.43};
-    vector<double> rotation {83, 83, 83, 175};
-    ```
+```cpp
+vector<double> linear { 0.45, 0.33, 0.33, 0.43};
+vector<double> rotation {83, 83, 83, 175};
+```
 
 Note that the last one was more than 90° because the task was to trace the square back which was harder when your buggy did not move in straight line. I used bang-bang control approach to compensate any tiny deviation between the two wheels, implemented in the Motor::forward.
 
-    **motor.cpp**
+_motor.cpp_
 
-    ```cpp
-    if ( left_encoder > right_encoder)
+```cpp
+if ( left_encoder > right_encoder)
 
-        right_motor.write(SLOW_PWM * correction);
-        left_motor.write(SLOW_PWM)
+    right_motor.write(SLOW_PWM * correction);
+    left_motor.write(SLOW_PWM)
 
-    else if ( right_encoder > left_encoder)
+else if ( right_encoder > left_encoder)
 
-        left_motor.write(SLOW_PWM * correction);
-        right_motor.write(SLOW_PWM)
-    ```
+    left_motor.write(SLOW_PWM * correction);
+    right_motor.write(SLOW_PWM)
+```
 
 \f{align}{
 correction &= \frac{pulse_N}{pulse_M} \  where \ pulse_N > pulse_M \\
@@ -211,3 +211,67 @@ weight[label = <{-30||-20|| -10 |  | 10 ||20||30}>]
 \enddot
 
 The solution was very simple and the equivalent formula was \f$\ distance = \frac{\sum_{1}^{6} reading_i \times weight_i}{\sum_{1}^{6} reading_i} \f$
+
+# TD3: Steering {#steering}
+
+When all components were put together, it was time to make sure all can work in sync to follow the white line on the track. The overall look on how the control algorithm work was outlined in the figure below.
+
+\dot
+digraph System{
+
+ fontname="Arial";
+ fontsize="14pt";
+    node [shape=record style=filled fillcolor=gray95 fontname="Arial" fontsize="11pt"];
+
+    subgraph cluster_nucleo{
+        label="Control Algorithm";
+        line_controller line_output
+        left_controller left_output
+        right_controller right_output
+        color =blue;
+    }
+
+    line_controller[label = <{<b>Line Controller</b>|Kp: 1.2<br align="left"/>|PV: sensors.read()<br align="left"/> SP: 0<br align="left"/>}>]
+    line_output[label = <{<b>Output</b>|CO: delta [-max,+max]<br align="left"/>}>]
+    
+    left_controller[label = <{<b>Left Controller</b>|Kp: 0.75<br align="left"/>Ki: 0<br align="left"/>Kd: 0.0004<br align="left"/>|PV: encoder.read_pps()<br align="left"/> SP: target - delta <br align="left"/>}>]
+    left_output[label = <{<b>Output</b>|CO: PWM [0,1]<br align="left"/>}>]
+    
+    right_controller[label = <{<b>Right Controller</b>|Kp: 0.75<br align="left"/>Ki: 0<br align="left"/>Kd: 0.0004<br align="left"/>|PV: encoder.read_pps()<br align="left"/> SP: target + delta <br align="left"/>}>]
+    right_output[label = <{<b>Output</b>|CO: PWM [0,1]<br align="left"/>}>]
+    
+    edge [arrowtail=empty style=""]
+    line_controller -> line_output
+    line_output  -> left_controller 
+    left_controller -> left_output
+    line_output  -> right_controller
+    right_controller -> right_output
+}
+\enddot
+
+Though it is unnecesary to have P controller in the line controller, I was thinking why not just use the same framework so it can be easily tweak and maintainable in the long run. The first controller scaled the deviations from white line in terms on pulses per second for the encoders. Then, a differential was created by using a target value and the output before to create turning effect for the wheels. This differential then outputs the corresponding PWM outputs for each motor.
+
+Another extra thing I added was adaptive system response based on the position of the line, which manipulate the set point of the left and right controller to create quicker turning response.
+
+_wheelcontrol.cpp_
+```cpp
+float delta_target = linecontroller.compute();
+float delta_left = m_target - delta_target;
+float delta_right = m_target + delta_target;
+
+if (abs_position < 0.5f) {
+
+    m_setSetPoint(m_target, m_target);
+
+} else if (abs_position > 15.0f) {
+
+    m_setSetPoint(delta_left - 0.4 * delta_target, delta_right + 0.4 * delta_target);
+
+} else {
+
+    m_setSetPoint(delta_left, delta_right);
+
+}
+```
+
+Other than control algorithm, I simply added the turnaround code when BLE signal was sent. The turnaround used the code created in [TD1](#motor) to allow rotation of 180 degrees.

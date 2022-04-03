@@ -32,7 +32,7 @@ Both of this design approach gives us flexibility to choose the height and posit
 
 # Software Solution {#software}
 
-Determining the position of the line is very simple by using weighted average as discuss in [this section](#autotoc_md9). Recall again that it is simply \f$\ distance = \frac{\sum_{1}^{6} reading_i \times weight_i}{\sum_{1}^{6} reading_i} \f$. This simple method is fast and simple but it is not the best way to determine the position of sensors. The alternative method is to use quadratic interpolation from the sensors. Using this method, not all sensors will be used for calculations because the problem is overdetermined so only four nearest to the sensors output is chosen to simplify the problem. Maybe it is easier to visualise this concept using the figure below.
+Determining the position of the line is very simple by using weighted average as discuss in [this section](#sensor). Recall again that it is simply \f$\ distance = \frac{\sum_{1}^{6} reading_i \times weight_i}{\sum_{1}^{6} reading_i} \f$. This simple method is fast and simple but it is not the best way to determine the position of sensors. The alternative method is to use quadratic interpolation from the sensors. Using this method, not all sensors will be used for calculations because the problem is overdetermined so only four nearest to the sensors output is chosen to simplify the problem. Maybe it is easier to visualise this concept using the figure below.
 
 ![Quadratic interpolation](sensor4.svg)
 

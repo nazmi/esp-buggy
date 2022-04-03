@@ -17,8 +17,10 @@
 #define POLLING_PERIOD 10ms
 
 #ifndef M_PI
+/** @brief Define M_PI on ArmC6.*/
 #define M_PI 3.14159265358979323846264338327950288
 #endif
+
 /**
  * @brief Encoder class with helper functions, derived from QEI.
  * @details This class call a function periodically to measure the speed of wheel. It features return values in terms of pulse per second, distance, and velocity.
@@ -85,19 +87,19 @@ class Encoder : public QEI {
      *
      * @return int Total number of pulses after start.
      */
-    int read_counter() const;
+    int getCounter() const;
 
     /**
-     * @brief Reset the running \link m_pulse_counter sum of pulses\endlink used for read_distance().
+     * @brief Reset the running \link m_pulse_counter sum of pulses\endlink used for getDistance().
      */
-    void reset_counter();
+    void resetCounter();
 
     /**
      * @brief Get \link m_velocity current velocity\endlink.
      *
      * @return double Velocity of the wheel.
      */
-    double read_velocity() const;
+    double getVelocity() const;
 
     /**
      * @brief Get total distance travelled.
@@ -107,14 +109,14 @@ class Encoder : public QEI {
      * \f$distance = \frac{pulse\ counter\  \cdot\  cirmcumference}{2\  \cdot\  CPR}\\\f$
      * @return double Total distance (metre) travelled by the wheel.
      */
-    double read_distance() const;
+    double getDistance() const;
 
     /**
      * @brief Get current \link m_pulse_per_sec  pulses per unit second (PPS)\endlink.
      *
      * @return double PPS of the wheel.
      */
-    double read_pps() const;
+    double getPPS() const;
 
     /**
      * @brief Get average of angular \link m_velocity velocity\endlink between two wheels.
@@ -125,7 +127,7 @@ class Encoder : public QEI {
      * @param left_encoder Left Wheel encoder
      * @return double Angular velocity \link radiansToDegrees(const T &angle) (deg/s)\endlink of the buggy.
      */
-    static double average_angular(const Encoder &right_encoder, const Encoder &left_encoder);
+    static double getAverageAngular(const Encoder &right_encoder, const Encoder &left_encoder);
 
     /**
      * @brief Get average of linear \link m_velocity velocity\endlink between two wheels.
@@ -136,10 +138,10 @@ class Encoder : public QEI {
      * @param left_encoder Left Wheel encoder.
      * @return double Linear velocity (m/s) of the buggy.
      */
-    static double average_velocity(const Encoder &right_encoder, const Encoder &left_encoder);
+    static double getAverageVelocity(const Encoder &right_encoder, const Encoder &left_encoder);
 
     /**
-     * @brief Get average of total \link read_distance() distance\endlink between two wheels.
+     * @brief Get average of total \link getDistance() distance\endlink between two wheels.
      *
      * +ve indicates forward direction.
      * -ve indicates reverse direction.
@@ -147,7 +149,7 @@ class Encoder : public QEI {
      * @param left_encoder Left Wheel encoder.
      * @return double Average distance of the buggy.
      */
-    static double average_distance(const Encoder &right_encoder, const Encoder &left_encoder);
+    static double getAverageDistance(const Encoder &right_encoder, const Encoder &left_encoder);
 
   private:
     /**
@@ -158,12 +160,12 @@ class Encoder : public QEI {
      * \f$velocity = \frac{pulse\ width\  \cdot\  cirmcumference}{2\  \cdot\  CPR \ \cdot \ time}\\\f$
      * @param time_elapsed The elapsed time between two pulse count.
      */
-    void calculate_speed(const double &time_elapsed);
+    void m_calculateSpeed(const double &time_elapsed);
 
     /**
      * @brief Stop the timer and get current pulse.
      */
-    void stop();
+    void m_stop();
 };
 
 #endif
