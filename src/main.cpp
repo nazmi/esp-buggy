@@ -18,7 +18,7 @@ int main() {
     DigitalOut analog_1(PC_5, 0), analog_2(PB_1, 0), analog_3(PC_4, 0);
 
     WheelControl controller;
-    controller.setSpeedController(0.75f, 0.0f, 0.0004f);
+    controller.setSpeedController(0.70f, 0.0f, 0.0f);
     controller.setLineController(1.2f, 0.0f, 0.0f);
     controller.setLineLimits(-27.0f, 27.0f);
     controller.setPWMLimits(0.0f, 1.0f);
@@ -92,7 +92,16 @@ int main() {
                         } else if (c == 'Q') {
                             motor.setEnable(0);
                             ThisThread::sleep_for(1s);
-                            motor.turnright(172, &motor, &wheel_left, &wheel_right);
+                            motor.turnright(45, &motor, &wheel_left, &wheel_right);
+
+                            while(1){
+                                auto distance = sensors.read();
+                                if(distance < 2.0f)
+                                    break;
+
+                                motor.turnright(5, &motor, &wheel_left, &wheel_right); 
+                            }
+                            
                             controller.reset();
                             motor.setDutycycle('A', 0);
                             motor.setEnable(1);
