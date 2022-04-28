@@ -159,7 +159,7 @@ float PID::compute() {
     float scaledBias = 0.0;
 
     // Exponential Filter
-    if (_tauD > 0){
+    if (_tauD > 0) {
         dError = _a * error + (1 - _a) * _prevError;
     }
 

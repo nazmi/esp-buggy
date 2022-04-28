@@ -1,6 +1,6 @@
-#include "mbed.h"
-#include "helper.h"
 #include "encoder.h"
+#include "helper.h"
+#include "mbed.h"
 #include "motor.h"
 #include "sensor.h"
 #include "wheelcontrol.h"
@@ -75,8 +75,8 @@ int main() {
                         motor.setDirection('R', compute_value[1].first);
                         motor.setDutycycle('R', compute_value[1].second);
                         DEBUGLOG("Motor output: [%d,%.5f] [%d,%.5f]\n",
-                               compute_value[0].first, compute_value[0].second,
-                               compute_value[1].first, compute_value[1].second);
+                                 compute_value[0].first, compute_value[0].second,
+                                 compute_value[1].first, compute_value[1].second);
                     } else {
                         DEBUGLOG("Counter : %d\n", sensors.getNoTrackCounter());
                         if (sensors.getNoTrackCounter() > 150) {
@@ -96,14 +96,14 @@ int main() {
                             ThisThread::sleep_for(1s);
                             motor.turnright(45, &motor, &wheel_left, &wheel_right);
 
-                            while(1){
-                                auto distance = sensors.read();
-                                if(distance < 2.0f)
+                            while (1) {
+                                auto _distance = sensors.read();
+                                if (_distance < 2.0f)
                                     break;
 
-                                motor.turnright(5, &motor, &wheel_left, &wheel_right); 
+                                motor.turnright(5, &motor, &wheel_left, &wheel_right);
                             }
-                            
+
                             controller.reset();
                             motor.setDutycycle('A', 0);
                             motor.setEnable(1);

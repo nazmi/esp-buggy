@@ -68,7 +68,7 @@ float Sensor::read() {
     }
 
     // Debugging Stuff
-    if (_SENSORS_DEBUG){
+    if (_SENSORS_DEBUG) {
         if (!s_run) {
             DEBUGLOG("1,2,3,4,5,6,time,m_distance\n");
             s_run = true;
@@ -79,7 +79,6 @@ float Sensor::read() {
         }
         DEBUGLOG("%f\n", m_distance);
     }
-    
 
     return m_distance;
 }
