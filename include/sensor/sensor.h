@@ -15,6 +15,12 @@
 /** @brief Minimum treshold for white line */
 #define WHITE_TRESHOLD 0.8
 
+#ifdef SENSORS_DEBUG
+#define _SENSORS_DEBUG 1
+#else
+#define _SENSORS_DEBUG 0
+#endif
+
 /**
  * @brief Sensor class to handle the sensor readings.
  * @details This class handles the sensor readings and provides the data in terms of position from white line.

@@ -1,9 +1,13 @@
 #include "encoder.h"
+#include "helper.h"
 #include "mbed.h"
 #include "motor.h"
 #include "sensor.h"
 #include "wheelcontrol.h"
 #include <string>
+
+// #define DEBUG
+// #define SENSORS_DEBUG
 
 int main() {
 
@@ -18,14 +22,13 @@ int main() {
     DigitalOut analog_1(PC_5, 0), analog_2(PB_1, 0), analog_3(PC_4, 0);
 
     WheelControl controller;
-    controller.setSpeedController(0.75f, 0.0f, 0.0004f);
+    controller.setSpeedController(0.70f, 0.0f, 0.0f);
     controller.setLineController(1.2f, 0.0f, 0.0f);
     controller.setLineLimits(-27.0f, 27.0f);
     controller.setPWMLimits(0.0f, 1.0f);
     controller.setTargetSpeed(1.5f);
 
     char c;
-    Timer test;
 
     while (1) {
 
@@ -38,7 +41,7 @@ int main() {
             case 'R': {
                 while (1) {
                     auto distance = sensors.read();
-                    if (distance < NO_TRACK) {
+                    if (distance != NO_TRACK) {
                         char s[9];
                         snprintf(s, sizeof(s), "%2.5f", distance);
                         hm10.write(&s, sizeof(s));
@@ -64,19 +67,18 @@ int main() {
                 motor.setFrequency(1000);
                 while (1) {
                     auto distance = sensors.read();
-                    printf("Position: %.5f\n", distance);
+                    DEBUGLOG("Position: %.5f\n", distance);
                     if (distance != NO_TRACK) {
                         auto compute_value = controller.computeSpeed(distance, wheel_left, wheel_right);
                         motor.setDirection('L', compute_value[0].first);
                         motor.setDutycycle('L', compute_value[0].second);
                         motor.setDirection('R', compute_value[1].first);
                         motor.setDutycycle('R', compute_value[1].second);
-                        printf("Motor output: [%d,%.5f] [%d,%.5f]\n",
-                               compute_value[0].first, compute_value[0].second,
-                               compute_value[1].first, compute_value[1].second);
-                        // printf("Counter : %d\n", sensors.getNoTrackCounter());
+                        DEBUGLOG("Motor output: [%d,%.5f] [%d,%.5f]\n",
+                                 compute_value[0].first, compute_value[0].second,
+                                 compute_value[1].first, compute_value[1].second);
                     } else {
-                        // printf("Counter : %d\n", sensors.getNoTrackCounter());
+                        DEBUGLOG("Counter : %d\n", sensors.getNoTrackCounter());
                         if (sensors.getNoTrackCounter() > 150) {
                             motor.setDutycycle('A', 0);
                             break;
@@ -92,7 +94,16 @@ int main() {
                         } else if (c == 'Q') {
                             motor.setEnable(0);
                             ThisThread::sleep_for(1s);
-                            motor.turnright(172, &motor, &wheel_left, &wheel_right);
+                            motor.turnright(45, &motor, &wheel_left, &wheel_right);
+
+                            while (1) {
+                                auto _distance = sensors.read();
+                                if (_distance < 2.0f)
+                                    break;
+
+                                motor.turnright(5, &motor, &wheel_left, &wheel_right);
+                            }
+
                             controller.reset();
                             motor.setDutycycle('A', 0);
                             motor.setEnable(1);
@@ -111,7 +122,7 @@ int main() {
                     hm10.read(&ki, sizeof(ki));
                     hm10.read(&kd, sizeof(kd));
 
-                    printf("Kp: %.5f Ki: %.5f Kd: %.5f\n", kp, ki, kd);
+                    DEBUGLOG("Kp: %.5f Ki: %.5f Kd: %.5f\n", kp, ki, kd);
                     controller.setSpeedController(kp, ki, kd);
                     break;
                 }
@@ -125,7 +136,7 @@ int main() {
                 while (1) {
                     hm10.read(&speed, sizeof(speed));
 
-                    printf("Target speed: %.5f\n", speed);
+                    DEBUGLOG("Target speed: %.5f\n", speed);
                     controller.setTargetSpeed(speed);
                     break;
                 }
@@ -141,7 +152,7 @@ int main() {
                 motor.setDutycycle('L', 1);
 
                 while (1) {
-                    printf("%.5f %.5f\n", wheel_left.getPPS(), wheel_right.getPPS());
+                    DEBUGLOG("%.5f %.5f\n", wheel_left.getPPS(), wheel_right.getPPS());
                     ThisThread::sleep_for(400ms);
                 }
                 break;
@@ -159,7 +170,7 @@ int main() {
                 break;
             }
             default:
-                if (isalnum(c)) {
+                if (std::isalnum(c)) {
                     printf("HM10 sent %c\n", c);
                 }
             }

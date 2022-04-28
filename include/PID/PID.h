@@ -150,6 +150,7 @@ class PID {
     // The thing we measure.
     float _processVariable;
     float _prevProcessVariable;
+    float _prevError;
     // The output that affects the process variable.
     float _controllerOutput;
     float _prevControllerOutput;
@@ -167,6 +168,9 @@ class PID {
     float _accError;
     // The controller output bias.
     float _bias;
+
+    // The exponential filter alpha
+    float _a;
 
     // The interval between samples.
     float _tSample;

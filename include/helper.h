@@ -4,6 +4,26 @@
 #include "encoder.h"
 #include "mbed.h"
 #include <functional>
+#include <cstdio>
+
+#ifdef DEBUG
+#define _DEBUG 1
+#else
+#define _DEBUG 0
+#endif
+
+#define DEBUGLOG(x, ...) \
+    do { if (_DEBUG) { \
+    printf("[LOG] %s %s(): " x, \
+    __FILE__, __func__, ##__VA_ARGS__); \
+    fflush(stdout); }} while (0)
+
+#define ERROR(...) \
+    do { if (_DEBUG) { \
+    fprintf(stderr, "[ERROR] %s %s(): %s\n", \
+    __FILE__, __func__, ##__VA_ARGS__); \
+    fflush(stdout); __builtin_abort(); \
+    }} while (0)
 
 /**
  * @brief Clamp the value between [lo,high].
