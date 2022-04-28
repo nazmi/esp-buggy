@@ -36,13 +36,96 @@ Determining the position of the line is very simple by using weighted average as
 
 ![Quadratic interpolation](sensor4.svg)
 
-The position can be determined from \f$ distance = -\frac{b}{2a} \f$. To be explained.
+The position can be determined from \f$ distance = -\frac{b}{2a} \f$. The idea behind of the solution is as follows.
+\f$
+\begin{bmatrix}
+y_1\\ 
+y_2\\ 
+y_3\\ 
+y_4
+\end{bmatrix} 
+= 
+\begin{bmatrix}
+h_1^{2} & h_1 & 1 \\ 
+h_2^{2} & h_2 & 1 \\ 
+h_3^{2} & h_3 & 1 \\
+h_4^{2} & h_4 & 1
+\end{bmatrix}
+ 
+\begin{bmatrix}
+A\\ 
+B\\ 
+C
+\end{bmatrix} \\\\
+Y = HX \\
+\text{The problem  can be solved using inverse. } \\
+X = H^{-1}Y \\ 
+\text{But the problem is overdetermined and can be solved by minimizing the error. } \\
+\hat{X} = (H^{T}H)^{-1}H^{T}Y \f$
+
+This is where the DSP library from Arm comes in handy. The following code show the implementation of the quadratic interpolation.
+
+```cpp
+arm_matrix_instance_f32 computeH(){
+    
+    arm_matrix_instance_f32 H,HT,HTH,HTHI,HTHIHT;
+    const float32_t h[4*3] = {
+        h_1*h_1, h_1, 1,
+        h_2*h_2, h_2, 1,
+        h_3*h_3, h_3, 1,
+        h_4*h_4, h_4, 1
+    };
+    arm_mat_init_f32(&H, 4, 3, (float32_t *)h);
+
+    float32_t ht[3*4];
+    arm_mat_init_f32(&HT, 3, 4, ht);
+    arm_mat_trans_f32(&H, &HT);
+    
+    float32_t hth[3*3];
+    arm_mat_init_f32(&HTH, 3, 3, hth);
+    arm_mat_mult_f32(&HT,&H,&HTH);
+
+    float32_t hthi[3*3];
+    arm_mat_init_f32(&HTHI, 3, 3, hthi);
+    arm_mat_inverse_f32(&HTH,&HTHI);
+
+    float32_t hthiht[3*4];
+    arm_mat_init_f32(&HTHIHT, 3, 4, hthiht);
+    arm_mat_mult_f32(&HTHI,&HT,&HTHIHT);
+
+    return HTHIHT;
+}
+
+arm_matrix_instance_f32 computeX(const arm_matrix_instance_f32* H, const arm_matrix_instance_f32* Y){
+    arm_matrix_instance_f32 X;
+    float32_t x_matrix[3];
+    arm_mat_init_f32(&X, 3, 1, x_matrix);
+    arm_mat_mult_f32(&HTHIT,&Y,&X);
+    return X;
+}
+
+float computeDistance(const arm_matrix_instance_f32* X){
+    return -(X->pData[1])/(2*X->pData[0]);
+}
+
+```
 
 # Results {#results}
 
-Adjusting the height....  
-graph reading vs height  
+We adjusted the height between 2.5cm and 6 cm to get the best readings that do not clip and not too low. The best height we found was 2.7 cm from the ground.
+<details><summary>See...</summary>
+Showcase the reading values at different height.<br/>
+<div align="center">
+![Height](height.svg)
+</div>
+</details>
   
-Quadratic vs weighted average software solution.  
-Graph distance vs (error_1 vs error_2).  
-Graph no of sample vs (time_1 vs time_2).
+For the software solution, we cannot accurately measure the position of the line. But the error in both method implied that the difference in the measured position is small. However, in time complexity, the quadratic interpolation method is more efficient than the simple method. This is because the H matrix is evaluated at compile time and only one multiplication occurs during runtime.
+
+<details><summary>See...</summary>
+Showcase the distance estimation based on two different method.<br/>
+<div align="center">
+![Comparing Accuracy](quadratic.svg)
+![Comparing Time](timetaken.svg)
+</div>
+</details>
