@@ -60,10 +60,11 @@ PID::PID(float Kc, float tauI, float tauD, float interval) {
 
     _setPoint = 0.0f;
     _processVariable = 0.0f;
-    _prevProcessVariable = 0.0f;
     _controllerOutput = 0.0f;
     _prevControllerOutput = 0.0f;
+    _prevError = 0.0f;
 
+    _a = 0.7f;
     _accError = 0.0f;
     _bias = 0.0f;
 }
@@ -75,11 +76,7 @@ void PID::setInputLimits(float inMin, float inMax) {
         return;
 
     // Rescale the working variables to reflect the changes.
-    _prevProcessVariable *= (inMax - inMin) / _inSpan;
     _accError *= (inMax - inMin) / _inSpan;
-
-    // Make sure the working variables are within the new limits.
-    _prevProcessVariable = clamp(_prevProcessVariable, 0.0f, 1.0f);
 
     _inMin = inMin;
     _inMax = inMax;
@@ -130,7 +127,7 @@ void PID::setTunings(float Kc, float tauI, float tauD) {
 
 void PID::reset() {
 
-    _prevProcessVariable = 0.0f;
+    _prevError = 0.0f;
     _prevControllerOutput = 0.0f;
     _accError = 0.0f;
 }
@@ -158,8 +155,13 @@ float PID::compute() {
     float scaledPV = clamp((_processVariable - _inMin) / _inSpan, 0.0f, 1.0f);
     float scaledSP = clamp((_setPoint - _inMin) / _inSpan, 0.0f, 1.0f);
     float error = scaledSP - scaledPV;
-    float dMeas = (scaledPV - _prevProcessVariable) / _tSample;
+    float dError = 0.0;
     float scaledBias = 0.0;
+
+    // Exponential Filter
+    if (_tauD > 0){
+        dError = _a * error + (1 - _a) * _prevError;
+    }
 
     // Check and see if the output is pegged at a limit and only
     // integrate if it is not. This is to prevent reset-windup.
@@ -172,21 +174,17 @@ float PID::compute() {
     }
 
     // Perform the PID calculation.
-    float derivative = _tauD * dMeas;
-    if (abs(error) > abs(derivative)) {
-        _controllerOutput = scaledBias + _Kc * (error + (_tauR * _accError) - derivative);
-    } else {
-        _controllerOutput = scaledBias + _Kc * (error + (_tauR * _accError));
-    }
+     _controllerOutput = scaledBias + _Kc * (error + (_tauR * _accError) + _tauD * dError / _tSample);
 
-    printf("[ %.5f %.5f %.5f %.5f %.5f ", scaledPV, scaledSP, error, dMeas, _controllerOutput);
+    printf("[ %.5f %.5f %.5f %.5f %.5f ", scaledPV, scaledSP, error, dError, _controllerOutput);
     // Make sure the computed output is within output constraints.
     _controllerOutput = clamp(_controllerOutput, -1.0f, 1.0f);
 
     // Remember this output for the windup check next time.
     _prevControllerOutput = _controllerOutput;
     // Remember the input for the derivative calculation next time.
-    _prevProcessVariable = scaledPV;
+    _prevError = dError;
+
     printf("%.5f] \n", (_controllerOutput * _outSpan) + _outMin);
     // Scale the output from percent span back out to a real world number.
     return ((_controllerOutput * _outSpan) + _outMin);
