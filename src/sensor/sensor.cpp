@@ -68,14 +68,18 @@ float Sensor::read() {
     }
 
     // Debugging Stuff
-    // if (!s_run) {
-    //     printf("1,2,3,4,5,6,time,m_distance\n");
-    //     s_run = true;
-    // }
-    // for (const auto &reading : m_reading) {
-    //     printf("%.5f,", reading);
-    // }
-    // printf("%f\n", m_distance);
+    if (_SENSORS_DEBUG){
+        if (!s_run) {
+            DEBUGLOG("1,2,3,4,5,6,time,m_distance\n");
+            s_run = true;
+        }
+
+        for (const auto &reading : m_reading) {
+            DEBUGLOG("%.5f,", reading);
+        }
+        DEBUGLOG("%f\n", m_distance);
+    }
+    
 
     return m_distance;
 }

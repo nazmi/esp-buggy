@@ -73,7 +73,7 @@ void PID::setInputLimits(float inMin, float inMax) {
 
     // Make sure we haven't been given impossible values.
     if (inMin >= inMax)
-        return;
+        ERROR("Invalid input limits");
 
     // Rescale the working variables to reflect the changes.
     _accError *= (inMax - inMin) / _inSpan;
@@ -87,7 +87,7 @@ void PID::setOutputLimits(float outMin, float outMax) {
 
     // Make sure we haven't been given impossible values.
     if (outMin >= outMax)
-        return;
+        ERROR("Invalid output limits");
 
     // Rescale the working variables to reflect the changes.
     _prevControllerOutput *= (outMax - outMin) / _outSpan;
@@ -104,7 +104,7 @@ void PID::setTunings(float Kc, float tauI, float tauD) {
 
     // Verify that the tunings make sense.
     if (Kc == 0.0f || tauI < 0.0f || tauD < 0.0f) {
-        return;
+        ERROR("Invalid tuning parameters");
     }
 
     // Store raw values to hand back to user on request.
@@ -176,7 +176,7 @@ float PID::compute() {
     // Perform the PID calculation.
      _controllerOutput = scaledBias + _Kc * (error + (_tauR * _accError) + _tauD * dError / _tSample);
 
-    printf("[ %.5f %.5f %.5f %.5f %.5f ", scaledPV, scaledSP, error, dError, _controllerOutput);
+    DEBUGLOG("[ %.5f %.5f %.5f %.5f %.5f ", scaledPV, scaledSP, error, dError, _controllerOutput);
     // Make sure the computed output is within output constraints.
     _controllerOutput = clamp(_controllerOutput, -1.0f, 1.0f);
 
@@ -185,7 +185,7 @@ float PID::compute() {
     // Remember the input for the derivative calculation next time.
     _prevError = dError;
 
-    printf("%.5f] \n", (_controllerOutput * _outSpan) + _outMin);
+    DEBUGLOG("%.5f] \n", (_controllerOutput * _outSpan) + _outMin);
     // Scale the output from percent span back out to a real world number.
     return ((_controllerOutput * _outSpan) + _outMin);
 }

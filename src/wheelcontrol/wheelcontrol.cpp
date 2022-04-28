@@ -64,10 +64,11 @@ vector<pif> WheelControl::computeSpeed(float position, const Encoder &left_encod
     float abs_left_encoder_pps{static_cast<float>(abs(left_encoder.getPPS()))};
     float abs_right_encoder_pps{static_cast<float>(abs(right_encoder.getPPS()))};
 
+    DEBUGLOG("Encoder PPS: [%.5f %.5f]\n", abs_left_encoder_pps, abs_right_encoder_pps);
     // Compute line follower controller
     m_linecontroller.setProcessValue(position);
-    printf("PID OUTPUT:       PV      SP     Error    Derror  Output  ScaledOutput\n");
-    printf("Line output : ");
+    DEBUGLOG("PID OUTPUT:       PV      SP     Error    Derror  Output  ScaledOutput\n");
+    DEBUGLOG("Line output : ");
 
     // Positive position : Controller output is negative
     // Negative position : Controller output is positive
@@ -91,9 +92,9 @@ vector<pif> WheelControl::computeSpeed(float position, const Encoder &left_encod
     }
 
     m_setProcessValue(abs_left_encoder_pps, abs_right_encoder_pps);
-    printf("Left output : ");
+    DEBUGLOG("Left output : ");
     float left_output = clamp(m_leftcontroller.compute(), 0.0f, 1.0f);
-    printf("Right output: ");
+    DEBUGLOG("Right output: ");
     float right_output = clamp(m_rightcontroller.compute(), 0.0f, 1.0f);
 
     // Special cases when going up of ramp

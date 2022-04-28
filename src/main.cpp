@@ -1,9 +1,13 @@
-#include "encoder.h"
 #include "mbed.h"
+#include "helper.h"
+#include "encoder.h"
 #include "motor.h"
 #include "sensor.h"
 #include "wheelcontrol.h"
 #include <string>
+
+// #define DEBUG
+// #define SENSORS_DEBUG
 
 int main() {
 
@@ -25,7 +29,6 @@ int main() {
     controller.setTargetSpeed(1.5f);
 
     char c;
-    Timer test;
 
     while (1) {
 
@@ -38,7 +41,7 @@ int main() {
             case 'R': {
                 while (1) {
                     auto distance = sensors.read();
-                    if (distance < NO_TRACK) {
+                    if (distance != NO_TRACK) {
                         char s[9];
                         snprintf(s, sizeof(s), "%2.5f", distance);
                         hm10.write(&s, sizeof(s));
@@ -64,19 +67,18 @@ int main() {
                 motor.setFrequency(1000);
                 while (1) {
                     auto distance = sensors.read();
-                    printf("Position: %.5f\n", distance);
+                    DEBUGLOG("Position: %.5f\n", distance);
                     if (distance != NO_TRACK) {
                         auto compute_value = controller.computeSpeed(distance, wheel_left, wheel_right);
                         motor.setDirection('L', compute_value[0].first);
                         motor.setDutycycle('L', compute_value[0].second);
                         motor.setDirection('R', compute_value[1].first);
                         motor.setDutycycle('R', compute_value[1].second);
-                        printf("Motor output: [%d,%.5f] [%d,%.5f]\n",
+                        DEBUGLOG("Motor output: [%d,%.5f] [%d,%.5f]\n",
                                compute_value[0].first, compute_value[0].second,
                                compute_value[1].first, compute_value[1].second);
-                        // printf("Counter : %d\n", sensors.getNoTrackCounter());
                     } else {
-                        // printf("Counter : %d\n", sensors.getNoTrackCounter());
+                        DEBUGLOG("Counter : %d\n", sensors.getNoTrackCounter());
                         if (sensors.getNoTrackCounter() > 150) {
                             motor.setDutycycle('A', 0);
                             break;
@@ -120,7 +122,7 @@ int main() {
                     hm10.read(&ki, sizeof(ki));
                     hm10.read(&kd, sizeof(kd));
 
-                    printf("Kp: %.5f Ki: %.5f Kd: %.5f\n", kp, ki, kd);
+                    DEBUGLOG("Kp: %.5f Ki: %.5f Kd: %.5f\n", kp, ki, kd);
                     controller.setSpeedController(kp, ki, kd);
                     break;
                 }
@@ -134,7 +136,7 @@ int main() {
                 while (1) {
                     hm10.read(&speed, sizeof(speed));
 
-                    printf("Target speed: %.5f\n", speed);
+                    DEBUGLOG("Target speed: %.5f\n", speed);
                     controller.setTargetSpeed(speed);
                     break;
                 }
@@ -150,7 +152,7 @@ int main() {
                 motor.setDutycycle('L', 1);
 
                 while (1) {
-                    printf("%.5f %.5f\n", wheel_left.getPPS(), wheel_right.getPPS());
+                    DEBUGLOG("%.5f %.5f\n", wheel_left.getPPS(), wheel_right.getPPS());
                     ThisThread::sleep_for(400ms);
                 }
                 break;
@@ -168,7 +170,7 @@ int main() {
                 break;
             }
             default:
-                if (isalnum(c)) {
+                if (std::isalnum(c)) {
                     printf("HM10 sent %c\n", c);
                 }
             }
