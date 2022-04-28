@@ -1,6 +1,7 @@
 #ifndef WHEEL_CONTROL_H
 #define WHEEL_CONTROL_H
 
+#include "debug1.h"
 #include "mbed.h"
 #include "PID.h"
 #include <utility>

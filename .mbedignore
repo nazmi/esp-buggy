@@ -81,3 +81,5 @@ mbed-os/hal/usb/TARGET_Templates/*
 
 /* WiFi */
 mbed-os/connectivity/drivers/wifi/*
+
+mbed-os/platform/randlib/*
