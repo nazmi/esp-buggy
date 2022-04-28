@@ -20,7 +20,7 @@
 <polygon fill="#f2f2f2" stroke="black" points="102.5,-303.5 102.5,-375.5 209.5,-375.5 209.5,-303.5 102.5,-303.5"/>
 <text text-anchor="start" x="115.5" y="-363.7" font-family="Arial" font-weight="bold" font-size="11.00">Line Controller</text>
 <polyline fill="none" stroke="black" points="102.5,-355.5 209.5,-355.5 "/>
-<text text-anchor="start" x="138.5" y="-342.7" font-family="Arial" font-size="11.00">Kp: 1.2</text>
+<text text-anchor="start" x="138.5" y="-342.7" font-family="Arial" font-size="11.00">Kp: 0.7</text>
 <polyline fill="none" stroke="black" points="102.5,-335.5 209.5,-335.5 "/>
 <text text-anchor="start" x="110.5" y="-322.7" font-family="Arial" font-size="11.00">PV: sensors.read()</text>
 <text text-anchor="start" x="110.5" y="-310.7" font-family="Arial" font-size="11.00"> SP: 0</text>
@@ -45,9 +45,9 @@
 <polygon fill="#f2f2f2" stroke="black" points="16.5,-93.5 16.5,-189.5 147.5,-189.5 147.5,-93.5 16.5,-93.5"/>
 <text text-anchor="start" x="42.5" y="-177.7" font-family="Arial" font-weight="bold" font-size="11.00">Left Controller</text>
 <polyline fill="none" stroke="black" points="16.5,-169.5 147.5,-169.5 "/>
-<text text-anchor="start" x="55.5" y="-156.7" font-family="Arial" font-size="11.00">Kp: 0.75</text>
-<text text-anchor="start" x="55.5" y="-144.7" font-family="Arial" font-size="11.00">Ki: 0</text>
-<text text-anchor="start" x="55.5" y="-132.7" font-family="Arial" font-size="11.00">Kd: 0.0004</text>
+<text text-anchor="start" x="64.5" y="-156.7" font-family="Arial" font-size="11.00">Kp: 1.2</text>
+<text text-anchor="start" x="64.5" y="-144.7" font-family="Arial" font-size="11.00">Ki: 0</text>
+<text text-anchor="start" x="64.5" y="-132.7" font-family="Arial" font-size="11.00">Kd: 0</text>
 <polyline fill="none" stroke="black" points="16.5,-125.5 147.5,-125.5 "/>
 <text text-anchor="start" x="24.5" y="-112.7" font-family="Arial" font-size="11.00">PV: encoder.read_pps()</text>
 <text text-anchor="start" x="24.5" y="-100.7" font-family="Arial" font-size="11.00"> SP: target &#45; delta </text>
@@ -64,9 +64,9 @@
 <polygon fill="#f2f2f2" stroke="black" points="165.5,-93.5 165.5,-189.5 296.5,-189.5 296.5,-93.5 165.5,-93.5"/>
 <text text-anchor="start" x="188" y="-177.7" font-family="Arial" font-weight="bold" font-size="11.00">Right Controller</text>
 <polyline fill="none" stroke="black" points="165.5,-169.5 296.5,-169.5 "/>
-<text text-anchor="start" x="204.5" y="-156.7" font-family="Arial" font-size="11.00">Kp: 0.75</text>
-<text text-anchor="start" x="204.5" y="-144.7" font-family="Arial" font-size="11.00">Ki: 0</text>
-<text text-anchor="start" x="204.5" y="-132.7" font-family="Arial" font-size="11.00">Kd: 0.0004</text>
+<text text-anchor="start" x="213.5" y="-156.7" font-family="Arial" font-size="11.00">Kp: 1.2</text>
+<text text-anchor="start" x="213.5" y="-144.7" font-family="Arial" font-size="11.00">Ki: 0</text>
+<text text-anchor="start" x="213.5" y="-132.7" font-family="Arial" font-size="11.00">Kd: 0</text>
 <polyline fill="none" stroke="black" points="165.5,-125.5 296.5,-125.5 "/>
 <text text-anchor="start" x="173.5" y="-112.7" font-family="Arial" font-size="11.00">PV: encoder.read_pps()</text>
 <text text-anchor="start" x="173.5" y="-100.7" font-family="Arial" font-size="11.00"> SP: target + delta </text>

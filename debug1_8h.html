@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>EEEN21000: /github/workspace/include/motor/motor.h File Reference</title>
+<title>EEEN21000: /github/workspace/include/debug1.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -94,7 +94,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('motor_8h.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('debug1_8h.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -114,89 +114,104 @@ $(document).ready(function(){initNavTree('motor_8h.html',''); initResizable(); }
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a>  </div>
-  <div class="headertitle"><div class="title">motor.h File Reference</div></div>
+  <div class="headertitle"><div class="title">debug1.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="encoder_8h_source.html">encoder.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="helper_8h_source.html">helper.h</a>&quot;</code><br />
-<code>#include &quot;mbed.h&quot;</code><br />
-<code>#include &lt;utility&gt;</code><br />
+<div class="textblock"><code>#include &lt;cstdio&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for motor.h:</div>
+Include dependency graph for debug1.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="motor_8h__incl.svg" width="344" height="351"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="debug1_8h__incl.svg" width="184" height="127"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="debug1_8h__dep__incl.svg" width="432" height="231"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
-<p><a href="motor_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="debug1_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_motor.html">Motor</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_motor.html" title="Motor class to control the motors.">Motor</a> class to control the motors.  <a href="class_motor.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:add64edb466ebc8cf935fbce2e3a6fb25"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="motor_8h.html#add64edb466ebc8cf935fbce2e3a6fb25">FAST_PWM</a>&#160;&#160;&#160;0.6</td></tr>
-<tr class="memdesc:add64edb466ebc8cf935fbce2e3a6fb25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fast duty cycle constant.  <a href="motor_8h.html#add64edb466ebc8cf935fbce2e3a6fb25">More...</a><br /></td></tr>
-<tr class="separator:add64edb466ebc8cf935fbce2e3a6fb25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7051de59e6115405db179689d7a630e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="motor_8h.html#ac7051de59e6115405db179689d7a630e">HALF_PWM</a>&#160;&#160;&#160;0.5</td></tr>
-<tr class="memdesc:ac7051de59e6115405db179689d7a630e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Half duty cycle constant.  <a href="motor_8h.html#ac7051de59e6115405db179689d7a630e">More...</a><br /></td></tr>
-<tr class="separator:ac7051de59e6115405db179689d7a630e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2d5253ae733c15431dbf44cbad409f0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">SLOW_PWM</a>&#160;&#160;&#160;0.3</td></tr>
-<tr class="memdesc:ae2d5253ae733c15431dbf44cbad409f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Slow duty cycle constant.  <a href="motor_8h.html#ae2d5253ae733c15431dbf44cbad409f0">More...</a><br /></td></tr>
-<tr class="separator:ae2d5253ae733c15431dbf44cbad409f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a152fc5203b90b1cff03b7b78579b8f52"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug1_8h.html#a152fc5203b90b1cff03b7b78579b8f52">_DEBUG</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a152fc5203b90b1cff03b7b78579b8f52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e4920173533b3af6aed403ef3bb1ea6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug1_8h.html#a1e4920173533b3af6aed403ef3bb1ea6">DEBUGLOG</a>(x, ...)</td></tr>
+<tr class="separator:a1e4920173533b3af6aed403ef3bb1ea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02ce8a968600d004ba60858425c46307"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug1_8h.html#a02ce8a968600d004ba60858425c46307">ERROR</a>(...)</td></tr>
+<tr class="separator:a02ce8a968600d004ba60858425c46307"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="add64edb466ebc8cf935fbce2e3a6fb25" name="add64edb466ebc8cf935fbce2e3a6fb25"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add64edb466ebc8cf935fbce2e3a6fb25">&#9670;&nbsp;</a></span>FAST_PWM</h2>
+<a id="a152fc5203b90b1cff03b7b78579b8f52" name="a152fc5203b90b1cff03b7b78579b8f52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a152fc5203b90b1cff03b7b78579b8f52">&#9670;&nbsp;</a></span>_DEBUG</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define FAST_PWM&#160;&#160;&#160;0.6</td>
+          <td class="memname">#define _DEBUG&#160;&#160;&#160;0</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fast duty cycle constant. </p>
-
 </div>
 </div>
-<a id="ac7051de59e6115405db179689d7a630e" name="ac7051de59e6115405db179689d7a630e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7051de59e6115405db179689d7a630e">&#9670;&nbsp;</a></span>HALF_PWM</h2>
+<a id="a1e4920173533b3af6aed403ef3bb1ea6" name="a1e4920173533b3af6aed403ef3bb1ea6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e4920173533b3af6aed403ef3bb1ea6">&#9670;&nbsp;</a></span>DEBUGLOG</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define HALF_PWM&#160;&#160;&#160;0.5</td>
+          <td class="memname">#define DEBUGLOG</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Half duty cycle constant. </p>
-
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> { <span class="keywordflow">if</span> (<a class="code hl_define" href="debug1_8h.html#a152fc5203b90b1cff03b7b78579b8f52">_DEBUG</a>) { \</div>
+<div class="line">    printf(<span class="stringliteral">&quot;[LOG] %s %s(): &quot;</span> x, \</div>
+<div class="line">    __FILE__, __func__, ##__VA_ARGS__); \</div>
+<div class="line">    fflush(stdout); }} <span class="keywordflow">while</span> (0)</div>
+<div class="ttc" id="adebug1_8h_html_a152fc5203b90b1cff03b7b78579b8f52"><div class="ttname"><a href="debug1_8h.html#a152fc5203b90b1cff03b7b78579b8f52">_DEBUG</a></div><div class="ttdeci">#define _DEBUG</div><div class="ttdef"><b>Definition:</b> debug1.h:12</div></div>
+</div><!-- fragment -->
 </div>
 </div>
-<a id="ae2d5253ae733c15431dbf44cbad409f0" name="ae2d5253ae733c15431dbf44cbad409f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae2d5253ae733c15431dbf44cbad409f0">&#9670;&nbsp;</a></span>SLOW_PWM</h2>
+<a id="a02ce8a968600d004ba60858425c46307" name="a02ce8a968600d004ba60858425c46307"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02ce8a968600d004ba60858425c46307">&#9670;&nbsp;</a></span>ERROR</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SLOW_PWM&#160;&#160;&#160;0.3</td>
+          <td class="memname">#define ERROR</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Slow duty cycle constant. </p>
-
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> { <span class="keywordflow">if</span> (<a class="code hl_define" href="debug1_8h.html#a152fc5203b90b1cff03b7b78579b8f52">_DEBUG</a>) { \</div>
+<div class="line">    fprintf(stderr, <span class="stringliteral">&quot;[ERROR] %s %s(): %s\n&quot;</span>, \</div>
+<div class="line">    __FILE__, __func__, ##__VA_ARGS__); \</div>
+<div class="line">    fflush(stdout); __builtin_abort(); \</div>
+<div class="line">    }} <span class="keywordflow">while</span> (0)</div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
@@ -204,7 +219,7 @@ Macros</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_701317e477332ba3a7632d6dcc6d415f.html">motor</a></li><li class="navelem"><a class="el" href="motor_8h.html">motor.h</a></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="debug1_8h.html">debug1.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
   </ul>
 </div>

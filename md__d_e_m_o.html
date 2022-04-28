@@ -121,6 +121,7 @@ $(document).ready(function(){initNavTree('md__d_e_m_o.html',''); initResizable()
 <li class="level1"><a href="#motor">TD1: Motor Control</a></li>
 <li class="level1"><a href="#sensor">TD2: Sensors</a></li>
 <li class="level1"><a href="#steering">TD3: Steering</a></li>
+<li class="level1"><a href="#heats">TD4: Heats</a></li>
 </ul>
 </div>
 <div class="textblock"><p ><a class="anchor" id="journey"></a> </p>
@@ -129,12 +130,12 @@ Overview</h1>
 <p >We had at least 4 technical demonstrations (TD) for this semester, accessing different parts of the buggy. They emphasised the hardware control, especially the motors and the software solutions to interface the microcontroller and other components like sensors and Bluetooth module.</p>
 <h1><a class="anchor" id="motor"></a>
 TD1: Motor Control</h1>
-<p >On the software side, the key task was setting up the encoders and motors to work as intended. I settled down on a <b>20% duty cycle</b> to keep it steady and avoid any translational inertia after stopping. PWM frequency set to <b>1000 Hz</b> because the wheels were louder than the switches, why not? The heatsink was also not too hot to touch. I chose to use <b>unipolar mode</b> as this offered less switching losses. </p><div class="dotgraph">
+<p >On the software side, the key task was setting up the encoders and motors to work as intended. I settled down on a <b>20% duty cycle</b> to keep it steady and avoid any translational inertia after stopping. PWM frequency set to <b>1000 Hz</b> because the wheels were louder than the switches, why not? The heatsink was also not too hot to touch. I chose to use <b>unipolar mode</b> as this offered fewer switching losses. </p><div class="dotgraph">
 <iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_1.svg" width="458" height="412"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-<p >The encoder was connected directly to the wheel shaft, and from there we could measure the speed of the rotating wheel. The <a class="el" href="class_q_e_i.html" title="Handle reading pulses from encoder.">QEI</a> library encoded the pulses to <b>X2 resolution</b>, so we need to scale it down to get actual number of pulses. We also knew the number of pulses per revolution (CPR) was <b>256</b>. </p><p class="formulaDsp">
+<p >The encoder was connected directly to the wheel shaft, and from there we could measure the speed of the rotating wheel. The <a class="el" href="class_q_e_i.html" title="Handle reading pulses from encoder.">QEI</a> library encoded the pulses to <b>X2 resolution</b>, so we need to scale it down to get the actual number of pulses. We also knew the number of pulses per revolution (CPR) was <b>256</b>. </p><p class="formulaDsp">
 \begin{align} pulses &amp;= \frac{pulses}{2} \\ rev &amp;= \frac{pulses}{256} \\ distance &amp;= rev \times 2 \pi r \\ velocity &amp;= \frac{distance}{time} \\ \end{align}
 </p>
-<p >One of the tasks was to make a square of 0.5 m length. The hardest part was the square had to be in between the wheels. Even worst, I did not tune the task on the actual square at A16. The snippet below shows how I implemented the square sequence.</p>
+<p >One of the tasks was to make a square of 0.5 m in length. The hardest part was the square had to be in between the wheels. Even worst, I did not tune the task on the actual square at A16. The snippet below shows how I implemented the square sequence.</p>
 <p ><em>main.cpp</em></p>
 <div class="fragment"><div class="line"><a class="code hl_class" href="class_motor.html">Motor</a>  motor(PC_9,PB_8,PC_8,PC_6,PB_9);</div>
 <div class="line"><a class="code hl_class" href="class_encoder.html">Encoder</a>  wheel_left(PC_3,PC_2);</div>
@@ -157,7 +158,7 @@ TD1: Motor Control</h1>
 </div><!-- fragment --><p >Ideally all values in linear vector are 0.5 m and rotation vector are 90°. However, ours looked like this</p>
 <div class="fragment"><div class="line">vector&lt;double&gt; linear { 0.45, 0.33, 0.33, 0.43};</div>
 <div class="line">vector&lt;double&gt; rotation {83, 83, 83, 175};</div>
-</div><!-- fragment --><p >Note that the last one was more than 90° because the task was to trace the square back which was harder when your buggy did not move in straight line. I used bang-bang control approach to compensate any tiny deviation between the two wheels, implemented in the <a class="el" href="class_motor.html#abbeb0f664d334505276a83b7b7ef77ea" title="Control the motor to cruise forward.">Motor::forward</a>.</p>
+</div><!-- fragment --><p >Note that the last one was more than 90° because the task was to trace the square back which was harder when your buggy did not move in a straight line. I used bang-bang control approach to compensate for any tiny deviation between the two wheels, implemented in the <a class="el" href="class_motor.html#abbeb0f664d334505276a83b7b7ef77ea" title="Control the motor to cruise forward.">Motor::forward</a>.</p>
 <p ><em>motor.cpp</em></p>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> ( left_encoder &gt; right_encoder)</div>
 <div class="line"> </div>
@@ -172,15 +173,15 @@ TD1: Motor Control</h1>
 </div><!-- fragment --><p class="formulaDsp">
 \begin{align} correction &amp;= \frac{pulse_N}{pulse_M} \ where \ pulse_N &gt; pulse_M \\ \end{align}
 </p>
-<p> We received full marks on TD1 and this assured us a good start of our journey in producing a winning buggy.</p>
+<p> We received full marks on TD1 and this assured us of a good start to our journey in producing a winning buggy.</p>
 <h1><a class="anchor" id="sensor"></a>
 TD2: Sensors</h1>
-<p >This was where we had to interface the sensors and bluetooth module with the microcontroller. The bluetooth module was easily configured by connecting to the correct RX, TX pins. In this case I used <b>BufferedSerial</b> to handle the communication between F401RE and HM-10. Sensors were the tricky bit, since we chose not to arrange it in a one row but two instead. However, I will discuss on general process of configuration and calibration without considering our chosen arrangement.</p>
+<p >This was where we had to interface the sensors and Bluetooth module with the microcontroller. The Bluetooth module was easily configured by connecting to the correct RX, TX pins. In this case, I used <b>BufferedSerial</b> to handle the communication between F401RE and HM-10. Sensors were the tricky bit since we chose not to arrange them in one row but two instead. However, I will discuss on the general process of configuration and calibration without considering our chosen arrangement.</p>
 <div class="dotgraph">
 <iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_2.svg" width="334" height="244"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-<p >It was easier to manage 6 sensors if they are connected to op-amp as this approach allowed calibration only using potetiometer instead of software. Since this was not available to us, we had to calibrate the black and white level of the sensors.</p>
+<p >It was easier to manage 6 sensors if they are connected to op-amp as this approach allowed calibration only using potentiometer instead of software. Since this was not available to us, we had to calibrate the black and white level of the sensors.</p>
 <ol type="1">
-<li><p class="startli">The <b>white level</b> was calibrated by placing <b>white card</b> under the sensors and toggling the sensors under <b>normal condition at fixed height from the sensors</b>. <em>Does VDD matter?</em> No, because reading was already normalised, you can do whatever scaling you want as long as you comfortable with it. Here, I choose a saturation level of <b>10</b>.</p>
+<li><p class="startli">The <b>white level</b> was calibrated by placing a <b>white card</b> under the sensors and toggling the sensors under <b>normal conditions at a fixed height from the sensors</b>. <em>Does VDD matter?</em> No, because reading was already normalised, you can do whatever scaling you want as long as you were comfortable with it. Here, I choose a saturation level of <b>10</b>.</p>
 <p class="startli">Recall that I had <em>raw uncalibrated data (white level)</em> </p><table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">S1   </th><th class="markdownTableHeadNone">S2   </th><th class="markdownTableHeadNone">S3   </th><th class="markdownTableHeadNone">S4   </th><th class="markdownTableHeadNone">S5   </th><th class="markdownTableHeadNone">S6    </th></tr>
@@ -193,13 +194,13 @@ TD2: Sensors</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">3.13481   </td><td class="markdownTableBodyNone">3.06497   </td><td class="markdownTableBodyNone">3.25221   </td><td class="markdownTableBodyNone">3.19731   </td><td class="markdownTableBodyNone">3.09790   </td><td class="markdownTableBodyNone">2.69567   </td></tr>
 </table>
-<p class="startli">Now, just apply a scale factor to each sensor to scale it to the desired maximum level. </p><dl class="section note"><dt>Note</dt><dd>We assumed the sensors scale linearly. <em>But did it?</em></dd></dl>
+<p class="startli">Now, just apply a scale factor to each sensor to scale it to the desired maximum level. </p><dl class="section note"><dt>Note</dt><dd>We assumed the sensors scaled linearly. <em>But did it?</em></dd></dl>
 </li>
-<li>The <b>black level</b> was calibrated by placing <b>black track</b> under the sensors and toggling the sensors under <b>minimum light condition</b>. This ensured we get minimum treshold value at minimum external noise(infrared). <em>What to do with black level?</em> It was pretty much pointless to read small values that was not useful for distance calculation, so the black level is the treshold of the sensor activation.</li>
+<li>The <b>black level</b> was calibrated by placing a <b>black track</b> under the sensors and toggling the sensors under <b>minimum light conditions</b>. This ensured we get minimum treshold value at minimum external noise(infrared). <em>What to do with the black level?</em> It was pretty much pointless to read small values that were not useful for distance calculation, so the black level is the threshold of the sensor activation.</li>
 <li><p class="startli">Although we expected perfect results by calibration, there will be always external noise coming from sunlight and other sources. The issue needed to be addressed to avoid unreliable readings consisting of random errors.</p>
 <p class="startli">\( reading_i = noise_i + emitter_i \)</p>
-<dl class="section note"><dt>Note</dt><dd>Noise is simply background reading when none of the emitter is turned on.</dd></dl>
-<p>Measurements of the analog input when all emitter is off at the start of each read was very easy to implement. When this is done correctly, you get the best intended readings from the sensor.</p>
+<dl class="section note"><dt>Note</dt><dd>Noise is simply background reading when none of the emitters is turned on.</dd></dl>
+<p>Measurements of the analogue input when all emitter is off at the start of each read were very easy to implement. When this is done correctly, you get the best-intended readings from the sensor.</p>
 </li>
 </ol>
 <p ><details>
@@ -210,7 +211,7 @@ TD2: Sensors</h1>
 <br  />
  <img src="distance.svg" alt="Variation of distance" style="pointer-events: none;" class="inline"/> Sweeping the white card back and forth to the sensor. </div><p> </details>
 </p>
-<p >This part was where I realised how important normalised readings for distance calculation. If all readings were normalised to a level, distance formula simply became weighted mean of sensor readings. From the sensor array, if we established a pivot point between sensor 3 and 4, we could assign weight for every sensor based on its distance from pivot like in the example below.</p>
+<p >This part was where I realised how important normalised readings are for distance calculation. If all readings were normalised to a level, the distance formula simply became the weighted mean of sensor readings. From the sensor array, if we established a pivot point between sensors 3 and 4, we could assign a weight for every sensor based on its distance from the pivot as in the example below.</p>
 <div class="dotgraph">
 <iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_3.svg" width="462" height="132"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <div class="dotgraph">
@@ -218,10 +219,10 @@ TD2: Sensors</h1>
 <p >The solution was very simple and the equivalent formula was \(\ distance = \frac{\sum_{1}^{6} reading_i \times weight_i}{\sum_{1}^{6} reading_i} \)</p>
 <h1><a class="anchor" id="steering"></a>
 TD3: Steering</h1>
-<p >When all components were put together, it was time to make sure all can work in sync to follow the white line on the track. The overall look on how the control algorithm work was outlined in the figure below.</p>
+<p >When all components were put together, it was time to make sure all can work in sync to follow the white line on the track. The overall look at how the control algorithm work was outlined in the figure below.</p>
 <div class="dotgraph">
 <iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_5.svg" width="428" height="564"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-<p >Though it is unnecesary to have P controller in the line controller, I was thinking why not just use the same framework so it can be easily tweak and maintainable in the long run. The first controller scaled the deviations from white line in terms on pulses per second for the encoders. Then, a differential was created by using a target value and the output before to create turning effect for the wheels. This differential then outputs the corresponding PWM outputs for each motor.</p>
+<p >The first controller scaled the deviations from the white line and outputted target speed for the encoders. Then, a differential was created by using a target value and the output before to create a turning effect for the wheels. This differential then outputs the corresponding PWM outputs for each motor.</p>
 <p >Another extra thing I added was adaptive system response based on the position of the line, which manipulate the set point of the left and right controller to create quicker turning response.</p>
 <p ><em>wheelcontrol.cpp</em> </p><div class="fragment"><div class="line"><span class="keywordtype">float</span> delta_target = linecontroller.compute();</div>
 <div class="line"><span class="keywordtype">float</span> delta_left = m_target - delta_target;</div>
@@ -240,7 +241,22 @@ TD3: Steering</h1>
 <div class="line">    m_setSetPoint(delta_left, delta_right);</div>
 <div class="line"> </div>
 <div class="line">}</div>
-</div><!-- fragment --><p >Other than control algorithm, I simply added the turnaround code when BLE signal was sent. The turnaround used the code created in <a class="el" href="md__d_e_m_o.html#motor">TD1</a> to allow rotation of 180 degrees. </p>
+</div><!-- fragment --><p >Other than the control algorithm, I simply added the turnaround code when the BLE signal was sent. The turnaround used the code created in <a class="el" href="md__d_e_m_o.html#motor">TD1</a> with a little tweak to find the centre line instead of rotating 180. This method allows consistent turnaround even when the buggy is not perfectly aligned with the line before the turn.</p>
+<h1><a class="anchor" id="heats"></a>
+TD4: Heats</h1>
+<p >In TD3, we only used proportional gain to drive the buggy. This time we tuned the Kp and Kd gains to anticipate the motion of the buggy. The final Kp and Kd gains were found to be 1.2 and 0.0004 respectively.</p>
+<p >In real-world, the derivative term is noisy, so we used a low pass filter to smooth out the noise. The value of alpha in the filter is closer to 1 because we still need the high details of the term to be able to accurately predict the motion of the buggy. The low pass filter was implemented in the following code.</p>
+<p ><em>PID.cpp</em> </p><div class="fragment"><div class="line"><span class="keywordtype">float</span> _a = 0.7;</div>
+<div class="line"><span class="keywordtype">float</span> error = scaledSP - scaledPV;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Exponential Filter</span></div>
+<div class="line"><span class="keywordflow">if</span> (_tauD &gt; 0) {</div>
+<div class="line">    dError = _a * error + (1 - _a) * _prevError;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> <details>
+<summary>more...</summary> Showcase the filter behaviour with different alpha. Simulated error in range [-1,1]<br  />
+ </p><div align="center"> <img src="filter.svg" alt="Filter comparison" style="pointer-events: none;" class="inline"/> </div><p> </details>
+ </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

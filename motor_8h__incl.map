@@ -1,11 +1,10 @@
 <map id="/github/workspace/include/motor/motor.h" name="/github/workspace/include/motor/motor.h">
-<area shape="rect" id="node1" title=" " alt="" coords="57,5,230,47"/>
-<area shape="rect" id="node2" href="$encoder_8h.html" title=" " alt="" coords="64,169,143,196"/>
-<area shape="rect" id="node4" title=" " alt="" coords="146,319,210,345"/>
-<area shape="rect" id="node6" href="$helper_8h.html" title=" " alt="" coords="157,95,223,121"/>
-<area shape="rect" id="node9" title=" " alt="" coords="248,95,300,121"/>
-<area shape="rect" id="node3" href="$_q_e_i_8h.html" title=" " alt="" coords="119,244,173,271"/>
-<area shape="rect" id="node5" title=" " alt="" coords="33,244,94,271"/>
-<area shape="rect" id="node7" title=" " alt="" coords="300,169,379,196"/>
-<area shape="rect" id="node8" title=" " alt="" coords="167,169,224,196"/>
+<area shape="rect" id="node1" title=" " alt="" coords="55,5,228,47"/>
+<area shape="rect" id="node2" href="$encoder_8h.html" title=" " alt="" coords="67,169,146,196"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,319,69,345"/>
+<area shape="rect" id="node6" href="$helper_8h.html" title=" " alt="" coords="144,95,211,121"/>
+<area shape="rect" id="node8" title=" " alt="" coords="235,95,287,121"/>
+<area shape="rect" id="node3" href="$_q_e_i_8h.html" title=" " alt="" coords="43,244,98,271"/>
+<area shape="rect" id="node5" title=" " alt="" coords="123,244,184,271"/>
+<area shape="rect" id="node7" title=" " alt="" coords="259,169,338,196"/>
 </map>

@@ -4,7 +4,7 @@ var searchData=
   ['_5faccerror_1',['_accError',['../class_p_i_d.html#afc25f129d1cb3620b113c62b649e944a',1,'PID']]],
   ['_5fbias_2',['_bias',['../class_p_i_d.html#a243a3a02a5292d9168bf3d42b87bf2de',1,'PID']]],
   ['_5fcontrolleroutput_3',['_controllerOutput',['../class_p_i_d.html#a03bc6a8c1b018decd7e32f3f0a012986',1,'PID']]],
-  ['_5fdebug_4',['_DEBUG',['../helper_8h.html#a152fc5203b90b1cff03b7b78579b8f52',1,'helper.h']]],
+  ['_5fdebug_4',['_DEBUG',['../debug1_8h.html#a152fc5203b90b1cff03b7b78579b8f52',1,'debug1.h']]],
   ['_5fdparam_5',['_dParam',['../class_p_i_d.html#a3ca2d4149b4dc717caac4803c82571cd',1,'PID']]],
   ['_5finmax_6',['_inMax',['../class_p_i_d.html#a85eaad444fc9e277286d55c9734685c3',1,'PID']]],
   ['_5finmin_7',['_inMin',['../class_p_i_d.html#a9d449fac524e12e2f64e57b3073d088e',1,'PID']]],
