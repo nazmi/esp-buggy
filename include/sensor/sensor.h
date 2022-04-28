@@ -1,6 +1,7 @@
 #ifndef SENSOR_H
 #define SENSOR_H
 
+#include "debug.h"
 #include "arm_math.h"
 #include "mbed.h"
 #include "helper.h"

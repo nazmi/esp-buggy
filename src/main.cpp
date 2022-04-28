@@ -1,3 +1,4 @@
+#include "debug.h"
 #include "encoder.h"
 #include "helper.h"
 #include "mbed.h"
@@ -5,9 +6,6 @@
 #include "sensor.h"
 #include "wheelcontrol.h"
 #include <string>
-
-// #define DEBUG
-// #define SENSORS_DEBUG
 
 int main() {
 
