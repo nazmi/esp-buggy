@@ -8,7 +8,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>EEEN21000: /github/workspace/include/helper.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.smartmenus/1.0.2/jquery.smartmenus.min.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="resize.js"></script>
@@ -112,6 +114,7 @@ $(document).ready(function(){initNavTree('helper_8h.html',''); initResizable(); 
 
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">helper.h File Reference</div></div>
 </div><!--header-->
@@ -119,10 +122,11 @@ $(document).ready(function(){initNavTree('helper_8h.html',''); initResizable(); 
 <div class="textblock"><code>#include &quot;<a class="el" href="encoder_8h_source.html">encoder.h</a>&quot;</code><br />
 <code>#include &quot;mbed.h&quot;</code><br />
 <code>#include &lt;functional&gt;</code><br />
+<code>#include &lt;cstdio&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for helper.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="helper_8h__incl.svg" width="356" height="276"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="helper_8h__incl.svg" width="438" height="276"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -134,6 +138,15 @@ This graph shows which files directly or indirectly include this file:</div>
 </div>
 <p><a href="helper_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a152fc5203b90b1cff03b7b78579b8f52"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="helper_8h.html#a152fc5203b90b1cff03b7b78579b8f52">_DEBUG</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a152fc5203b90b1cff03b7b78579b8f52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e4920173533b3af6aed403ef3bb1ea6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="helper_8h.html#a1e4920173533b3af6aed403ef3bb1ea6">DEBUGLOG</a>(x, ...)</td></tr>
+<tr class="separator:a1e4920173533b3af6aed403ef3bb1ea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02ce8a968600d004ba60858425c46307"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="helper_8h.html#a02ce8a968600d004ba60858425c46307">ERROR</a>(...)</td></tr>
+<tr class="separator:a02ce8a968600d004ba60858425c46307"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:aab9f0232e41c960b4a09629eac33aef3"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
@@ -149,6 +162,77 @@ Functions</h2></td></tr>
 <tr class="memdesc:a1544dfe1cc64b778b7052f55c16fb868"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert radians to degree.  <a href="helper_8h.html#a1544dfe1cc64b778b7052f55c16fb868">More...</a><br /></td></tr>
 <tr class="separator:a1544dfe1cc64b778b7052f55c16fb868"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a152fc5203b90b1cff03b7b78579b8f52" name="a152fc5203b90b1cff03b7b78579b8f52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a152fc5203b90b1cff03b7b78579b8f52">&#9670;&nbsp;</a></span>_DEBUG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _DEBUG&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1e4920173533b3af6aed403ef3bb1ea6" name="a1e4920173533b3af6aed403ef3bb1ea6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e4920173533b3af6aed403ef3bb1ea6">&#9670;&nbsp;</a></span>DEBUGLOG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEBUGLOG</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> { <span class="keywordflow">if</span> (<a class="code hl_define" href="helper_8h.html#a152fc5203b90b1cff03b7b78579b8f52">_DEBUG</a>) { \</div>
+<div class="line">    printf(<span class="stringliteral">&quot;[LOG] %s %s(): &quot;</span> x, \</div>
+<div class="line">    __FILE__, __func__, ##__VA_ARGS__); \</div>
+<div class="line">    fflush(stdout); }} <span class="keywordflow">while</span> (0)</div>
+<div class="ttc" id="ahelper_8h_html_a152fc5203b90b1cff03b7b78579b8f52"><div class="ttname"><a href="helper_8h.html#a152fc5203b90b1cff03b7b78579b8f52">_DEBUG</a></div><div class="ttdeci">#define _DEBUG</div><div class="ttdef"><b>Definition:</b> helper.h:12</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a02ce8a968600d004ba60858425c46307" name="a02ce8a968600d004ba60858425c46307"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02ce8a968600d004ba60858425c46307">&#9670;&nbsp;</a></span>ERROR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> { <span class="keywordflow">if</span> (<a class="code hl_define" href="helper_8h.html#a152fc5203b90b1cff03b7b78579b8f52">_DEBUG</a>) { \</div>
+<div class="line">    fprintf(stderr, <span class="stringliteral">&quot;[ERROR] %s %s(): %s\n&quot;</span>, \</div>
+<div class="line">    __FILE__, __func__, ##__VA_ARGS__); \</div>
+<div class="line">    fflush(stdout); __builtin_abort(); \</div>
+<div class="line">    }} <span class="keywordflow">while</span> (0)</div>
+</div><!-- fragment -->
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="aab9f0232e41c960b4a09629eac33aef3" name="aab9f0232e41c960b4a09629eac33aef3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aab9f0232e41c960b4a09629eac33aef3">&#9670;&nbsp;</a></span>clamp()</h2>

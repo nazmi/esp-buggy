@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['counts_5fper_5frev_0',['COUNTS_PER_REV',['../encoder_8h.html#a3518641a6d2b8381fe5bbf5d08760b4d',1,'encoder.h']]],
-  ['curr_5fmask_1',['CURR_MASK',['../_q_e_i_8h.html#a7c88b710ce6b5128524915cc7f5b051c',1,'QEI.h']]]
+  ['_5fdebug_0',['_DEBUG',['../helper_8h.html#a152fc5203b90b1cff03b7b78579b8f52',1,'helper.h']]],
+  ['_5fsensors_5fdebug_1',['_SENSORS_DEBUG',['../sensor_8h.html#a6a8c63d711421f338646219979005d0c',1,'sensor.h']]]
 ];

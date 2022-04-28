@@ -20,6 +20,7 @@ var class_p_i_d =
     [ "_setPoint", "class_p_i_d.html#aafaf175fcdcca7371f1c59af527d2659", null ],
     [ "_processVariable", "class_p_i_d.html#a31e66811cc7f4b3a84ea718c0d59da44", null ],
     [ "_prevProcessVariable", "class_p_i_d.html#a828edaa3693bade0afc0e02e030a8718", null ],
+    [ "_prevError", "class_p_i_d.html#a05816b6df62f559aeadc61c39af93cbd", null ],
     [ "_controllerOutput", "class_p_i_d.html#a03bc6a8c1b018decd7e32f3f0a012986", null ],
     [ "_prevControllerOutput", "class_p_i_d.html#a03145d1e557c4e4028f0a776b0698358", null ],
     [ "_inMin", "class_p_i_d.html#a9d449fac524e12e2f64e57b3073d088e", null ],
@@ -30,5 +31,6 @@ var class_p_i_d =
     [ "_outSpan", "class_p_i_d.html#a17997c7ed80b980caa736605bb3267cb", null ],
     [ "_accError", "class_p_i_d.html#afc25f129d1cb3620b113c62b649e944a", null ],
     [ "_bias", "class_p_i_d.html#a243a3a02a5292d9168bf3d42b87bf2de", null ],
+    [ "_a", "class_p_i_d.html#a6f13bce773479fc6fb1c55ebf9b9343e", null ],
     [ "_tSample", "class_p_i_d.html#ab790e3a93f09ff6cd5290e4613907989", null ]
 ];

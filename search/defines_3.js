@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['fast_5fpwm_0',['FAST_PWM',['../motor_8h.html#add64edb466ebc8cf935fbce2e3a6fb25',1,'motor.h']]]
+  ['encoder_5flimit_0',['ENCODER_LIMIT',['../wheelcontrol_8h.html#a5419d77ed11a58d3abd038ced957e92d',1,'wheelcontrol.h']]],
+  ['error_1',['ERROR',['../helper_8h.html#a02ce8a968600d004ba60858425c46307',1,'helper.h']]]
 ];

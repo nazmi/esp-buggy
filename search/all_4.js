@@ -6,5 +6,6 @@ var searchData=
   ['encoder_2eh_3',['encoder.h',['../encoder_8h.html',1,'']]],
   ['encoder_5flimit_4',['ENCODER_LIMIT',['../wheelcontrol_8h.html#a5419d77ed11a58d3abd038ced957e92d',1,'wheelcontrol.h']]],
   ['encoding_5',['Encoding',['../class_q_e_i.html#a402e83314ec5151efa06b0f8512ba442',1,'QEI::Encoding()'],['../class_q_e_i.html#ac66dae3589c072a3762ee03a983485f5',1,'QEI::Encoding()']]],
-  ['encoding_5f_6',['encoding_',['../class_q_e_i.html#a4588035fcfed16d8fe3f7e06cd43a68c',1,'QEI']]]
+  ['encoding_5f_6',['encoding_',['../class_q_e_i.html#a4588035fcfed16d8fe3f7e06cd43a68c',1,'QEI']]],
+  ['error_7',['ERROR',['../helper_8h.html#a02ce8a968600d004ba60858425c46307',1,'helper.h']]]
 ];

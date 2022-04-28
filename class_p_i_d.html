@@ -8,7 +8,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>EEEN21000: PID Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.smartmenus/1.0.2/jquery.smartmenus.min.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="resize.js"></script>
@@ -179,6 +181,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a31e66811cc7f4b3a84ea718c0d59da44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a828edaa3693bade0afc0e02e030a8718"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_i_d.html#a828edaa3693bade0afc0e02e030a8718">_prevProcessVariable</a></td></tr>
 <tr class="separator:a828edaa3693bade0afc0e02e030a8718"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05816b6df62f559aeadc61c39af93cbd"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_i_d.html#a05816b6df62f559aeadc61c39af93cbd">_prevError</a></td></tr>
+<tr class="separator:a05816b6df62f559aeadc61c39af93cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03bc6a8c1b018decd7e32f3f0a012986"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_i_d.html#a03bc6a8c1b018decd7e32f3f0a012986">_controllerOutput</a></td></tr>
 <tr class="separator:a03bc6a8c1b018decd7e32f3f0a012986"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03145d1e557c4e4028f0a776b0698358"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_i_d.html#a03145d1e557c4e4028f0a776b0698358">_prevControllerOutput</a></td></tr>
@@ -199,6 +203,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:afc25f129d1cb3620b113c62b649e944a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a243a3a02a5292d9168bf3d42b87bf2de"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_i_d.html#a243a3a02a5292d9168bf3d42b87bf2de">_bias</a></td></tr>
 <tr class="separator:a243a3a02a5292d9168bf3d42b87bf2de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f13bce773479fc6fb1c55ebf9b9343e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_i_d.html#a6f13bce773479fc6fb1c55ebf9b9343e">_a</a></td></tr>
+<tr class="separator:a6f13bce773479fc6fb1c55ebf9b9343e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab790e3a93f09ff6cd5290e4613907989"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_i_d.html#ab790e3a93f09ff6cd5290e4613907989">_tSample</a></td></tr>
 <tr class="separator:ab790e3a93f09ff6cd5290e4613907989"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -736,6 +742,28 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a05816b6df62f559aeadc61c39af93cbd" name="a05816b6df62f559aeadc61c39af93cbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05816b6df62f559aeadc61c39af93cbd">&#9670;&nbsp;</a></span>_prevError</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float PID::_prevError</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a03bc6a8c1b018decd7e32f3f0a012986" name="a03bc6a8c1b018decd7e32f3f0a012986"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a03bc6a8c1b018decd7e32f3f0a012986">&#9670;&nbsp;</a></span>_controllerOutput</h2>
 
@@ -945,6 +973,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">float PID::_bias</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6f13bce773479fc6fb1c55ebf9b9343e" name="a6f13bce773479fc6fb1c55ebf9b9343e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f13bce773479fc6fb1c55ebf9b9343e">&#9670;&nbsp;</a></span>_a</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float PID::_a</td>
         </tr>
       </table>
   </td>
