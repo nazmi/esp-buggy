@@ -6,6 +6,10 @@
 
 We had at least 4 technical demonstrations (TD) for this semester, accessing different parts of the buggy. They emphasised the hardware control, especially the motors and the software solutions to interface the microcontroller and other components like sensors and Bluetooth module.
 
+|TD|1|2|3|4|
+|-|-|-|-|-|
+|Marks|100|97|100|80|
+
 # TD1: Motor Control {#motor}
 
 On the software side, the key task was setting up the encoders and motors to work as intended. I settled down on a **20% duty cycle** to keep it steady and avoid any translational inertia after stopping. PWM frequency set to **1000 Hz** because the wheels were louder than the switches, why not? The heatsink was also not too hot to touch. I chose to use **unipolar mode** as this offered fewer switching losses.
@@ -279,7 +283,9 @@ Other than the control algorithm, I simply added the turnaround code when the BL
 
 # TD4: Heats {#heats}
 
-In TD3, we only used proportional gain to drive the buggy. This time we tuned the Kp and Kd gains to anticipate the motion of the buggy. The final Kp and Kd gains were found to be 1.2 and 0.0004 respectively.
+In TD3, we only used proportional gain to drive the buggy. This time we try to tune the Kp and Kd gains to anticipate the motion of the buggy. Eventually, the buggy does not even need derivative gain to drive the buggy. It happened to be replacing printf with debugprint in the code improves the algorithm's performance.
+
+Because we didn't bother to test it on the actual track, the fastest code failed to complete on the actual track at the heats day. We had to compromise speed to complete the track since we only had one try because we were disqualified of the first run for being late on the day.
 
 In real-world, the derivative term is noisy, so we used a low pass filter to smooth out the noise. The value of alpha in the filter is closer to 1 because we still need the high details of the term to be able to accurately predict the motion of the buggy. The low pass filter was implemented in the following code.
 
