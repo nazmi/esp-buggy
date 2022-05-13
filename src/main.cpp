@@ -24,7 +24,7 @@ int main() {
     controller.setLineController(1.2f, 0.0f, 0.0f);
     controller.setLineLimits(-27.0f, 27.0f);
     controller.setPWMLimits(0.0f, 1.0f);
-    controller.setTargetSpeed(1.5f);
+    controller.setTargetSpeed(2.0f);
 
     char c;
 
