@@ -128,6 +128,12 @@ $(document).ready(function(){initNavTree('md__d_e_m_o.html',''); initResizable()
 <h1><a class="anchor" id="overview"></a>
 Overview</h1>
 <p >We had at least 4 technical demonstrations (TD) for this semester, accessing different parts of the buggy. They emphasised the hardware control, especially the motors and the software solutions to interface the microcontroller and other components like sensors and Bluetooth module.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">TD   </th><th class="markdownTableHeadNone">1   </th><th class="markdownTableHeadNone">2   </th><th class="markdownTableHeadNone">3   </th><th class="markdownTableHeadNone">4    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Marks   </td><td class="markdownTableBodyNone">100   </td><td class="markdownTableBodyNone">97   </td><td class="markdownTableBodyNone">100   </td><td class="markdownTableBodyNone">80   </td></tr>
+</table>
 <h1><a class="anchor" id="motor"></a>
 TD1: Motor Control</h1>
 <p >On the software side, the key task was setting up the encoders and motors to work as intended. I settled down on a <b>20% duty cycle</b> to keep it steady and avoid any translational inertia after stopping. PWM frequency set to <b>1000 Hz</b> because the wheels were louder than the switches, why not? The heatsink was also not too hot to touch. I chose to use <b>unipolar mode</b> as this offered fewer switching losses. </p><div class="dotgraph">
@@ -244,7 +250,8 @@ TD3: Steering</h1>
 </div><!-- fragment --><p >Other than the control algorithm, I simply added the turnaround code when the BLE signal was sent. The turnaround used the code created in <a class="el" href="md__d_e_m_o.html#motor">TD1</a> with a little tweak to find the centre line instead of rotating 180. This method allows consistent turnaround even when the buggy is not perfectly aligned with the line before the turn.</p>
 <h1><a class="anchor" id="heats"></a>
 TD4: Heats</h1>
-<p >In TD3, we only used proportional gain to drive the buggy. This time we tuned the Kp and Kd gains to anticipate the motion of the buggy. The final Kp and Kd gains were found to be 1.2 and 0.0004 respectively.</p>
+<p >In TD3, we only used proportional gain to drive the buggy. This time we try to tune the Kp and Kd gains to anticipate the motion of the buggy. Eventually, the buggy does not even need derivative gain to drive the buggy. It happened to be replacing printf with debugprint in the code improves the algorithm's performance.</p>
+<p >Because we didn't bother to test it on the actual track, the fastest code failed to complete on the actual track at the heats day. We had to compromise speed to complete the track since we only had one try because we were disqualified of the first run for being late on the day.</p>
 <p >In real-world, the derivative term is noisy, so we used a low pass filter to smooth out the noise. The value of alpha in the filter is closer to 1 because we still need the high details of the term to be able to accurately predict the motion of the buggy. The low pass filter was implemented in the following code.</p>
 <p ><em>PID.cpp</em> </p><div class="fragment"><div class="line"><span class="keywordtype">float</span> _a = 0.7;</div>
 <div class="line"><span class="keywordtype">float</span> error = scaledSP - scaledPV;</div>
