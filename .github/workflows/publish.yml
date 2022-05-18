@@ -34,7 +34,7 @@ jobs:
     # Build Documentation
     - uses: actions/checkout@v3
     - name: Build documentation
-      uses: mattnotmitt/doxygen-action@v1.9.3
+      uses: mattnotmitt/doxygen-action@edge
       with:
         doxyfile-path: "./Doxyfile-prj.cfg"
         working-directory: "docs/"
