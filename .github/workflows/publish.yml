@@ -18,8 +18,8 @@ on:
     branches: [ main ]
     paths:
     - 'docs/**'
-  schedule:
-    - cron: 34 12 * * *
+#   schedule:
+#     - cron: 34 12 * * *
 
 ###############
 # Set the Job #

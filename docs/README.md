@@ -2,9 +2,10 @@
 
 ## Line Following Robot (LFR) 🚓 {#intro}
 
-![Build GCC](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/nazmi/661bc6f35f626bca218501f160893b4b/raw/gcc_badge.json)
-![Doxygen](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/nazmi/25d7b5dd85bdd54d9dc73366aa9f4c85/raw/doxygen_badge.json)
-![cpp-lint](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/nazmi/88852f73e80cb06c05e5babaec5febe0/raw/lint_badge.json)  
+[![Build GCC_ARM](https://github.com/nazmi/esp-buggy/actions/workflows/build.yml/badge.svg)](https://github.com/nazmi/esp-buggy/actions/workflows/build.yml)
+[![Style Check](https://github.com/nazmi/esp-buggy/actions/workflows/linter.yml/badge.svg)](https://github.com/nazmi/esp-buggy/actions/workflows/linter.yml)
+[![C++ Syntax Check](https://github.com/nazmi/esp-buggy/actions/workflows/cppcheck.yml/badge.svg)](https://github.com/nazmi/esp-buggy/actions/workflows/cppcheck.yml)
+[![Doxygen Action](https://github.com/nazmi/esp-buggy/actions/workflows/publish.yml/badge.svg)](https://github.com/nazmi/esp-buggy/actions/workflows/publish.yml)  
 Hi! I'm [Nazmi Ropi](https://uk.linkedin.com/in/nazmi-ropi), the author of this software documentation. One of the objectives of this year's project is to produce a high average speed line following buggy without compromising its robustness. Also, my approach towards software development is to implement Object-Oriented-Programming features to abstract any technical details to the user. Details of technical demonstrations were also documented on [its page](#journey).
 
 ## Dependencies 📌 {#dependencies}
@@ -21,8 +22,6 @@ Hi! I'm [Nazmi Ropi](https://uk.linkedin.com/in/nazmi-ropi), the author of this 
    ```bash
    git clone https://github.com/nazmi/esp-buggy
    ```
-
-   @warning This will not work because the repository is private.
 
 3. Compile *main.cpp* using the compiler.
 4. Upload the binary file to NUCLEO-F401RE through USB.
@@ -84,8 +83,7 @@ You can buy any component you like, but the table below will help if you want to
 
 ## Contributing 👨‍💻 {#contribute}
 
-Contributors are welcomed. If this repo is still private contact me through [email](mailto:muhammad.binmohdropi@student.manchester.ac.uk).
-Please create [pull request](https://github.com/nazmi/esp-buggy/pulls) and raise any [bug/issue](https://github.com/nazmi/esp-buggy/issues).  
+Contributors are welcomed. Please create [pull request](https://github.com/nazmi/esp-buggy/pulls) and raise any [bug/issue](https://github.com/nazmi/esp-buggy/issues).  
 
 ## Contributors 👷‍♂️ {#contributors}
 
