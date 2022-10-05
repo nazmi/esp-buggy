@@ -4,9 +4,9 @@
 
 [TOC]
 
-High speed buggy is very achievable by all groups, but cornering will punish those who overlook their control algorithm.
-Either the buggy will overshoot at high speed, or the buggy will slow down and take the corner wisely.
-Is there a way to corner without lowering current speed? Of course, it is possible with the correct implementation of signal processing.
+High-speed buggy is very achievable by all groups, but cornering will punish those who overlook their control algorithm.
+Either the buggy will overshoot at high speed or the buggy will slow down and take the corner wisely.
+Is there a way to corner without lowering the speed? Of course, it is possible with the correct implementation of signal processing.
 Signal processing is important for line following robot to achieve stability in performance.
 Simply reading the output of the sensors will not give meaningful components to the software if it is not processed the correct way.
 This page discusses our attempt to get the best out of the buggy system by incorporating hardware and software solutions to the stated problem.
@@ -16,23 +16,23 @@ This page discusses our attempt to get the best out of the buggy system by incor
 Although we try our best to test the sensor and get the optimum operating height, it can vary depending on the environment.
 So designing a chassis based on this constraint may cause trouble for iterative development as we go forward.
 This also might cause a problem because we only test one sensor to characterise it, not as an array of sensors which we will be using in the final assembly.
-Our solution to this problem to use a system that allow us to change the height of the sensors from ground when the sensors are calibrated.
-The plate for the sensors can be clamped at height from the ground of between 2.5 cm up to 6 cm.  
+Our solution to this problem is to use a system that allows us to change the height of the sensors from the ground when the sensors are calibrated.
+The plate for the sensors can be clamped at a height from the ground of between 2.5 cm to 6 cm.  
   
 <div style="text-align:center"><img width="60%"  src="sensor1.png" alt="Vertical adjustment"></div>
   
-However, this solution only fix the problem in vertical-axis direction.
-Hence, we further design the sensor plate with long holes to allow adjustable position of the PCB by using nuts and bolts.
+However, this solution only fixes the problem in the vertical-axis direction.
+Hence, we further design the sensor plate with long holes to allow an adjustable position of the PCB by using nuts and bolts.
 
 <div style="text-align:center"><img width="60%" src="sensor2.png" alt="Horizontal adjustment"></div>
 
-Both of this design approach gives us flexibility to choose the height and position of the sensors that we want, resulting to better output of the sensors' readings. Next, our sensor array design consist of two rows instead of traditional one row system. The inner row consist of two sensors, and the front row consists of four sensors. We created this design based on the consideration that we want to maximise number of sensors operating and reading outputs. While 6 sensors in a row cover the line almost by 4x its width, our arrangement benefits from its additional row. This allow the buggy to immediately respond to incoming corners when detected by the front row sensors.
+Both of these design approaches give us the flexibility to choose the height and position of the sensors that we want, resulting in a better output of the sensors' readings. Next, our sensor array design consists of two rows instead of the traditional one-row system. The inner row consists of two sensors, and the front row consists of four sensors. We created this design based on the consideration that we want to maximise the number of sensors operating and reading outputs. While 6 sensors in a row cover the line almost by 4x its width, our arrangement benefits from its additional row. This allows the buggy to immediately respond to incoming corners when detected by the front row sensors.
 
 <div style="text-align:center"><img width="60%" src="sensor3.png" alt="PCB design"></div>
 
 # Software Solution {#software}
 
-Determining the position of the line is very simple by using weighted average as discuss in [this section](#sensor). Recall again that it is simply \f$\ distance = \frac{\sum_{1}^{6} reading_i \times weight_i}{\sum_{1}^{6} reading_i} \f$. This simple method is fast and simple but it is not the best way to determine the position of sensors. The alternative method is to use quadratic interpolation from the sensors. Using this method, not all sensors will be used for calculations because the problem is overdetermined so only four nearest to the sensors output is chosen to simplify the problem. Maybe it is easier to visualise this concept using the figure below.
+Determining the position of the line is very simple by using the weighted average as discussed in [this section](#sensor). Recall again that it is simply \f$\ distance = \frac{\sum_{1}^{6} reading_i \times weight_i}{\sum_{1}^{6} reading_i} \f$. This simple method is fast and simple but it is not the best way to determine the position of sensors. The alternative method is to use quadratic interpolation from the sensors. Using this method, not all sensors will be used for calculations because the problem is overdetermined so only four primary sensors' output(the one that is right above the line plus the other two neighbours) is chosen to simplify the problem. Maybe it is easier to visualise this concept using the figure below.
 
 ![Quadratic interpolation](sensor4.svg)
 
@@ -112,7 +112,7 @@ float computeDistance(const arm_matrix_instance_f32* X){
 
 # Results {#results}
 
-We adjusted the height between 2.5cm and 6 cm to get the best readings that do not clip and not too low. The best height we found was 2.7 cm from the ground.
+We adjusted the height between 2.5cm and 6 cm to get the best readings that do not clip and are not too low. The best height we found was 2.7 cm from the ground.
 <details><summary>See...</summary>
 Showcase the reading values at different height.<br/>
 <div align="center">
@@ -120,7 +120,7 @@ Showcase the reading values at different height.<br/>
 </div>
 </details>
   
-For the software solution, we cannot accurately measure the position of the line. But the error in both method implied that the difference in the measured position is small. However, in time complexity, the quadratic interpolation method is more efficient than the simple method. This is because the H matrix is evaluated at compile time and only one multiplication occurs during runtime.
+For the software solution, we cannot accurately measure the position of the line. But the error in both methods implied that the difference in the measured position is small. However, in time complexity, the quadratic interpolation method is more efficient than the simple method. This is because the H matrix is evaluated at compile time and only one multiplication occurs during runtime.
 
 <details><summary>See...</summary>
 Showcase the distance estimation based on two different method.<br/>
