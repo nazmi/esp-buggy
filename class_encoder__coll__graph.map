@@ -1,4 +1,4 @@
 <map id="Encoder" name="Encoder">
-<area shape="rect" id="node1" title="Encoder class with helper functions, derived from QEI." alt="" coords="5,80,75,107"/>
-<area shape="rect" id="node2" href="$class_q_e_i.html" title="Handle reading pulses from encoder." alt="" coords="18,5,62,32"/>
+<area shape="rect" id="node1" title="Encoder class with helper functions, derived from QEI." alt="" coords="5,79,75,104"/>
+<area shape="rect" id="node2" href="$class_q_e_i.html" title="Handle reading pulses from encoder." alt="" coords="18,5,62,31"/>
 </map>

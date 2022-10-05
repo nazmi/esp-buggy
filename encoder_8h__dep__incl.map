@@ -1,8 +1,8 @@
 <map id="/github/workspace/include/QEI/encoder/encoder.h" name="/github/workspace/include/QEI/encoder/encoder.h">
-<area shape="rect" id="node1" title=" " alt="" coords="308,5,481,47"/>
-<area shape="rect" id="node2" href="$helper_8h.html" title=" " alt="" coords="228,95,401,136"/>
-<area shape="rect" id="node5" href="$motor_8h.html" title=" " alt="" coords="407,184,580,225"/>
-<area shape="rect" id="node3" href="$_p_i_d_8h.html" title=" " alt="" coords="12,184,185,225"/>
-<area shape="rect" id="node6" href="$sensor_8h.html" title=" " alt="" coords="209,184,383,225"/>
-<area shape="rect" id="node4" href="$wheelcontrol_8h.html" title=" " alt="" coords="5,273,192,315"/>
+<area shape="rect" id="node1" title=" " alt="" coords="308,5,481,45"/>
+<area shape="rect" id="node2" href="$helper_8h.html" title=" " alt="" coords="228,93,401,133"/>
+<area shape="rect" id="node5" href="$motor_8h.html" title=" " alt="" coords="407,181,580,221"/>
+<area shape="rect" id="node3" href="$_p_i_d_8h.html" title=" " alt="" coords="12,181,185,221"/>
+<area shape="rect" id="node6" href="$sensor_8h.html" title=" " alt="" coords="209,181,383,221"/>
+<area shape="rect" id="node4" href="$wheelcontrol_8h.html" title=" " alt="" coords="5,269,192,309"/>
 </map>
