@@ -4,7 +4,7 @@
 
 [TOC]
 
-We had at least 4 technical demonstrations (TD) for this semester, accessing different parts of the buggy. They emphasised the hardware control, especially the motors and the software solutions to interface the microcontroller and other components like sensors and Bluetooth module.
+We had at least 4 technical demonstrations (TD) for this semester, assessing different parts of the buggy. They emphasised the hardware control, especially the motors and the software solutions to interface the microcontroller with other sensors and Bluetooth module.
 
 |TD|1|2|3|4|
 |-|-|-|-|-|
@@ -12,7 +12,7 @@ We had at least 4 technical demonstrations (TD) for this semester, accessing dif
 
 # TD1: Motor Control {#motor}
 
-On the software side, the key task was setting up the encoders and motors to work as intended. I settled down on a **20% duty cycle** to keep it steady and avoid any translational inertia after stopping. PWM frequency set to **1000 Hz** because the wheels were louder than the switches, why not? The heatsink was also not too hot to touch. I chose to use **unipolar mode** as this offered fewer switching losses.
+On the software side, the key task was setting up the encoders and motors to work as intended. We settled down on a **20% duty cycle** to keep it steady and avoid any translational inertia after stopping. PWM frequency set to **1000 Hz** because the wheels were louder than the switches, why not? The heatsink was also not too hot to touch. We chose to use **unipolar mode** as this offered fewer switching losses.
 \dot
 digraph System{
 
@@ -42,7 +42,7 @@ digraph System{
 }
 \enddot
 
-The encoder was connected directly to the wheel shaft, and from there we could measure the speed of the rotating wheel. The QEI library encoded the pulses to **X2 resolution**, so we need to scale it down to get the actual number of pulses. We also knew the number of pulses per revolution (CPR) was **256**.
+The encoder was connected directly to the wheel shaft, and from there we could measure the speed of the rotating wheel. The QEI library encoded the pulses to **X2 resolution**, so we must scale it down to get the actual number of pulses. We also knew the number of pulses per revolution (CPR) was **256**.
 \f{align}{
   
 pulses &= \frac{pulses}{2} \\
@@ -52,7 +52,7 @@ velocity &= \frac{distance}{time} \\
 
 \f}
 
-One of the tasks was to make a square of 0.5 m in length. The hardest part was the square had to be in between the wheels. Even worst, I did not tune the task on the actual square at A16. The snippet below shows how I implemented the square sequence.
+One of the tasks was to make a square of 0.5 m in length. The hardest part was the square had to be in between the wheels. Even worst, we did not tune the task on the actual square at A16. The snippet below shows how we implemented the square sequence.
 
 _main.cpp_
 
@@ -73,14 +73,14 @@ while(1){
 }
 ```
 
-Ideally all values in linear vector are 0.5 m and rotation vector are 90°. However, ours looked like this
+Ideally, all values in the linear vector and the rotation vector are 0.5 m and 90° respectively. However, ours looked like this
 
 ```cpp
 vector<double> linear { 0.45, 0.33, 0.33, 0.43};
 vector<double> rotation {83, 83, 83, 175};
 ```
 
-Note that the last one was more than 90° because the task was to trace the square back which was harder when your buggy did not move in a straight line. I used bang-bang control approach to compensate for any tiny deviation between the two wheels, implemented in the Motor::forward.
+Note that the last one was more than 90° because the task was to trace the square back which was harder when your buggy did not move in a straight line. We used the bang-bang control approach to compensate for any tiny deviation between the two wheels, implemented in the Motor::forward.
 
 _motor.cpp_
 
@@ -103,7 +103,7 @@ We received full marks on TD1 and this assured us of a good start to our journey
 
 # TD2: Sensors {#sensor}
 
-This was where we had to interface the sensors and Bluetooth module with the microcontroller. The Bluetooth module was easily configured by connecting to the correct RX, TX pins. In this case, I used **BufferedSerial** to handle the communication between F401RE and HM-10. Sensors were the tricky bit since we chose not to arrange them in one row but two instead. However, I will discuss on  the general process of configuration and calibration without considering our chosen arrangement.
+The Bluetooth module was easily configured by connecting to the correct RX, and TX pins. In this case, we used **BufferedSerial** to handle the communication between F401RE and HM-10. Infrared sensors were the tricky bit since we chose not to arrange them in one row but two instead. However, we will discuss the general process of configuration and calibration without considering our chosen arrangement.
 
 \dot
 digraph System{
@@ -131,11 +131,11 @@ digraph System{
 }
 \enddot
 
-It was easier to manage 6 sensors if they are connected to op-amp as this approach allowed calibration only using potentiometer instead of software. Since this was not available to us, we had to calibrate the black and white level of the sensors.
+It was easier to manage 6 sensors if they are connected to op-amp as this approach allowed calibration only using a potentiometer instead of software. Since this was not available to us, we had to calibrate the black and white level of the sensors.
 
-1. The **white level** was calibrated by placing a **white card** under the sensors and toggling the sensors under **normal conditions at a fixed height from the sensors**. *Does VDD matter?* No, because reading was already normalised, you can do whatever scaling you want as long as you were comfortable with it. Here, I choose a saturation level of **10**.
+1. The **white level** was calibrated by placing a **white card** under the sensors and toggling the sensors under **normal conditions at a fixed height from the sensors**. *Does VDD matter?* No, because reading was already normalised, you can do whatever scaling you want as long as you were comfortable with it. Here, we choose a saturation level of **10**.
 
-    Recall that I had *raw uncalibrated data (white level)*
+    Recall that we had *raw uncalibrated data (white level)*
     |S1|S2|S3|S4|S5|S6|
     |-|-|-|-|-|-|
     |3.18998|3.26268|3.07483|3.12763|3.22799|3.70966|
@@ -148,7 +148,7 @@ It was easier to manage 6 sensors if they are connected to op-amp as this approa
     Now, just apply a scale factor to each sensor to scale it to the desired maximum level.
     @note We assumed the sensors scaled linearly. *But did it?*
 
-2. The **black level** was calibrated by placing a **black track** under the sensors and toggling the sensors under **minimum light conditions**. This ensured we get minimum treshold value at minimum external noise(infrared). *What to do with the black level?* It was pretty much pointless to read small values that were not useful for distance calculation, so the black level is the threshold of the sensor activation.
+2. The **black level** was calibrated by placing a **black track** under the sensors and toggling the sensors under **minimum light conditions**. This ensured we get a minimum threshold value at minimum external noise(infrared). *What to do with the black level?* It was pretty much pointless to read small values that were not useful for distance calculation, so the black level is the threshold of the sensor activation.
 
 3. Although we expected perfect results by calibration, there will be always external noise coming from sunlight and other sources. The issue needed to be addressed to avoid unreliable readings consisting of random errors.
 
@@ -170,7 +170,7 @@ Sweeping the white card back and forth to the sensor.
 </div>
 </details>
 
-This part was where I realised how important normalised readings are for distance calculation. If all readings were normalised to a level, the distance formula simply became the weighted mean of sensor readings. From the sensor array, if we established a pivot point between sensors 3 and 4, we could assign a weight for every sensor based on its distance from the pivot as in the example below.
+This part was where we realised how important normalised readings are for distance calculation. If all readings were normalised to a level, the distance formula simply became the weighted mean of sensor readings. From the sensor array, if we established a pivot point between sensors 3 and 4, we could assign a weight for every sensor based on its distance from the pivot as in the example below.
 
 \dot
 digraph Sensor{
@@ -253,9 +253,9 @@ digraph System{
 }
 \enddot
 
-The first controller scaled the deviations from the white line and outputted target speed for the encoders. Then, a differential was created by using a target value and the output before to create a turning effect for the wheels. This differential then outputs the corresponding PWM outputs for each motor.
+The first controller scaled the deviations from the white line and outputted the target speed for the encoders. Then, a differential was created by using a target value and the output before to create a turning effect for the wheels. This differential then outputs the corresponding PWM outputs for each motor.
 
-Another extra thing I added was adaptive system response based on the position of the line, which manipulate the set point of the left and right controller to create quicker turning response.
+Another extra thing we added was an adaptive system response based on the position of the line, which manipulates the set point of the left and right controller to create a quicker turning response.
 
 _wheelcontrol.cpp_
 ```cpp
@@ -278,16 +278,16 @@ if (abs_position < 0.5f) {
 }
 ```
 
-Other than the control algorithm, I simply added the turnaround code when the BLE signal was sent. The turnaround used the code created in [TD1](#motor) with a little tweak to find the centre line instead of rotating 180. This method allows consistent turnaround even when the buggy is not perfectly aligned with the line before the turn.
+Other than the control algorithm, we simply added the turnaround code when the BLE signal was sent. The turnaround used the code created in [TD1](#motor) with a little tweak to find the centre line instead of rotating 180. This method allows consistent turnaround even when the buggy is not perfectly aligned with the line before the turn.
 
 
 # TD4: Heats {#heats}
 
 In TD3, we only used proportional gain to drive the buggy. This time we try to tune the Kp and Kd gains to anticipate the motion of the buggy. Eventually, the buggy does not even need derivative gain to drive the buggy. It happened to be replacing printf with debugprint in the code improves the algorithm's performance.
 
-Because we didn't bother to test it on the actual track, the fastest code failed to complete on the actual track at the heats day. We had to compromise speed to complete the track since we only had one try because we were disqualified of the first run for being late on the day.
+Because we didn't bother to test it on the actual track, the fastest code failed to complete on the actual track on the heats day. We had to compromise speed to complete the track since we only had one try because we were disqualified from the first run for being late on the day.
 
-In real-world, the derivative term is noisy, so we used a low pass filter to smooth out the noise. The value of alpha in the filter is closer to 1 because we still need the high details of the term to be able to accurately predict the motion of the buggy. The low pass filter was implemented in the following code.
+In the real world situation, the derivative term is noisy, so we used a low-pass filter to smooth out the noise. The value of alpha in the filter is closer to 1 because we still need the high details of the term to be able to accurately predict the motion of the buggy. The low pass filter was implemented in the following code.
 
 _PID.cpp_
 ```cpp
