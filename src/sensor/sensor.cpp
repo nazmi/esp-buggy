@@ -1,4 +1,6 @@
 #include "sensor.h"
+#include <algorithm>
+#include <cstdio>
 
 bool Sensor::s_run = false;
 std::array<float, 6> Sensor::WEIGHTS = {27, 9, -9, -27, 9, -9};
