@@ -10,13 +10,11 @@
 #include <array>
 #include <cstdio>
 
-// Deprecated: Use Config::Sensor namespace constants instead
-/** @brief Prescaler to normalised the sensor readings. @deprecated Use Config::Sensor::PRESCALER */
-#define PRESCALER Config::Sensor::PRESCALER
-/** @brief Arbitrary value for out of track detection. @deprecated Use Config::Sensor::NO_TRACK_VALUE */
-#define NO_TRACK Config::Sensor::NO_TRACK_VALUE
-/** @brief Minimum treshold for white line @deprecated Use Config::Sensor::WHITE_THRESHOLD */
-#define WHITE_TRESHOLD Config::Sensor::WHITE_THRESHOLD
+// Legacy macros removed - all code now uses Config::Sensor namespace
+// If you need the old values, use:
+// - Config::Sensor::PRESCALER (was PRESCALER)
+// - Config::Sensor::NO_TRACK_VALUE (was NO_TRACK)
+// - Config::Sensor::WHITE_THRESHOLD (was WHITE_TRESHOLD)
 
 #ifdef SENSORS_DEBUG
 #define _SENSORS_DEBUG 1

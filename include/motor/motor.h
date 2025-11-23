@@ -7,13 +7,13 @@
 #include "mbed.h"
 #include <utility>
 
-// Deprecated: Use Config::Motor namespace constants instead
+// Legacy macros preserved for backward compatibility
 /** @brief Fast duty cycle constant. @deprecated Use Config::Motor::FAST_DUTY_CYCLE */
-#define FAST_PWM Config::Motor::FAST_DUTY_CYCLE
+#define FAST_PWM 0.6f
 /** @brief Half duty cycle constant. @deprecated Use Config::Motor::HALF_DUTY_CYCLE */
-#define HALF_PWM Config::Motor::HALF_DUTY_CYCLE
+#define HALF_PWM 0.5f
 /** @brief Slow duty cycle constant. @deprecated Use Config::Motor::SLOW_DUTY_CYCLE */
-#define SLOW_PWM Config::Motor::SLOW_DUTY_CYCLE
+#define SLOW_PWM 0.3f
 
 /**
  * @brief Motor class to control the motors.

@@ -18,10 +18,10 @@ namespace CommandCode {
     constexpr char START_LINE_FOLLOW = 'S';  ///< Start line following mode
     constexpr char TUNE_PID = 'T';           ///< Tune PID speed controller
     constexpr char SET_VELOCITY = 'V';       ///< Set target velocity
-    constexpr char MANUAL_MODE = 'M';        ///< Manual motor control mode
-    constexpr char CALIBRATE_WHITE = 'W';    ///< Calibrate sensors on white surface
-    constexpr char CALIBRATE_BLACK = 'B';    ///< Calibrate sensors on black surface
-    constexpr char EMERGENCY_RECOVERY = 'Q'; ///< Emergency track recovery
+    constexpr char MANUAL_MODE = 'M';          ///< Manual motor control mode
+    constexpr char CALIBRATE_WHITE = 'W';      ///< Calibrate sensors on white surface
+    constexpr char CALIBRATE_BLACK = 'B';      ///< Calibrate sensors on black surface
+    constexpr char EMERGENCY_RECOVERY = 'Q';   ///< Emergency track recovery
 }
 
 /**
@@ -106,4 +106,4 @@ class CommandParser {
     bool isCommandAvailable() const;
 };
 
-#endif // COMMAND_PARSER_H
+#endif  // COMMAND_PARSER_H

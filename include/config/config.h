@@ -43,7 +43,7 @@ namespace Config {
 
         // Target Speed (PPS - Pulses Per Second)
         constexpr float DEFAULT_TARGET_SPEED = 2.0f;
-    }
+    }  // namespace PID
 
     // Sensor Configuration
     namespace Sensor {
@@ -74,6 +74,6 @@ namespace Config {
         constexpr unsigned int THREAD_SLEEP_MS = 1;
     }
 
-} // namespace Config
+}  // namespace Config
 
-#endif // CONFIG_H
+#endif  // CONFIG_H
