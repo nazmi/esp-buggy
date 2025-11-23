@@ -1,23 +1,26 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
+#include "config.h"
 #include "encoder.h"
 #include "helper.h"
 #include "mbed.h"
 #include <utility>
 
-/** @brief Fast duty cycle constant.*/
-#define FAST_PWM 0.6
-/** @brief Half duty cycle constant.*/
-#define HALF_PWM 0.5
-/** @brief Slow duty cycle constant.*/
-#define SLOW_PWM 0.3
+// Deprecated: Use Config::Motor namespace constants instead
+/** @brief Fast duty cycle constant. @deprecated Use Config::Motor::FAST_DUTY_CYCLE */
+#define FAST_PWM Config::Motor::FAST_DUTY_CYCLE
+/** @brief Half duty cycle constant. @deprecated Use Config::Motor::HALF_DUTY_CYCLE */
+#define HALF_PWM Config::Motor::HALF_DUTY_CYCLE
+/** @brief Slow duty cycle constant. @deprecated Use Config::Motor::SLOW_DUTY_CYCLE */
+#define SLOW_PWM Config::Motor::SLOW_DUTY_CYCLE
 
 /**
  * @brief Motor class to control the motors.
  * @details This class includes configuration method of left and right motors. It also features cruising methods to move
- * forward, backwards, turn left and turn left.
+ * forward, backwards, turn left and turn right.
  *
+ * @note Improved to follow SOLID principles and DRY (Don't Repeat Yourself) pattern.
  */
 class Motor {
   private:
@@ -35,6 +38,34 @@ class Motor {
      *\f${m\\_period} = \frac{1}{frequency}\\\f$
      */
     float m_period;
+
+    /**
+     * @brief Template method for linear movement (forward/reverse).
+     * @details Eliminates code duplication between forward() and reverse() methods.
+     *
+     * @param distance Distance to travel before stopping
+     * @param motor Motor object
+     * @param left_encoder Left Encoder object
+     * @param right_encoder Right Encoder object
+     * @param direction Direction to move (1 = forward, 0 = reverse)
+     */
+    static void executeLinearMovement(const double distance, Motor *const motor,
+                                      Encoder *const left_encoder, Encoder *const right_encoder,
+                                      const int direction);
+
+    /**
+     * @brief Template method for rotational movement (turn left/right).
+     * @details Eliminates code duplication between turnleft() and turnright() methods.
+     *
+     * @param angle Angle to rotate before stopping
+     * @param motor Motor object
+     * @param left_encoder Left Encoder object
+     * @param right_encoder Right Encoder object
+     * @param turnDirection 0 = left turn, 1 = right turn
+     */
+    static void executeRotationalMovement(const double angle, Motor *const motor,
+                                          Encoder *const left_encoder, Encoder *const right_encoder,
+                                          const int turnDirection);
 
   public:
     /** @brief Left motor PwmOut.*/
