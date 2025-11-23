@@ -1,4 +1,5 @@
 #include "wheelcontrol.h"
+#include <vector>
 
 WheelControl::WheelControl() : m_leftcontroller(1.0f, 0.0f, 0.0f, 0.01f),
                                m_rightcontroller(1.0f, 0.0f, 0.0f, 0.01f),

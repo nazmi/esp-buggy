@@ -1,4 +1,6 @@
 #include "sensor.h"
+#include <algorithm>
+#include <cstdio>
 
 bool Sensor::s_run = false;
 std::array<float, 6> Sensor::WEIGHTS = {27, 9, -9, -27, 9, -9};
@@ -16,54 +18,62 @@ float Sensor::read() {
 
     // All off to capture noise
     m_pins.write(0);
-    wait_us(25);
+    wait_us(Config::Sensor::SENSOR_WAIT_US);
     for (size_t i = 0; i < m_analog.size(); ++i) {
-
         m_noise[i] = m_analog[i].read();
     }
 
     // Turn on in sequence, reading -= noise
     for (size_t i = 0; i < m_analog.size(); ++i) {
-
         m_pins.write(1 << i);
-        wait_us(25);
+        wait_us(Config::Sensor::SENSOR_WAIT_US);
         m_reading[i] = m_analog[i].read();
         m_reading[i] = clamp(m_reading[i] - m_noise[i], 0.0f, 1.0f);
     }
 
     // Process reading[i] -= minimum
     // If reading[i] > BLACK_TRESHOLD, output reading[i]
-    float min = *std::min_element(m_reading.begin(), m_reading.end());
+    const float min = *std::min_element(m_reading.begin(), m_reading.end());
     for (size_t i = 0; i < m_analog.size(); ++i) {
-
         m_reading[i] = clamp(m_reading[i] - min, 0.0f, 1.0f);
 
-        const auto isAboveTreshold = m_reading[i] > BLACK_TRESHOLD[i];
-        if (isAboveTreshold) {
-            m_reading[i] = m_reading[i] * PRESCALER * SCALE_FACTOR[i];
+        const bool isAboveThreshold = m_reading[i] > BLACK_TRESHOLD[i];
+        if (isAboveThreshold) {
+            m_reading[i] = m_reading[i] * Config::Sensor::PRESCALER * SCALE_FACTOR[i];
         } else {
-            m_reading[i] = 0;
+            m_reading[i] = 0.0f;
         }
     }
 
-    // Check if any of 6 m_pins m_reading > WHITE_TRESHOLD for white
+    // Check if any of 6 sensors detect white line
     const auto isUnderWhiteLine = std::any_of(m_reading.begin(), m_reading.end(),
-                                              [](float reading) { return reading > WHITE_TRESHOLD; });
+                                              [](const float reading) {
+                                                  return reading > Config::Sensor::WHITE_THRESHOLD;
+                                              });
     if (isUnderWhiteLine) {
-
         m_notrackcounter = 0;
-        // Check if second row is contributing to any m_reading
-        // TODO(@nazmi): Fix if only one sensor is contributing.
-        const auto isCenterOn = m_reading[4] > WHITE_TRESHOLD || m_reading[5] > WHITE_TRESHOLD;
-        if (isCenterOn) {
-            m_distance = arm_weighted_sum_f32(Sensor::WEIGHTS.cbegin(), m_reading.cbegin(), 6);
+
+        // Count how many sensors are actively detecting
+        const int activeSensorCount = std::count_if(m_reading.begin(), m_reading.end(),
+                                                    [](const float reading) {
+                                                        return reading > Config::Sensor::WHITE_THRESHOLD;
+                                                    });
+
+        // Check if second row (rear sensors) is contributing
+        const auto isCenterOn = m_reading[4] > Config::Sensor::WHITE_THRESHOLD ||
+                               m_reading[5] > Config::Sensor::WHITE_THRESHOLD;
+
+        // Fixed: Handle single sensor detection by always using appropriate sensor array
+        // If only one sensor detects and it's from the second row, still use 6 sensors
+        // If second row contributes, use all 6 sensors; otherwise use only front 4
+        if (isCenterOn || activeSensorCount == 1) {
+            m_distance = arm_weighted_sum_f32(Sensor::WEIGHTS.data(), m_reading.data(), 6);
         } else {
-            m_distance = arm_weighted_sum_f32(Sensor::WEIGHTS.cbegin(), m_reading.cbegin(), 4);
+            m_distance = arm_weighted_sum_f32(Sensor::WEIGHTS.data(), m_reading.data(), 4);
         }
 
     } else {
-
-        m_distance = NO_TRACK;
+        m_distance = Config::Sensor::NO_TRACK_VALUE;
         m_notrackcounter++;
     }
 
@@ -92,15 +102,13 @@ int Sensor::getNoTrackCounter() const {
 }
 
 void Sensor::calibrateBlack() {
-
     std::array<float, 6> calibrate_data{};
-    wait_us(25);
-    // Read sensors one by one.
+    wait_us(Config::Sensor::SENSOR_WAIT_US);
+
+    // Read sensors one by one
     for (size_t i = 0; i < m_analog.size(); ++i) {
-
         m_pins.write(1 << i);
-        wait_us(25);
-
+        wait_us(Config::Sensor::SENSOR_WAIT_US);
         calibrate_data[i] = m_analog[i].read();
     }
 
@@ -115,27 +123,25 @@ void Sensor::calibrateBlack() {
 }
 
 void Sensor::calibrateWhite() {
-
-    // Turn all off to read m_noise
+    // Turn all off to read noise
     m_pins.write(0);
-    wait_us(25);
+    wait_us(Config::Sensor::SENSOR_WAIT_US);
     for (size_t i = 0; i < m_analog.size(); ++i) {
         m_noise[i] = m_analog[i].read();
     }
 
-    // Read sensors one by one.
+    // Read sensors one by one
     for (size_t i = 0; i < m_analog.size(); ++i) {
-
         m_pins.write(1 << i);
-        wait_us(25);
+        wait_us(Config::Sensor::SENSOR_WAIT_US);
 
-        float adc_value = m_analog[i].read();
+        const float adc_value = m_analog[i].read();
 
-        auto isAboveTreshold = adc_value > m_noise[i] && adc_value > BLACK_TRESHOLD[i];
-        if (isAboveTreshold) {
-            m_reading[i] = (adc_value - m_noise[i]) * PRESCALER;
+        const bool isAboveThreshold = adc_value > m_noise[i] && adc_value > BLACK_TRESHOLD[i];
+        if (isAboveThreshold) {
+            m_reading[i] = (adc_value - m_noise[i]) * Config::Sensor::PRESCALER;
         } else {
-            m_reading[i] = 0;
+            m_reading[i] = 0.0f;
         }
     }
 

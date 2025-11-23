@@ -1,20 +1,20 @@
 #ifndef SENSOR_H
 #define SENSOR_H
 
-#include "debug1.h"
 #include "arm_math.h"
-#include "mbed.h"
+#include "config.h"
+#include "debug1.h"
 #include "helper.h"
+#include "mbed.h"
 #include <algorithm>
 #include <array>
 #include <cstdio>
 
-/** @brief Prescaler to normalised the sensor readings.*/
-#define PRESCALER 10.0f
-/** @brief Arbitrary value for out of track detection.*/
-#define NO_TRACK 30
-/** @brief Minimum treshold for white line */
-#define WHITE_TRESHOLD 0.8
+// Legacy macros removed - all code now uses Config::Sensor namespace
+// If you need the old values, use:
+// - Config::Sensor::PRESCALER (was PRESCALER)
+// - Config::Sensor::NO_TRACK_VALUE (was NO_TRACK)
+// - Config::Sensor::WHITE_THRESHOLD (was WHITE_TRESHOLD)
 
 #ifdef SENSORS_DEBUG
 #define _SENSORS_DEBUG 1
